@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="width=device-width, initial-scale=1.0"/>
+		<title>Augucation 2.0</title>
+		
+		<style>
+		.button
+		{
+			background-color: #555e67;
+			border: 		  none;
+			border-radius: 	  4px;
+			color:            white;
+			padding: 		  0px 5px 5px 5px;
+			text-align:       center;
+			text-decoration:  none;
+			display:          inline-block;
+			font-size:        28px;
+			margin:           10px 10px;
+			cursor:           pointer;
+		}
+		
+		.button.pageButton
+		{
+			margin: 		  10px 100px;
+		}
+		
+		.wrapper
+		{
+			position: relative;
+			margin:   0; 
+			padding:  0;
+		}
+		
+		.slideCanvas
+		{
+			position: relative;
+			z-index:  1;
+			border:	  0px solid black;
+			height:   80vh;
+			display:  block;
+			margin:   0; 
+			padding:  0;
+		}
+		
+		.augButton
+		{
+			background-color: white;
+			background-image: url("http://i.imgur.com/mEPBj0k.png");
+			background-size:  80px 80px;
+			border: 		  none;
+			height:   		  80px;
+			width:    		  80px;
+			position: 		  fixed;
+			z-index:  		  2;
+			bottom:	  		  1%;
+			right:    		  1%;
+			align:    		  center;
+			cursor:	  		  pointer;
+		}
+		
+		@font-face 
+		{
+			font-family: 'uhh'; 
+			src: url('TheSansUHH/TheSansUHHRegular.ttf') format('truetype');
+		}
+		
+		.my_text
+		{
+			font-family:    'uhh'; 
+			font-size:      20px;
+			color:		    #555e67;
+		}
+		
+		div.content
+		{
+			font-family: 'uhh';
+		}
+		
+		.no-spin, .no-spin:hover, no-spin:focus
+		{
+			-webkit-appearance: none;
+			margin: 			0;
+			-moz-appearance:	textfield;
+			width:				34px;
+			font-family:		'uhh';
+			font-size:			20px;
+			color:		    	#555e67;
+			min: 				1;
+			max:				3;
+			border:				none;
+			text-align:			center;
+		}
+		
+		.textField
+		{
+			background-color:  #E3E6E8;
+			border-radius:     2px;
+		}
+}
+		
+		</style>
+	</head>
+
+	<body>
+
+		<div id="div1" align="center" class="my_text">
+			<button id="prev" class="button pageButton"> &lt </button>
+			
+			<span id="page_num_count">
+				<input id="page_num" type="number" class="no-spin textField" size="3" onkeypress="newPage(event)"/>
+				/ 
+				<span id="page_count"/>
+			</span>
+			
+			<button id="next" class="button pageButton"> &gt </button>
+		</div>
+
+		<div align="center" class="wrapper">
+			<canvas id="the-canvas" class="slideCanvas"></canvas>
+		
+			<input id="augBtn" type="submit" class="augButton" alt="Augucation" onclick="StartAugucation();" name="Augucation" value="" style="visibility:hidden"/>
+			
+		</div>
+		
+		
+		<div align="center" class="my_text">
+			<span id="loading">Loading...</span>
+		</div>
+		
+
+
+		<!--div id="myDiv" style="width:600px;height:250px;"></div-->
+
+
+		<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
+
+
+		<script type="text/javascript" src="pdf.js"></script>
+		<!--script src="https://wzrd.in/standalone/function-plot@1.17.3"></script-->
+
+		<!--Own scripts-->
+		<script type="text/javascript" src="guistuff.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="slideshow.js"></script>
+		
+
+		<!-- <script src="plotter.js"></script> -->
+		<!-- <script src="main.js"></script> -->
+
+
+		<!--input type="button" onclick="showSlides(true);" name="showSlides" value="Show slides"/-->
+		<!--input type="button" onclick="showSlides(false);" name="hideSlides" value="Hide slides"/-->
+
+	</body>
+</html>

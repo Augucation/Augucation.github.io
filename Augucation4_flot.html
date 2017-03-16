@@ -1,0 +1,692 @@
+<head>
+
+	<meta charset="UTF-8"/>
+
+	<style>
+		:root
+		{
+			--hci_gray: #555e67;
+			--hci_red:  #dc0b15;
+			--dark_red: #B52121;
+			--blue:     #351FC2;
+			--green: 	#27B320;
+			--orange:   #E8A231;
+		}
+	
+		@font-face 
+		{
+			font-family: 'uhh'; 
+			src: 		 url('TheSansUHH/TheSansUHHRegular.ttf') format('truetype');
+		}
+		
+		.my_text
+		{
+			font-family:   'uhh';
+			font-size:      20px;
+			color:		    var(hci_gray);
+		}
+		
+		.textField
+		{
+			background-color:  #E3E6E8;
+			border-radius:     2px;
+		}
+		
+		.header
+		{
+			float: center;
+		}
+		
+		.chart
+		{
+			height: 50%;
+			width:  50%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top:   1%;
+			margin-bottom: 1%;
+		}
+		
+		.button
+		{
+			background-color: #555e67;
+			border: 		  none;
+			border-radius: 	  4px;
+			color:            white;
+			padding: 		  0px 5px 5px 5px;
+			text-align:       center;
+			text-decoration:  none;
+			display:          inline-block;
+			font-size:        28px;
+			margin:           10px 10px;
+			cursor:           pointer;
+		}
+		
+		.back.button
+		{
+			position: fixed;
+			bottom:   0px;
+			left:     0px;
+			width:    50px;
+		}
+		
+		.slider_wrap
+		{
+			width: 100%;
+		}
+		
+		.slider_block
+		{
+			position:	  relative;
+			display:      table;
+			width: 		  40%;
+			margin:       0 auto;
+		}
+
+		input[type=range] {
+		  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+		  width: 80%; /* Specific width is required for Firefox. */
+		  background: transparent; /* Otherwise white in Chrome */
+		  display: table;
+		  margin: 0 auto;
+		  position: relative;
+		}
+
+		input[type=range]::-webkit-slider-thumb {
+		  -webkit-appearance: none;
+		}
+
+		input[type=range]:focus {
+		  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+		}
+
+		input[type=range]::-ms-track {
+		  width: 100%;
+		  cursor: pointer;
+
+		  /* Hides the slider so custom styles can be added */
+		  background: transparent; 
+		  border-color: transparent;
+		  color: #555e67; /*transparent*/;
+		}
+		
+		input[type=range]::-webkit-slider-runnable-track {
+			width: 100%;
+			height: 2px;
+			background: #82888F;
+			border: none;
+			border-radius: 2px;
+		}
+		
+		/* Special styling for WebKit/Blink */
+		input[type=range]::-webkit-slider-thumb {
+		  -webkit-appearance: none;
+		  border: none;
+		  height: 20px;
+		  width: 20px;
+		  border-radius: 20px;
+		  background: #555e67;
+		  cursor: pointer;
+		  margin-top: -8.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+		}
+
+		/* All the same stuff for Firefox */
+		input[type=range]::-moz-range-thumb {
+		  border: none;
+		  height: 20px;
+		  width: 20px;
+		  border-radius: 20px;
+		  background: #555e67;
+		  cursor: pointer;
+		}
+
+		/* All the same stuff for IE */
+		input[type=range]::-ms-thumb {
+		  border: none;
+		  height: 20px;
+		  width: 20px;
+		  border-radius: 20px;
+		  background: #555e67;
+		  cursor: pointer;
+		}
+		
+		input[type=range]::-moz-focus-outer {
+			border: 0;
+		}
+		.no-spin, .no-spin:hover, no-spin:focus
+		{
+			-webkit-appearance: none;
+			margin: 			0;
+			-moz-appearance:	textfield;
+			font-family:		'uhh';
+			font-size:			20px;
+			color:		    	#555e67;
+			min: 				1;
+			max:				3;
+			text-align:			center;
+			border: 			0px solid #4D90FE !important;
+			-webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) inset !important;
+			-moz-box-shadow:	0 px 0px rgba(0, 0, 0, 0.3) inset !important;
+			box-shadow:			0 0px 0px rgba(0, 0, 0, 0.3) inset !important;
+			outline: 			none !important;
+		}
+		
+		*:focus
+		{
+			outline: none;
+		}
+		
+		.slider_value_wrap
+		{ 
+			position:	relative;
+			margin-top: -2%;
+		}
+		
+		@-moz-document url-prefix()
+		{
+			.slider_value_wrap
+			{ 
+				position:	relative;
+				margin-top: -3%;
+			}
+		}
+		
+		.slider_value
+		{
+			display: 	inline-block;
+			width: 		7%;
+			float: 		right;
+			position: 	absolute;
+			right: 		0%;
+			top: 		-3.5%;
+		}
+		
+		@-moz-document url-prefix()
+		{
+			.slider_value
+			{
+				display: 	inline-block;
+				width: 		7%;
+				float: 		right;
+				position: 	absolute;
+				right: 		0%;
+				top: 		-2%;	
+				border-radius: 4px;
+			}
+		}
+		
+		.slider_name_wrap
+		{
+			position:   relative;
+			margin-top: 0%;
+		}
+		
+		@-moz-document url-prefix()
+		{
+			.slider_name_wrap
+			{
+				position:   relative;
+				margin-top: 0%;
+			}
+		}
+		
+		.slider_name
+		{
+			display: 	inline-block;
+			width: 		5%;
+			float: 		left;
+			position: 	absolute;
+			left: 		5%;
+			margin-top: -1.5%;
+		}
+		
+		@-moz-document url-prefix() 
+		{ 
+		  .slider_name 
+		  {
+			display: 	inline-block;
+			width: 		5%;
+			float: 		left;
+			position: 	absolute;
+			left: 		5%;
+			margin-top: -0.5%;
+		  }
+		}
+		
+		.slider_label
+		{
+			font-family:   'uhh';
+			font-size:      15px;
+			
+			position:	absolute;
+			margin-top: -1%;
+			width:      50px;
+		}
+		
+		.min.slider_label
+		{
+			float: 		 left;
+			margin-top:  0%;
+			margin-left: 10%;
+		}
+		
+		.max.slider_label
+		{
+			float: 	      right;
+			right: 		  5.5%;
+			margin-top:   0%;
+			margin-right: 0%;
+		}
+	</style>
+	
+</head>
+
+
+	<div style="text-align: center;">
+		<span class="my_text header">
+			f(x) = 
+			<span style="color: var(--dark_red);">a</span>
+			* sin (
+			<span style="color: var(--blue);">b</span>
+			* (x + 
+			<span style="color: var(--green);">c</span>
+			)) + 
+			<span style="color: var(--orange);">d</span>
+		</span>
+	</div>
+	
+	<div id="chart1" class="chart"></div>
+
+
+	<!--[if lte IE 8]><script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/excanvas.min.js"></script><![endif]-->
+
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
+	
+	<script type="text/javascript" src="slideshow.js"></script> 
+	
+	<script>
+	
+	var options1;
+	
+		function format(id){
+		
+			field = document.getElementById(id);
+			
+			// delete leading zeros
+			if(!field.value.includes(',') && !field.value.includes('.'))
+				field.value = field.value.replace(/^0+(?!\.|$)/, '');
+			
+			// delete decimal places (if more than 2. not rounded, just cut off)
+			var val = field.value; // parseFloat(field.value);
+			//val = (Math.floor(val * 100) / 100).toFixed(2);
+			
+			// Caution: Holzhammer. Allow commas: replace comma with dot, do regex-stuff, replace dot with comma
+			if(val.includes(','))
+			{
+				val = val.replace(',', '.');
+				console.log("val 1: ", val);
+				val = val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
+				console.log("val 2: ", val);
+				//val = val.replace('.', ',');
+				val = parseFloat(val);
+				console.log("val 3: ", val);
+			}
+			
+			val = parseFloat(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]); //TODO allow commas
+			field.value = val;
+		}
+		
+		/*
+		 * validate input of a text field
+		 * allow numbers, max. one decimal separator, backspace, delete, LAK and RAK
+		 */
+		function validate(evt, v, id) {
+			
+			
+		  var theEvent = evt || window.event;
+		  var key = theEvent.keyCode || theEvent.which;
+		  var el = document.getElementById(id);
+		  
+		if(key == 13)
+			format(id);
+		  		  
+		  // allow backspace, LAK and RAK
+		  if(key == 8 || key == 37 || key == 39)
+			return true;
+		  
+		  // prevent false minus inputs: multiple minus or minus not at first position
+		  if(key == 45) //or 173
+		  {
+			// only one allowed
+			if(v.includes('-') || el.selectionStart > 0){
+				theEvent.preventDefault();      // firefox
+				theEvent.returnValue = false;   // chrome
+				}				
+			else
+				return true;
+		  }
+		  
+		  // prevent multiple decimal separators
+		  if(key == 44 || key == 46)
+		  //if(key == 188 || key == 190)
+		  {
+			if(v.includes(',') || v.includes('.')){
+				theEvent.preventDefault();      // firefox
+				theEvent.returnValue = false;   // chrome
+				}				
+			else
+				return true;
+		  }
+		  
+		  // regex for numbers
+		  key = String.fromCharCode( key );
+		  var regex = /[0-9]|\.|,/; 
+		  if( !regex.test(key)) {
+			theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+		  }
+		}
+		
+		$(function a() {
+		
+		// declare sinus function parameters
+			var A = document.getElementById("sA").textContent = document.getElementById("rA").value,
+			    B = document.getElementById("sB").textContent = document.getElementById("rB").value,
+			    C = document.getElementById("sC").textContent = document.getElementById("rC").value,
+			    D = document.getElementById("sD").textContent = document.getElementById("rD").value;
+		
+
+		// add eventlistener to sliders 
+		document.getElementById("rA").addEventListener("input", function(){setValues(false);});
+		document.getElementById("rB").addEventListener("input", function(){setValues(false);});
+		document.getElementById("rC").addEventListener("input", function(){setValues(false);});
+		document.getElementById("rD").addEventListener("input", function(){setValues(false);});
+		
+		// add eventlisteners to text fields
+		
+		// validate input (multiple decimal separators, ...)
+		document.getElementById("sA").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
+		document.getElementById("sB").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
+		document.getElementById("sC").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
+		document.getElementById("sD").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
+		
+		// plot and shit
+		document.getElementById("sA").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
+		document.getElementById("sB").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
+		document.getElementById("sC").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
+		document.getElementById("sD").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
+		
+		// if focus is lost
+		//document.getElementById("sA").addEventListener("blur", aBlured, false);
+		//document.getElementById("sB").addEventListener("blur", bBlured, false);
+		//document.getElementById("sC").addEventListener("blur", cBlured, false);
+		//document.getElementById("sD").addEventListener("blur", dBlured, false);
+		
+		// if input value has changed
+		//document.getElementById("sA").addEventListener("onkeypress", function() {sliderValueInput(event, this.id);}, false);
+		//document.getElementById("sB").addEventListener("input", function() {sliderValueInput(this.id);}, false);
+		//document.getElementById("sC").addEventListener("input", cChangeed, false);
+		//document.getElementById("sD").addEventListener("input", dChangeed, false);
+		
+		// fill in values with slider values
+		setValues(false);
+		
+		function sliderValueInput(e, slider){
+			e.preventDefault();
+			var key = e.which || e.keyCode;
+		}
+		
+		function sliderValueKeyPressed(e, v, id){
+		
+			var key = e.which || e.keyCode;
+			
+			//validate(e, v, id);
+						
+			if(key == 13)
+				setValue_typed(id, false);
+			else
+				setValue_typed(id, true);
+		}		
+		function bPressed(e){
+			if(e.keyCode == 13)
+				setValue_typed('B', false);
+		}		
+		function cPressed(e){
+			if(e.keyCode == 13)
+				setValue_typed('C', false);
+		}		
+		function dPressed(e){
+			if(e.keyCode == 13)
+				setValue_typed('D', false);
+		}
+		
+		function aBlured(){
+			setValue_typed('A', false);
+		}
+		function bBlured(){
+			setValue_typed('B', false);
+		}
+		function cBlured(){
+			setValue_typed('C', false);
+		}
+		function dBlured(){
+			setValue_typed('D', false);
+		}
+		
+		function aChangeed(){
+			setValue_typed('A', true);
+		}
+		function bChangeed(){
+			setValue_typed('B', true);
+		}
+		function cChangeed(){
+			setValue_typed('C', true);
+		}
+		function dChangeed(){
+			setValue_typed('D', true);
+		}
+				
+				
+		function my_sin(x){		
+		
+			// without parsing, C and D would spack ab krass!
+			A = parseFloat(A);
+			B = parseFloat(B);
+			C = parseFloat(C);
+			D = parseFloat(D);
+		
+			return A * Math.sin(B * (x + C)) + D;
+		}
+		
+
+		// called by the slider's eventlisteners 
+		// update function parameters, draw plot
+		// typed: this function was called by typing a value, not by pressing enter
+		function setValues(typed){
+				
+				
+							
+			if(typed)
+			{
+				//A = document.getElementById("rA").value = document.getElementById("sA").value;
+				A = document.getElementById("rA").value = parseFloat(document.getElementById("sA").value.replace(",", "."), 10);
+				B = document.getElementById("rB").value = parseFloat(document.getElementById("sB").value.replace(",", "."), 10);
+				C = document.getElementById("rC").value = parseFloat(document.getElementById("sC").value.replace(",", "."), 10);
+				D = document.getElementById("rD").value = parseFloat(document.getElementById("sD").value.replace(",", "."), 10);
+			}
+			else
+			{
+				A = document.getElementById("sA").value = document.getElementById("rA").value;
+				B = document.getElementById("sB").value = document.getElementById("rB").value;
+				C = document.getElementById("sC").value = document.getElementById("rC").value;
+				D = document.getElementById("sD").value = document.getElementById("rD").value;
+			}
+			
+			var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
+			var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
+			
+			document.getElementById("eq_A").textContent = A;
+			document.getElementById("eq_B").textContent = B;
+			document.getElementById("eq_C").textContent = C;
+			document.getElementById("eq_D").textContent = D;
+		}
+		
+		/* Called when there is a new value in a slider's text field
+		 * v: text field identifier 'A' - 'D'
+		 * still_typing: is the user still typing? (did not pressed enter or changed focus)
+		 */
+		function setValue_typed(id, still_typing){
+																				
+			field = document.getElementById(id);
+			
+			// get variable name from id
+			var vari = id.replace('s', '');
+			
+			
+			
+			// when typing ended, remove leading zeros and extra decimal separators in the end
+			if(!still_typing)
+			{
+				// zeros
+				if(!field.value.includes(',') && !field.value.includes('.'))
+					field.value = field.value.replace(/^0+(?!\.|$)/, '');
+				
+				
+				// decimal separators 
+				var lastChar = field.value.charAt(field.value.length - 1);
+				if (lastChar == "," || lastChar == ".")
+				{
+					field.value = field.value.slice(0, -1);
+				}
+				
+			}
+			
+			val = parseFloat(field.value.replace(",", "."), 10);
+						
+			// if the input is invalid, reset field to the last accepted value
+			if(isNaN(val) || val < -10 || val > 10){
+				// reset field value only if user is not typing anymore
+				if(!still_typing){	
+						field.value = eval(vari); 
+					}
+				return;
+			}
+			
+			setValues(true);
+		}		
+		
+		// setup plot
+		function sampleFunction(x1, x2, func) {
+					
+			var d = [ ];
+			var step = (x2-x1)/700;
+			for (var i = x1; i < x2; i += step )
+				d.push([i, func( i ) ]);
+
+			return d;
+		}
+		
+		options1 = {
+			lines: { show: true },
+			xaxis: { ticks: [[0.5*Math.PI,"0.5 \u03C0"],
+							 [Math.PI, "1 \u03C0"],
+							 [1.5*Math.PI, "1.5 \u03C0"],
+							 [2*Math.PI, "2 \u03C0"], 
+							 [2.5*Math.PI, "2.5 \u03C0"], 
+							 [3*Math.PI, "3 \u03C0"], 
+							 [3.5*Math.PI, "3.5 \u03C0"], 
+							 [4*Math.PI, "4 \u03C0"],
+							 [4.5*Math.PI, "4.5 \u03C0"],  
+							 [5*Math.PI, "5 \u03C0"], 
+							 [5.5*Math.PI, "5.5 \u03C0"], 
+							 [6*Math.PI, "6 \u03C0"],
+							 [6.5*Math.PI, "6.5 \u03C0"], 
+							],
+					zoomRange: [0, 100],
+					panRange: null
+					},
+			yaxis:  {min: -5, 
+					max: 5, 
+					ticks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+					zoomRange: [0, 100],
+					panRange: null
+					},					
+			grid: { hoverable: true, clickable: true , color: "#999"},
+			colors: ["#dc0b15"],
+			zoom: {
+				interactive: true
+			},
+			pan: {
+				interactive: true
+			}
+		};
+		
+		var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
+		
+		var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
+			
+		});
+	</script>
+	
+	<br/>
+	<div class="slider_wrap">
+		<div id="sliders" class="my_text slider_block">
+			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--dark_red);">a</span></div>
+				<input id="rA" type="range" min="-10" max="10" value="1" step="0.01"/>	
+					<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
+				<br/>
+				<span class="min slider_label">-10</span>		
+				<span class="max slider_label">10</span>
+			<br/> <br/>
+			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--blue);">b</span></div>
+				<input id="rB" type="range" min="-10" max="10" value="1" step="0.01" />	
+					<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
+				<br/>
+				<span class="min slider_label my_text">-10</span>		
+				<span class="max slider_label my_text">10</span>
+			<br/> <br/>
+			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--green);">c</span></div>
+				<input id="rC" type="range" min="-10" max="10" value="2" step="0.01" />	
+					<div class="slider_value_wrap"> <input id="sC" type="text" class="no-spin textField slider_value" style="color: var(--green);" size="4"/> </div>
+				<br/>
+				<span class="min slider_label my_text">-10</span>		
+				<span class="max slider_label my_text">10</span>
+			<br/> <br/>
+			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--orange);">d</span></div>
+				<input id="rD" type="range" min="-10" max="10" value="0" step="0.01" />	
+					<div class="slider_value_wrap"> <input id="sD" type="text" class="no-spin textField slider_value" style="color: var(--orange);" size="4"/> </div>
+				<br/>
+				<span class="min slider_label my_text">-10</span>		
+				<span class="max slider_label my_text">10</span>
+			<br/>
+			<br/>
+						
+			<div style="text-align: center;">
+				<span class="my_text header">
+				f(x) = 
+				<span id="eq_A" style="color: var(--dark_red);">a</span>
+				* sin (
+				<span id="eq_B" style="color: var(--blue);">b</span>
+				* (x + 
+				<span id="eq_C" style="color: var(--green);">c</span>
+				)) + 
+				<span id="eq_D" style="color: var(--orange);">d</span>
+			</div>
+		</span>
+	</div>
+		</div>
+	</div>
+	<script>
+		//SET DEFAULT VALUES! do that, because value="x" in html appears like it does not work
+	
+		document.getElementById("rA").value = 1;
+		document.getElementById("rB").value = 1;
+		document.getElementById("rC").value = 0;
+		document.getElementById("rD").value = 0;
+	</script>
+	
+	
+
+
+<input id="backBtn" type="button" class="back button" onclick="CloseAugucation();" name="back" value="<<"/>
