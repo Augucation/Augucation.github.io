@@ -1,6 +1,6 @@
 
 // URL of PDF document
-var url = "ftp://a8900030:julba@juliaba.net23.net/public_html/Augucation2.0/Augucation2.0/dummy_slides.pdf";
+var url = "/dummy_slides.pdf";
 
 var pdfDoc = null,
 	pageNum = 1,
