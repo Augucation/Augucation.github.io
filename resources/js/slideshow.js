@@ -175,12 +175,12 @@ function StartAugucation(){
 	localStorage.setItem("pageNum", pageNum);
 
 	if(pageNum == 4){
-		window.location="../../augucations/1_Signale/Augucation4_flot.html";
+		window.location="augucations/1_Signale/Augucation4_flot.html";
 	}
 }
 
 function CloseAugucation(){
-	window.location="index.html";
+	window.location="../../index.html";
 
 	pageNum = localStorage.getItem("pageNum") - 1;
 	onNextPage();
