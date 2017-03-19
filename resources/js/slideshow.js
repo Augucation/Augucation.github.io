@@ -1,6 +1,6 @@
 
 // URL of PDF document
-var url = "/dummy_slides.pdf";
+var url = "../slides/dummy_slides.pdf";
 
 var pdfDoc = null,
 	pageNum = 1,
@@ -175,7 +175,7 @@ function StartAugucation(){
 	localStorage.setItem("pageNum", pageNum);
 
 	if(pageNum == 4){
-		window.location="Augucation4_flot.html";
+		window.location="../../augucations/1_Signale/Augucation4_flot.html";
 	}
 }
 
