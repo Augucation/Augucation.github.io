@@ -1,6 +1,6 @@
 
 // URL of PDF document
-var url = "../slides/dummy_slides.pdf";
+var url = "resources/slides/dummy_slides.pdf";
 
 var pdfDoc = null,
 	pageNum = 1,
