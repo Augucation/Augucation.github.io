@@ -50,12 +50,8 @@
 			if(val.includes(','))
 			{
 				val = val.replace(',', '.');
-				console.log("val 1: ", val);
 				val = val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
-				console.log("val 2: ", val);
-				//val = val.replace('.', ',');
 				val = parseFloat(val);
-				console.log("val 3: ", val);
 			}
 			
 			val = parseFloat(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]); //TODO allow commas
@@ -72,10 +68,7 @@
 		  var theEvent = evt || window.event;
 		  var key = theEvent.keyCode || theEvent.which;
 		  var el = document.getElementById(id);
-		  
-		if(key == 13)
-			format(id);
-		  		  
+		  		  		  
 		  // allow backspace, LAK and RAK
 		  if(key == 8 || key == 37 || key == 39)
 			return true;
@@ -115,6 +108,14 @@
 		
 		$(function a() {
 		
+		function addEventListeners(_class, _event, _func){
+			objects = document.getElementsByClassName(_class);
+			
+			for(i=0; i < objects.length; i++){
+				objects[i].addEventListener(_event, _func, false);
+			}
+		}
+		
 		// declare sinus function parameters
 			var A = document.getElementById("sA").textContent = document.getElementById("rA").value,
 			    B = document.getElementById("sB").textContent = document.getElementById("rB").value,
@@ -123,36 +124,16 @@
 		
 
 		// add eventlistener to sliders 
-		document.getElementById("rA").addEventListener("input", function(){setValues(false);});
-		document.getElementById("rB").addEventListener("input", function(){setValues(false);});
-		document.getElementById("rC").addEventListener("input", function(){setValues(false);});
-		document.getElementById("rD").addEventListener("input", function(){setValues(false);});
+		addEventListeners("slider", "input", function(){setValues(false);});
 		
 		// add eventlisteners to text fields
 		
 		// validate input (multiple decimal separators, ...)
-		document.getElementById("sA").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
-		document.getElementById("sB").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
-		document.getElementById("sC").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
-		document.getElementById("sD").addEventListener("keypress", function(e) {validate(e, this.value, this.id);}, false);
-		
-		// plot and shit
-		document.getElementById("sA").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
-		document.getElementById("sB").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
-		document.getElementById("sC").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
-		document.getElementById("sD").addEventListener("keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);}, false);
-		
+		addEventListeners("slider_value", "keypress", function(e) {validate(e, this.value, this.id);});
+		// plot and shit;
+		addEventListeners("slider_value", "keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);});
 		// if focus is lost
-		//document.getElementById("sA").addEventListener("blur", aBlured, false);
-		//document.getElementById("sB").addEventListener("blur", bBlured, false);
-		//document.getElementById("sC").addEventListener("blur", cBlured, false);
-		//document.getElementById("sD").addEventListener("blur", dBlured, false);
-		
-		// if input value has changed
-		//document.getElementById("sA").addEventListener("onkeypress", function() {sliderValueInput(event, this.id);}, false);
-		//document.getElementById("sB").addEventListener("input", function() {sliderValueInput(this.id);}, false);
-		//document.getElementById("sC").addEventListener("input", cChangeed, false);
-		//document.getElementById("sD").addEventListener("input", dChangeed, false);
+		addEventListeners("slider_value", "blur", function(e) {sliderValueFocusLost(this.id);});
 		
 		// fill in values with slider values
 		setValues(false);
@@ -166,52 +147,18 @@
 		
 			var key = e.which || e.keyCode;
 			
-			//validate(e, v, id);
-						
-			if(key == 13)
+			if(key == 13){
+				format(id);
 				setValue_typed(id, false);
+			}
 			else
 				setValue_typed(id, true);
-		}		
-		function bPressed(e){
-			if(e.keyCode == 13)
-				setValue_typed('B', false);
-		}		
-		function cPressed(e){
-			if(e.keyCode == 13)
-				setValue_typed('C', false);
-		}		
-		function dPressed(e){
-			if(e.keyCode == 13)
-				setValue_typed('D', false);
+		}	
+
+		function sliderValueFocusLost(id){
+			format(id);
+			setValue_typed(id, false);
 		}
-		
-		function aBlured(){
-			setValue_typed('A', false);
-		}
-		function bBlured(){
-			setValue_typed('B', false);
-		}
-		function cBlured(){
-			setValue_typed('C', false);
-		}
-		function dBlured(){
-			setValue_typed('D', false);
-		}
-		
-		function aChangeed(){
-			setValue_typed('A', true);
-		}
-		function bChangeed(){
-			setValue_typed('B', true);
-		}
-		function cChangeed(){
-			setValue_typed('C', true);
-		}
-		function dChangeed(){
-			setValue_typed('D', true);
-		}
-				
 				
 		function my_sin(x){		
 		
@@ -224,7 +171,6 @@
 			return A * Math.sin(B * (x + C)) + D;
 		}
 		
-
 		// called by the slider's eventlisteners 
 		// update function parameters, draw plot
 		// typed: this function was called by typing a value, not by pressing enter
@@ -268,11 +214,10 @@
 			// get variable name from id
 			var vari = id.replace('s', '');
 			
-			
-			
 			// when typing ended, remove leading zeros and extra decimal separators in the end
 			if(!still_typing)
 			{
+				console.log("j,jdhjsdadjsajdksaljdksajdksajdksajdklsajd");
 				// zeros
 				if(!field.value.includes(',') && !field.value.includes('.'))
 					field.value = field.value.replace(/^0+(?!\.|$)/, '');
@@ -358,28 +303,28 @@
 	<div class="slider_wrap">
 		<div id="sliders" class="my_text slider_block">
 			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--dark_red);">a</span></div>
-				<input id="rA" type="range" min="-10" max="10" value="1" step="0.01"/>	
+				<input id="rA" type="range" class="slider" min="-10" max="10" value="1" step="0.01"/>	
 					<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
 				<br/>
 				<span class="min slider_label">-10</span>		
 				<span class="max slider_label">10</span>
 			<br/> <br/>
 			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--blue);">b</span></div>
-				<input id="rB" type="range" min="-10" max="10" value="1" step="0.01" />	
+				<input id="rB" type="range" class="slider" min="-10" max="10" value="1" step="0.01" />	
 					<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
 				<br/>
 				<span class="min slider_label my_text">-10</span>		
 				<span class="max slider_label my_text">10</span>
 			<br/> <br/>
 			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--green);">c</span></div>
-				<input id="rC" type="range" min="-10" max="10" value="2" step="0.01" />	
+				<input id="rC" type="range" class="slider" min="-10" max="10" value="2" step="0.01" />	
 					<div class="slider_value_wrap"> <input id="sC" type="text" class="no-spin textField slider_value" style="color: var(--green);" size="4"/> </div>
 				<br/>
 				<span class="min slider_label my_text">-10</span>		
 				<span class="max slider_label my_text">10</span>
 			<br/> <br/>
 			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--orange);">d</span></div>
-				<input id="rD" type="range" min="-10" max="10" value="0" step="0.01" />	
+				<input id="rD" type="range" class="slider" min="-10" max="10" value="0" step="0.01" />	
 					<div class="slider_value_wrap"> <input id="sD" type="text" class="no-spin textField slider_value" style="color: var(--orange);" size="4"/> </div>
 				<br/>
 				<span class="min slider_label my_text">-10</span>		
@@ -404,7 +349,6 @@
 	</div>
 	<script>
 		//SET DEFAULT VALUES! do that, because value="x" in html appears like it does not work
-	
 		document.getElementById("rA").value = 1;
 		document.getElementById("rB").value = 1;
 		document.getElementById("rC").value = 0;
