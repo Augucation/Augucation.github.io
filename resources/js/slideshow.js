@@ -16,6 +16,16 @@ var pdfDoc = null,
 	ctx = canvas.getContext('2d'),
 	topic = 1;
 
+// array that stores which slides per topic are augmented
+var augucations = [
+	[4],
+	[0],
+	[0],
+	[0],
+	[0],
+	[0]
+];	
+	
 loadAndRenderPDF();
 
 function setPageNum(num){
@@ -92,6 +102,9 @@ document.getElementById('prev').addEventListener('click', onPrevPage);
  * Displays previous page
  */
 function onNextPage(){
+	
+	console.log("onNextPage pageNum: ", pageNum);
+	
 	if(pageNum >= pdfDoc.numPages){
 		return;
 	}
@@ -173,26 +186,42 @@ function showSlides(show){
 function StartAugucation(){
 	//showSlides(false);
 
-	localStorage.setItem("pageNum", pageNum);
-
-	if(pageNum == 4){
-		window.location="augucations/1_Signale/Augucation4_flot.html";
-	}
+	url = "augucations/" + topic + "/Augucation" + topic + "_" + pageNum + ".htmlwqwqwq";
+	if(fileExists(url))
+		window.location = url;
 }
 
-function CloseAugucation(){
-	window.location="../../index.html";
-
-	pageNum = localStorage.getItem("pageNum") - 1;
-	onNextPage();
-	console.log("pageNum before Rendering: " + pageNum);
-	//loadAndRenderPDF();
-	console.log("pageNum after Rendering: " + pageNum);
-
+function CloseAugucation(top, page){
+	
+	window.location="../../index.html?" + top;
+	
+	topic = top;
+	pageNum = page;
+	
+	//onNextPage();
 	//showSlides(true);
 }
 
 function getTopicFromURL(){
    topic = window.location.search.substring(1);
    url = "resources/slides/im-0" + topic + ".pdf";
+}
+
+// checks for available augucations 
+function update(){
+	if (augucations[topic-1].includes(pageNum))
+		enableGUIElement(augBtn, true);
+	else
+		enableGUIElement(augBtn, false);
+}
+
+function fileExists(url) {
+    if(url){
+        var req = new XMLHttpRequest();
+        req.open('GET', url, false);
+        req.send();
+        return req.status==200;
+    } else {
+        return false;
+    }
 }

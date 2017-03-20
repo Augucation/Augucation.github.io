@@ -1,3 +1,3 @@
-function update(){
-	enableGUIElement(augBtn, pageNum == 4);
-}
+//function update(){
+//	enableGUIElement(augBtn, pageNum == 4);
+//}
