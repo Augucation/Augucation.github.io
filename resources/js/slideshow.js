@@ -1,6 +1,5 @@
-
 // URL of PDF document
-var url = "resources/slides/dummy_slides.pdf";
+//var url = "resources/slides/dummy_slides.pdf";
 
 var pdfDoc = null,
 	pageNum = 1,
@@ -14,7 +13,8 @@ var pdfDoc = null,
 	augBtn = document.getElementById("augBtn"),
 	pageCounter = document.getElementById("page_num_count"),
 	loadingText = document.getElementById("loading"),
-	ctx = canvas.getContext('2d');
+	ctx = canvas.getContext('2d'),
+	topic = 1;
 
 loadAndRenderPDF();
 
@@ -130,6 +130,7 @@ function newPage(e){
 
 function loadAndRenderPDF(){
 	enableGUIElement(loadingText, true);
+	getTopicFromURL();
 	/*
 	 * Asynchronously downloads PDF
 	 */
@@ -189,4 +190,9 @@ function CloseAugucation(){
 	console.log("pageNum after Rendering: " + pageNum);
 
 	//showSlides(true);
+}
+
+function getTopicFromURL(){
+   topic = window.location.search.substring(1);
+   url = "resources/slides/im-0" + topic + ".pdf";
 }
