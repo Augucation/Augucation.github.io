@@ -6,37 +6,108 @@
 	
 </head>
 
-
-	<div style="text-align: center;">
-		<span class="my_text header">
-			f(x) = 
-			<span style="color: var(--dark_red);">a</span>
-			* sin (
-			<span style="color: var(--blue);">b</span>
-			* (x + 
-			<span style="color: var(--green);">c</span>
-			)) + 
-			<span style="color: var(--orange);">d</span>
-		</span>
-	</div>
-	
-	<div id="chart1" class="chart"></div>
-
-
-	<!--[if lte IE 8]><script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/excanvas.min.js"></script><![endif]-->
-
+<body>
 	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
 	
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script> 
+
+	<div>
+		<div style="text-align: center;">
+			<span class="my_text header">
+				f(x) = 
+				<span style="color: var(--dark_red);">a</span>
+				* sin (
+				<span style="color: var(--blue);">b</span>
+				* (x + 
+				<span style="color: var(--green);">c</span>
+				)) + 
+				<span style="color: var(--orange);">d</span>
+			</span>
+		</div>
 	
+		<div id="chart1" class="chart"></div>
+
+		<br/>
+		<div class="slider_wrap">
+			<div id="sliders" class="my_text slider_block">
+				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--dark_red);">a</span></div>
+					<input id="rA" type="range" class="slider" min="-10" max="10" value="1" step="0.01"/>	
+						<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label">-10</span>		
+					<span class="max slider_label">10</span>
+				<br/> <br/>
+				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--blue);">b</span></div>
+					<input id="rB" type="range" class="slider" min="-10" max="10" value="1" step="0.01" />	
+						<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label my_text">-10</span>		
+					<span class="max slider_label my_text">10</span>
+				<br/> <br/>
+				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--green);">c</span></div>
+					<input id="rC" type="range" class="slider" min="-10" max="10" value="2" step="0.01" />	
+						<div class="slider_value_wrap"> <input id="sC" type="text" class="no-spin textField slider_value" style="color: var(--green);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label my_text">-10</span>		
+					<span class="max slider_label my_text">10</span>
+				<br/> <br/>
+				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--orange);">d</span></div>
+					<input id="rD" type="range" class="slider" min="-10" max="10" value="0" step="0.01" />	
+						<div class="slider_value_wrap"> <input id="sD" type="text" class="no-spin textField slider_value" style="color: var(--orange);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label my_text">-10</span>		
+					<span class="max slider_label my_text">10</span>
+				<br/>
+				<br/>
+							
+				<div style="text-align: center;">
+					<span class="my_text header">
+						f(x) = 
+						<span id="eq_A" style="color: var(--dark_red);">1</span>
+						* sin (
+						<span id="eq_B" style="color: var(--blue);">1</span>
+						* (x + 
+						<span id="eq_C" style="color: var(--green);">0</span>
+						)) + 
+						<span id="eq_D" style="color: var(--orange);">0</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 4);" name="back" value="<<"/>
+	</div>
+				
 	<script>
 	
-	var options1;
+		var options1;
+		
+		// store relevant slider-html-elements in arrays
+		var sliders = document.getElementsByClassName("slider");
+		var slider_values = new Array(4);
+		slider_values = document.getElementsByClassName("slider_value");
+		var vars = [1, 1, 0, 0]; // Start Values!
+		
+		
+		function addEventListeners(_type, _event, _func){
+			objects = window[_type];
+			for(i=0; i < objects.length; i++){
+				objects[i].addEventListener(_event, _func, false);
+			}
+		}
 	
 		function format(id){
 		
 			field = document.getElementById(id);
+
+			// find index of the current slider 
+			index = -1;
+			for(var i = 0, len = slider_values.length; i < len; i++) {
+				if (slider_values[i].id === id) {
+					index = i;
+					break;
+				}
+			}
 			
 			// delete leading zeros
 			if(!field.value.includes(',') && !field.value.includes('.'))
@@ -54,7 +125,7 @@
 				val = parseFloat(val);
 			}
 			
-			val = parseFloat(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]); //TODO allow commas
+			val = parseFloat(val.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]); 
 			field.value = val;
 		}
 		
@@ -108,41 +179,23 @@
 		
 		$(function a() {
 		
-		function addEventListeners(_class, _event, _func){
-			objects = document.getElementsByClassName(_class);
-			
-			for(i=0; i < objects.length; i++){
-				objects[i].addEventListener(_event, _func, false);
-			}
-		}
-		
-		// declare sinus function parameters
-			var A = document.getElementById("sA").textContent = document.getElementById("rA").value,
-			    B = document.getElementById("sB").textContent = document.getElementById("rB").value,
-			    C = document.getElementById("sC").textContent = document.getElementById("rC").value,
-			    D = document.getElementById("sD").textContent = document.getElementById("rD").value;
-		
-
+		// set values everywhere
+		for(i = 0; i < vars.length; i++){
+			slider_values[i].value = sliders[i].value = vars[i];
+		}	
+				
 		// add eventlistener to sliders 
-		addEventListeners("slider", "input", function(){setValues(false);});
+		addEventListeners("sliders", "input", function(){setValues(false);});
 		
 		// add eventlisteners to text fields
 		
 		// validate input (multiple decimal separators, ...)
-		addEventListeners("slider_value", "keypress", function(e) {validate(e, this.value, this.id);});
+		addEventListeners("slider_values", "keypress", function(e) {validate(e, this.value, this.id);});
 		// plot and shit;
-		addEventListeners("slider_value", "keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);});
+		addEventListeners("slider_values", "keyup", function(e) {sliderValueKeyPressed(e, this.value, this.id);});
 		// if focus is lost
-		addEventListeners("slider_value", "blur", function(e) {sliderValueFocusLost(this.id);});
-		
-		// fill in values with slider values
-		setValues(false);
-		
-		function sliderValueInput(e, slider){
-			e.preventDefault();
-			var key = e.which || e.keyCode;
-		}
-		
+		addEventListeners("slider_values", "blur", function(e) {sliderValueFocusLost(this.id);});
+						
 		function sliderValueKeyPressed(e, v, id){
 		
 			var key = e.which || e.keyCode;
@@ -163,44 +216,40 @@
 		function my_sin(x){		
 		
 			// without parsing, C and D would spack ab krass!
-			A = parseFloat(A);
-			B = parseFloat(B);
-			C = parseFloat(C);
-			D = parseFloat(D);
+			vars[0] = parseFloat(vars[0]);
+			vars[1] = parseFloat(vars[1]);
+			vars[2] = parseFloat(vars[2]);
+			vars[3] = parseFloat(vars[3]);
 		
-			return A * Math.sin(B * (x + C)) + D;
+			return vars[0] * Math.sin(vars[1] * (x + vars[2])) + vars[3];
 		}
 		
 		// called by the slider's eventlisteners 
 		// update function parameters, draw plot
 		// typed: this function was called by typing a value, not by pressing enter
-		function setValues(typed){
-				
-				
+		function setValues(typed){	
 							
 			if(typed)
 			{
 				//A = document.getElementById("rA").value = document.getElementById("sA").value;
-				A = document.getElementById("rA").value = parseFloat(document.getElementById("sA").value.replace(",", "."), 10);
-				B = document.getElementById("rB").value = parseFloat(document.getElementById("sB").value.replace(",", "."), 10);
-				C = document.getElementById("rC").value = parseFloat(document.getElementById("sC").value.replace(",", "."), 10);
-				D = document.getElementById("rD").value = parseFloat(document.getElementById("sD").value.replace(",", "."), 10);
+				vars[0] = document.getElementById("rA").value = parseFloat(document.getElementById("sA").value.replace(",", "."), 10);
+				vars[1] = document.getElementById("rB").value = parseFloat(document.getElementById("sB").value.replace(",", "."), 10);
+				vars[2] = document.getElementById("rC").value = parseFloat(document.getElementById("sC").value.replace(",", "."), 10);
+				vars[3] = document.getElementById("rD").value = parseFloat(document.getElementById("sD").value.replace(",", "."), 10);
 			}
 			else
 			{
-				A = document.getElementById("sA").value = document.getElementById("rA").value;
-				B = document.getElementById("sB").value = document.getElementById("rB").value;
-				C = document.getElementById("sC").value = document.getElementById("rC").value;
-				D = document.getElementById("sD").value = document.getElementById("rD").value;
+				vars[0] = document.getElementById("sA").value = document.getElementById("rA").value;
+				vars[1] = document.getElementById("sB").value = document.getElementById("rB").value;
+				vars[2] = document.getElementById("sC").value = document.getElementById("rC").value;
+				vars[3] = document.getElementById("sD").value = document.getElementById("rD").value;
 			}
 			
-			var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
-			var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
-			
-			document.getElementById("eq_A").textContent = A;
-			document.getElementById("eq_B").textContent = B;
-			document.getElementById("eq_C").textContent = C;
-			document.getElementById("eq_D").textContent = D;
+			plot_it();			
+			document.getElementById("eq_A").textContent = vars[0];
+			document.getElementById("eq_B").textContent = vars[1];
+			document.getElementById("eq_C").textContent = vars[2];
+			document.getElementById("eq_D").textContent = vars[3];
 		}
 		
 		/* Called when there is a new value in a slider's text field
@@ -208,41 +257,32 @@
 		 * still_typing: is the user still typing? (did not pressed enter or changed focus)
 		 */
 		function setValue_typed(id, still_typing){
-																				
+			
 			field = document.getElementById(id);
+			
+			// find index of the current slider 
+			index = -1;
+			for(var i = 0, len = slider_values.length; i < len; i++) {
+				if (slider_values[i].id === id) {
+					index = i;
+					break;
+				}
+			}
 			
 			// get variable name from id
 			var vari = id.replace('s', '');
-			
-			// when typing ended, remove leading zeros and extra decimal separators in the end
-			if(!still_typing)
-			{
-				console.log("j,jdhjsdadjsajdksaljdksajdksajdksajdklsajd");
-				// zeros
-				if(!field.value.includes(',') && !field.value.includes('.'))
-					field.value = field.value.replace(/^0+(?!\.|$)/, '');
-				
-				
-				// decimal separators 
-				var lastChar = field.value.charAt(field.value.length - 1);
-				if (lastChar == "," || lastChar == ".")
-				{
-					field.value = field.value.slice(0, -1);
-				}
-				
-			}
-			
+						
 			val = parseFloat(field.value.replace(",", "."), 10);
 						
 			// if the input is invalid, reset field to the last accepted value
 			if(isNaN(val) || val < -10 || val > 10){
 				// reset field value only if user is not typing anymore
-				if(!still_typing){	
-						field.value = eval(vari); 
+				if(!still_typing){	 
+						field.value = vars[index];
 					}
 				return;
 			}
-			
+		
 			setValues(true);
 		}		
 		
@@ -257,6 +297,13 @@
 			return d;
 		}
 		
+		function plot_it(){
+			
+			var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
+			
+			var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
+		}
+			
 		options1 = {
 			lines: { show: true },
 			xaxis: { ticks: [[0.5*Math.PI,"0.5 \u03C0"],
@@ -292,70 +339,8 @@
 			}
 		};
 		
-		var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
+		plot_it();
 		
-		var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
-			
 		});
 	</script>
-	
-	<br/>
-	<div class="slider_wrap">
-		<div id="sliders" class="my_text slider_block">
-			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--dark_red);">a</span></div>
-				<input id="rA" type="range" class="slider" min="-10" max="10" value="1" step="0.01"/>	
-					<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
-				<br/>
-				<span class="min slider_label">-10</span>		
-				<span class="max slider_label">10</span>
-			<br/> <br/>
-			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--blue);">b</span></div>
-				<input id="rB" type="range" class="slider" min="-10" max="10" value="1" step="0.01" />	
-					<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
-				<br/>
-				<span class="min slider_label my_text">-10</span>		
-				<span class="max slider_label my_text">10</span>
-			<br/> <br/>
-			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--green);">c</span></div>
-				<input id="rC" type="range" class="slider" min="-10" max="10" value="2" step="0.01" />	
-					<div class="slider_value_wrap"> <input id="sC" type="text" class="no-spin textField slider_value" style="color: var(--green);" size="4"/> </div>
-				<br/>
-				<span class="min slider_label my_text">-10</span>		
-				<span class="max slider_label my_text">10</span>
-			<br/> <br/>
-			<div class="slider_name_wrap"><span class="slider_name" style="color: var(--orange);">d</span></div>
-				<input id="rD" type="range" class="slider" min="-10" max="10" value="0" step="0.01" />	
-					<div class="slider_value_wrap"> <input id="sD" type="text" class="no-spin textField slider_value" style="color: var(--orange);" size="4"/> </div>
-				<br/>
-				<span class="min slider_label my_text">-10</span>		
-				<span class="max slider_label my_text">10</span>
-			<br/>
-			<br/>
-						
-			<div style="text-align: center;">
-				<span class="my_text header">
-				f(x) = 
-				<span id="eq_A" style="color: var(--dark_red);">a</span>
-				* sin (
-				<span id="eq_B" style="color: var(--blue);">b</span>
-				* (x + 
-				<span id="eq_C" style="color: var(--green);">c</span>
-				)) + 
-				<span id="eq_D" style="color: var(--orange);">d</span>
-			</div>
-		</span>
-	</div>
-		</div>
-	</div>
-	<script>
-		//SET DEFAULT VALUES! do that, because value="x" in html appears like it does not work
-		document.getElementById("rA").value = 1;
-		document.getElementById("rB").value = 1;
-		document.getElementById("rC").value = 0;
-		document.getElementById("rD").value = 0;
-	</script>
-	
-	
-
-
-<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 4);" name="back" value="<<"/>
+</body>
