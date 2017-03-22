@@ -177,6 +177,26 @@
 		  }
 		}
 		
+		function clip_value(id){
+			
+			field = document.getElementById(id);
+			
+			// find index of the current slider 
+			index = -1;
+			for(var i = 0, len = slider_values.length; i < len; i++) {
+				if (slider_values[i].id === id) {
+					index = i;
+					break;
+				}
+			}
+					
+			// if the input is invalid, reset field to the last accepted value
+			val = field.value;			
+			if(isNaN(val) || val < -10 || val > 10){
+				field.value = vars[index];
+			}
+		}				
+		
 		$(function a() {
 		
 		// set values everywhere
@@ -202,15 +222,17 @@
 			
 			if(key == 13){
 				format(id);
-				setValue_typed(id, false);
+				clip_value(id);
+				setValues(true);
 			}
-			else
-				setValue_typed(id, true);
+			//else
+				//setValues(false);
 		}	
 
 		function sliderValueFocusLost(id){
 			format(id);
-			setValue_typed(id, false);
+			clip_value(id);
+			setValues(true);
 		}
 				
 		function my_sin(x){		
@@ -228,7 +250,7 @@
 		// update function parameters, draw plot
 		// typed: this function was called by typing a value, not by pressing enter
 		function setValues(typed){	
-							
+										
 			if(typed)
 			{
 				//A = document.getElementById("rA").value = document.getElementById("sA").value;
@@ -251,41 +273,7 @@
 			document.getElementById("eq_C").textContent = vars[2];
 			document.getElementById("eq_D").textContent = vars[3];
 		}
-		
-		/* Called when there is a new value in a slider's text field
-		 * v: text field identifier 'A' - 'D'
-		 * still_typing: is the user still typing? (did not pressed enter or changed focus)
-		 */
-		function setValue_typed(id, still_typing){
-			
-			field = document.getElementById(id);
-			
-			// find index of the current slider 
-			index = -1;
-			for(var i = 0, len = slider_values.length; i < len; i++) {
-				if (slider_values[i].id === id) {
-					index = i;
-					break;
-				}
-			}
-			
-			// get variable name from id
-			var vari = id.replace('s', '');
-						
-			val = parseFloat(field.value.replace(",", "."), 10);
-						
-			// if the input is invalid, reset field to the last accepted value
-			if(isNaN(val) || val < -10 || val > 10){
-				// reset field value only if user is not typing anymore
-				if(!still_typing){	 
-						field.value = vars[index];
-					}
-				return;
-			}
-		
-			setValues(true);
-		}		
-		
+				
 		// setup plot
 		function sampleFunction(x1, x2, func) {
 					
