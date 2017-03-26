@@ -3,23 +3,7 @@
 	<meta charset="UTF-8"/>
 
 	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
-	
-	<style>
-		.canvas
-		{ 
-			background:url(../../resources/img/im-01_sinwave.png);
-			background-size: 100% auto;
-			position: relative;
-			border:	  0px;
-			/*height:   80vh;
-			width:	  60vw;*/
-			display:  block;
-			margin:   auto; 
-			padding:  0;
-		}
-
-	</style>
-	
+	<link rel="stylesheet" href="Augucation1_46.css">	
 </head>
 
 <body>
@@ -27,32 +11,63 @@
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script> 
 
 	<div>
-		<canvas id="myCanvas" class="canvas" width="1000px" height="750px"></canvas>
-		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 5);" name="back" value="<<"/>
+		<div id="canvas_wrapper" class="canvas_wrapper" width="1200px" height="750px">
+			<canvas id="myCanvas" class="canvas" width="1000px" height="750px"></canvas>
+			<div class="bitCodeList_wrapper" width="20px" height="750px">
+				<ul id="bitCodeList" class="my_text bitCodeList" width="100px", height="750px"></ul>
+			</div>
+		</div>
+		<br/>
+		<div class="slider_wrap">
+			<div id="sliders" class="my_text slider_block">
+				<div class="slider_name_wrap slider_name_wrap_spec"><span class="slider_name" style="color: var(--dark_red);">Diskretisierung</span></div>
+					<input id="rA" type="range" class="slider" min="5" max="15" value="10" step="1"/>	
+						<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label">5</span>		
+					<span class="max slider_label">15</span>
+				<br/> <br/>
+				<div class="slider_name_wrap slider_name_wrap_spec"><span class="slider_name" style="color: var(--blue);">Quantisierung</span></div>
+					<input id="rB" type="range" class="slider" min="1" max="3" value="2" step="1" />	
+						<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label my_text">1</span>		
+					<span class="max slider_label my_text">3</span>
+			</div>
+		</div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 46);" name="back" value="<<"/>
 	</div>
 
 	<script>
-	
-		var c=document.getElementById("myCanvas");		
-		var ctx=c.getContext("2d");
-		ctx.strokeStyle = '#000000';
+		var bitCodeList = document.getElementById("bitCodeList");
+		var c = document.getElementById("myCanvas");		
+		var ctx = c.getContext("2d");
 		
-		var toppel = 251; 
+		////////////////////////////////////////////////////////DRAW///////////////////////////////////////////////////////////////////
+		
+		// get colors from css
+		var bodyStyles = window.getComputedStyle(document.body);
+		var dark_red = bodyStyles.getPropertyValue('--dark_red');
+		var blue = bodyStyles.getPropertyValue('--blue');
+		
+				var toppel = 251; 
 		var bottom = 657; 
 		var leftestLine = 150;
-		var rightestLine = 914;
+		var rightestLine = 940;
 		
 		var discOffset = 10;
-		var quantOffset = 60;
+		var quantOffset = 35;
 		
 		var discWidth = rightestLine - leftestLine;
 		var quantHeight = bottom - toppel;
 		
+		// discretisisation and quantization
 		var disc = 10; // 5-15
-		var quant = 6; // 1-3	// Note: this variable contains the number of lines, not of bits
+		var quant = 4; // 2, 4, 8	// Note: this variable contains the number of quant steps, not of bits
 			
 		function drawDiscLines(){
-			var discSpace = discWidth / (disc + 1); // one more, because the middle line is on the x-axis
+		
+			var discSpace = discWidth / (disc + 1); 
 			
 			ctx.beginPath();
 			for(i = 1; i < disc + 1; i++)
@@ -60,24 +75,90 @@
 				ctx.moveTo(leftestLine + discSpace * i, toppel - discOffset * 1.1); // offset and offset * 1.1 is just pi times thumb
 				ctx.lineTo(leftestLine + discSpace * i, bottom + discOffset);		// to draw the lines a bit longer
 			}
-			ctx.stroke();
+			ctx.strokeStyle = dark_red;
+ 			ctx.stroke();
+			
+			createBitResults();
 		}
 			
 		function drawQuantLines(){
 			var quantSpace = quantHeight / quant;
 			
+			var quantLines = quant + 1; //== 2 ? 0 : quant + 1; // draw one more line, because the middle line is on the x-axis
+			
 			ctx.beginPath();
-			for(i = 0; i < quant + 1; i++)	// draw one more line, because the middle line is on the x-axis
+			for(i = 0; i < quantLines; i++)
 			{
 				ctx.moveTo(leftestLine, toppel + quantSpace * i);
 				ctx.lineTo(rightestLine - quantOffset, toppel + quantSpace * i); //offset is just pi times thumb
 			}
+			ctx.strokeStyle = blue;
 			ctx.stroke();
+			
+			createQuantBitcodes();
 		}
 		
-		drawDiscLines();
-		drawQuantLines();
+		function drawNew(){
+			ctx.clearRect(0, 0, c.width, c.height);
+			drawDiscLines();
+			drawQuantLines();
+		}
 		
+		drawNew();
+				
+		////////////////////////////////////////////////////////SLIDER///////////////////////////////////////////////////////////////////
+		
+		// add eventListeners
+		slider_disc = document.getElementById("rA");
+		slider_disc.addEventListener("input", function(e){slider_input("disc", this.value);});
+		slider_disc = document.getElementById("rB");
+		slider_disc.addEventListener("input", function(e){slider_input("quant", Math.pow(2, this.value));});
+		
+		function slider_input(discOrQuant, val){
+			window[discOrQuant] = parseInt(val);
+			drawNew();
+		}
+				
+		function createQuantBitcodes(){
+			
+			// delete old bitCodes
+			bitCodeList.innerHTML = '';
+						
+			// create new ones
+			bitCodes = new Array(quant);
+			for(var i = 0; i < quant; i++){
+				bitCodes[i] = document.createElement("li");
+				bitCodes[i].className = "bitCode _" + quant;
+				//var bitCode = i.toString(2); // convert to binary
+				var bitCode = calcBitcode(i);
+				bitCode = addLeadingZeros(bitCode);
+				bitCodes[i].textContent = bitCode;
+				bitCodeList.appendChild(bitCodes[i]);
+			}			
+		}
+		
+		function calcBitcode(i){
+			var bit;
+			if(i < quant / 2)
+				bit = quant / 2 - i - 1;
+			else
+				bit = quant - i + (quant / 2 - 1); // it just works. nobody knows why...
+			return bit.toString(2);
+		}
+		
+		function addLeadingZeros(b){
+			var bit = b.toString();
+			bitNum = Math.log2(quant); // calculate number of bits
+			limit = bitNum - bit.length;
+			for(var i = 0; i < limit; i++){
+				bit = "0" + bit;
+			}
+			return bit;
+		}
+	
+		function createBitResults(){
+			
+		}
 	</script>
 	
 </body>
