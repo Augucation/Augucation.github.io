@@ -24,6 +24,12 @@ var quantHeight = bottom - toppel;
 var disc = 10; // 5-15
 var quant = 4; // 2, 4, 8	// Note: this variable contains the number of quant steps, not of bits
 
+var disc_min = 5;
+var disc_max = 15;
+var quant_min = 1; //Note: this time, the number of bits is stored
+var quant_max = 3;
+
+
 // stores all possible digital codes of the signal, depending von disc and quant
 var digitalSignals;
 
@@ -132,11 +138,22 @@ function addListeners(){
 	text_quant = document.getElementById("sB");
 	text_quant.addEventListener("keypress", function(e){slider_input("quant", "text", Math.pow(2, this.value), e);});
 
+	text_disc.addEventListener("keydown", function(e){validateInput(e);});
+	text_quant.addEventListener("keydown", function(e){validateInput(e);});
+	
 	slider_disc.value = disc;
 	slider_quant.value = Math.log2(quant);
 	
 	text_disc.value = disc;
 	text_quant.value = Math.log2(quant);
+}
+
+function validateInput(e){
+	if((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 13 && e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 39)
+	{
+		e.preventDefault();      // firefox
+		e.returnValue = false;   // chrome
+	}
 }
 
 function slider_input(discOrQuant, sliderOrText, val, e){
@@ -157,26 +174,20 @@ function slider_input(discOrQuant, sliderOrText, val, e){
 		}
 				
 		var v = parseInt(window["text_" + discOrQuant].value);
+		console.log("v: ", v);
 		
 		// check for invalid values
-		if(discOrQuant == "disc")
-		{
-			if(isNaN(v) || v < 5 || v > 15){
-				text_disc.value = slider_disc.value;
-				disc  = slider_disc.value;
-				return;
-			}
-		}
-		else if(discOrQuant == "quant")
-		{
-			if(isNaN(v) || v < 1 || v > 3){
-				text_quant.value = slider_quant.value;
-				quant  = Math.pow(2, slider_quant.value);
-				return;
-			}			
+		if(isNaN(v) 
+			|| v < window[discOrQuant + "_min"] 
+			|| v > window[discOrQuant + "_max"]
+			|| (val + "").includes(',')
+			|| (val + "").includes('.')){
+			window["text_" + discOrQuant].value = window["slider_" + discOrQuant].value;
+			window[discOrQuant]  = window["slider_" + discOrQuant].value;
+			return;
 		}
 		
-		window[discOrQuant] = valu; // discOrQuant == "disc" ? valu : Math.pow(valu);
+		window[discOrQuant] = valu; 
 		window["slider_" + discOrQuant].value = discOrQuant == "disc" ? valu : Math.log2(valu);
 	}
 	
