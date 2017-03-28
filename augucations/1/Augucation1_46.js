@@ -27,9 +27,12 @@ var quant = 4; // 2, 4, 8	// Note: this variable contains the number of quant st
 // stores all possible digital codes of the signal, depending von disc and quant
 var digitalSignals;
 
+var digitalSpan = document.getElementById("digital_signal");
+
 addListeners();
 initializeDigitalSignals();
 drawNew();
+showDigitalSignal();
 	
 function initializeDigitalSignals(){
 	
@@ -80,7 +83,7 @@ function initializeDigitalSignals(){
 }	
 	
 function drawDiscLines(){
-
+	
 	var discSpace = discWidth / (disc + 1); 
 	
 	ctx.beginPath();
@@ -119,14 +122,64 @@ function drawNew(){
 ////////////////////////////////////////////////////////SLIDER///////////////////////////////////////////////////////////////////
 
 function addListeners(){
-slider_disc = document.getElementById("rA");
-slider_disc.addEventListener("input", function(e){slider_input("disc", this.value);});
-slider_disc = document.getElementById("rB");
-slider_disc.addEventListener("input", function(e){slider_input("quant", Math.pow(2, this.value));});
+	slider_disc = document.getElementById("rA");
+	slider_disc.addEventListener("input", function(e){slider_input("disc", "slider", this.value);});
+	slider_quant = document.getElementById("rB");
+	slider_quant.addEventListener("input", function(e){slider_input("quant", "slider", Math.pow(2, this.value));});
+	
+	text_disc = document.getElementById("sA");
+	text_disc.addEventListener("keypress", function(e){slider_input("disc", "text", this.value, e);});
+	text_quant = document.getElementById("sB");
+	text_quant.addEventListener("keypress", function(e){slider_input("quant", "text", Math.pow(2, this.value), e);});
+
+	slider_disc.value = disc;
+	slider_quant.value = Math.log2(quant);
+	
+	text_disc.value = disc;
+	text_quant.value = Math.log2(quant);
 }
 
-function slider_input(discOrQuant, val){
-	window[discOrQuant] = parseInt(val);
+function slider_input(discOrQuant, sliderOrText, val, e){
+	
+	var valu = parseInt(val);
+	
+	// update text value
+	if(sliderOrText == "slider")
+	{
+		window["text_" + discOrQuant].value = discOrQuant == "disc" ? val : Math.log2(val);
+		window[discOrQuant] = parseInt(val);
+	}
+	else if(sliderOrText == "text")
+	{
+		if(e.keyCode != 13) // enter key
+		{ 
+			return;
+		}
+				
+		var v = parseInt(window["text_" + discOrQuant].value);
+		
+		// check for invalid values
+		if(discOrQuant == "disc")
+		{
+			if(isNaN(v) || v < 5 || v > 15){
+				text_disc.value = slider_disc.value;
+				disc  = slider_disc.value;
+				return;
+			}
+		}
+		else if(discOrQuant == "quant")
+		{
+			if(isNaN(v) || v < 1 || v > 3){
+				text_quant.value = slider_quant.value;
+				quant  = Math.pow(2, slider_quant.value);
+				return;
+			}			
+		}
+		
+		window[discOrQuant] = valu; // discOrQuant == "disc" ? valu : Math.pow(valu);
+		window["slider_" + discOrQuant].value = discOrQuant == "disc" ? valu : Math.log2(valu);
+	}
+	
 	drawNew();
 	showDigitalSignal();
 }
@@ -141,7 +194,6 @@ function createQuantBitcodes(){
 	for(var i = 0; i < quant; i++){
 		bitCodes[i] = document.createElement("li");
 		bitCodes[i].className = "bitCode _" + quant;
-		//var bitCode = i.toString(2); // convert to binary
 		var bitCode = calcBitcode(i);
 		bitCode = addLeadingZeros(bitCode);
 		bitCodes[i].textContent = bitCode;
@@ -169,5 +221,15 @@ function addLeadingZeros(b){
 }
 
 function showDigitalSignal(){
-	//console.log(digitalSignals[disc - 5][Math.log2(quant) - 1]);
+		
+	// delete old digits
+	digitalSpan.innerHTML = '';
+	
+	var digits = new Array(disc);
+	for(var i = 0; i < digits.length; i++){
+		digits[i] = document.createElement("span");
+		digits[i].className = i == 0 ? "digital first" : "digital _" + disc;
+		digits[i].textContent = digitalSignals[disc - 5][Math.log2(quant) - 1][i];
+		digitalSpan.appendChild(digits[i]);
+	}
 }
