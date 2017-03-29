@@ -186,7 +186,7 @@ function showSlides(show){
 function StartAugucation(){
 	//showSlides(false);
 
-	url = "augucations/" + topic + "/Augucation" + topic + "_" + pageNum + ".html";
+	url = "augucations/" + topic + "/" + pageNum + "/Augucation" + topic + "_" + pageNum + ".html";
 	if(fileExists(url))
 		window.location = url;
 }
