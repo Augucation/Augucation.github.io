@@ -109,7 +109,65 @@
 	align:    		  center;
 	cursor:	  		  pointer;
 }
-		
+	
+.menuBtn
+{
+	background-color: var(--hci_gray);
+	background-size:  50px 50px;
+	border: 		  none;
+	height:   		  50px;
+	width:    		  50px;
+  border-radius: 10px;
+	position: 		  fixed;
+	z-index:  		  2;
+	bottom:	  		  1%;
+	left:    		  1%;
+	align:    		  center;
+	cursor:	  		  pointer;
+	color:        white;
+}
+
+
+.menuCloseBtn
+{
+	background-color: var(--hci_gray);
+	background-size:  50px 50px;
+	border: 		  none;
+	height:   		  50px;
+	width:    		  50px;
+  border-radius: 10px;
+	position: 		  absolute;
+	z-index:  		  2;
+	top:	  		  1%;
+	right:    		  1%;
+	align:    		  center;
+	cursor:	  		  pointer;
+	color:        white;
+}
+
+.menuAugBtn
+{
+  background-color: var(--hci_gray);
+	color: white;
+	border: none;
+	height: 30%;
+	font-size: 100;
+	margin-top: 10%; 
+}
+
+.menu
+{
+	background-color: var(--hci_gray);
+	left: 0px;
+	height: 100%;
+	width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+}
+
 div.content
 {
 	font-family: 'uhh';

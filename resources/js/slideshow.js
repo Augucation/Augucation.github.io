@@ -225,3 +225,22 @@ function fileExists(url) {
         return false;
     }
 }
+
+function showMenu(){
+    document.getElementById("menu").style.width = "20%";
+	console.log("show it!");
+	enableGUIElement(document.getElementById("menuCloseBtn"), true);
+	enableGUIElement(document.getElementById("menuBtn"), false);
+	enableGUIElement(document.getElementById("menuAugBtn1"), true);
+}
+
+function hideMenu(){
+    document.getElementById("menu").style.width = "0%";
+	enableGUIElement(document.getElementById("menuCloseBtn"), false);
+	enableGUIElement(document.getElementById("menuBtn"), true);
+	enableGUIElement(document.getElementById("menuAugBtn1"), false);
+}
+
+function manageMenuButtons(){
+	document.getElementById("menuAugBtn1").addEventListener("onclick", function() {pageNum = augucations[topic][1]; StartAugucation();});
+}
