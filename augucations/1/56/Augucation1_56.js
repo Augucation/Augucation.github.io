@@ -42,7 +42,7 @@ function sampleFunction(x1, x2, func) {
 	return d;
 }
 	
-function makeData(index){
+function makeData(index){	
 	var amp = index > 1 ? param_a[index - 2] : 1;
 	var phas = index > 1 ? param_theta[index - 2] : 1;
 	return sampleFunction(0, 20, function(x) {return amp * Math.cos(x + phas)} );
@@ -50,10 +50,10 @@ function makeData(index){
 	
 function makeOptions(index){
 	
+	var borderWid = index == current_chart ? 2 : 0.5;
 	var borderCol = index == current_chart ? colors[index] : color_gray;
 	
 	return {
-		colors: [colors[index]],
 		yaxis: 
 		{
 			ticks: [],
@@ -68,7 +68,7 @@ function makeOptions(index){
 		},
 		grid:
 		{
-			borderWidth: 0.5,
+			borderWidth: borderWid,
 			borderColor: borderCol,
 		}
 	};
@@ -77,8 +77,12 @@ function makeOptions(index){
 $(function(){
 	
 	function plotIt(){		
-		for(var i = 0; i < charts.length; i++)
-			this.plot = $.plot($(charts[i]),  [ { data: makeData(i)} ], makeOptions(i));
+		for(var i = 0; i < charts.length; i++){
+			if(i == 0)
+				this.plot = $.plot($(charts[i]),  [ { data: makeData(2), color: colors[2]}, {data: makeData(3), color: colors[3]}, {data: makeData(4), color: colors[4]}, {data: makeData(5), color: colors[5]}, {data: makeData(6), color: colors[6]} ], makeOptions(i));
+			else
+				this.plot = $.plot($(charts[i]),  [ { data: makeData(i), color: colors[i]} ], makeOptions(i));
+		}
 	}
 	plotIt();
 	plotFunc = plotIt;
