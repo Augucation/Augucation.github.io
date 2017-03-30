@@ -1,5 +1,7 @@
 :root
 {
+	--white: #FFFFFF;
+	--hci_black: #000000;
 	--hci_gray: #555e67;
 	--hci_red:  #dc0b15;
 	--dark_red: #B52121;
@@ -18,7 +20,19 @@
 {
 	font-family:   'uhh';
 	font-size:      20px;
-	color:		    var(hci_gray);
+  color:		      var(hci_gray) !important;
+}
+
+.my_text.centered_label
+{
+  display: table;
+	text-align: center;
+	margin: 0 auto;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: smaller;
 }
 
 .textField
