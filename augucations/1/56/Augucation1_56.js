@@ -1,6 +1,9 @@
 var charts, options, colors, data1;
 var current_chart = 4; // 2 - 6 because the first two charts are Extrawürschte
 
+var param_a, param_theta;
+var param_freq = 1; // maybe -4-5
+
 var sliders;
 
 function initializePlotStuff(){
@@ -9,13 +12,21 @@ function initializePlotStuff(){
 	options = new Array(charts.length);
 
 	colors = [color_black, color_gray, color_dark_red, color_blue, color_green, color_orange];
-
-	data1 = sampleFunction( 0, 20, function(x){ 3 * x; } );
 }	
 initializePlotStuff();
 
 function initializeSliderStuff(){
 	sliders = document.getElementsByClassName("slider");
+	
+	for (var i = 0; i < sliders.length; i++){
+		sliders[i].addEventListener("input", function(e){sliderInput(this.id, this.value);});
+	}
+	
+	param_a = new Array(charts.length - 2);
+	param_a.fill(1);
+	param_theta = new Array(charts.length - 2);
+	param_theta.fill(0);
+	param_freq = 1;
 }
 initializeSliderStuff();
 
@@ -26,11 +37,16 @@ function sampleFunction(x1, x2, func) {
 	var d = [ ];
 	var step = (x2-x1)/700;
 	for (var i = x1; i < x2; i += step )
-		//d.push([i, func( i ) ]);
-		d.push([i, Math.sin(i) ]);
+		d.push([i, func( i ) ]);
 
 	return d;
 }
+	
+function makeData(index){
+	var amp = index > 1 ? param_a[index - 2] : 1;
+	var phas = index > 1 ? param_theta[index - 2] : 1;
+	return sampleFunction(0, 20, function(x) {return amp * Math.cos(x + phas)} );
+}	
 	
 function makeOptions(index){
 	
@@ -62,7 +78,7 @@ $(function(){
 	
 	function plotIt(){		
 		for(var i = 0; i < charts.length; i++)
-			this.plot = $.plot($(charts[i]),  [ { data: data1} ], makeOptions(i));
+			this.plot = $.plot($(charts[i]),  [ { data: makeData(i)} ], makeOptions(i));
 	}
 	plotIt();
 	plotFunc = plotIt;
@@ -76,7 +92,8 @@ function chartSelected(index){
 }
 
 function highlight(){
-		
+	
+	/*
 	var r = document.querySelectorAll('input[type=range]'), 
     prefs = ['moz-range-thumb', 'webkit-slider-thumb', 'ms-thumb'],
     styles = [], 
@@ -114,5 +131,16 @@ function highlight(){
 		setDragStyleStr();
 	}
 	
-	blubbel();
+	//blubbel();
+	*/
+}
+
+function sliderInput(id, val){
+	if(id == "slider_amp"){
+		param_a[current_chart - 2] = parseFloat(val);
+	}
+	else if(id == "slider_phas"){
+		param_theta[current_chart - 2] = parseFloat(val);
+	}
+	plotFunc();
 }
