@@ -11,7 +11,7 @@ function initializePlotStuff(){
 
 	options = new Array(charts.length);
 
-	colors = [color_black, color_gray, color_dark_red, color_blue, color_green, color_orange];
+	colors = [color_black, color_gray, color_dark_red, color_blue, color_green, color_orange, color_purple];
 }	
 initializePlotStuff();
 
@@ -32,10 +32,9 @@ initializeSliderStuff();
 
 plotFunc = null;
 
-function sampleFunction(x1, x2, func) {
-			
+function sampleFunction(x1, x2, func) {			
 	var d = [ ];
-	var step = (x2-x1)/700;
+	var step = (x2-x1)/500;
 	for (var i = x1; i < x2; i += step )
 		d.push([i, func( i ) ]);
 
@@ -43,9 +42,22 @@ function sampleFunction(x1, x2, func) {
 }
 	
 function makeData(index){	
+
+	// plot the fourier sum
+	if(index == 1){
+		return sampleFunction(0, 20, function(x){
+			var sum = 0;
+			for(var i = 0; i < charts.length - 2; i++){
+				sum += (param_a[i] * Math.cos(i * param_freq * x + param_theta[i]));
+			}
+			return sum;
+		} );
+	}
+	
+	// plot all the other graphs
 	var amp = index > 1 ? param_a[index - 2] : 1;
 	var phas = index > 1 ? param_theta[index - 2] : 1;
-	return sampleFunction(0, 20, function(x) {return amp * Math.cos(x + phas)} );
+	return sampleFunction(0, 20, function(x) {return amp * Math.cos((index-2) * param_freq * x + phas)} );
 }	
 	
 function makeOptions(index){
@@ -145,6 +157,9 @@ function sliderInput(id, val){
 	}
 	else if(id == "slider_phas"){
 		param_theta[current_chart - 2] = parseFloat(val);
+	}
+	else if(id == "slider_freq"){
+		param_freq = parseFloat(val);
 	}
 	plotFunc();
 }

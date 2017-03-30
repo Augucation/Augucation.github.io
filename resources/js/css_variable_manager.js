@@ -7,3 +7,4 @@ var color_dark_red = htmlStyles.getPropertyValue("--dark_red");
 var color_blue = htmlStyles.getPropertyValue("--blue"); 
 var color_green = htmlStyles.getPropertyValue("--green"); 
 var color_orange = htmlStyles.getPropertyValue("--orange"); 
+var color_purple = htmlStyles.getPropertyValue("--purple");
