@@ -193,7 +193,7 @@ function StartAugucation(){
 
 function CloseAugucation(top, page){
 	
-	window.location="../../index.html?" + top;
+	window.location="../../../index.html?" + top;
 	
 	topic = top;
 	pageNum = page;
