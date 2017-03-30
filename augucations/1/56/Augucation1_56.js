@@ -53,11 +53,9 @@ function makeData(index){
 			return sum;
 		} );
 	}
-	
-	// plot all the other graphs
-	var amp = index > 1 ? param_a[index - 2] : 1;
-	var phas = index > 1 ? param_theta[index - 2] : 1;
-	return sampleFunction(0, 20, function(x) {return amp * Math.cos((index-2) * param_freq * x + phas)} );
+	if(index > 1){
+		return sampleFunction(0, 20, function(x) {return param_a[index-2] * Math.cos((index-2) * param_freq * x + param_theta[index-2])} );
+	}
 }	
 	
 function makeOptions(index){
