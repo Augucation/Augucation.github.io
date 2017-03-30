@@ -18,7 +18,7 @@ var pdfDoc = null,
 
 // array that stores which slides per topic are augmented
 var augucations = [
-	[4, 46, 56],
+	[31, 46, 56],
 	[0],
 	[0],
 	[0],
