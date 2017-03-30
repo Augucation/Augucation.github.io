@@ -1,5 +1,5 @@
 var charts, options, colors, data1;
-var current_chart = 4; // 2 - 6 because the first two charts are Extrawürschte
+var current_chart = 2; // 2 - 6 because the first two charts are Extrawürschte
 
 var param_a, param_theta;
 var param_freq = 1; // maybe -4-5
@@ -26,7 +26,6 @@ function initializeSliderStuff(){
 	param_a.fill(1);
 	param_theta = new Array(charts.length - 2);
 	param_theta.fill(0);
-	param_freq = 1;
 }
 initializeSliderStuff();
 
@@ -58,12 +57,16 @@ function makeData(index){
 	}
 }	
 	
-function makeOptions(index){
-	
+function makeOptions(index, plotAll){
+		
 	var borderWid = index == current_chart ? 2 : 0.5;
 	var borderCol = index == current_chart ? colors[index] : color_gray;
 	
 	return {
+		lines:
+		{
+			lineWidth: 1,
+		},
 		yaxis: 
 		{
 			ticks: [],
@@ -83,15 +86,45 @@ function makeOptions(index){
 		}
 	};
 }	
+
+function makeLineWidth(index){
+	return index == current_chart ? 2.5 : 1;
+}
 	
 $(function(){
 	
 	function plotIt(){		
 		for(var i = 0; i < charts.length; i++){
 			if(i == 0)
-				this.plot = $.plot($(charts[i]),  [ { data: makeData(2), color: colors[2]}, {data: makeData(3), color: colors[3]}, {data: makeData(4), color: colors[4]}, {data: makeData(5), color: colors[5]}, {data: makeData(6), color: colors[6]} ], makeOptions(i));
+				this.plot = $.plot($(charts[i]),  [ { 
+														data: makeData(2), 
+													    color: colors[2], 
+													    lines: {lineWidth: makeLineWidth(2)}
+													}, 
+													{
+														data: makeData(3),
+														color: colors[3],
+													    lines: {lineWidth: makeLineWidth(3)}
+													}, 
+													{
+														data: makeData(4), 
+														color: colors[4],
+													    lines: {lineWidth: makeLineWidth(4)}
+													}, 
+													{
+														data: makeData(5), 
+														color: colors[5],
+													    lines: {lineWidth: makeLineWidth(5)}
+													}, 
+													{
+														data: makeData(6), 
+														color: colors[6],
+													    lines: {lineWidth: makeLineWidth(6)}
+													} 
+													], 
+													makeOptions(i, true));
 			else
-				this.plot = $.plot($(charts[i]),  [ { data: makeData(i), color: colors[i]} ], makeOptions(i));
+				this.plot = $.plot($(charts[i]),  [ { data: makeData(i), color: colors[i]} ], makeOptions(i, false));
 		}
 	}
 	plotIt();
@@ -99,8 +132,14 @@ $(function(){
 		
 });
 
+function updateSlider(){
+	sliders[0].value = param_a[current_chart - 2];
+	sliders[1].value = param_theta[current_chart - 2];
+}
+
 function chartSelected(index){
 	current_chart = index;
+	updateSlider();
 	plotFunc();
 	highlight();
 }
