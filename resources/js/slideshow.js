@@ -27,6 +27,7 @@ var augucations = [
 ];	
 	
 loadAndRenderPDF();
+manageMenuButtons();
 
 function setPageNum(num){
 	pageNum = num;
@@ -185,9 +186,11 @@ function showSlides(show){
 
 function StartAugucation(){
 	//showSlides(false);
+	
+	console.log("Show Augucation!");
 
 	url = "augucations/" + topic + "/" + pageNum + "/Augucation" + topic + "_" + pageNum + ".html";
-	if(fileExists(url))
+	//if(fileExists(url))
 		window.location = url;
 }
 
@@ -228,19 +231,29 @@ function fileExists(url) {
 
 function showMenu(){
     document.getElementById("menu").style.width = "20%";
-	console.log("show it!");
 	enableGUIElement(document.getElementById("menuCloseBtn"), true);
 	enableGUIElement(document.getElementById("menuBtn"), false);
+	enableGUIElement(document.getElementById("menuAugBtn0"), true);
 	enableGUIElement(document.getElementById("menuAugBtn1"), true);
+	enableGUIElement(document.getElementById("menuAugBtn2"), true);
 }
 
 function hideMenu(){
     document.getElementById("menu").style.width = "0%";
 	enableGUIElement(document.getElementById("menuCloseBtn"), false);
 	enableGUIElement(document.getElementById("menuBtn"), true);
+	enableGUIElement(document.getElementById("menuAugBtn0"), false);
 	enableGUIElement(document.getElementById("menuAugBtn1"), false);
+	enableGUIElement(document.getElementById("menuAugBtn2"), false);
 }
 
 function manageMenuButtons(){
-	document.getElementById("menuAugBtn1").addEventListener("onclick", function() {pageNum = augucations[topic][1]; StartAugucation();});
+	document.getElementById("menuAugBtn0").addEventListener("click", function() {StartAugucationFromMenu(0);});
+	document.getElementById("menuAugBtn1").addEventListener("click", function() {StartAugucationFromMenu(1);});
+	document.getElementById("menuAugBtn2").addEventListener("click", function() {StartAugucationFromMenu(2);});
+}
+
+function StartAugucationFromMenu(index){
+	pageNum = augucations[topic-1][index];
+	StartAugucation();
 }
