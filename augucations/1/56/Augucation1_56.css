@@ -47,3 +47,17 @@
 {
   margin-bottom: 10% !important;
 }
+
+
+.slider_top_label
+{
+  margin-bottom: 2% !important;
+}
+
+@-moz-document url-prefix()
+{
+.slider_top_label
+{
+  margin-bottom: 0% !important;
+}
+}
