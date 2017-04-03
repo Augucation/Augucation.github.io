@@ -249,28 +249,28 @@ function showDigitalSignal(){
 ///////////////////////////////////////////////////// 1_57 specific /////////////////////////////////////////////////////////////	
 // manually collected data points:
 var sample_data = new Array(4); // 2, 1, 0.5, 0.25 * f_max
-var sample_rate = 0; // index in sample_data
+var sample_rate = 4; // index in sample_data
 
 
 // 2 * f_max
 sample_data[0] = [
 	[226, 445],
 	[261, 295],
-	[298, 352],
-	[335, 295],
+	[294, 347],
+	[328, 295],
 	[370, 445],
-	[405, 596],
-	[441, 540],
-	[475, 596],
+	[415, 596],
+	[444, 538],
+	[476, 596],
 	[514, 445],
 	[550, 295],
-	[583, 352],
-	[620, 295],
+	[581, 352],
+	[610, 295],
 	[655, 445],
-	[690, 596],
-	[725, 535],
-	[765, 596],
-	[795, 455],
+	[700, 593],
+	[730, 535],
+	[765, 593],
+	[795, 445],
 ];
 
 // 1 * f_max
@@ -335,15 +335,24 @@ function smoothFunction(){
 		sincWindow: function(x) { return 1; }
 	};
 	
-	smooth_data = Smooth(sample_data[sample_rate], smoothConfig);
+	var sample_rate_related_data = new Array();
+	for (var i = 0; i < sample_data[0].length; i++){
+		if (sample_rate == 0 || i % (sample_rate + 1) == 0){
+			sample_rate_related_data[sample_rate_related_data.length] = sample_data[0][i];
+		}
+	}
+	
+	console.log(sample_rate_related_data);
+	
+	smooth_data = Smooth(sample_rate_related_data, smoothConfig);
 }
 
 function drawFunction(){
 	
 	ctx.beginPath();
 	ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
-	for (var i = 0; i < sample_data[sample_rate].length * 100; i++){
-		ctx.lineTo(smooth_data(i * 0.01)[0], smooth_data(i * 0.01)[1]);
+	for (var i = 0; i < sample_data[0].length * 100; i++){
+			ctx.lineTo(smooth_data(i * 0.01)[0], smooth_data(i * 0.01)[1]);
 	}
 	ctx.lineWidth = 5;
 	ctx.stroke();
