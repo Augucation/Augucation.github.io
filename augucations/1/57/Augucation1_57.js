@@ -21,7 +21,7 @@ var discWidth = rightestLine - leftestLine;
 var quantHeight = bottom - toppel;
 
 // discretisisation and quantization
-var disc = 10; // 5-15
+var disc = 1//;10; // 5-15
 var quant = 4; // 2, 4, 8	// Note: this variable contains the number of quant steps, not of bits
 
 var disc_min = 5;
@@ -102,27 +102,9 @@ function drawDiscLines(){
 	ctx.stroke();
 }
 	
-function drawQuantLines(){
-	var quantSpace = quantHeight / quant;
-	
-	var quantLines = quant + 1; //== 2 ? 0 : quant + 1; // draw one more line, because the middle line is on the x-axis
-	
-	ctx.beginPath();
-	for(i = 0; i < quantLines; i++)
-	{
-		ctx.moveTo(leftestLine, toppel + quantSpace * i);
-		ctx.lineTo(rightestLine - quantOffset, toppel + quantSpace * i); //offset is just pi times thumb
-	}
-	ctx.strokeStyle = blue;
-	ctx.stroke();
-	
-	//createQuantBitcodes();
-}
-
 function drawNew(){
 	ctx.clearRect(0, 0, c.width, c.height);
-	drawDiscLines();
-	drawQuantLines();
+	//drawDiscLines();
 }
 		
 ////////////////////////////////////////////////////////SLIDER///////////////////////////////////////////////////////////////////
@@ -130,22 +112,16 @@ function drawNew(){
 function addListeners(){
 	slider_disc = document.getElementById("rA");
 	slider_disc.addEventListener("input", function(e){slider_input("disc", "slider", this.value);});
-	slider_quant = document.getElementById("rB");
-	slider_quant.addEventListener("input", function(e){slider_input("quant", "slider", Math.pow(2, this.value));});
 	
 	text_disc = document.getElementById("sA");
 	text_disc.addEventListener("keypress", function(e){slider_input("disc", "text", this.value, e);});
 	text_quant = document.getElementById("sB");
-	text_quant.addEventListener("keypress", function(e){slider_input("quant", "text", Math.pow(2, this.value), e);});
-
+	
 	text_disc.addEventListener("keydown", function(e){validateInput(e);});
-	text_quant.addEventListener("keydown", function(e){validateInput(e);});
 	
 	slider_disc.value = disc;
-	slider_quant.value = Math.log2(quant);
 	
 	text_disc.value = disc;
-	text_quant.value = Math.log2(quant);
 }
 
 function validateInput(e){
@@ -160,6 +136,13 @@ function slider_input(discOrQuant, sliderOrText, val, e){
 	
 	var valu = parseInt(val);
 	
+	if(discOrQuant == "disc"){
+		window["text_disc"].value = val;
+		sample_rate = parseInt(val);
+		sampleFunction();
+	}
+	
+	/*
 	// update text value
 	if(sliderOrText == "slider")
 	{
@@ -193,6 +176,7 @@ function slider_input(discOrQuant, sliderOrText, val, e){
 	
 	drawNew();
 	showDigitalSignal();
+	*/
 }
 		
 function createQuantBitcodes(){
@@ -249,7 +233,7 @@ function showDigitalSignal(){
 ///////////////////////////////////////////////////// 1_57 specific /////////////////////////////////////////////////////////////	
 // manually collected data points:
 var sample_data = new Array(4); // 2, 1, 0.5, 0.25 * f_max
-var sample_rate = 4; // index in sample_data
+var sample_rate = 1; // index in sample_data
 
 
 // 2 * f_max
@@ -277,38 +261,29 @@ sample_data[0] = [
 sample_data[1] = [
 
 	[226, 445],
-	//[261, 295],
-	[298, 352],
-	//[335, 295],
+	[288, 354],
 	[370, 445],
-	//[405, 596],
-	[441, 540],
-	//[475, 596],
+	[447, 537],
 	[514, 445],
-	//[550, 295],
-	[583, 352],
-	//[620, 295],
+	[578, 352],
 	[655, 445],
-	//[690, 596],
-	[725, 535],
-	//[765, 596],
+	[735, 535],
 	[795, 455],
-	
-	/* old
-	//[226, 445],
-	[298, 352],
-	//[370, 445],
-	[442, 538],
-	//[514, 445],
-	[586, 352],
-	//[658, 445],
-	[730, 538]
-	*/
 ];
 
 // 0.5 * f_max, um f_max verschoben (p. 60)
 sample_data[2] = [
 
+	[226, 445],
+	//[288, 354],
+	[370, 445],
+	//[447, 537],
+	[514, 445],
+	//[578, 352],
+	[655, 445],
+	//[735, 535],
+	[795, 445],
+	
 	/* old
 	[298, 352],
 	[442, 538],
@@ -318,11 +293,12 @@ sample_data[2] = [
 ];
 
 var smooth_data;
-smoothFunction();
-drawFunction();
+sampleFunction();
 
 function sampleFunction(){
 	
+	smoothFunction();
+	drawFunction();
 }
 
 function smoothFunction(){
@@ -341,20 +317,21 @@ function smoothFunction(){
 			sample_rate_related_data[sample_rate_related_data.length] = sample_data[0][i];
 		}
 	}
-	
-	console.log(sample_rate_related_data);
-	
-	smooth_data = Smooth(sample_rate_related_data, smoothConfig);
+		
+	//smooth_data = Smooth(sample_rate_related_data, smoothConfig);
+	smooth_data = Smooth(sample_data[sample_rate], smoothConfig);
 }
 
 function drawFunction(){
 	
+	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.beginPath();
 	ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
-	for (var i = 0; i < sample_data[0].length * 100; i++){
-			ctx.lineTo(smooth_data(i * 0.01)[0], smooth_data(i * 0.01)[1]);
+	for (var i = 0; i < sample_data[0].length * 10; i++){
+			ctx.lineTo(smooth_data(i * 0.1)[0], smooth_data(i * 0.1)[1]);
 	}
 	ctx.lineWidth = 5;
+	ctx.strokeStyle = "blue";
 	ctx.stroke();
 }
 		
