@@ -144,7 +144,7 @@ function newPage(e){
 
 function loadAndRenderPDF(){
 	enableGUIElement(loadingText, true);
-	getTopicFromURL();
+	getTopicAndPageNumFromURL();
 	/*
 	 * Asynchronously downloads PDF
 	 */
@@ -196,7 +196,7 @@ function StartAugucation(){
 
 function CloseAugucation(top, page){
 	
-	window.location="../../../index.html?" + top;
+	window.location="../../../index.html?" + top + "&" + page;
 	
 	topic = top;
 	pageNum = page;
@@ -205,9 +205,18 @@ function CloseAugucation(top, page){
 	//showSlides(true);
 }
 
-function getTopicFromURL(){
-   topic = window.location.search.substring(1);
-   url = "resources/slides/im-0" + topic + ".pdf";
+function getTopicAndPageNumFromURL(){
+	
+	var params = window.location.search.substring(1).split("&");
+	
+	topic = params[0];
+	url = "resources/slides/im-0" + topic + ".pdf";
+   
+	var n = parseInt(params[1]);
+	if(n > 0)
+		pageNum = n;
+	
+	update();
 }
 
 // checks for available augucations 
