@@ -21,7 +21,7 @@
 {
 	font-family:   'uhh';
 	font-size:      20px;
-  color:		      var(hci_gray) !important;
+  color:		      var(--hci_gray) !important;
 }
 
 .my_text.centered_label
