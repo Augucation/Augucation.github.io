@@ -18,7 +18,7 @@ var pdfDoc = null,
 
 // array that stores which slides per topic are augmented
 var augucations = [
-	[31, 46, 56, 57],
+	[31, 46, 56, 57, 135],
 	[0],
 	[0],
 	[0],
@@ -209,7 +209,7 @@ function getTopicAndPageNumFromURL(){
 	
 	var params = window.location.search.substring(1).split("&");
 	
-	topic = params[0];
+	topic = params[0] != "" ? params[0] : 1;
 	url = "resources/slides/im-0" + topic + ".pdf";
    
 	var n = parseInt(params[1]);
