@@ -29,7 +29,7 @@
 .chart_name_container
 {
   margin-left: -3%;
-  margin-top: -1%;
+  margin-top: -0%;
 }
 
 .chart_name
@@ -69,8 +69,24 @@
 
 @-moz-document url-prefix()
 {
-.slider_top_label
-{
-  margin-bottom: 0% !important;
+  .slider_top_label
+  {
+    margin-bottom: 0% !important;
+  }
 }
+
+input[type=range].color_red::-moz-range-thumb {
+  background: var(--hci_red);
+}
+input[type=range].color_blue::-moz-range-thumb {
+  background: var(--blue);
+}
+input[type=range].color_green::-moz-range-thumb {
+  background: var(--green);
+}
+input[type=range].color_orange::-moz-range-thumb {
+  background: var(--orange);
+}
+input[type=range].color_purple::-moz-range-thumb {
+  background: var(--purple);
 }

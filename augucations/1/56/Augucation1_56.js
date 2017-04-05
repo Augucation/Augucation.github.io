@@ -26,6 +26,8 @@ function initializeSliderStuff(){
 	param_a.fill(1);
 	param_theta = new Array(charts.length - 2);
 	param_theta.fill(0);
+	
+	highlight();
 }
 initializeSliderStuff();
 
@@ -69,13 +71,26 @@ function makeOptions(index, plotAll){
 		},
 		yaxis: 
 		{
-			ticks: [],
+			//ticks: [],
 			min: -3,
 			max: 3,
 		}, 
 		xaxis: 
 		{
-			ticks: [],
+			ticks: [
+					 [Math.PI, "1 \u03C0"],
+					 //[1.5*Math.PI, "1.5 \u03C0"],
+					 [2*Math.PI, "2 \u03C0"], 
+					 //[2.5*Math.PI, "2.5 \u03C0"], 
+					 [3*Math.PI, "3 \u03C0"], 
+					 //[3.5*Math.PI, "3.5 \u03C0"], 
+					 [4*Math.PI, "4 \u03C0"],
+					 //[4.5*Math.PI, "4.5 \u03C0"],  
+					 [5*Math.PI, "5 \u03C0"], 
+					 //[5.5*Math.PI, "5.5 \u03C0"], 
+					 [6*Math.PI, "6 \u03C0"],
+					 //[6.5*Math.PI, "6.5 \u03C0"], 
+					],
 			min: 0,
 			max: 15,
 		},
@@ -145,47 +160,9 @@ function chartSelected(index){
 }
 
 function highlight(){
-	
-	/*
-	var r = document.querySelectorAll('input[type=range]'), 
-    prefs = ['moz-range-thumb', 'webkit-slider-thumb', 'ms-thumb'],
-    styles = [], 
-    l = prefs.length,
-    n = r.length;
-	
-	var getTrackStyleStr = function(j) {
-	  var str = '';
-	  for(var i = 0; i < l; i++) {
-		str += "input[type=range]" + "::-" + prefs[i] + '{background: #FF0000} ';
-	  }
-	  console.log(str);
-	  return str;
-	};
-
-	var setDragStyleStr = function() {
-	  console.log("schwabbelmin");
-	  var trackStyle = getTrackStyleStr(this); 
-	  //styles[this].textContent = trackStyle;
-	  styles[this].textContent = trackStyle;
-	};
-
-	for(var i = 0; i < n; i++) {
-	  var s = document.createElement('style');
-	  document.body.appendChild(s);
-	  styles.push(s);
-	  //r[i].setAttribute('data-rangeId', i);
-	  //setDragStyleStr.bind(i);
-	  r[i].addEventListener('input', setDragStyleStr.bind(i));
-	}
-	
-	function blubbel(){
-		console.log("blubbel");
-		setDragStyleStr.bind(i);
-		setDragStyleStr();
-	}
-	
-	//blubbel();
-	*/
+	var color_names = ["red", "blue", "green", "orange", "purple"];
+	sliders[0].className = "slider color_" + color_names[current_chart-2];
+	sliders[1].className = "slider color_" + color_names[current_chart-2];
 }
 
 function sliderInput(id, val){
