@@ -287,3 +287,9 @@ input[type=range]::-moz-focus-outer {
 	margin-top:   0%;
 	margin-right: 0%;
 }
+
+.slider_interpretation
+{
+	text-align: center;
+	margin-top: -5%;
+}

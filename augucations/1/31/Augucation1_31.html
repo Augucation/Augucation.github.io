@@ -32,12 +32,14 @@
 		<div class="slider_wrap">
 			<div id="sliders" class="my_text slider_block">
 				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--dark_red);">a</span></div>
+					<div class="slider_interpretation" style="color: var(--dark_red);">Amplitude</div>
 					<input id="rA" type="range" class="slider" min="-10" max="10" value="1" step="0.01"/>	
 						<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
 					<br/>
 					<span class="min slider_label">-10</span>		
 					<span class="max slider_label">10</span>
 				<br/> <br/>
+					<div class="slider_interpretation" style="color: var(--blue);">Frequenz</div>
 				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--blue);">b</span></div>
 					<input id="rB" type="range" class="slider" min="-10" max="10" value="1" step="0.01" />	
 						<div class="slider_value_wrap"> <input id="sB" type="text" class="no-spin textField slider_value" style="color: var(--blue);" size="4"/> </div>
@@ -45,6 +47,7 @@
 					<span class="min slider_label my_text">-10</span>		
 					<span class="max slider_label my_text">10</span>
 				<br/> <br/>
+					<div class="slider_interpretation" style="color: var(--green);">Phasenlage</div>
 				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--green);">c</span></div>
 					<input id="rC" type="range" class="slider" min="-10" max="10" value="2" step="0.01" />	
 						<div class="slider_value_wrap"> <input id="sC" type="text" class="no-spin textField slider_value" style="color: var(--green);" size="4"/> </div>
@@ -52,6 +55,7 @@
 					<span class="min slider_label my_text">-10</span>		
 					<span class="max slider_label my_text">10</span>
 				<br/> <br/>
+					<div class="slider_interpretation" style="color: var(--orange);">Offset/DC-Antei</div>
 				<div class="slider_name_wrap"><span class="slider_name" style="color: var(--orange);">d</span></div>
 					<input id="rD" type="range" class="slider" min="-10" max="10" value="0" step="0.01" />	
 						<div class="slider_value_wrap"> <input id="sD" type="text" class="no-spin textField slider_value" style="color: var(--orange);" size="4"/> </div>
@@ -289,28 +293,42 @@
 			
 			var data1 = sampleFunction( 0, 20, function(x){ return my_sin(x); } );
 			
-			var plot1 = $.plot($("#chart1"),  [ { data: data1} ], options1);
+			var dataSet = [{
+								data: data1,
+								xaxis: 1,
+							},
+							{
+								data: data1,
+								xaxis: 2
+							}
+						   ]
+			var plot1 = $.plot($("#chart1"), dataSet, options1);
 		}
 			
 		options1 = {
 			lines: { show: true },
-			xaxis: { ticks: [[0.5*Math.PI,"0.5 \u03C0"],
-							 [Math.PI, "1 \u03C0"],
-							 [1.5*Math.PI, "1.5 \u03C0"],
-							 [2*Math.PI, "2 \u03C0"], 
-							 [2.5*Math.PI, "2.5 \u03C0"], 
-							 [3*Math.PI, "3 \u03C0"], 
-							 [3.5*Math.PI, "3.5 \u03C0"], 
-							 [4*Math.PI, "4 \u03C0"],
-							 [4.5*Math.PI, "4.5 \u03C0"],  
-							 [5*Math.PI, "5 \u03C0"], 
-							 [5.5*Math.PI, "5.5 \u03C0"], 
-							 [6*Math.PI, "6 \u03C0"],
-							 [6.5*Math.PI, "6.5 \u03C0"], 
-							],
-					zoomRange: [0, 100],
-					panRange: null
-					},
+			xaxes: [	
+						{ 	position: "top",
+							tickSize: 1,
+						},
+						{ 	ticks: [[0.5*Math.PI,"0.5 \u03C0"],
+									[Math.PI, "1 \u03C0"],
+									[1.5*Math.PI, "1.5 \u03C0"],
+									[2*Math.PI, "2 \u03C0"], 
+									[2.5*Math.PI, "2.5 \u03C0"], 
+									[3*Math.PI, "3 \u03C0"], 
+									[3.5*Math.PI, "3.5 \u03C0"], 
+									[4*Math.PI, "4 \u03C0"],
+									[4.5*Math.PI, "4.5 \u03C0"],  
+									[5*Math.PI, "5 \u03C0"], 
+									[5.5*Math.PI, "5.5 \u03C0"], 
+									[6*Math.PI, "6 \u03C0"],
+									[6.5*Math.PI, "6.5 \u03C0"], 
+									],
+							position: "bottom",
+						},
+						
+					],
 			yaxis:  {min: -5, 
 					max: 5, 
 					ticks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
