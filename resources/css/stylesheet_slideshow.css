@@ -83,15 +83,24 @@
 	padding:  0;
 }
 
-.slideCanvas
+.canvas_wrapper
 {
 	position: relative;
+	z-index:  1;
+	border:	  0px solid black;	position: relative;
 	z-index:  1;
 	border:	  0px solid black;
 	height:   80vh;
 	display:  block;
 	margin:   0; 
 	padding:  0;
+	display:  block;
+	margin:   0; 
+	padding:  0;	
+}
+
+.slideCanvas
+{
 }
 
 .augButton
