@@ -3,6 +3,7 @@
 	<meta charset="UTF-8"/>
 
 	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="Augucation1_135.css">	
 	
 </head>
 
@@ -10,8 +11,27 @@
 
 	<script type="text/javascript" src="../../../resources/js/slideshow.js"></script> 
 	
+	<div class="wrapper my_text">
+		<div id="code_bits" class="code bits"><br>11000000011111111000001111</div>
+		<div id="code_pairs" class="code bits">Codierung (als Wertpaare)<br>{1,0010}, {0,0111}, {1,1000}, {0,0101}, {1,0100}</div>
+		<div id="code_stream" class="code stream">Codierung (als Bitstrom)<br>1001000111110000010110100</div>
+		<div id="code_memory" class="code memory">Gesamtspeicherbedarf<br>25 Bit</div>
+		
+		<div class="radio_wrapper">
+			<fieldset>
+				<input type="radio" id="2bit" name="bit" value="2">
+				<label for="2bit">2 Bit</label>
+				<input type="radio" id="3bit" name="bit" value="3">
+				<label for="3bit">3 Bit</label>
+				<input type="radio" id="4bit" name="bit" value="4">
+				<label for="4bit">4 Bit</label>
+			</fieldset>
+		</div>
+	</div>
+	
 	<div>
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 135);" name="back" value="<<"/>
 	</div>
 
+	<script type="text/javascript" src="Augucation1_135.js"></script>
 </body>
