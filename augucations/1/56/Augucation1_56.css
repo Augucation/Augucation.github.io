@@ -90,3 +90,20 @@ input[type=range].color_orange::-moz-range-thumb {
 input[type=range].color_purple::-moz-range-thumb {
   background: var(--purple);
 }
+
+
+input[type=range].color_red::-webkit-slider-thumb {
+  background: var(--hci_red);
+}
+input[type=range].color_blue::-webkit-slider-thumb {
+  background: var(--blue);
+}
+input[type=range].color_green::-webkit-slider-thumb {
+  background: var(--green);
+}
+input[type=range].color_orange::-webkit-slider-thumb {
+  background: var(--orange);
+}
+input[type=range].color_purple::-webkit-slider-thumb {
+  background: var(--purple);
+}
