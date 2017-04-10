@@ -233,12 +233,54 @@ function showDigitalSignal(){
 ///////////////////////////////////////////////////// 1_57 specific /////////////////////////////////////////////////////////////	
 // manually collected data points:
 var sample_data = new Array(4); // 2, 1, 0.5, 0.25 * f_max
-var sample_rate = 1; // index in sample_data
+var sample_points = new Array(4); // actually nearly the same as sample_data but a bit different because the smoothing function goes crazy and needs slightly other points than the real ones to look good
+var sample_rate = 0; // index in sample_data
 
+
+sample_points[0] = [
+
+	[230, 445],
+	[267, 293],
+	[298, 352],
+	[332, 293],
+	[375, 445],
+	[410, 596],
+	[441, 537],
+	[474, 596],
+	[514, 445],
+	[552, 293],
+	[583, 352],
+	[617, 293],
+	[655, 445],
+	[694, 596],
+	[726, 537],
+	[759, 596],
+	[798, 445],
+];
+
+sample_points[1] = [
+
+	[230, 445],
+	[298, 352],
+	[375, 445],
+	[441, 537],
+	[514, 445],
+	[583, 352],
+	[655, 445],
+	[726, 537],
+	[798, 445],
+];
+
+sample_points[2] = [
+
+	[298, 352],
+	[583, 352],
+]
 
 // 2 * f_max
 sample_data[0] = [
-	[226, 445],
+
+	[230, 445],
 	[261, 295],
 	[294, 347],
 	[328, 295],
@@ -254,13 +296,13 @@ sample_data[0] = [
 	[700, 593],
 	[730, 535],
 	[765, 593],
-	[795, 445],
+	[798, 467],
 ];
 
 // 1 * f_max
 sample_data[1] = [
 
-	[226, 445],
+	[230, 445],
 	[288, 354],
 	[370, 445],
 	[447, 537],
@@ -274,36 +316,29 @@ sample_data[1] = [
 // 0.5 * f_max, um f_max verschoben (p. 60)
 sample_data[2] = [
 
-	[226, 445],
-	//[288, 354],
-	[370, 445],
-	//[447, 537],
-	[514, 445],
-	//[578, 352],
-	[655, 445],
-	//[735, 535],
-	[795, 445],
-	
-	/* old
-	[298, 352],
-	[442, 538],
-	[586, 352],
-	[730, 538]
-	*/
+	[230, 354],
+	[288, 354],
+	[578, 354],
+	[800, 354]
 ];
+
 
 var smooth_data;
 sampleFunction();
 
 function sampleFunction(){
 	
+	ctx.clearRect(0, 0, c.width, c.height);
+	
 	smoothFunction();
+	
+	drawSamplingPoints();
 	drawFunction();
 }
 
 function smoothFunction(){
 	smoothConfig = {
-		method: 'sinc',
+		method: 'lanczos',
 		clip: 'clamp',
 		lanczosFilterSize: 10,
 		cubicTension: 0,
@@ -311,20 +346,11 @@ function smoothFunction(){
 		sincWindow: function(x) { return 1; }
 	};
 	
-	var sample_rate_related_data = new Array();
-	for (var i = 0; i < sample_data[0].length; i++){
-		if (sample_rate == 0 || i % (sample_rate + 1) == 0){
-			sample_rate_related_data[sample_rate_related_data.length] = sample_data[0][i];
-		}
-	}
-		
-	//smooth_data = Smooth(sample_rate_related_data, smoothConfig);
 	smooth_data = Smooth(sample_data[sample_rate], smoothConfig);
 }
 
 function drawFunction(){
 	
-	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.beginPath();
 	ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
 	for (var i = 0; i < sample_data[0].length * 10; i++){
@@ -332,6 +358,20 @@ function drawFunction(){
 	}
 	ctx.lineWidth = 5;
 	ctx.strokeStyle = "blue";
+	ctx.stroke();
+}
+
+function drawSamplingPoints(){
+	
+	ctx.beginPath();
+	for (var i = 0; i < sample_points[sample_rate].length; i++)
+	{
+		console.log(sample_points[sample_rate][i]);
+		ctx.moveTo(sample_points[sample_rate][i][0], sample_points[sample_rate][i][1]);
+		ctx.lineTo(sample_points[sample_rate][i][0], 445);
+	}
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = "black";
 	ctx.stroke();
 }
 		
