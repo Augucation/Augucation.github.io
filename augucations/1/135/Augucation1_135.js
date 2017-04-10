@@ -98,4 +98,5 @@ function manageRadioButtons()
 }
 
 findElements();
+update();
 manageRadioButtons();
