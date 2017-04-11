@@ -232,9 +232,56 @@ function showDigitalSignal(){
 
 ///////////////////////////////////////////////////// 1_57 specific /////////////////////////////////////////////////////////////	
 // manually collected data points:
-var sample_data = new Array(4); // 2, 1, 0.5, 0.25 * f_max
+var sample_data = new Array(16); // 2, 1, 0.5, 0.25 * f_max
 var sample_points = new Array(4); // actually nearly the same as sample_data but a bit different because the smoothing function goes crazy and needs slightly other points than the real ones to look good
-var sample_rate = 0; // index in sample_data
+var sample_rate = 13; //2-17 //0; // index in sample_data
+
+var sample_points_new = new Array(16); //2-17
+
+// curve's distance: 796 - 228 = 568;
+
+for(var i = 0; i < 13; i++)
+{
+	//console.log((228) + ((796 - 228) / 13 * i), "\n");
+}
+
+sample_points_new[11] = [
+	[228, 445],
+	[272, 295],
+	[315, 320],
+	[359, 370],
+	[403, 593],
+	[446, 539],
+	[490, 571],
+	[534, 325],
+	[578, 350],
+	[621, 293],
+	[665, 510],
+	[708, 575],
+	[752, 591],
+	[796, 445]
+];
+
+sample_points_new[15] = [
+
+	[228, 445],
+	[267, 293],
+	[298, 352],
+	[332, 293],
+	[375, 445],
+	[410, 596],
+	[441, 537],
+	[474, 596],
+	[514, 445],
+	[552, 293],
+	[583, 352],
+	[617, 293],
+	[655, 445],
+	[694, 596],
+	[726, 537],
+	[759, 596],
+	[796, 445],
+];
 
 
 sample_points[0] = [
@@ -323,6 +370,23 @@ sample_data[2] = [
 ];
 
 
+sample_data[11] = [
+	[228, 445],
+	[272, 295],
+	[315, 320],
+	[359, 370],
+	[403, 593],
+	[446, 539],
+	[490, 571],
+	[534, 325],
+	[578, 350],
+	[621, 293],
+	[665, 510],
+	[708, 575],
+	[752, 591],
+	[796, 445]
+];
+
 var smooth_data;
 sampleFunction();
 
@@ -346,7 +410,7 @@ function smoothFunction(){
 		sincWindow: function(x) { return 1; }
 	};
 	
-	smooth_data = Smooth(sample_data[sample_rate], smoothConfig);
+	smooth_data = Smooth(sample_data[sample_rate - 2 ], smoothConfig);
 }
 
 function drawFunction(){
@@ -364,11 +428,11 @@ function drawFunction(){
 function drawSamplingPoints(){
 	
 	ctx.beginPath();
-	for (var i = 0; i < sample_points[sample_rate].length; i++)
+	for (var i = 0; i < sample_points_new[sample_rate-2].length; i++)
 	{
-		console.log(sample_points[sample_rate][i]);
-		ctx.moveTo(sample_points[sample_rate][i][0], sample_points[sample_rate][i][1]);
-		ctx.lineTo(sample_points[sample_rate][i][0], 445);
+		console.log(sample_points_new[sample_rate-2][i]);
+		ctx.moveTo(sample_points_new[sample_rate-2][i][0], sample_points_new[sample_rate-2][i][1]);
+		ctx.lineTo(sample_points_new[sample_rate-2][i][0], 445);
 	}
 	ctx.lineWidth = 3;
 	ctx.strokeStyle = "black";
