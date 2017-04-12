@@ -136,7 +136,7 @@ function slider_input(discOrQuant, sliderOrText, val, e){
 	
 	var valu = parseInt(val);
 	
-	if(discOrQuant == "disc"){
+	if(discOrQuant == "disc" && (val == 2 || val == 4 || val == 8 || val == 12 || val == 13 || val == 16)){
 		window["text_disc"].value = val;
 		sample_rate = parseInt(val);
 		sampleFunction();
@@ -234,17 +234,170 @@ function showDigitalSignal(){
 // manually collected data points:
 var sample_data = new Array(16); // 2, 1, 0.5, 0.25 * f_max
 var sample_points = new Array(4); // actually nearly the same as sample_data but a bit different because the smoothing function goes crazy and needs slightly other points than the real ones to look good
-var sample_rate = 13; //2-17 //0; // index in sample_data
+var sample_rate = 16; //2-17 //0; // index in sample_data
 
 var sample_points_new = new Array(16); //2-17
 
 // curve's distance: 796 - 228 = 568;
 
-for(var i = 0; i < 13; i++)
+for(var i = 0; i <= sample_rate; i++)
 {
-	//console.log((228) + ((796 - 228) / 13 * i), "\n");
+	//console.log((228) + ((796 - 228) / sample_rate * i), "\n");
+	// 2, 4, 8, 12, 13, 16
 }
 
+// 2
+sample_points_new[0] = [
+	
+	[228, 445],
+	[512, 445],
+	[796, 445],
+];
+
+// 3
+sample_points_new[1] = [
+	
+	[228, 445],
+	[417, 590],
+	[607, 299],
+	[796, 445],
+];
+
+// 4
+sample_points_new[2] = [
+
+	[228, 445],
+	[370, 445],
+	[512, 445],
+	[654, 445],
+	[796, 445],
+
+];
+
+// 5
+sample_points_new[3] = [
+
+	[228, 445],
+	[342, 302],
+	[455, 556],
+	[569, 330],
+	[682, 580],
+	[796, 455],
+
+];
+
+// 6
+sample_points_new[4] = [
+	
+	[228, 445],
+	[323, 298],
+	[417, 590],
+	[512, 445],
+	[607, 299],
+	[701, 590],
+	[796, 445],
+];
+ 
+// 7
+sample_points_new[5] = [
+	
+	[228, 445],
+	[309, 343],
+	[390, 560],
+	[471, 598],
+	[553, 292],
+	[634, 324],
+	[715, 546],
+	[796, 445],
+
+]; 
+ 
+// 8 
+sample_points_new[6] = [
+
+	[228, 445],
+	[299, 352],
+	[370, 445],
+	[441, 535],
+	[512, 445],
+	[583, 352],
+	[654, 445],
+	[725, 535],
+	[796, 445],
+
+];
+
+// 9
+sample_points_new[7] = [
+	
+	[228, 445],
+	[291, 348],
+	[354, 346],
+	[417, 590],
+	[480, 594],
+	[544, 298],
+	[607, 300],
+	[670, 536],
+	[733, 538],
+	[796, 445],
+];
+
+// 10
+sample_points_new[8] = [
+
+	[228, 445],
+	[285, 334],
+	[342, 304],
+	[398, 584],
+	[455, 558],
+	[512, 445],
+	[569, 332],
+	[626, 302],
+	[682, 580],
+	[739, 552],
+	[796, 445],
+	
+];
+
+// 11
+sample_points_new[9] = [
+
+	[228, 445],
+	[280, 312],
+	[331, 292],
+	[383, 530],
+	[434, 540],
+	[486, 582],
+	[538, 312],
+	[589, 350],
+	[641, 356],
+	[693, 595],
+	[744, 572],
+	[796, 445],
+
+]; 
+
+// 12
+sample_points_new[10] = [
+
+	
+	[228, 445],
+	[275, 298],
+	[323, 298],
+	[370, 445],
+	[417, 592],
+	[465, 590],
+	[512, 445],
+	[559, 298],
+	[607, 298],
+	[654, 445],
+	[701, 592],
+	[749, 586],
+	[796, 445]
+	
+];
+
+// 13
 sample_points_new[11] = [
 	[228, 445],
 	[272, 295],
@@ -262,6 +415,98 @@ sample_points_new[11] = [
 	[796, 445]
 ];
 
+// 14
+sample_points_new[12] = [
+
+	[228, 445],
+	[269, 292],
+	[309, 344],
+	[350, 326],
+	[390, 560],
+	[431, 546],
+	[471, 598],
+	[512, 445],
+	[553, 292],
+	[593, 344],
+	[634, 322],
+	[674, 556],
+	[715, 546],
+	[755, 596],
+	[796, 445],
+
+];
+
+// 15
+sample_points_new[13] = [
+
+	[228, 445],
+	[266, 292],
+	[304, 350],
+	[342, 302],
+	[379, 510],
+	[417, 592],
+	[455, 558],
+	[494, 558],
+	[531, 336],
+	[569, 328],
+	[607, 300],
+	[645, 376],
+	[682, 580],
+	[720, 538],
+	[758, 596],
+	[796, 445],
+
+];
+
+// 16
+sample_points_new[14] = [
+	
+	[228, 445],
+	[264, 292],
+	[299, 352],
+	[335, 292],
+	[370, 445],
+	[406, 596],
+	[441, 537],
+	[477, 596],
+	[512, 445],
+	[548, 292],
+	[583, 352],
+	[619, 292],
+	[654, 445],
+	[690, 596],
+	[725, 537],
+	[761, 596],
+	[796, 445]
+	
+];
+
+// 17
+sample_points_new[15] = [
+	
+	[228, 445],
+	[261, 294],
+	[295, 352],
+	[328, 292],
+	[362, 390],
+	[395, 578],
+	[428, 555],
+	[462, 584],
+	[495, 552],
+	[529, 346],
+	[562, 304],
+	[596, 339],
+	[629, 308],
+	[662, 494],
+	[696, 596],
+	[729, 535],
+	[763, 595],
+	[796, 445],
+
+];
+
+// 17 DEPRECATED einer zu wenig
+/*
 sample_points_new[15] = [
 
 	[228, 445],
@@ -282,7 +527,7 @@ sample_points_new[15] = [
 	[759, 596],
 	[796, 445],
 ];
-
+*/
 
 sample_points[0] = [
 
@@ -328,9 +573,9 @@ sample_points[2] = [
 sample_data[0] = [
 
 	[230, 445],
-	[261, 295],
+	[255, 310],
 	[294, 347],
-	[328, 295],
+	[328, 298],
 	[370, 445],
 	[415, 596],
 	[444, 538],
@@ -341,9 +586,9 @@ sample_data[0] = [
 	[610, 295],
 	[655, 445],
 	[700, 593],
-	[730, 535],
-	[765, 593],
-	[798, 467],
+	[732, 540],
+	[770, 583],
+	[798, 445],
 ];
 
 // 1 * f_max
@@ -388,7 +633,22 @@ sample_data[11] = [
 ];
 
 var smooth_data;
+var smoothed_data = new Array();
+//calcSmoothData();
 sampleFunction();
+
+function calcSmoothData(){
+	
+	var steps = 10;
+	
+	for(var i = 0; i < sample_points_new.length; i++)
+	{
+		for(var j = 0; j < steps; j++)
+		{
+			smoothed_data[i][j] = smooth_data(j * 1/steps);
+		}
+	}
+}
 
 function sampleFunction(){
 	
@@ -403,20 +663,25 @@ function sampleFunction(){
 function smoothFunction(){
 	smoothConfig = {
 		method: 'lanczos',
-		clip: 'clamp',
+		clip: 'mirror',
 		lanczosFilterSize: 10,
-		cubicTension: 0,
+		cubicTension: 0.1,
 		sincFilterSize: 4000,
 		sincWindow: function(x) { return 1; }
 	};
 	
-	smooth_data = Smooth(sample_data[sample_rate - 2 ], smoothConfig);
+	//smooth_data = Smooth(sample_data[sample_rate + 2 ], smoothConfig);
+	if(sample_rate < 16)
+		smooth_data = Smooth(sample_points_new[sample_rate - 2 ], smoothConfig);
+	else
+		smooth_data = Smooth(sample_data[0], smoothConfig);	// draw perfect curve
 }
 
 function drawFunction(){
 	
 	ctx.beginPath();
 	ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
+	//ctx.moveTo(smooth_data(0)[0], smoothed_data[[1]);
 	for (var i = 0; i < sample_data[0].length * 10; i++){
 			ctx.lineTo(smooth_data(i * 0.1)[0], smooth_data(i * 0.1)[1]);
 	}
@@ -428,9 +693,8 @@ function drawFunction(){
 function drawSamplingPoints(){
 	
 	ctx.beginPath();
-	for (var i = 0; i < sample_points_new[sample_rate-2].length; i++)
+	for (var i = 0; i < sample_points_new[sample_rate - 2].length; i++)
 	{
-		console.log(sample_points_new[sample_rate-2][i]);
 		ctx.moveTo(sample_points_new[sample_rate-2][i][0], sample_points_new[sample_rate-2][i][1]);
 		ctx.lineTo(sample_points_new[sample_rate-2][i][0], 445);
 	}
