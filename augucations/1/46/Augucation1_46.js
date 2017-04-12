@@ -206,22 +206,35 @@ function createQuantBitcodes(){
 		bitCodes[i] = document.createElement("li");
 		bitCodes[i].className = "bitCode _" + quant;
 		var bitCode = calcBitcode(i);
-		bitCode = addLeadingZeros(bitCode);
+		//bitCode = addLeadingZeros(bitCode);
 		bitCodes[i].textContent = bitCode;
 		bitCodeList.appendChild(bitCodes[i]);
 	}			
 }
 
 function calcBitcode(i){
+	
+	/* old: calculation
 	var bit;
 	if(i < quant / 2)
 		bit = quant / 2 - i - 1;
 	else
 		bit = quant - i + (quant / 2 - 1); // it just works. nobody knows why...
 	return bit.toString(2);
+	*/
+	
+	// new: changed signs, hardcoded
+	console.log("i: ", i);
+	var codes = new Array(new Array());
+	codes[0] = ["1", "0"];
+	codes[1] = ["11", "10", "01", "00"]
+	codes[2] = ["111", "110", "101", "100", "011", "010", "001", "000"];
+	
+	return codes[Math.log2(quant) - 1][i];
 }
 
 function addLeadingZeros(b){
+	
 	var bit = b.toString();
 	bitNum = Math.log2(quant); // calculate number of bits
 	limit = bitNum - bit.length;
