@@ -645,8 +645,7 @@ function calcSmoothData(){
 	{
 		smoothFunction(i+2);
 		smoothed_data[i] = new Array();
-		
-		
+			
 		for(var j = 0; j < 160; j++)
 		{
 			smoothed_data[i][j] = smooth_data(j * 0.1);
