@@ -136,7 +136,7 @@ function slider_input(discOrQuant, sliderOrText, val, e){
 	
 	var valu = parseInt(val);
 	
-	if(discOrQuant == "disc" && (val == 2 || val == 4 || val == 8 || val == 12 || val == 13 || val == 16)){
+	if(discOrQuant == "disc") {// && (val == 2 || val == 4 || val == 8 || val == 12 || val == 13 || val == 16)){
 		window["text_disc"].value = val;
 		sample_rate = parseInt(val);
 		sampleFunction();
@@ -234,7 +234,7 @@ function showDigitalSignal(){
 // manually collected data points:
 var sample_data = new Array(16); // 2, 1, 0.5, 0.25 * f_max
 var sample_points = new Array(4); // actually nearly the same as sample_data but a bit different because the smoothing function goes crazy and needs slightly other points than the real ones to look good
-var sample_rate = 16; //2-17 //0; // index in sample_data
+var sample_rate = 2; //2-17 //0; // index in sample_data
 
 var sample_points_new = new Array(16); //2-17
 
@@ -634,18 +634,22 @@ sample_data[11] = [
 
 var smooth_data;
 var smoothed_data = new Array();
-//calcSmoothData();
+calcSmoothData();
 sampleFunction();
 
 function calcSmoothData(){
 	
 	var steps = 10;
-	
+		
 	for(var i = 0; i < sample_points_new.length; i++)
 	{
-		for(var j = 0; j < steps; j++)
+		smoothFunction(i+2);
+		smoothed_data[i] = new Array();
+		
+		
+		for(var j = 0; j < 160; j++)
 		{
-			smoothed_data[i][j] = smooth_data(j * 1/steps);
+			smoothed_data[i][j] = smooth_data(j * 0.1);
 		}
 	}
 }
@@ -654,36 +658,46 @@ function sampleFunction(){
 	
 	ctx.clearRect(0, 0, c.width, c.height);
 	
-	smoothFunction();
+	//smoothFunction();
 	
 	drawSamplingPoints();
 	drawFunction();
 }
 
-function smoothFunction(){
+function smoothFunction(rate){
+	
 	smoothConfig = {
 		method: 'lanczos',
 		clip: 'mirror',
 		lanczosFilterSize: 10,
 		cubicTension: 0.1,
 		sincFilterSize: 4000,
-		sincWindow: function(x) { return 1; }
+		sincWindow: function(x) { return 1; },
 	};
 	
 	//smooth_data = Smooth(sample_data[sample_rate + 2 ], smoothConfig);
-	if(sample_rate < 16)
-		smooth_data = Smooth(sample_points_new[sample_rate - 2 ], smoothConfig);
+	if(rate < 16)
+		smooth_data = Smooth(sample_points_new[rate - 2 ], smoothConfig);
 	else
 		smooth_data = Smooth(sample_data[0], smoothConfig);	// draw perfect curve
 }
 
 function drawFunction(){
 	
+	
 	ctx.beginPath();
-	ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
-	//ctx.moveTo(smooth_data(0)[0], smoothed_data[[1]);
-	for (var i = 0; i < sample_data[0].length * 10; i++){
-			ctx.lineTo(smooth_data(i * 0.1)[0], smooth_data(i * 0.1)[1]);
+	//ctx.moveTo(smooth_data(0)[0], smooth_data(0)[1]);
+	//ctx.moveTo(smoothed_data[sample_rate-2], smoothed_data[[1]);
+	
+	// Caution: Hard coded starting point!!!
+	ctx.moveTo(228, 445);
+	//for (var i = 0; i < sample_data[0].length * 10; i++){
+			//ctx.lineTo(smooth_data(i * 0.1)[0], smooth_data(i * 0.1)[1]);
+	//}
+	
+	for (var i = 0; i < smoothed_data[sample_rate-2].length; i++)
+	{
+		ctx.lineTo(smoothed_data[sample_rate-2][i][0], smoothed_data[sample_rate-2][i][1]);
 	}
 	ctx.lineWidth = 5;
 	ctx.strokeStyle = "blue";
