@@ -245,6 +245,7 @@ function showMenu(){
 	enableGUIElement(document.getElementById("menuAugBtn0"), true);
 	enableGUIElement(document.getElementById("menuAugBtn1"), true);
 	enableGUIElement(document.getElementById("menuAugBtn2"), true);
+	enableGUIElement(document.getElementById("menuAugBtn3"), true);
 }
 
 function hideMenu(){
@@ -254,12 +255,14 @@ function hideMenu(){
 	enableGUIElement(document.getElementById("menuAugBtn0"), false);
 	enableGUIElement(document.getElementById("menuAugBtn1"), false);
 	enableGUIElement(document.getElementById("menuAugBtn2"), false);
+	enableGUIElement(document.getElementById("menuAugBtn3"), false);
 }
 
 function manageMenuButtons(){
 	document.getElementById("menuAugBtn0").addEventListener("click", function() {StartAugucationFromMenu(0);});
 	document.getElementById("menuAugBtn1").addEventListener("click", function() {StartAugucationFromMenu(1);});
 	document.getElementById("menuAugBtn2").addEventListener("click", function() {StartAugucationFromMenu(2);});
+	document.getElementById("menuAugBtn3").addEventListener("click", function() {StartAugucationFromMenu(3);});
 }
 
 function StartAugucationFromMenu(index){
