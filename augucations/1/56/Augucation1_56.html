@@ -1,56 +1,42 @@
 <head>
 
 	<meta charset="UTF-8"/>
-	<title>Fouriertransformation</title>
+	<title>Abtasttheorem</title>
 
 	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
 	<link rel="stylesheet" href="Augucation1_56.css">	
-	
 </head>
 
 <body>
 
 	<script type="text/javascript" src="../../../resources/js/slideshow.js"></script> 
-	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script> 
 
-	<img class="img_formula" src="../../../resources/img/im-01-56_formula.png">
-	
-	<div class="plots_wrapper">
-		<div class="inner_plots_wrapper">
-			<div id="chart0" class="plot_chart"></div>
-			<div id="chart1" class="plot_chart"></div>
-			<br/>
-			<div id="chart2" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(2)"></div>
-			<div id="chart3" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(3)"></div>
-			<div id="chart4" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(4)"></div>
-			<div id="chart5" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(5)"></div>
-			<div id="chart6" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(6)"></div>
-			<br/>
-			<div class="my_text chart_name_container">
-				<span class="chart_name">k = 0</span>
-				<span class="chart_name">k = 1</span>
-				<span class="chart_name">k = 2</span>
-				<span class="chart_name">k = 3</span>
-				<span class="chart_name">k = 4</span>
+	<div>
+		<div id="canvas_wrapper" class="canvas_wrapper" width="1200px" height="750px">
+			<canvas id="myCanvas" class="canvas" width="1000px" height="750px"></canvas>
+			<div class="bitCodeList_wrapper" width="20px" height="750px">
+				<ul id="bitCodeList" class="my_text bitCodeList" width="100px", height="750px"></ul>
+			</div>
+			<br/> <br/>
+			<!--div class="digital_signal_wrapper" height="50px">
+				<span id="digital_signal" class="digital_signal my_text" width="1000px" height="30px"></span>
+			</div-->
+		</div>
+		<br/> <br/>
+		<div class="slider_wrap">
+			<div id="sliders" class="my_text slider_block">
+				<div class="slider_name_wrap slider_name_wrap_spec"><span class="slider_name" style="color: var(--dark_red);">Abtastpunkte</span></div>
+					<input id="rA" type="range" class="slider" min="2" max="17" value="0" step="1"/>	
+						<div class="slider_value_wrap"> <input id="sA" type="text" class="no-spin textField slider_value" style="color: var(--dark_red);" size="4"/> </div>
+					<br/>
+					<span class="min slider_label">5</span>		
+					<span class="max slider_label">15</span>
+				<br/> <br/>
 			</div>
 		</div>
-	</div>
-	<div class="slider_wrapper">
-			<span class="my_text centered_label slider_top_label">Anteil a<sub>k</sub></span>
-			<input id="slider_amp" class="slider" type="range" min="0" max="2.8" value="1" step="0.01">
-			<span class="my_text centered_label slider_top_label">Phasenverschiebung &theta;<sub>k</sub></span>
-			<input id="slider_phas" class="slider" type="range" min="-5" max="5" value="0" step="0.01">
-			<span class="my_text centered_label slider_top_label">Grundfrequenz &omega;<sub>0</sub></span>
-			<input id="slider_freq" class="slider" type="range" min="0" max="2" value="1" step="0.01">
-	</div>
-	<div>
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(1, 56);" name="back" value="<<"/>
-	</div>  
-	
-    <!--script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery-1.8.3.min.js"></script!-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-    <!--script type="text/javascript" src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script-->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
-	<script type="text/javascript" src="Augucation1_56.js"></script>
+	</div>	
 
+	<script type="text/javascript" src="../../../resources/js/Smooth-0.1.7.js"></script>
+	<script type="text/javascript" src="Augucation1_56.js"></script>
 </body>
