@@ -37,6 +37,7 @@ var augucationButtons = new Array();
 	
 loadAndRenderPDF();
 manageMenuButtons();
+addPrevNextPageInput();
 
 function setPageNum(num){
 	pageNum = num;
@@ -299,3 +300,18 @@ function StartAugucationFromMenu(evt){
 	pageNum = augucations[topic-1][index][0];
 	StartAugucation();
 }
+
+function addPrevNextPageInput(){
+	
+	document.addEventListener('keydown', function(event)
+	{					
+		if(pageNumText == document.activeElement)
+			return;
+		
+		if(event.keyCode == 37) {
+			onPrevPage();
+		}
+		else if(event.keyCode == 39) {
+			onNextPage();
+    }
+});}
