@@ -1,6 +1,3 @@
-// URL of PDF document
-//var url = "resources/slides/dummy_slides.pdf";
-
 var pdfDoc = null,
 	pageNum = 1,
 	pageRendering = false,
@@ -13,18 +10,30 @@ var pdfDoc = null,
 	augBtn = document.getElementById("augBtn"),
 	pageCounter = document.getElementById("page_num_count"),
 	loadingText = document.getElementById("loading"),
+	menu = document.getElementById("menu");
+	menuBtnContainer = document.getElementById("menuBtnContainer");
 	ctx = canvas.getContext('2d'),
 	topic = 1;
 
-// array that stores which slides per topic are augmented
+// array that stores page numbers and titles of augmented slides sorted by topic
 var augucations = [
-	[30, 45, 55, 56, 135],
+	// topic 1
+	[
+		[30, "Analoge Signale"], 
+		[45, "Diskretisierung und Quantisierung"],
+		[55, "Fouriertransformation"],
+		[56, "Abtasttheorem"],
+		[135, "Lauflängenkodierung"],
+	],
+	
 	[0],
 	[0],
 	[0],
 	[0],
 	[0]
 ];	
+
+var augucationButtons = new Array();
 	
 loadAndRenderPDF();
 manageMenuButtons();
@@ -35,8 +44,6 @@ function setPageNum(num){
 
 function renderPage(num){
 	
-	//resizeCanvas();
-	
 	pageRendering = true;
 
 	pdfDoc.getPage(num).then(function(page){
@@ -44,9 +51,6 @@ function renderPage(num){
 			// Set dimensions to Canvas
 			canvas.height = viewport.height;
 			canvas.width = viewport.width;
-			//canvas.height = window.innerHeight;
-			//canvas.width = window.innerWidth;
-
 
 		// Prepare object needed by render method
 		var renderContext = {
@@ -103,9 +107,7 @@ document.getElementById('prev').addEventListener('click', onPrevPage);
  * Displays previous page
  */
 function onNextPage(){
-	
-	console.log("onNextPage pageNum: ", pageNum);
-	
+		
 	if(pageNum >= pdfDoc.numPages){
 		return;
 	}
@@ -134,9 +136,7 @@ function newPage(e){
 	}
 	
 	pageNum = p;
-	
-	console.log("p: ", p, "\n pageNum: ", pageNum);
-	
+		
 	update();
 	queueRenderPage(pageNum);
 }
@@ -185,24 +185,20 @@ function showSlides(show){
 }
 
 function StartAugucation(){
-	//showSlides(false);
 	
-	console.log("Show Augucation!");
-
 	url = "augucations/" + topic + "/" + pageNum + "/Augucation" + topic + "_" + pageNum + ".html";
 	//if(fileExists(url))
 		window.location = url;
 }
 
+// called from augucation htmls
+// open index.html with topic and page encoded as url parameters
 function CloseAugucation(top, page){
 	
 	window.location="../../../index.html?" + top + "&" + page;
 	
 	topic = top;
 	pageNum = page;
-	
-	//onNextPage();
-	//showSlides(true);
 }
 
 function getTopicAndPageNumFromURL(){
@@ -238,34 +234,58 @@ function fileExists(url) {
     }
 }
 
+// adds a button for each available augucation to the menu
+function fillMenuWithButtons(){
+	
+	// create button template
+	var btn = document.createElement("input");
+	btn.type = "submit";
+	btn.className = "menuAugBtn";
+	
+	// create br template
+	var br = document.createElement("br");
+	
+	augucationButtons = new Array(augucations[topic-1].length);
+	
+	for(var i = 0; i < augucationButtons.length; i++)
+	{
+		augucationButtons[i] = btn.cloneNode(true);
+		augucationButtons[i].id = "menuAugBtn" + i;
+		augucationButtons[i].value = augucations[topic-1][i][1];
+		menuBtnContainer.appendChild(augucationButtons[i]);
+		menuBtnContainer.appendChild(br.cloneNode(true));
+	}
+}
+
 function showMenu(){
-    document.getElementById("menu").style.width = "20%";
+    menu.style.width = "20%";
 	enableGUIElement(document.getElementById("menuCloseBtn"), true);
-	enableGUIElement(document.getElementById("menuBtn"), false);
-	enableGUIElement(document.getElementById("menuAugBtn0"), true);
-	enableGUIElement(document.getElementById("menuAugBtn1"), true);
-	enableGUIElement(document.getElementById("menuAugBtn2"), true);
-	enableGUIElement(document.getElementById("menuAugBtn3"), true);
+	enableGUIElement(document.getElementById("menuBtn"), false);	
+	enableGUIElement(menuBtnContainer, true);
 }
 
 function hideMenu(){
-    document.getElementById("menu").style.width = "0%";
+    menu.style.width = "0%";
 	enableGUIElement(document.getElementById("menuCloseBtn"), false);
 	enableGUIElement(document.getElementById("menuBtn"), true);
-	enableGUIElement(document.getElementById("menuAugBtn0"), false);
-	enableGUIElement(document.getElementById("menuAugBtn1"), false);
-	enableGUIElement(document.getElementById("menuAugBtn2"), false);
-	enableGUIElement(document.getElementById("menuAugBtn3"), false);
+	enableGUIElement(menuBtnContainer, false);
 }
 
 function manageMenuButtons(){
-	document.getElementById("menuAugBtn0").addEventListener("click", function() {StartAugucationFromMenu(0);});
-	document.getElementById("menuAugBtn1").addEventListener("click", function() {StartAugucationFromMenu(1);});
-	document.getElementById("menuAugBtn2").addEventListener("click", function() {StartAugucationFromMenu(2);});
-	document.getElementById("menuAugBtn3").addEventListener("click", function() {StartAugucationFromMenu(3);});
+	
+	fillMenuWithButtons();
+
+	for(var i = 0; i < augucationButtons.length; i++)
+	{
+		augucationButtons[i].addEventListener("click", StartAugucationFromMenu, false);
+		augucationButtons[i].index = i;
+	}
 }
 
-function StartAugucationFromMenu(index){
-	pageNum = augucations[topic-1][index];
+function StartAugucationFromMenu(evt){
+	
+	var index = evt.target.index;
+	
+	pageNum = augucations[topic-1][index][0];
 	StartAugucation();
 }
