@@ -154,6 +154,11 @@
 	color:        white;
 }
 
+.menuBtnContainer
+{
+	margin-top: 10%;
+}
+
 .menuAugBtn
 {
   background-color: var(--hci_gray);

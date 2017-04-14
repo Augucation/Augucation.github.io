@@ -273,12 +273,20 @@ function hideMenu(){
 
 function manageMenuButtons(){
 	
+	hideMenu();
 	fillMenuWithButtons();
 
 	for(var i = 0; i < augucationButtons.length; i++)
 	{
 		augucationButtons[i].addEventListener("click", StartAugucationFromMenu, false);
 		augucationButtons[i].index = i;
+	}
+	
+	// add Eventlistener to hide menu when an outside click is detected
+	document.body.onclick = function(e) 
+	{
+		if(e.target != menu && e.target != menuBtn)
+			hideMenu();
 	}
 }
 
