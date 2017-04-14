@@ -23,7 +23,7 @@ var augucations = [
 		[45, "Diskretisierung und Quantisierung"],
 		[55, "Fouriertransformation"],
 		[56, "Abtasttheorem"],
-		[135, "Lauflängenkodierung"],
+		//[135, "Lauflängenkodierung"],
 	],
 	
 	[0],
