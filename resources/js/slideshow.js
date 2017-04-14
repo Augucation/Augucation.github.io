@@ -217,10 +217,12 @@ function getTopicAndPageNumFromURL(){
 
 // checks for available augucations 
 function update(){
-	if (augucations[topic-1].includes(pageNum))
-		enableGUIElement(augBtn, true);
-	else
-		enableGUIElement(augBtn, false);
+	
+	enableGUIElement(augBtn, false);
+	for(var i = 0; i < augucations[topic-1].length; i++){
+		if(augucations[topic-1][i].includes(pageNum))
+			enableGUIElement(augBtn, true);
+	}
 }
 
 function fileExists(url) {

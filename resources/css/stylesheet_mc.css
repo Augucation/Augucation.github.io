@@ -1,0 +1,32 @@
+.mc_container
+{
+  margin: 4% auto;
+  display: block;
+  width: 60%;
+}
+
+.question_container
+{
+  margin-top: 2%;
+}
+
+fieldset
+{
+  border: none;
+  font-size: 20;
+}
+
+input[type=radio]
+{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.check
+{
+  width: 75px;
+  height: 40px;
+  font-size: 20;
+  margin: 5% auto;
+  display: block;
+}
