@@ -130,8 +130,8 @@ function addMouseOverListeners()
 	
 	for (var i = 0; i < pairs_spans.length; i++)
 	{
-		pairs_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "pairs_spans", Math.round(i * .5) - 1), false);
-		pairs_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "pairs_spans", Math.round(i * .5) - 1), false);
+		pairs_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "pairs_spans", i), false);
+		pairs_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "pairs_spans", i), false);
 	}
 	
 	// stream spans
@@ -145,6 +145,10 @@ function addMouseOverListeners()
 
 function mouseOver(hover, type, index)
 {	
+	// ... because pairs has doubled elements
+	if(type == "pairs_spans")
+		index = index % 2 == 0 ? index / 2 : Math.round(index / 2) - 1;
+		
 	code_spans[index].style.color = hover ? color_red : color_gray;
 	
 	pairs_spans[index * 2].style.color = hover ? color_blue : color_gray;
