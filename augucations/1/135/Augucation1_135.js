@@ -3,6 +3,7 @@ var codes, pairs, stream, memory = new Array(3);
 var radios = document.getElementsByName("bit");
 
 var code_bits, code_pairs, code_stream, code_memory;
+var code_spans = new Array(), pairs_spans = new Array(), stream_spans = new Array();
 
 codes = [
 		["11", "000", "000", "0", "111", "111", "11", "000", "00", "111", "1"],
@@ -32,10 +33,11 @@ function findElements()
 	code_memory = document.getElementById("code_memory");
 }
 
+
 function update()
 {
 	// fill code_bits
-	var code_spans = new Array();
+	//var code_spans = new Array();
 	code_bits.innerHTML = "<br>";
 	for(var i = 0; i < codes[bits-2].length; i++)
 	{
@@ -45,7 +47,6 @@ function update()
 	}
 	
 	// fill code_pairs
-	var pairs_spans = new Array();
 	code_pairs.innerHTML = "Codierung (als Wertpaare)<br>";
 		
 		// create brackets and comma
@@ -72,7 +73,6 @@ function update()
 	}
 	
 	// fill code_stream
-	var stream_spans = new Array();
 	code_stream.innerHTML = "Codierung (als Bitstrom)<br>";
 		for(var i = 0; i < codes[bits-2].length; i++)
 	{
@@ -81,8 +81,19 @@ function update()
 		code_stream.appendChild(stream_spans[i]);
 	}
 	
-	//fill code_memory
+	// fill code_memory
 	code_memory.innerHTML = "Gesamtspeicherbedarf<br>" + memory[bits-2] + " Bit";
+	
+	// add big white text to avoid jumpy text due to font size changes 
+	var whitey = document.createElement("SPAN");
+	whitey.innerHTML = " ";
+	whitey.style.fontSize = "34px";
+	
+	code_bits.appendChild(whitey.cloneNode(true));
+	code_pairs.appendChild(whitey.cloneNode(true));
+	code_stream.appendChild(whitey.cloneNode(true));
+	
+	addMouseOverListeners();
 }
 
 function manageRadioButtons()
@@ -94,7 +105,60 @@ function manageRadioButtons()
 			update();
 		}
 	}
-		
+}
+
+function addMouseOverListeners()
+{
+	function getMouseOverFunction(hover, type, index)
+	{
+		return function() 
+		{
+			mouseOver(hover, type, index)
+		}
+	}
+	
+	
+	// code_spans
+	
+	for (var i = 0; i < code_spans.length; i++)
+	{
+		code_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "code_spans", i), false);
+		code_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "code_spans", i), false);
+	}
+	
+	// pairs_spans
+	
+	for (var i = 0; i < pairs_spans.length; i++)
+	{
+		pairs_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "pairs_spans", Math.round(i * .5) - 1), false);
+		pairs_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "pairs_spans", Math.round(i * .5) - 1), false);
+	}
+	
+	// stream spans
+	
+	for (var i = 0; i < stream_spans.length; i++)
+	{
+		stream_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "stream_spans", i), false);
+		stream_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "stream_spans", i), false);
+	}
+}
+
+function mouseOver(hover, type, index)
+{	
+	code_spans[index].style.color = hover ? color_red : color_gray;
+	
+	pairs_spans[index * 2].style.color = hover ? color_blue : color_gray;
+	pairs_spans[index * 2 + 1].style.color = hover ? color_blue : color_gray;
+	
+	stream_spans[index].style.color = hover ? color_green : color_gray;
+	
+	
+	code_spans[index].style.fontSize = hover ? "34px" : "28px";
+	
+	pairs_spans[index * 2].style.fontSize = hover ? "34px" : "28px";
+	pairs_spans[index * 2 + 1].style.fontSize = hover ? "34px" : "28px";
+	
+	stream_spans[index].style.fontSize = hover ? "34px" : "28px";
 }
 
 findElements();
