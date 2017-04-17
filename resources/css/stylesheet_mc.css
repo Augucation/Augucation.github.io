@@ -22,11 +22,16 @@ input[type=radio]
   height: 1.5em;
 }
 
+.check_btn_container
+{
+  margin-top: -2%;
+}
+
 .check
 {
   width: 75px;
   height: 40px;
   font-size: 20;
-  margin: 5% auto;
+  margin: 1% auto;
   display: block;
 }

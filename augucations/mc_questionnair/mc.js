@@ -164,7 +164,7 @@ function check()
 
 function markRadio(index, right)
 {
-	labels[parseInt(index)].style.color = right ? "#00FF00" : "#FF0000";
+	labels[parseInt(index)].style.color = right ? color_green : color_red;
 }
 
 init();
