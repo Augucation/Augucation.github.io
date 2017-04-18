@@ -149,13 +149,15 @@ function mouseOver(hover, type, index)
 	if(type == "pairs_spans")
 		index = index % 2 == 0 ? index / 2 : Math.round(index / 2) - 1;
 		
-	code_spans[index].style.color = hover ? color_red : color_gray;
+	code_spans[index].style.color = hover ? "#FF0000" : color_gray;
 	
-	pairs_spans[index * 2].style.color = hover ? color_blue : color_gray;
-	pairs_spans[index * 2 + 1].style.color = hover ? color_blue : color_gray;
+	pairs_spans[index * 2].style.color = hover ? "#0000FF" : color_gray;
+	pairs_spans[index * 2 + 1].style.color = hover ? "#0000FF" : color_gray;
 	
-	stream_spans[index].style.color = hover ? color_green : color_gray;
+	stream_spans[index].style.color = hover ? "#00FF00" : color_gray;
 	
+	
+	/* Change font sizes to highlight
 	
 	code_spans[index].style.fontSize = hover ? "34px" : "28px";
 	
@@ -163,6 +165,7 @@ function mouseOver(hover, type, index)
 	pairs_spans[index * 2 + 1].style.fontSize = hover ? "34px" : "28px";
 	
 	stream_spans[index].style.fontSize = hover ? "34px" : "28px";
+	*/
 }
 
 findElements();
