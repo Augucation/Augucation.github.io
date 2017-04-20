@@ -1,0 +1,44 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Fouriertransformation</title>
+
+	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="Augucation2_48.css">	
+	
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../../resources/js/slideshow.js"></script> 
+	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script> 
+	
+	<div class="my_text">
+		<div class="slider_block">
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Schalldruck</span>
+				<input type="range" class="slider" id="slider_vol" min="0" max="1" step="0.01" value="0.5"oninput="setVolume(this.value)"/>
+				<span class="slider_val" id="span_vol">0.5</span>
+			</div>
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Frequenz</span>
+				<input type="range" class="slider" id="slider_freq" min="0" max="1000" step="1" value="500"oninput="setFrequency(this.value)"/>
+				<span class="slider_val" id="span_freq">400</span>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 48);" name="back" value="<<"/>
+	</div>  
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	
+	
+	<script type="text/javascript" src="../../../resources/js/plugins/Pizzicato.js/Pizzicato.js"></script>
+	
+	<script type="text/javascript" src="Augucation2_48.js"></script>
+
+</body>

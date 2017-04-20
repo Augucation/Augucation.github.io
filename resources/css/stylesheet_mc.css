@@ -1,13 +1,20 @@
+.mc_container_container
+{
+  text-align: center;
+}
+
 .mc_container
 {
   margin: 4% auto;
-  display: block;
-  width: 60%;
+  display: inline-block;
+  width: 35%;
+  text-align: left;
 }
 
 .question_container
 {
   margin-top: 2%;
+  display: inline; /*inline*/
 }
 
 fieldset

@@ -39,6 +39,15 @@ function pickCurrentQuestions(data){
 	}
 }
 
+
+var br = document.createElement("br");
+
+
+function addbr(elem){
+	elem.appendChild(br.cloneNode(true));
+}
+	
+	
 function fillInQuestions(){
 	
 	// get big container_div
@@ -63,8 +72,6 @@ function fillInQuestions(){
 	answer_input.type = "radio";
 	
 	var answer_label = document.createElement("label");
-	
-	var br = document.createElement("br");
 	
 	
 	// add elements
@@ -96,9 +103,8 @@ function fillInQuestions(){
 			f.appendChild(a_i[j]);
 			a_l[j] = answer_label.cloneNode(true);
 			f.appendChild(a_l[j]);
-			
-			f.appendChild(br.cloneNode(true));
-			
+	
+			addbr(f);		
 		}
 		
 	
