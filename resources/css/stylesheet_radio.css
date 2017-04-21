@@ -1,0 +1,18 @@
+.radio_wrapper
+{
+  margin-top: 5%;
+}
+
+fieldset
+{
+  border: none;
+  text-align: center;
+  font-size: 28;
+}
+
+input[type=radio]
+{
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 3%;
+}

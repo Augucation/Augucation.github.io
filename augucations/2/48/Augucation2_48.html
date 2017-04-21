@@ -1,9 +1,10 @@
 <head>
 
 	<meta charset="UTF-8"/>
-	<title>Fouriertransformation</title>
+	<title>Psychoakustik</title>
 
 	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../../resources/css/stylesheet_radio.css">
 	<link rel="stylesheet" href="Augucation2_48.css">	
 	
 </head>
@@ -18,13 +19,26 @@
 			<div class="slider_wrapper">
 				<span class="slider_top_label">Schalldruck</span>
 				<input type="range" class="slider" id="slider_vol" min="0" max="1" step="0.01" value="0.5"oninput="setVolume(this.value)"/>
-				<span class="slider_val" id="span_vol">0.5</span>
+				<span class="slider_val" id="span_vol">5%</span>
 			</div>
 			<div class="slider_wrapper">
 				<span class="slider_top_label">Frequenz</span>
-				<input type="range" class="slider" id="slider_freq" min="0" max="1000" step="1" value="500"oninput="setFrequency(this.value)"/>
-				<span class="slider_val" id="span_freq">400</span>
+				<input type="range" class="slider" id="slider_freq" min="0" max="100" step="1" value="50"oninput="setFrequency(this.value)"/>
+				<span class="slider_val" id="span_freq">400 Hz</span>
 			</div>
+		</div>
+		
+		<div class="radio_wrapper">
+			<fieldset>
+				<input type="radio" id="sine" name="type" value="0" checked="checked">
+				<label for="sine">Sinus</label></label>
+				<input type="radio" id="square" name="type" value="1">
+				<label for="square">Quadrat</label>
+				<input type="radio" id="triangle" name="type" value="2">
+				<label for="triangle">Dreieck</label>
+				<input type="radio" id="sawtooth" name="type" value="3">
+				<label for="sawtooth">Sägezahn</label>
+			</fieldset>
 		</div>
 	</div>
 	
