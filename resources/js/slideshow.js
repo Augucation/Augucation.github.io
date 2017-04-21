@@ -27,11 +27,27 @@ var augucations = [
 		[142, "Lempel Ziv Welch"]
 	],
 	
-	[0],
-	[0],
-	[0],
-	[0],
-	[0]
+	// topic 2
+	[
+		[],
+	],
+	
+	[
+		[],
+	],
+	
+	
+	[
+		[],
+	],
+	
+	[
+		[],
+	],
+	
+	[
+		[],
+	],
 ];	
 
 var augucationButtons = new Array();
