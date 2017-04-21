@@ -4,22 +4,25 @@ var 	span_vol,
 		max_f_log = Math.log(20000),
 		old_v, 
 		old_f,
-		sound = new Pizzicato.Sound();
+		sound = new Pizzicato.Sound(),
+		play = false,
+		muteBtn = document.getElementById("muteBtn"),
+		img_soundoff = "url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg')";
+		img_soundon = "url('https://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg')";
 
 var radios = document.getElementsByName("type");
 
 function init(){
 	findElements();
 	manageRadioButtons();
-	startSound();
+	createSound();
 }
 
-function startSound(){
+function createSound(){
 	sound = new Pizzicato.Sound({ 
 			source: 'wave',
 			options: { type: 'sine', frequency: 400, volume: 0.5 }
 	});
-	sound.play();	
 }
 		
 function findElements(){
@@ -64,6 +67,22 @@ function manageRadioButtons()
 		{
 			setType(this.id);
 		}
+	}
+}
+
+function mute(){
+		
+	if(play)
+	{
+		sound.stop();
+		play = false;
+		muteBtn.style.backgroundImage = img_soundoff;
+	}
+	else
+	{
+		sound.play();
+		play = true;
+		muteBtn.style.backgroundImage = img_soundon;
 	}
 }
 

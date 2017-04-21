@@ -237,6 +237,11 @@ function getTopicAndPageNumFromURL(){
 function update(){
 	
 	enableGUIElement(augBtn, false);
+	
+	// check if there are any augucations for the current topic
+	if(!augucations[topic-1])
+		return;
+	
 	for(var i = 0; i < augucations[topic-1].length; i++){
 		if(augucations[topic-1][i].includes(pageNum))
 			enableGUIElement(augBtn, true);

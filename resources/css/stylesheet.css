@@ -47,6 +47,11 @@ sub {
 	float: center;
 }
 
+.center_wrapper
+{
+	text-align: center;
+}
+
 .chart
 {
 	height: 50%;
@@ -78,6 +83,18 @@ sub {
 	bottom:   0px;
 	left:     0px;
 	width:    50px;
+}
+
+.mute.button
+{
+	margin: 1% auto;
+	background-color: white;
+	background-size:  80px 80px;
+	border: 		  none;
+	height:   		  80px;
+	width:    		  80px;
+	cursor:	  		  pointer;
+	background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg');
 }
 
 .slider_wrap
