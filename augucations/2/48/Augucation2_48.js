@@ -1,6 +1,6 @@
 var 	span_vol,
 		span_freq,
-		min_f_log = Math.log(1),
+		min_f_log = Math.log(20),
 		max_f_log = Math.log(20000),
 		old_v,
 		old_f,
@@ -13,7 +13,8 @@ var 	span_vol,
 		data,
 		type = "sine",
 		plot_x_scale = 0.001,
-		sound2 = new Pizzicato.Sound();
+		plot_x_min = 0,
+		plot_x_max = 6.001;
 
 var radios = document.getElementsByName("type");
 
@@ -136,20 +137,45 @@ $(function(){
 		switch(type)
 		{
 			case "sine":
-				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return sin(x); } );
+				data = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return sin(x); } );
 				break;
 			case "square":
-				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return square(x); } );
+				data = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return square(x); } );
 				break;
 			case "triangle":
-				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return triangle(x); } );
+				data = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return triangle(x); } );
 				break;
 			case "sawtooth":
-				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return sawtooth(x); } );
+				data = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return sawtooth(x); } );
 				break;
 		}
 
-		$.plot($("#chart"), [data], { yaxis: { min: -1, max: 1 } });
+		var options =
+		{
+			axisLabels:
+			{
+				show: true
+			},
+			xaxis:
+			{
+				tickFormatter: function(val, axis) {return (val / plot_x_scale).toString() + 'ms';},
+				tickSize: plot_x_scale,
+				axisLabel: 'ms'
+			},
+			yaxis:
+			{
+				min: -1,
+				max: 1,
+				ticks: []
+			},
+			grid:
+			{
+				borderWidth: 0
+			},
+			colors: ["#FF0000"]
+		};
+
+		$.plot($("#chart"), [data], options);
 	}
 
 	plotit();
