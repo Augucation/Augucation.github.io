@@ -29,7 +29,12 @@ var augucations = [
 
 	// topic 2
 	[
+		[11, "Amazing Water & Sound Experiment #2"],
+		[30, "Lautstärke"],
 		[49, "Psychoakustik"],
+		[60, "Scope - 20hz to 20khz"],
+		[61, "Der Prozess des Hörens und Wie Hören funktioniert"],
+		[68, "Virtual Barber Shop"],
 		[93, "Maskierung"]
 	],
 
