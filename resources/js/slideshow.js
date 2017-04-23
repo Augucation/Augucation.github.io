@@ -19,39 +19,40 @@ var pdfDoc = null,
 var augucations = [
 	// topic 1
 	[
-		[30, "Analoge Signale"], 
+		[30, "Analoge Signale"],
 		[45, "Diskretisierung und Quantisierung"],
 		[55, "Fouriertransformation"],
 		[56, "Abtasttheorem"],
 		[135, "Lauflängenkodierung"],
 		[142, "Lempel Ziv Welch"]
 	],
-	
+
 	// topic 2
 	[
-		[],
+		[49, "Psychoakustik"],
+		[93, "Maskierung"]
 	],
-	
+
 	[
 		[],
 	],
-	
-	
+
+
 	[
 		[],
 	],
-	
+
 	[
 		[],
 	],
-	
+
 	[
 		[],
 	],
-];	
+];
 
 var augucationButtons = new Array();
-	
+
 loadAndRenderPDF();
 manageMenuButtons();
 addPrevNextPageInput();
@@ -61,7 +62,7 @@ function setPageNum(num){
 }
 
 function renderPage(num){
-	
+
 	pageRendering = true;
 
 	pdfDoc.getPage(num).then(function(page){
@@ -125,7 +126,7 @@ document.getElementById('prev').addEventListener('click', onPrevPage);
  * Displays previous page
  */
 function onNextPage(){
-		
+
 	if(pageNum >= pdfDoc.numPages){
 		return;
 	}
@@ -144,17 +145,17 @@ function newPage(e){
 	if(e.keyCode != 13) { //enter key
 		return;
 	}
-	
+
 	p = parseInt(pageNumText.value, 10);
-	
+
 	// if the input is invalid, reset field to current page number
 	if(isNaN(p) || p < 1 || p > pdfDoc.numPages){
-		pageNumText.value = pageNum; 
+		pageNumText.value = pageNum;
 		return;
 	}
-	
+
 	pageNum = p;
-		
+
 	update();
 	queueRenderPage(pageNum);
 }
@@ -203,7 +204,7 @@ function showSlides(show){
 }
 
 function StartAugucation(){
-	
+
 	url = "augucations/" + topic + "/" + pageNum + "/Augucation" + topic + "_" + pageNum + ".html";
 	//if(fileExists(url))
 		window.location = url;
@@ -212,36 +213,36 @@ function StartAugucation(){
 // called from augucation htmls
 // open index.html with topic and page encoded as url parameters
 function CloseAugucation(top, page){
-	
+
 	window.location="../../../index.html?" + top + "&" + page;
-	
+
 	topic = top;
 	pageNum = page;
 }
 
 function getTopicAndPageNumFromURL(){
-	
+
 	var params = window.location.search.substring(1).split("&");
-	
+
 	topic = params[0] != "" ? params[0] : 1;
 	url = "resources/slides/im-0" + topic + ".pdf";
-   
+
 	var n = parseInt(params[1]);
 	if(n > 0)
 		pageNum = n;
-	
+
 	update();
 }
 
-// checks for available augucations 
+// checks for available augucations
 function update(){
-	
+
 	enableGUIElement(augBtn, false);
-	
+
 	// check if there are any augucations for the current topic
 	if(!augucations[topic-1])
 		return;
-	
+
 	for(var i = 0; i < augucations[topic-1].length; i++){
 		if(augucations[topic-1][i].includes(pageNum))
 			enableGUIElement(augBtn, true);
@@ -261,17 +262,17 @@ function fileExists(url) {
 
 // adds a button for each available augucation to the menu
 function fillMenuWithButtons(){
-	
+
 	// create button template
 	var btn = document.createElement("input");
 	btn.type = "submit";
 	btn.className = "menuAugBtn";
-	
+
 	// create br template
 	var br = document.createElement("br");
-	
+
 	augucationButtons = new Array(augucations[topic-1].length);
-	
+
 	for(var i = 0; i < augucationButtons.length; i++)
 	{
 		augucationButtons[i] = btn.cloneNode(true);
@@ -285,7 +286,7 @@ function fillMenuWithButtons(){
 function showMenu(){
     menu.style.width = "20%";
 	enableGUIElement(document.getElementById("menuCloseBtn"), true);
-	enableGUIElement(document.getElementById("menuBtn"), false);	
+	enableGUIElement(document.getElementById("menuBtn"), false);
 	enableGUIElement(menuBtnContainer, true);
 }
 
@@ -297,7 +298,7 @@ function hideMenu(){
 }
 
 function manageMenuButtons(){
-	
+
 	hideMenu();
 	fillMenuWithButtons();
 
@@ -306,9 +307,9 @@ function manageMenuButtons(){
 		augucationButtons[i].addEventListener("click", StartAugucationFromMenu, false);
 		augucationButtons[i].index = i;
 	}
-	
+
 	// add Eventlistener to hide menu when an outside click is detected
-	document.body.onclick = function(e) 
+	document.body.onclick = function(e)
 	{
 		if(e.target != menu && e.target != menuBtn)
 			hideMenu();
@@ -316,20 +317,20 @@ function manageMenuButtons(){
 }
 
 function StartAugucationFromMenu(evt){
-	
+
 	var index = evt.target.index;
-	
+
 	pageNum = augucations[topic-1][index][0];
 	StartAugucation();
 }
 
 function addPrevNextPageInput(){
-	
+
 	document.addEventListener('keydown', function(event)
-	{					
+	{
 		if(pageNumText == document.activeElement)
 			return;
-		
+
 		if(event.keyCode == 37) {
 			onPrevPage();
 		}
