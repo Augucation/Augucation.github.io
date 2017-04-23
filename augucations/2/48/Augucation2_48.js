@@ -7,8 +7,13 @@ var 	span_vol,
 		sound = new Pizzicato.Sound(),
 		play = false,
 		muteBtn = document.getElementById("muteBtn"),
-		img_soundoff = "url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg')";
-		img_soundon = "url('https://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg')";
+		img_soundoff = "url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg')",
+		img_soundon = "url('https://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg')",
+		plotFunc,
+		data,
+		type = "sine",
+		plot_x_scale = 0.001,
+		sound2 = new Pizzicato.Sound();
 
 var radios = document.getElementsByName("type");
 
@@ -16,6 +21,7 @@ function init(){
 	findElements();
 	manageRadioButtons();
 	createSound();
+	sound.volume = 2;
 }
 
 function createSound(){
@@ -31,13 +37,18 @@ function findElements(){
 }
 
 function setVolume(val){
-	sound.volume = parseFloat(val);	
+	
+	sound.volume = parseFloat(val);		
 	span_vol.innerHTML = Math.round(val * 100) + "%";
+	
+	plotFunc();
 }
 
 function setFrequency(val){
 	sound.frequency = logFreq(val);
 	span_freq.innerHTML = logFreq(val) + " Hz";
+	
+	plotFunc();
 }
 
 function logFreq(val){
@@ -57,11 +68,15 @@ function setType(val){
 			source: 'wave',
 			options: { type: val, frequency: old_f, volume: old_v }
 	});
-	sound.play();		
+	
+	if(play)
+		sound.play();	
+
+	type = val;
+	plotFunc();
 }
 
-function manageRadioButtons()
-{	
+function manageRadioButtons(){	
 	for(var i = 0; i < radios.length; i++){
 		radios[i].onclick = function()
 		{
@@ -85,5 +100,60 @@ function mute(){
 		muteBtn.style.backgroundImage = img_soundon;
 	}
 }
+
+function sampleFunction(x1, x2, func) {			
+	var d = [ ];
+	var step = (x2-x1)/10050;
+	for (var i = x1; i < x2; i += step )
+		d.push([i, func( i ) ]);
+
+	return d;
+}
+
+$(function(){
+				
+	function sin(x){
+		return sound.volume * Math.sin(sound.frequency * (2 * Math.PI) * x);
+	}
+	
+	function square(x){
+		p = 1 / sound.frequency;
+		return x % p < p * 0.5 ? sound.volume : -sound.volume;
+	}
+	
+	function triangle(x){
+		p = 1 / sound.frequency;
+		return sound.volume * 2 * Math.abs(Math.round(x / p) - x / p) * 2 - sound.volume;
+	}
+	
+	function sawtooth(x){
+		p = 1 / sound.frequency;
+		return sound.volume * ((x / p) - Math.floor(x / p)) * 2 - sound.volume;
+	}
+	
+	function plotit(){
+		
+		switch(type)
+		{
+			case "sine":
+				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return sin(x); } );
+				break;
+			case "square":
+				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return square(x); } );
+				break;
+			case "triangle":
+				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return triangle(x); } );
+				break;
+			case "sawtooth":
+				data = sampleFunction( 0, 2 * Math.PI * plot_x_scale, function(x){ return sawtooth(x); } );
+				break;
+		}
+
+		$.plot($("#chart"), [data], { yaxis: { min: -1, max: 1 } });
+	}
+	
+	plotit();
+	plotFunc = plotit;
+});
 
 init();

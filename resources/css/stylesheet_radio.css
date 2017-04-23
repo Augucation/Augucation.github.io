@@ -1,6 +1,6 @@
 .radio_wrapper
 {
-  margin-top: 5%;
+  margin-top: 0%;
 }
 
 fieldset
@@ -15,4 +15,9 @@ input[type=radio]
   width: 1.5em;
   height: 1.5em;
   margin-left: 3%;
+}
+
+.radio_label_small
+{
+  font-size: 20;
 }
