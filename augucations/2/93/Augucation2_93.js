@@ -3,7 +3,11 @@ var 	span_vol_1,
 		span_vol_2,
 		span_freq_2,
 		sound1 = new Pizzicato.Sound(),
-		sound2 = new Pizzicato.Sound();
+		sound2 = new Pizzicato.Sound(),
+		play = false
+		muteBtn = document.getElementById("muteBtn"),
+		img_soundoff = "url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg')",
+		img_soundon = "url('https://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg')";
 
 function init(){
 	findElements();
@@ -54,6 +58,24 @@ function setFrequency(id, val){
 	else{
 		sound2.frequency = parseFloat(val);
 		span_freq_2.innerHTML = val;
+	}
+}
+
+function mute(){
+
+	if(play)
+	{
+		sound1.stop();
+		sound2.stop();
+		play = false;
+		muteBtn.style.backgroundImage = img_soundoff;
+	}
+	else
+	{
+		sound1.play();
+		sound2.play();
+		play = true;
+		muteBtn.style.backgroundImage = img_soundon;
 	}
 }
 
