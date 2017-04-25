@@ -242,6 +242,8 @@ function getTopicAndPageNumFromURL(){
 // checks for available augucations
 function update(){
 
+	console.log("pageNum: ", pageNum);
+
 	enableGUIElement(augBtn, false);
 
 	// check if there are any augucations for the current topic
