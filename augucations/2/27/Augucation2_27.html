@@ -2,12 +2,12 @@
 
 	<meta charset="UTF-8"/>
 
-	<title>Psychoakustik</title>
+	<title>Lautstärke</title>
 	<link rel="icon" href="../../../resources/img/Icon.png">
 
 	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
 	<link rel="stylesheet" href="../../../resources/css/stylesheet_radio.css">
-	<link rel="stylesheet" href="Augucation2_49.css">
+	<link rel="stylesheet" href="Augucation2_27.css">
 
 </head>
 
@@ -23,7 +23,9 @@
 
 		</br>
 
-		<div id="chart" class="chart"></div>
+		<div id="canvas_wrapper" class="canvas_wrapper" width="1200px" height="750px">
+				<canvas id="myCanvas" class="canvas" width="1000px" height="750px"></canvas>
+		</div>
 
 		<div class="slider_block">
 			<div class="slider_wrapper">
@@ -38,32 +40,16 @@
 			</div>
 		</div>
 
-		<div class="radio_wrapper">
-			<span class="slider_top_label">Frequenzspektrum/Wellenform</span>
-			<fieldset>
-				<input type="radio" id="sine" name="type" value="0" checked="checked">
-				<label class="radio_label_small" for="sine">Sinus</label>
-				<input type="radio" id="square" name="type" value="1">
-				<label class="radio_label_small" for="square">Quadrat</label>
-				<input type="radio" id="triangle" name="type" value="2">
-				<label class="radio_label_small" for="triangle">Dreieck</label>
-				<input type="radio" id="sawtooth" name="type" value="3">
-				<label class="radio_label_small" for="sawtooth">Sägezahn</label>
-			</fieldset>
-		</div>
-	</div>
-
-
 	<div>
-		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 49);" name="back" value="<<"/>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 27);" name="back" value="<<"/>
 	</div>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.axislabels.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
 
 
 	<script type="text/javascript" src="../../../resources/js/plugins/Pizzicato.js/Pizzicato.js"></script>
 
-	<script type="text/javascript" src="Augucation2_49.js"></script>
+	<script type="text/javascript" src="Augucation2_27.js"></script>
 
 </body>

@@ -30,12 +30,13 @@ var augucations = [
 	// topic 2
 	[
 		[11, "Video: Audio-Experiment mit Wasser"],
-		[30, "Lautstärke"],
-		[49, "Psychoakustik"],
+		[27, "Lautstärke"],
+		[47, "Psychoakustik"],
 		[60, "Video: Hörbares Spektrum"],
-		[61, "Video: Der Prozess des Hörens"],
-		[68, "Video: Virtual Barber Shop"],
+		[58, "Video: Der Prozess des Hörens"],
+		[64, "Video: Virtual Barber Shop"],
 		[93, "Maskierung"]
+		/*TODO: Maskierung page updaten*/
 	],
 
 	[
