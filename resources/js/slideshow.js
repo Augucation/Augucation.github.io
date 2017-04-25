@@ -98,6 +98,8 @@ function renderPage(num){
 	pageNumText.value = pageNum;
 
 	enableGUIElement(loadingText, false);
+	
+	console.log("renderPage(", num, ") completed");
 }
 
 /*
@@ -107,10 +109,13 @@ function renderPage(num){
 function queueRenderPage(num){
 	if(pageRendering){
 		pageNumPending = num;
+		console.log("pageRendering");
 	}
 	else{
 		renderPage(num);
 	}
+	
+	console.log("queueRenderPage completed");
 }
 
 /*
@@ -254,6 +259,8 @@ function update(){
 		if(augucations[topic-1][i].includes(pageNum))
 			enableGUIElement(augBtn, true);
 	}
+	
+	console.log("updated successfully.");
 }
 
 function fileExists(url) {
