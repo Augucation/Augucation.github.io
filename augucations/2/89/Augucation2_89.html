@@ -15,36 +15,41 @@
 	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
 
 	<div class="my_text">
-	
+
 		<div class="center_wrapper">
 			<input type="submit" class="mute button" id="muteBtn" value="" onclick="mute()"/>
 		</div>
 
 		</br>
-		
+
+		<div id="canvas_wrapper" class="canvas_wrapper">
+				<canvas id="myCanvas" class="canvas" width="1000px"></canvas>
+		</div>
+
 		<div class="slider_block">
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Sound 1<br/>Schalldruck</span>
-				<input type="range" class="slider" id="slider_vol" min="0" max="1" step="0.0001" value="0.5"oninput="setVolume(1, this.value)"/>
-				<span class="slider_val" id="span_vol_1">0.5</span>
+				<!--span class="slider_top_label">Sound 1<br/>Schalldruck</span-->
+				<span class="slider_top_label">Schalldruck</span>
+				<input type="range" class="slider" id="slider_vol1" min="0" max="1" step="0.001" value="0.5"oninput="setVolume(1, this.value)"/>
+				<span class="slider_bottom_value" id="span_vol_1">50%</span>
 			</div>
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Sound 1<br/>Frequenz</span>
-				<input type="range" class="slider" id="slider_freq" min="0" max="20000" step="1" value="500"oninput="setFrequency(1, this.value)"/>
-				<span class="slider_val" id="span_freq_1">400</span>
+				<span class="slider_top_label">Frequenz</span>
+				<input type="range" class="slider" id="slider_freq1" min="0" max="100" step="1" value="50"oninput="setFrequency(1, this.value)"/>
+				<span class="slider_bottom_value" id="span_freq_1">630 Hz</span>
 			</div>
 		</div>
 
 		<div class="slider_block">
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Sound 2<br/>Schalldruck</span>
-				<input type="range" class="slider" id="slider_vol" min="0" max="1" step="0.0001" value="0.5"oninput="setVolume(2, this.value)"/>
-				<span class="slider_val" id="span_vol_2">0.5</span>
+				<span class="slider_top_label">Schalldruck</span>
+				<input type="range" class="slider" id="slider_vol2" min="0" max="1" step="0.001" value="0.5"oninput="setVolume(2, this.value)"/>
+				<span class="slider_bottom_value" id="span_vol_2">50%</span>
 			</div>
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Sound 2<br/>Frequenz</span>
-				<input type="range" class="slider" id="slider_freq" min="0" max="20000" step="1" value="500"oninput="setFrequency(2, this.value)"/>
-				<span class="slider_val" id="span_freq_2">400</span>
+				<span class="slider_top_label">Frequenz</span>
+				<input type="range" class="slider" id="slider_freq2" min="0" max="100" step="1" value="50"oninput="setFrequency(2, this.value)"/>
+				<span class="slider_bottom_value" id="span_freq_2">630 Hz</span>
 			</div>
 		</div>
 	</div>

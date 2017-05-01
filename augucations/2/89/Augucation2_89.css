@@ -1,3 +1,18 @@
+.canvas
+{
+  width: 43.417vw;
+  height: 20vw;
+  margin-top: -2%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3%;
+  position: relative;
+  display: block;
+  background: url('../../../resources/img/im-02_89_maskbg.png');
+  background-repeat: no-repeat;
+  background-size: 100%
+}
+
 .slider_block
 {
   margin-top: 0%;
@@ -8,17 +23,12 @@
   margin-top: 0%;
   margin-left: auto;
   margin-right: auto;
-  width:    24.27vw;
-  height:   15vw;
+  width:    54.27vw;
+  height:   6vw;
   
 }
 
-.slider
-{
-  margin-bottom: 10% !important;
-}
-
-
+/*
 .slider_top_label
 {
   margin-bottom: 2% !important;
@@ -28,6 +38,7 @@
   position: relative;
   text-align: center;
 }
+*/
 
 @-moz-document url-prefix()
 {
