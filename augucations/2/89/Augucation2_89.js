@@ -123,19 +123,19 @@ function draw(){
 
 	ctx.clearRect(0, 0, c.width, c.height);
 
-	// sound 1
-	ctx.beginPath();
-	ctx.moveTo(calcFreqDrawX(1), calcVolDrawY(1));
-	ctx.lineTo(calcFreqDrawX(1), c_y_max);
-	ctx.strokeStyle = "#0000FF";
-	ctx.lineWidth = 5;
-	ctx.stroke();
-
 	// sound 2
 	ctx.beginPath();
 	ctx.moveTo(calcFreqDrawX(2), calcVolDrawY(2));
 	ctx.lineTo(calcFreqDrawX(2), c_y_max);
 	ctx.strokeStyle = "#FF0000";
+	ctx.lineWidth = 5;
+	ctx.stroke();
+
+	// sound 1
+	ctx.beginPath();
+	ctx.moveTo(calcFreqDrawX(1), calcVolDrawY(1));
+	ctx.lineTo(calcFreqDrawX(1), c_y_max);
+	ctx.strokeStyle = "#0000FF";
 	ctx.lineWidth = 5;
 	ctx.stroke();
 
