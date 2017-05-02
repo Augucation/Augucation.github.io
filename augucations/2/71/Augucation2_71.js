@@ -26,7 +26,7 @@ var quantHeight = bottom - toppel;
 
 // discretisisation and quantization
 var disc = 10; // 5-15
-var quant = 8; // 2, 4, 8	// Note: this variable contains the number of quant steps, not of bits
+var quant = 16; // 2, 4, 8	// Note: this variable contains the number of quant steps, not of bits
 
 var disc_min = 5;
 var disc_max = 15;
@@ -38,8 +38,12 @@ var mode = "pcm"; //"dpcm"
 // stores all possible digital codes of the signal, depending von disc and quant
 var digitalSignals;
 
-var greenDotsY = [425, 330, 275, 275, 330, 485, 582, 635, 635, 582];
-var dpcm_data = ["100", "10", "01", "00", "01", "11", "10", "01", "00", "01"];
+//var greenDotsY = [425, 330, 275, 275, 330, 485, 582, 635, 635, 582]; // 3bits
+//var dpcm_data = ["100", "10", "01", "00", "01", "11", "10", "01", "00", "01"]; // 3bits
+
+var greenDotsY = [440, 314, 265, 265, 340, 492, 595, 645, 620, 567];
+var pcm_data = ["1000", "1101", "1111", "1111", "1100", "0110", "0010", "0000", "0001", "0011"];
+var dpcm_data = ["1000", "0101", "0001", "0000", "1011", "1110", "1010", "1010", "0001", "0010"];
 
 var digitalSpan = document.getElementById("digital_signal");
 
@@ -162,6 +166,7 @@ function calcBitcode(i){
 	codes[0] = ["1", "0"];
 	codes[1] = ["11", "10", "01", "00"]
 	codes[2] = ["111", "110", "101", "100", "011", "010", "001", "000"];
+	codes[3] = ["1111", "1110", "1101", "1100", "1011", "1010", "1001", "1000", "0111", "0110", "0101", "0100", "0011", "0010", "0001", "0000"];
 
 	return codes[Math.log2(quant) - 1][i];
 }
@@ -179,7 +184,7 @@ function addLeadingZeros(b){
 
 function showDigitalSignal(){
 
-	var data = mode == "pcm" ? digitalSignals[5][2] : dpcm_data;
+	var data = mode == "pcm" ? pcm_data : dpcm_data;
 
 	// delete old digits
 	digitalSpan.innerHTML = '';
@@ -200,20 +205,20 @@ function drawDeltaMax(){
 			return;
 		}
 
-		point(451, 330, 3.5, green);
-		point(462, 330, 3.5, green);
-		point(473, 330, 2.5, green);
+		point(451, 340, 3.5, green);
+		point(462, 340, 3.5, green);
+		point(473, 340, 2.5, green);
 
 		ctx.beginPath();
-		ctx.moveTo(473, 330);
-		ctx.lineTo(473, 485);
+		ctx.moveTo(473, 340);
+		ctx.lineTo(473, 492);
 		ctx.strokeStyle = green;
 		ctx.lineWidth = 5;
 		ctx.stroke();
 
-		point(473, 485, 2.5, green);
-		point(484, 485, 3.5, green);
-		point(495, 485, 3.5, green);
+		point(473, 492, 2.5, green);
+		point(484, 492, 3.5, green);
+		point(495, 492, 3.5, green);
 
 		ctx.font = "30px Arial";
 		ctx.fillStyle = green;
