@@ -35,7 +35,7 @@ var augucations = [
 		[47, "Psychoakustik"],
 		[58, "Video: Der Prozess des Hörens"],
 		[64, "Video: Virtual Barber Shop"],
-		[89, "Maskierung"]
+		//[89, "Maskierung"]
 	],
 
 	[
@@ -98,7 +98,7 @@ function renderPage(num){
 	pageNumText.value = pageNum;
 
 	enableGUIElement(loadingText, false);
-	
+
 	console.log("renderPage(", num, ") completed");
 }
 
@@ -114,7 +114,7 @@ function queueRenderPage(num){
 	else{
 		renderPage(num);
 	}
-	
+
 	console.log("queueRenderPage completed");
 }
 
@@ -259,7 +259,7 @@ function update(){
 		if(augucations[topic-1][i].includes(pageNum))
 			enableGUIElement(augBtn, true);
 	}
-	
+
 	console.log("updated successfully.");
 }
 

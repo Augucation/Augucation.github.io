@@ -65,12 +65,12 @@ function setVolume(id, val){
 function setFrequency(id, val){
 
 	if(id == 1){
-		sound1.frequency = logFreq(val);
-		span_freq_1.innerHTML = logFreq(val) + " Hz";
+		sound1.frequency = parseFloat(val);
+		span_freq_1.innerHTML = val + " Hz";
 	}
 	else{
-		sound2.frequency = logFreq(val);
-		span_freq_2.innerHTML = logFreq(val) + " Hz";
+		sound2.frequency = parseFloat(val);
+		span_freq_2.innerHTML = val + " Hz";
 	}
 
 	draw();
@@ -102,9 +102,9 @@ function mute(){
 
 function calcFreqDrawX(num){
 	if(num == 1)
-		return c_x_min + freq_slider1.value * 0.01 * (c_x_max - c_x_min);
+		return c_x_min + (freq_slider1.value - 200) * 0.001 * (c_x_max - c_x_min);
 	else if(num == 2)
-		return c_x_min + freq_slider2.value * 0.01 * (c_x_max - c_x_min);
+		return c_x_min + (freq_slider2.value - 200) * 0.001 * (c_x_max - c_x_min);
 }
 
 function calcVolDrawY(num){
