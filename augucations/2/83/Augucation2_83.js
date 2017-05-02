@@ -14,7 +14,6 @@ var play = false,
 	sounds[3] = new Audio('../../../resources/audio/original64.mp3');
 	sounds[4] = new Audio('../../../resources/audio/original96.mp3');
 	sounds[5] = new Audio('../../../resources/audio/original128.mp3');
-	loading.style.visibility = 'hidden';
 
 function init(){
 	manageRadioButtons();
