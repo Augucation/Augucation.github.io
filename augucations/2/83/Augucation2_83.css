@@ -1,0 +1,12 @@
+input[type=radio]
+{
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0% !important;
+}
+
+fieldset
+{
+	width: 100%;
+	align: left;
+}
