@@ -17,7 +17,10 @@ var pdfDoc = null,
 
 // array that stores page numbers and titles of augmented slides sorted by topic
 var augucations = [
-	// topic 1
+
+	// 1 - 6: lectures
+
+	// topic 1: signals
 	[
 		[30, "Analoge Signale"],
 		[45, "Diskretisierung und Quantisierung"],
@@ -27,7 +30,7 @@ var augucations = [
 		[142, "Lempel Ziv Welch"]
 	],
 
-	// topic 2
+	// topic 2: audio
 	[
 		[10, "Video: Audio-Experiment mit Wasser"],
 		[25, "Video: Hörbares Spektrum"],
@@ -38,22 +41,33 @@ var augucations = [
 		//[89, "Maskierung"]
 	],
 
+	// topic 3
 	[
 		[],
 	],
 
-
+	// topic 4
+	[
+		[],
+	],
+	
+	// topic 5
 	[
 		[],
 	],
 
+	// topic 6
 	[
 		[],
 	],
-
+	
+	
+	// 7++: excercises
+	
+	// topic 7: audio excercise
 	[
 		[],
-	],
+	]
 ];
 
 var augucationButtons = new Array();
@@ -98,8 +112,6 @@ function renderPage(num){
 	pageNumText.value = pageNum;
 
 	enableGUIElement(loadingText, false);
-
-	console.log("renderPage(", num, ") completed");
 }
 
 /*
@@ -114,8 +126,6 @@ function queueRenderPage(num){
 	else{
 		renderPage(num);
 	}
-
-	console.log("queueRenderPage completed");
 }
 
 /*
@@ -247,8 +257,6 @@ function getTopicAndPageNumFromURL(){
 // checks for available augucations
 function update(){
 
-	console.log("pageNum: ", pageNum);
-
 	enableGUIElement(augBtn, false);
 
 	// check if there are any augucations for the current topic
@@ -259,8 +267,6 @@ function update(){
 		if(augucations[topic-1][i].includes(pageNum))
 			enableGUIElement(augBtn, true);
 	}
-
-	console.log("updated successfully.");
 }
 
 function fileExists(url) {
