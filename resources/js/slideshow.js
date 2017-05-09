@@ -38,7 +38,8 @@ var augucations = [
 		[47, "Psychoakustik"],
 		[58, "Video: Der Prozess des Hörens"],
 		[64, "Video: Virtual Barber Shop"],
-		//[89, "Maskierung"]
+		//[89, "Maskierung"],
+		//[162, "Frequenz-Filter"]
 	],
 
 	// topic 3
@@ -50,7 +51,7 @@ var augucations = [
 	[
 		[],
 	],
-	
+
 	// topic 5
 	[
 		[],
@@ -60,13 +61,16 @@ var augucations = [
 	[
 		[],
 	],
-	
-	
+
+
 	// 7++: excercises
-	
+
 	// topic 7: audio excercise
 	[
-		[],
+		//[27, "Video: Autotune Remix"],
+		//[28, "Video: No Autotune"],
+		//[29, "Video: Loudness War"]
+		//[31, "Video: War"]
 	]
 ];
 
