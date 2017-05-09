@@ -39,7 +39,9 @@ var augucations = [
 		[58, "Video: Der Prozess des Hörens"],
 		[64, "Video: Virtual Barber Shop"],
 		//[89, "Maskierung"],
-		//[162, "Frequenz-Filter"]
+		//[162, "Frequenz-Filter"],
+		//[177, "Interferenzen"],
+		//[181, "Phasenverschiebung"]
 	],
 
 	// topic 3
