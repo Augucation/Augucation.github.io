@@ -13,40 +13,66 @@ var 	span_vol_1,
 		freq_slider1 = document.getElementById("slider_freq1"),
 		freq_slider2 = document.getElementById("slider_freq2"),
 		vol_slider1 = document.getElementById("slider_vol1"),
-		vol_slider2 = document.getElementById("slider_vol2");
+		vol_slider2 = document.getElementById("slider_vol2"),
+		ac,
+		osc1,
+		osc2;
 
 function init(){
 	findElements();
 	createSound();
 }
 
-function sine(x){
-	return Math.sin(0.1 * x);
+function soundysound(){
+	var n = 4096;
+	var real = new Float32Array(n);
+	var imag = new Float32Array(n);
+	ac = new AudioContext();
+	osc1 = ac.createOscillator();
+	osc2 = ac.createOscillator();
+
+	/* Pick a wave pattern */
+
+	/* Sine */
+	//imag[1] = 1;
+	real[0] = 0;
+	imag[0] = 0;
+	real[1] = 1;
+	imag[1] = 0;
+
+	/*
+	var wave = ac.createPeriodicWave(real, imag);
+
+	osc1.setPeriodicWave(wave);
+	osc1.connect(ac.destination);
+	osc1.start();
+	osc1.stop(2);
+	*/
+	var realCoeffs = new Float32Array([0,0]); // No DC offset or cosine fundamental freq
+	var imagCoeffs = new Float32Array([0,1]); // sine of amplitude 1 at fundamental freq (First imaginary coeff is ignored)
+	var wave = ac.createPeriodicWave(realCoeffs, imagCoeffs); // will be a simple sine wave
+
+	osc1.setPeriodicWave(wave);
+	osc1.frequency.value = 440;
+	osc1.connect(ac.destination);
+	osc1.start(0);
+
+
+	osc2.setPeriodicWave(wave);
+	osc2.frequency.value = 440;
+	osc2.connect(ac.destination);
+	osc2.start(0);
 }
 
 function createSound(){
 	sound1 = new Pizzicato.Sound({
 			source: 'wave',
-			options: { type: 'sine', frequency: 350, volume: 0.5 }
+			options: { type: 'sine', frequency: 400, volume: 0.5 }
 	});
-
-/*
-	sound1 = new Pizzicato.Sound({
-    source: 'script',
-    options: {
-        audioFunction: function(e) {
-            var output = e.outputBuffer.getChannelData(0);
-            for (var i = 0; i < e.outputBuffer.length; i++)
-								output[i] = sine(i);
-                //output[i] = Math.random();
-        }
-    }
-});
-*/
 
 	sound2 = new Pizzicato.Sound({
 			source: 'wave',
-			options: { type: 'sine', frequency: 350, volume: 0.5 }
+			options: { type: 'sine', frequency: 400, volume: 0.5 }
 	});
 }
 
@@ -106,4 +132,5 @@ function mute(){
 	}
 }
 
-init();
+//init();
+soundysound();
