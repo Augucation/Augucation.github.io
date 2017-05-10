@@ -55,13 +55,15 @@ function finishedLoading(){
 
 function createFilters(){
 	highPassFilter = new Pizzicato.Effects.HighPassFilter({
-		frequency: 2000,
-		peak: 10
+		frequency: 20,
+		peak: 1000,
+		mix: 1
 	});
 
 	lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-		frequency: 400,
-		peak: 10
+		frequency: 20000,
+		peak: 1000,
+		mix: 1
 	});
 }
 
