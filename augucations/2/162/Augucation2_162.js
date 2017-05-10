@@ -21,29 +21,11 @@ var delay,
 
 function init(){
 	findElements();
-	//createAudioContext();
 	createSound();
 	createFilters();
-	//createFilter();
-	//loop(sound);
-}
-
-function createAudioContext(){
-	window.addEventListener('load', init, false);
-	function init() {
-	  try {
-	    // Fix up for prefixing
-	    window.AudioContext = window.AudioContext||window.webkitAudioContext;
-	    context = new AudioContext();
-	  }
-	  catch(e) {
-	    alert('Web Audio API is not supported in this browser');
-	  }
-	}
 }
 
 function createSound(){
-	//sound = new Audio('../../../resources/audio/original.wav');
 	sound = new Pizzicato.Sound('../../../resources/audio/original.wav', function() {finishedLoading();});
 	sound.loop = true;
 }
@@ -56,31 +38,15 @@ function finishedLoading(){
 function createFilters(){
 	highPassFilter = new Pizzicato.Effects.HighPassFilter({
 		frequency: 20,
-		peak: 1000,
-		mix: 1
+		peak: 0.0001,
+		mix: 0
 	});
 
 	lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-		frequency: 20000,
-		peak: 1000,
+		frequency: 22050,
+		peak: 0.0001,
 		mix: 1
 	});
-}
-
-function createFilter(){
-	context = new AudioContext(); //webkitAudioContext
-	source = context.createMediaElementSource(document.getElementsByTagName('audio')[0]);
-	source.autoplay = false;
-
-	filter = context.createBiquadFilter();
-	filter.type = filter.LOWPASS;
-	filter.frequency.value = 100;
-
-	// Connect source to filter, filter to destination.
-	source.connect(filter);
-	filter.connect(context.destination);
-	// Play!
-	source.loop = true;
 }
 
 function findElements(){
@@ -99,36 +65,54 @@ function mute(){
 	if(play)
 	{
 		sound.pause();
-    play = false;
+		play = false;
 		muteBtn.style.backgroundImage = img_soundoff;
+		
+		if(low_attached)
+			sound.removeEffect(lowPassFilter);
+		
+		if(high_attached)
+			sound.removeEffect(high_attached);
 	}
 	else
 	{
 		sound.play();
 		play = true;
 		muteBtn.style.backgroundImage = img_soundon;
+		
+		if(low_attached)
+			sound.addEffect(lowPassFilter);
+		
+		if(high_attached)
+			sound.addEffect(high_attached);
 	}
 }
 
 function check(id){
 
 	if(id == "low"){
-		if(check_low.checked)
+		if(check_low.checked){
 			sound.addEffect(lowPassFilter);
-		else
+			low_attached = true;
+		}
+		else{
 			sound.removeEffect(lowPassFilter);
+			low_attached = false;
+		}
 	}
 	else if(id == "high"){
-		if(check_high.checked)
+		if(check_high.checked){
 			sound.addEffect(highPassFilter);
-		else
+			high_attached = true;
+		}
+		else{
 			sound.removeEffect(highPassFilter);
+			high_attached = false;
+		}
 	}
 
 	sound.pause();
-	setTimeout(function(){if(play) sound.play();}, 1000);
-
-
+	setTimeout(function(){if(play) sound.play(); play = true;}, 1000);
 }
 
 function setFrequency(id, val){
