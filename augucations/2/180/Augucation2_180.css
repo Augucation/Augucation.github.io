@@ -1,21 +1,11 @@
-.canvas
+.chart
 {
-  width: 43.417vw;
-  height: 20vw;
-  margin-top: -2%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 3%;
-  position: relative;
-  display: block;
-  background: url('../../../resources/img/im-02_89_maskbg.png');
-  background-repeat: no-repeat;
-  background-size: 100%
+  height: 25vh;
 }
 
 .slider_block
 {
-  margin-top: 1%;
+  margin-top: -1%;
 }
 
 .slider_wrapper
