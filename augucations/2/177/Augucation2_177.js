@@ -75,7 +75,7 @@ function mute(){
 function setFrequency(val){
 
 	if(val == 1 / (sound.frequency * 2) * 1000)
-		spanny.innerHTML = "Dekonstruktive Interferenz";
+		spanny.innerHTML = "Destruktive Interferenz";
 	else if(val == 0)
 		spanny.innerHTML = "Konstruktive Interferenz";
 	
