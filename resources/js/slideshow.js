@@ -40,7 +40,8 @@ var augucations = [
 		[64, "Video: Virtual Barber Shop"],
 		//[89, "Maskierung"],
 		//[162, "Frequenz-Filter"],
-		//[177, "Interferenzen"],
+		//[177, "Interferenzen: Konstruktiv und Dekonstruktiv"],
+		//[180, "Interferenzen: Schwebung"]
 		//[181, "Phasenverschiebung"]
 	],
 
