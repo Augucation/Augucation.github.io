@@ -13,9 +13,11 @@ var 	span_vol_1,
 		freq_slider2 = document.getElementById("slider_freq2"),
 		vol_slider1 = document.getElementById("slider_vol1"),
 		vol_slider2 = document.getElementById("slider_vol2"),
+		spanny,
 		delay,
 		data1,
 		data2,
+		data3,
 		plot_x_scale = 0.001,
 		plot_x_min = 0,
 		plot_x_max = 3.002,
@@ -50,6 +52,8 @@ function findElements(){
 
 	span_vol_2 = document.getElementById("span_vol_2");
 	span_freq_2 = document.getElementById("span_freq_2");
+	
+	spanny = document.getElementById("spanny");
 }
 
 function mute(){
@@ -70,6 +74,14 @@ function mute(){
 
 function setFrequency(val){
 
+	if(val == 1 / (sound.frequency * 2) * 1000)
+		spanny.innerHTML = "Dekonstruktive Interferenz";
+	else if(val == 0)
+		spanny.innerHTML = "Konstruktive Interferenz";
+	
+	spanny.style.visibility = (val == 1 / (sound.frequency * 2) * 1000 || val == 0) ? "visible" : "hidden";
+	
+
 	delay.time = parseFloat(val / 1000);
 	span_freq_2.innerHTML = val + " ms";
 	
@@ -89,13 +101,15 @@ $(function(){
 
 	function sin(x, delayed){
 		if(delayed){
-			console.log(delayed);
-			return 0.5 * Math.sin(sound.frequency * (2 * Math.PI) * x);
-		}
-		else{
-			console.log(delay.time);
 			return 0.5 * Math.sin(sound.frequency * (2 * Math.PI) * x - delay.time * 2500);
 		}
+		else{
+			return 0.5 * Math.sin(sound.frequency * (2 * Math.PI) * x);
+		}
+	}
+	
+	function result(x){
+		return sin(x, false) + sin(x, true);
 	}
 
 	function plotit(){
@@ -103,7 +117,9 @@ $(function(){
 		data1 = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return sin(x, false); });
 		data2 = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return sin(x, true); });
 		
-		var options =
+		data3 = sampleFunction( plot_x_min, plot_x_max * plot_x_scale, function(x){ return result(x); });
+		
+		var options_sines =
 		{
 			axisLabels:
 			{
@@ -128,7 +144,33 @@ $(function(){
 			colors: ["#FF0000", "#0000FF"]
 		};
 
-		$.plot($("#chart_sines"), [{data: data1}, {data: data2}], options);
+		var options_result =
+		{
+			axisLabels:
+			{
+				show: true
+			},
+			xaxis:
+			{
+				tickFormatter: function(val, axis) {return (val / plot_x_scale).toString() + 'ms';},
+				tickSize: 0.0005,
+				axisLabel: 'ms'
+			},
+			yaxis:
+			{
+				min: -1,
+				max: 1,
+				ticks: []
+			},
+			grid:
+			{
+				borderWidth: 0
+			},
+			colors: ["#FF00FF"]
+		};
+		
+		$.plot($("#chart_sines"), [{data: data1}, {data: data2}], options_sines);
+		$.plot($("#chart_result"), [{data: data3}], options_result);
 	}
 
 	plotit();
