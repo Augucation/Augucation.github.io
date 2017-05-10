@@ -70,10 +70,10 @@ var augucations = [
 
 	// topic 7: audio excercise
 	[
-		//[27, "Video: Autotune Remix"],
-		//[28, "Video: No Autotune"],
-		//[29, "Video: Loudness War"]
-		//[31, "Video: War"]
+		[27, "Video: Autotune Remix"],
+		[28, "Video: No Autotune"],
+		[29, "Video: Loudness War"],
+		[31, "Video: Hall"],
 	]
 ];
 
