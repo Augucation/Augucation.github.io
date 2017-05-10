@@ -25,28 +25,33 @@
 
 		</br>
 
+		<div class="radio_wrapper radios">
+			<fieldset>
+				<input type="radio" id="chorus" name="type" value="0" onclick="setEffect(this.id);">
+				<label class="radio_label_small blue" for="chorus">Chorus</label>
+				<input type="radio" id="flanging" name="type" value="1" onclick="setEffect(this.id);">
+				<label class="radio_label_small red" for="flanging">Flanging</label>
+			</fieldset>
+		</div>
+
+		</br>
+				
 		<div class="slider_block">
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Phasenverschiebung Chorus</span>
-				<input type="range" class="slider" id="slider_chorus" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
-				<span class="slider_bottom_value" id="span_chorus">0.01s</span>
+				<span class="slider_top_label">Phasenverschiebung</span>
+				<input type="range" class="slider color_blue" id="slider_chorus" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
+				<span class="slider_bottom_value" id="span_chorus">10 ms</span>
 			</div>
 
+			</br>
+			
 			<div class="slider_wrapper">
-				<span class="slider_top_label">Phasenverschiebung Flanging</span>
-				<input type="range" class="slider" id="slider_flanging" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
-				<span class="slider_bottom_value" id="span_flanging">0.01s</span>
+				<span class="slider_top_label">Phasenverschiebung</span>
+				<input type="range" class="slider color_red" id="slider_flanging" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
+				<span class="slider_bottom_value" id="span_flanging">10 ms</span>
 			</div>
 		</div>
 
-	<div class="radio_wrapper radios">
-		<fieldset>
-			<input type="radio" id="chorus" name="type" value="0" onclick="setEffect(this.id);">
-			<label class="radio_label_small" for="chorus">Chorus</label>
-			<input type="radio" id="flanging" name="type" value="1" onclick="setEffect(this.id);">
-			<label class="radio_label_small" for="flanging">Flanging</label>
-		</fieldset>
-	</div>
 </div>
 
 	<div>

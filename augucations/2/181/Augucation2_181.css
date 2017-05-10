@@ -1,16 +1,13 @@
-.canvas
+.blue
 {
-  width: 43.417vw;
-  height: 20vw;
-  margin-top: -2%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 3%;
-  position: relative;
-  display: block;
-  background: url('../../../resources/img/im-02_89_maskbg.png');
-  background-repeat: no-repeat;
-  background-size: 100%
+  color: var(--blue);
+  font-size: 26;
+}
+
+.red
+{
+  color: var(--hci_red);
+  font-size: 26;
 }
 
 .slider_block

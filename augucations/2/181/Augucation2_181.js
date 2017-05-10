@@ -27,21 +27,21 @@ function createSounds(){
 	sound1 = new Pizzicato.Sound('../../../resources/audio/Chantar_short.ogg', function() {finishedLoading();});
 	sound1.loop = true;
 
-  flanger = new Pizzicato.Effects.Flanger({
-    time: 0.45,
-    speed: 0.5,
-    depth: 0.1,
-    feedback: 1,
-    mix: 0.5
-  });
+	flanger = new Pizzicato.Effects.Flanger({
+		time: 0.45,
+		speed: 0.5,
+		depth: 0.1,
+		feedback: 0.5,
+	mix: 0.5
+	});
 
     //sound1.addEffect(flanger);
 
-		delay = new Pizzicato.Effects.Delay({
-		  feedback: 0.6,
+	delay = new Pizzicato.Effects.Delay({
+		  feedback: 0.5,
 		  time: 0.4,
-		  mix: 0.3
-		});
+		  mix: 0.5
+	});
 }
 
 function findElements(){
@@ -59,11 +59,12 @@ function setDelay(id, val){
 
 	if(id == "slider_chorus"){
 		delay.time = parseFloat(val);
-		span_chorus.innerHTML =  val + "s";
+		span_chorus.innerHTML =  val * 1000 + " ms";
 	}
 	else if(id == "slider_flanging"){
 		flanger.time = parseFloat(val);
-		span_flanging.innerHTML =  val + "s";
+		flanger.mix = parseFloat(val * 5);
+		span_flanging.innerHTML =  val * 1000+ " ms";
 	}
 }
 
