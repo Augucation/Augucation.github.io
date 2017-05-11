@@ -38,11 +38,11 @@ var augucations = [
 		[47, "Psychoakustik"],
 		[58, "Video: Der Prozess des Hörens"],
 		[64, "Video: Virtual Barber Shop"],
-		//[89, "Maskierung"],
-		//[162, "Frequenz-Filter"],
-		//[177, "Interferenzen: Konstruktiv und Dekonstruktiv"],
-		//[180, "Interferenzen: Schwebung"]
-		//[181, "Phasenverschiebung"]
+		[89, "Maskierung"],
+		[162, "Frequenz-Filter"],
+		[177, "Interferenzen: Konstruktiv und Dekonstruktiv"],
+		[180, "Interferenzen: Schwebung"]
+		[181, "Phasenverschiebung"]
 	],
 
 	// topic 3
