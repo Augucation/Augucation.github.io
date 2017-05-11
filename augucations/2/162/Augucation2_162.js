@@ -17,7 +17,17 @@ var delay,
 		high_attached,
 		low_attached,
 		highPassFilter,
-		lowPassFilter;
+		highPassFilter1,
+		highPassFilter2,
+		highPassFilter3,
+		highPassFilter4,
+		highPassFilter5,
+		lowPassFilter,
+		lowPassFilter1,
+		lowPassFilter2,
+		lowPassFilter3,
+		lowPassFilter4,
+		lowPassFilter5;
 
 function init(){
 	findElements();
@@ -41,12 +51,25 @@ function createFilters(){
 		peak: 0.0001,
 		mix: 0
 	});
+	
+	highPassFilter1 = highPassFilter;
+	highPassFilter2 = highPassFilter;
+	highPassFilter3 = highPassFilter;
+	highPassFilter4 = highPassFilter;
+	highPassFilter5 = highPassFilter;
 
+	
 	lowPassFilter = new Pizzicato.Effects.LowPassFilter({
 		frequency: 22050,
 		peak: 0.0001,
 		mix: 1
 	});
+	
+	lowPassFilter1 = lowPassFilter;
+	lowPassFilter2 = lowPassFilter;
+	lowPassFilter3 = lowPassFilter;
+	lowPassFilter4 = lowPassFilter;
+	lowPassFilter5 = lowPassFilter;
 }
 
 function findElements(){
@@ -93,20 +116,40 @@ function check(id){
 	if(id == "low"){
 		if(check_low.checked){
 			sound.addEffect(lowPassFilter);
+			sound.addEffect(lowPassFilter1);
+			sound.addEffect(lowPassFilter2);
+			sound.addEffect(lowPassFilter3);
+			sound.addEffect(lowPassFilter4);
+			sound.addEffect(lowPassFilter5);
 			low_attached = true;
 		}
 		else{
 			sound.removeEffect(lowPassFilter);
+			sound.removeEffect(lowPassFilter1);
+			sound.removeEffect(lowPassFilter2);
+			sound.removeEffect(lowPassFilter3);
+			sound.removeEffect(lowPassFilter4);
+			sound.removeEffect(lowPassFilter5);
 			low_attached = false;
 		}
 	}
 	else if(id == "high"){
 		if(check_high.checked){
 			sound.addEffect(highPassFilter);
+			sound.addEffect(highPassFilter1);
+			sound.addEffect(highPassFilter2);
+			sound.addEffect(highPassFilter3);
+			sound.addEffect(highPassFilter4);
+			sound.addEffect(highPassFilter5);
 			high_attached = true;
 		}
 		else{
 			sound.removeEffect(highPassFilter);
+			sound.removeEffect(highPassFilter1);
+			sound.removeEffect(highPassFilter2);
+			sound.removeEffect(highPassFilter3);
+			sound.removeEffect(highPassFilter4);
+			sound.removeEffect(highPassFilter5);
 			high_attached = false;
 		}
 	}
@@ -118,10 +161,20 @@ function check(id){
 function setFrequency(id, val){
 		if(id == "slider_high"){
 			highPassFilter.frequency = parseInt(val);
+			highPassFilter1.frequency = parseInt(val);
+			highPassFilter2.frequency = parseInt(val);
+			highPassFilter3.frequency = parseInt(val);
+			highPassFilter4.frequency = parseInt(val);
+			highPassFilter5.frequency = parseInt(val);
 			span_high.innerHTML = val + "HZ";
 		}
 		else if(id == "slider_low"){
 			lowPassFilter.frequency = parseInt(val);
+			lowPassFilter1.frequency = parseInt(val);
+			lowPassFilter2.frequency = parseInt(val);
+			lowPassFilter3.frequency = parseInt(val);
+			lowPassFilter4.frequency = parseInt(val);
+			lowPassFilter5.frequency = parseInt(val);
 			span_low.innerHTML = val + "HZ";
 		}
 }
