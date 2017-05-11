@@ -45,8 +45,8 @@ function createSounds(){
 }
 
 function findElements(){
-	span_chorus = document.getElementById("span_chorus");
-	span_flanging = document.getElementById("span_flanging");
+	//span_chorus = document.getElementById("span_chorus");
+	//span_flanging = document.getElementById("span_flanging");
 	loading_span = document.getElementById("loading");
 }
 
@@ -59,12 +59,12 @@ function setDelay(id, val){
 
 	if(id == "slider_chorus"){
 		delay.time = parseFloat(val);
-		span_chorus.innerHTML =  val * 1000 + " ms";
+		//span_chorus.innerHTML =  val * 1000 + " ms";
 	}
 	else if(id == "slider_flanging"){
 		flanger.time = parseFloat(val);
 		flanger.mix = parseFloat(val * 5);
-		span_flanging.innerHTML =  val * 1000+ " ms";
+		//span_flanging.innerHTML =  val * 1000+ " ms";
 	}
 }
 
