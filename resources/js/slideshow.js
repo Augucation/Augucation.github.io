@@ -74,6 +74,11 @@ var augucations = [
 		[22, "Video: No Autotune"],
 		[23, "Video: Loudness War"],
 		[25, "Video: Hall"],
+	],
+
+	// topic 8
+	[
+		[11, "Absorption"],
 	]
 ];
 
