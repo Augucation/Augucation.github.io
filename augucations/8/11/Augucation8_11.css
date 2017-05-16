@@ -1,6 +1,5 @@
 #container
 {
-  border: 1px solid black;
   width: 70vw;
   height: 70vh;
 
@@ -39,21 +38,21 @@
   width: 14vw; /*20%, if container width is 70vw */
 }
 
-#filter1
+#filter0
 {
   position: absolute;
   left: 10%;
   top: 40%;
 }
 
-#filter2
+#filter1
 {
   position: absolute;
   left: 31%;
   top: 40%;
 }
 
-#filter3
+#filter2
 {
   position: absolute;
   right: 14%;
