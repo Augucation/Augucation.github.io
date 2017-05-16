@@ -1,0 +1,189 @@
+#container
+{
+  border: 1px solid black;
+  width: 70vw;
+  height: 70vh;
+
+  position:absolute; /*it can be fixed too*/
+  left:0; right:0;
+  top:0; bottom:0;
+  margin:auto;
+
+  /*this to solve "the content will not be cut when the window is smaller than the content": */
+  max-width:100%;
+  max-height:100%;
+  overflow:auto;
+}
+
+.filter, #paper
+{
+  height: 6%;  
+  text-align: center;
+  font-size: 3vh;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#paper
+{
+  width: 80%;
+  position:absolute; /*it can be fixed too*/
+  left: 0; 
+  right: 0;
+  bottom: 6vh;
+  margin: auto;  
+}
+
+.filter
+{
+  width: 14vw; /*20%, if container width is 70vw */
+}
+
+#filter1
+{
+  position: absolute;
+  left: 10%;
+  top: 40%;
+}
+
+#filter2
+{
+  position: absolute;
+  left: 31%;
+  top: 40%;
+}
+
+#filter3
+{
+  position: absolute;
+  right: 14%;
+  top: 40%;
+}
+
+.red
+{
+  background-color: red;
+  color: var(--hci_gray);
+}
+
+.green
+{
+  background-color: #00FF00;
+  color: var(--hci_gray);
+}
+
+.blue
+{
+  background-color: blue;
+  color: white;
+}
+
+.cyan
+{
+  background-color: cyan;
+  color: var(--hci_gray);
+}
+
+.magenta
+{
+  background-color: magenta;
+  color: var(--hci_gray);
+}
+
+.yellow
+{
+  background-color: yellow;
+  color: var(--hci_gray);
+}
+
+.white
+{
+  background-color: white;
+  color: var(--hci_gray);
+  border: 1px solid var(--hci_gray);
+}
+
+.black
+{
+  background-color: black;
+  color: white;
+}
+
+#colorpicker
+{
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  
+  position: relative;
+  top: 0%;
+  left: 0%;
+  
+  visibility: hidden;
+}
+
+#colorpickerelementcontainer
+{
+  width 14vw;
+  height: 5vh;
+  display: inline-flex;
+  
+}
+
+.colorpickerlem
+{
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  float: left;
+  margin: 0.3vw 0.3vw;
+  cursor: pointer;
+}
+
+.arrow
+{
+  height: 26vh;
+  width: auto;
+  position: absolute;
+  z-index: -4;
+}
+
+.flip
+{
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipV;
+  -ms-filter: "FlipV";
+}
+
+#arrow1_r, #arrow1_g, #arrow1_b {  top: 1%; }
+#arrow1_r { left: 13%; }
+#arrow1_g { left: 16%; }
+#arrow1_b { left: 19%; }
+
+#arrow2_r, #arrow2_g, #arrow2_b {  top: 1%; }
+#arrow2_r { left: 33%; }
+#arrow2_g { left: 36%; }
+#arrow2_b { left: 39%; }
+
+#arrow3_r, #arrow3_g, #arrow3_b {  top: 47%; }
+#arrow3_r { left: 18.6%; }
+#arrow3_g { left: 21.6%; }
+#arrow3_b { left: 24.6%; }
+
+#arrow4_r, #arrow4_g, #arrow4_b {  top: 47%; }
+#arrow4_r { left: 38.6%; }
+#arrow4_g { left: 41.6%; }
+#arrow4_b { left: 44.6%; }
+
+#arrow5_r, #arrow5_g, #arrow5_b {  top: 47%; }
+#arrow5_r { left: 69%; }
+#arrow5_g { left: 72%; }
+#arrow5_b { left: 75%; }
+
+#arrow6_r, #arrow6_g, #arrow6_b {  top: 1%; }
+#arrow6_r { left: 74.6%; }
+#arrow6_g { left: 77.6%; }
+#arrow6_b { left: 80.6%; }
