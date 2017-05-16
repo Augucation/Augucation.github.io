@@ -36,27 +36,37 @@
 .filter
 {
   width: 14vw; /*20%, if container width is 70vw */
+  position: absolute;
 }
 
 #filter0
 {
-  position: absolute;
   left: 10%;
-  top: 40%;
+  top: 23%;
 }
 
 #filter1
 {
-  position: absolute;
   left: 31%;
-  top: 40%;
+  top: 23%;
 }
 
 #filter2
 {
-  position: absolute;
-  right: 14%;
-  top: 40%;
+  left: 13%;
+  top: 55%;
+}
+
+#filter3
+{
+  left: 34%;
+  top: 55%;
+}
+
+#filter4
+{
+  right: 17%;
+  top: 65%;
 }
 
 .red
@@ -141,7 +151,7 @@
 
 .arrow
 {
-  height: 26vh;
+  height: 14vh;
   width: auto;
   position: absolute;
   z-index: -4;
@@ -157,32 +167,47 @@
   -ms-filter: "FlipV";
 }
 
-#arrow1_r, #arrow1_g, #arrow1_b {  top: 1%; }
+.small
+{
+  height: 8vh;
+}
+
+#arrow1_r, #arrow1_g, #arrow1_b {  top: 0%; }
 #arrow1_r { left: 13%; }
 #arrow1_g { left: 16%; }
 #arrow1_b { left: 19%; }
 
-#arrow2_r, #arrow2_g, #arrow2_b {  top: 1%; }
+#arrow2_r, #arrow2_g, #arrow2_b {  top: 0%; }
 #arrow2_r { left: 33%; }
 #arrow2_g { left: 36%; }
 #arrow2_b { left: 39%; }
 
-#arrow3_r, #arrow3_g, #arrow3_b {  top: 47%; }
+#arrow3_r, #arrow3_g, #arrow3_b {  top: 32%; }
 #arrow3_r { left: 18.6%; }
 #arrow3_g { left: 21.6%; }
 #arrow3_b { left: 24.6%; }
 
-#arrow4_r, #arrow4_g, #arrow4_b {  top: 47%; }
+#arrow4_r, #arrow4_g, #arrow4_b {  top: 32%; }
 #arrow4_r { left: 38.6%; }
 #arrow4_g { left: 41.6%; }
 #arrow4_b { left: 44.6%; }
 
-#arrow5_r, #arrow5_g, #arrow5_b {  top: 47%; }
-#arrow5_r { left: 69%; }
-#arrow5_g { left: 72%; }
-#arrow5_b { left: 75%; }
+#arrow5_r, #arrow5_g, #arrow5_b {  top: 64%; }
+#arrow5_r { left: 24.2%; }
+#arrow5_g { left: 27.2%; }
+#arrow5_b { left: 30.2%; }
 
-#arrow6_r, #arrow6_g, #arrow6_b {  top: 1%; }
-#arrow6_r { left: 74.6%; }
-#arrow6_g { left: 77.6%; }
-#arrow6_b { left: 80.6%; }
+#arrow6_r, #arrow6_g, #arrow6_b {  top: 64%; }
+#arrow6_r { left: 43.2%; }
+#arrow6_g { left: 46.2%; }
+#arrow6_b { left: 49.2%; }
+
+#arrow7_r, #arrow7_g, #arrow7_b {  top: 72%; }
+#arrow7_r { left: 69%; }
+#arrow7_g { left: 72%; }
+#arrow7_b { left: 75%; }
+
+#arrow8_r, #arrow8_g, #arrow8_b {  top: 43%; }
+#arrow8_r { left: 73.6%; }
+#arrow8_g { left: 76.6%; }
+#arrow8_b { left: 79.6%; }

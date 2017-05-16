@@ -27,17 +27,21 @@ var colorpicker,
 	},
 	
 	light = [
-		[1, 1, 1], // 0 between filter 0 and paper
-		[1, 1, 1], // 1 between filter 1 and paper
-		[1, 1, 1], // 2 between paper and filter 2
-		[1, 1, 1], // 3 after filter 2
+		[1, 1, 1], // 0 between filter 0 and filter 2
+		[1, 1, 1], // 1 between filter 1 and filter 3
+		[1, 1, 1], // 2 between filter 2 and paper
+		[1, 1, 1], // 3 between filter 3 and paper
+		[1, 1, 1], // 4 between paper and filter 4
+		[1, 1, 1], // 5 after filter 4
 	],
 	
 	filterColors = [ // rgb
 		[1, 1, 1], // filter 0
 		[1, 1, 1], // filter 1
-		[1, 1, 1], // paper
 		[1, 1, 1], // filter 2
+		[1, 1, 1], // filter 3
+		[1, 1, 1], // paper
+		[1, 1, 1], // filter 4
 	];
 
 function init(){
@@ -57,11 +61,17 @@ function setFilterColor(id, color){
 		case "filter1":
 			filterColors[1] = color_codes[color];
 			break;
-		case "paper":
+		case "filter2":
 			filterColors[2] = color_codes[color];
 			break;
-		case "filter2":
+		case "filter3":
 			filterColors[3] = color_codes[color];
+			break;
+		case "paper":
+			filterColors[4] = color_codes[color];
+			break
+		case "filter4":
+			filterColors[5] = color_codes[color];
 			break;
 	}
 }
@@ -71,14 +81,22 @@ function calculateAbsorption(color){
 	light[0] = filterColors[0];
 	
 	light[1] = filterColors[1];
-				
-	light[2][0] = (filterColors[2][0] && (light[0][0] || light[1][0])) ? 1 : 0;
-	light[2][1] = (filterColors[2][1] && (light[0][1] || light[1][1])) ? 1 : 0;
-	light[2][2] = (filterColors[2][2] && (light[0][2] || light[1][2])) ? 1 : 0;
 	
-	light[3][0] = filterColors[3][0] && light[2][0] ? 1 : 0;
-	light[3][1] = filterColors[3][1] && light[2][1] ? 1 : 0;
-	light[3][2] = filterColors[3][2] && light[2][2] ? 1 : 0;
+	light[2][0] = filterColors[2][0] && light[0][0] ? 1 : 0;
+	light[2][1] = filterColors[2][1] && light[0][1] ? 1 : 0;
+	light[2][2] = filterColors[2][2] && light[0][2] ? 1 : 0;
+	
+	light[3][0] = filterColors[3][0] && light[1][0] ? 1 : 0;
+	light[3][1] = filterColors[3][1] && light[1][1] ? 1 : 0;
+	light[3][2] = filterColors[3][2] && light[1][2] ? 1 : 0;
+				
+	light[4][0] = (filterColors[4][0] && (light[2][0] || light[3][0])) ? 1 : 0;
+	light[4][1] = (filterColors[4][1] && (light[2][1] || light[3][1])) ? 1 : 0;
+	light[4][2] = (filterColors[4][2] && (light[2][2] || light[3][2])) ? 1 : 0;
+	
+	light[5][0] = filterColors[5][0] && light[4][0] ? 1 : 0;
+	light[5][1] = filterColors[5][1] && light[4][1] ? 1 : 0;
+	light[5][2] = filterColors[5][2] && light[4][2] ? 1 : 0;
 }
 
 function visualizeAbsorption(){
