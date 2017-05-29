@@ -57,7 +57,8 @@ var augucations = [
 
 	// topic 5
 	[
-		[],
+		[27, "Absorption"],
+		[271, "Histogramme"],
 	],
 
 	// topic 6
