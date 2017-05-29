@@ -11,7 +11,7 @@ var histo_data,
 	//pic_canvas,
 	img_data_orig,
 	img_ctx,
-	//canvas_ctx,
+	canvas_ctx,
 	img_data_orig_alles,
 	img_data_gray_histo;
 
@@ -22,10 +22,10 @@ function main(){
 	buildImage();
 	analyse(document.getElementById("pic"));
 	
-	//calcHistoData();
-	//RGBtoGray();
+	calcHistoData();
+	RGBtoGray();
 	
-	//calcHistoDataGray();
+	calcHistoDataGray();
 	
 }
 
@@ -35,7 +35,7 @@ function findElements(){
 	//pic_canvas = document.getElementById("pic_canvas");
 	pic_img = document.getElementById("pic");
 	//img_ctx = pic_img.getContext("2d");
-	//canvas_ctx = pic_canvas.getContext("2d");
+	canvas_ctx = pic_canvas.getContext("2d");
 }
 
 function checkAllCheckBoxes(){
@@ -65,10 +65,7 @@ function calcHistoDataGray(){
 	// add data
 	for (var i = 0; i < img_data_gray.length; i += 4){
 		img_data_gray_histo[img_data_gray[i]][1]++;
-	}
-	
-	console.log(img_data_gray_histo);
-	
+	}	
 }	
 	
 function RGBtoGray(){
@@ -178,8 +175,8 @@ $(function(){
 				{ data: new_histo_data[2], bars:{ show: true, barWidth: 0.1, align: "center", order: 3}, color: "blue"},
 			   ];
 			   
-		data_gray = { data: new_histo_data[3], bars:{ show: true, barWidth: 0.1, align: "center", order: 3}, color: "gray"};
-		//data_gray = { data: img_data_gray_histo, bars:{ show: true, barWidth: 0.1, align: "center", order: 3}, color: "gray"};
+		//data_gray = { data: new_histo_data[3], bars:{ show: true, barWidth: 0.1, align: "center", order: 3}, color: "gray"};
+		data_gray = { data: img_data_gray_histo, bars:{ show: true, barWidth: 0.1, align: "center", order: 3}, color: "gray"};
 		
 			
 		var options = {

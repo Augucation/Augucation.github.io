@@ -11,7 +11,7 @@
 
 #pic_canvas
 { 
-	display: block;
+	display: none;
 	border:          none;
 	/*background:      url("../../../resources/img/5_271_haus_2.jpg");*/
 	background-size: 100% auto;
