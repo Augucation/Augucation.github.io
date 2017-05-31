@@ -340,6 +340,7 @@ input[type=range]::-moz-focus-outer {
 .slider_interpretation
 {
 	text-align: center;
+	text-align-last:center; /*Chrome*/
 	margin-top: -5%;
 }
 
