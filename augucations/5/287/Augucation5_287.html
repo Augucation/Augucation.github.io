@@ -1,0 +1,63 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Filter</title>
+	<link rel="icon" href="../../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="Augucation5_287.css">
+	
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
+
+	<div id="pics_and_matrix_wrapper">
+		<img id="pic" class="image" src="../../../resources/img/zebra_schoen_pixels2.jpg" width="500px" height="375px">
+		
+		<div id="middle_wrapper" class="my_text">
+			<div id="matrix_wrapper">
+			</div>
+			
+			<div id="buttons_wrapper">
+			
+				<input id="btn_apply" type="button" class="button" value="Filter anwenden"> </input>
+			
+				<select id="select_filter">
+					<option selected disabled>Gewählter Filter</option>
+					<option value="1">Voreinstellung</option>
+					<option value="2">Schwacher Weichzeichner</option>
+					<option value="3">Starker Weichzeichner</option>
+					<option value="4">Schwacher Scharfzeichner</option>
+					<option value="5">Starker Scharfzeichner</option>
+					<option value="6">Horizontale Kantenerkennung</option>
+					<option value="7">Vertikale Kantenerkennung</option>
+				</select>
+			</div>
+		
+		</div>
+		
+		
+		<canvas id="pic_canvas" class="image"></canvas>
+	</div>
+		
+		
+		<div>	
+			<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(5, 287);" name="back" value="<<"/>
+		</div>
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
+	<script type="text/javascript" src="http://www.benjaminbuffet.com/public/js/jquery.flot.orderBars.js"></script>
+	<script src="js/jquery.flot.resize.min.js"></script>
+	<script src="nouislider.min.js"></script>
+	
+	<script type="text/javascript" src="Augucation1_55.js"></script>
+
+	<script type="text/javascript" src="filters.js"></script>
+	<script type="text/javascript" src="Augucation5_287.js"></script>
+</body>

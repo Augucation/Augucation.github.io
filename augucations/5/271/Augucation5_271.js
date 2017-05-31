@@ -269,14 +269,15 @@ function equalizeHistogram(val){
 	var max = min + range;
 	
 	// gray
-	temp = new Array(255);
+	temp = new Array(img_data_gray.length);
 	
-	
-	for (var i = 0; i < 255; i++){
-		temp[i] = new Array(2);
-		temp[i] = [i, ((data_gray.data[i][1] - min) / (max - min)) * 255];
+	for (var i = 0; i < 100; i += 4){
+		val = img_data_gray[i]; //((img_data_gray[i][1] - min) / (max - min)) * 255;
+		console.log(val);
 	}
-	data_gray.data = temp;
+	img_data_gray = temp;
+		
+	calcHistoDataGray();
 	
 	plot.setData([]);
 	addData(data_gray);

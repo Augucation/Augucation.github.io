@@ -342,3 +342,9 @@ input[type=range]::-moz-focus-outer {
 	text-align: center;
 	margin-top: -5%;
 }
+
+select {
+	font-size: .7em;
+	font-family: 'uhh';
+	text-align: center;
+}
