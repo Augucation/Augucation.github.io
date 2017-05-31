@@ -18,7 +18,7 @@ function main(){
 	
 	readImageData(pic_img);
 	
-	fillMatrix(Filters.Blur1);
+	fillMatrix(Filters.Init);
 }
 
 function findElements(){
