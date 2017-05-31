@@ -17,8 +17,6 @@ function main(){
 	resizeCanvas();
 	
 	readImageData(pic_img);
-	
-	applyFilter(Filters.EdgeV);
 }
 
 function findElements(){
@@ -58,7 +56,7 @@ function drawNewImage(new_data){
 }	
 
 function applyFilter(filter){
-	
+		
 	var mask = filter.mask;
 	var scale = filter.scale;
 		
@@ -174,6 +172,8 @@ function testImage(img_data){
 
 function setFilter(filtername){
 	applyFilter(Filters[filtername]);
+	
+	document.getElementById("btn_apply").focus();
 }
 
 main();
