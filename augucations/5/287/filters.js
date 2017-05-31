@@ -68,7 +68,7 @@ Filters.Sharp1 = new Filter(
 		0, -1, -1, -1, 0,
 		0, 0, 0, 0, 0
 	],
-	8
+	1
 );
 
 Filters.EdgeH = new Filter(
@@ -94,5 +94,5 @@ Filters.EdgeV = new Filter(
 		0, -1, 0, 1, 0,
 		0, 0, 0, 0, 0
 	],
-	1,
+	8
 );
