@@ -17,9 +17,6 @@ function main(){
 	resizeCanvas();
 	
 	readImageData(pic_img);
-	//drawNewImage(img_data_orig);
-	
-	getImgSize("../../../resources/img/zebra_schoen_pixels2.jpg");
 	
 	applyFilter(Filters.EdgeV);
 }
@@ -175,17 +172,8 @@ function testImage(img_data){
 	}
 }
 
-main();
-
-
-function getImgSize(imgSrc) {
-    newImg = new Image();
-
-    newImg.onload = function() {
-      var height = newImg.height;
-      var width = newImg.width;
-      console.log('The image size is '+width+'*'+height);
-    }
-	
-	readImageData(newImg);
+function setFilter(filtername){
+	applyFilter(Filters[filtername]);
 }
+
+main();

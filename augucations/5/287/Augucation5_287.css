@@ -61,3 +61,14 @@
 	display: block;
 	margin: 0 auto;
 }
+
+.cell
+{
+	width: 30px;
+	margin: 1%;
+}
+
+.cell:hover
+{
+	margin: 1%;
+}

@@ -344,7 +344,51 @@ input[type=range]::-moz-focus-outer {
 }
 
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	
 	font-size: .7em;
 	font-family: 'uhh';
-	text-align: center;
+	text-align: center; 
+	
+	border: 1px solid var(--hci_gray);
+	border-radius: 5px;
+	
+  padding: 0em 0.7em 0em 0.7em;
+	
+	/* Arrow*/
+	background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 10px) calc(0.7em),
+    calc(100% - 5px) calc(0.7em),
+    calc(100% - 1.3em) 0em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
 }
+
+select:focus {
+  background-image:
+    linear-gradient(45deg, green 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, green 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 5px) calc(0.4em),
+    calc(100% - 10px) calc(0.4em),
+    calc(100% - 1.3em) 0em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  outline: none;
+}
+
+select:-moz-focusring { color: transparent;
+                        text-shadow: 0 0 0 #000; }

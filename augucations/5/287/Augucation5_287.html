@@ -20,21 +20,23 @@
 		
 		<div id="middle_wrapper" class="my_text">
 			<div id="matrix_wrapper">
+			
+			
 			</div>
 			
 			<div id="buttons_wrapper">
 			
 				<input id="btn_apply" type="button" class="button" value="Filter anwenden"> </input>
 			
-				<select id="select_filter">
+				<select id="select_filter" onchange="setFilter(this.value);">
 					<option selected disabled>Gewählter Filter</option>
-					<option value="1">Voreinstellung</option>
-					<option value="2">Schwacher Weichzeichner</option>
-					<option value="3">Starker Weichzeichner</option>
-					<option value="4">Schwacher Scharfzeichner</option>
-					<option value="5">Starker Scharfzeichner</option>
-					<option value="6">Horizontale Kantenerkennung</option>
-					<option value="7">Vertikale Kantenerkennung</option>
+					<option value="Init">Voreinstellung</option>
+					<option value="Blur0">Schwacher Weichzeichner</option>
+					<option value="Blur1">Starker Weichzeichner</option>
+					<option value="Sharp0">Schwacher Scharfzeichner</option>
+					<option value="Sharp1">Starker Scharfzeichner</option>
+					<option value="EdgeH">Horizontale Kantenerkennung</option>
+					<option value="EdgeV">Vertikale Kantenerkennung</option>
 				</select>
 			</div>
 		
@@ -58,6 +60,7 @@
 	
 	<script type="text/javascript" src="Augucation1_55.js"></script>
 
+	<script type="text/javascript" src="gui.js"></script>
 	<script type="text/javascript" src="filters.js"></script>
 	<script type="text/javascript" src="Augucation5_287.js"></script>
 </body>
