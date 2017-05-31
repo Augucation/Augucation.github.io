@@ -19,14 +19,19 @@
 		<img id="pic" class="image" src="../../../resources/img/zebra_schoen_pixels2.jpg" width="500px" height="375px">
 		
 		<div id="middle_wrapper" class="my_text">
-			<div id="matrix_wrapper">
-			
+			<span>Filtermatrix</span>
+			</br>
+			<div id="matrix_wrapper">			
 			
 			</div>
 			
 			<div id="buttons_wrapper">
+				
+				<span>Skalierung</span>
+				</br>
+				<input id="input_scale"></input>
 			
-				<input id="btn_apply" type="button" class="button" value="Filter anwenden"> </input>
+				<input id="btn_apply" type="button" class="button" value="Filter anwenden" onclick="applyMatrix();"> </input>
 			
 				<select id="select_filter" onchange="setFilter(this.value);">
 					<option selected disabled>Gewählter Filter</option>
@@ -38,6 +43,7 @@
 					<option value="EdgeH">Horizontale Kantenerkennung</option>
 					<option value="EdgeV">Vertikale Kantenerkennung</option>
 				</select>
+				
 			</div>
 		
 		</div>

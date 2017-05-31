@@ -17,6 +17,8 @@ function main(){
 	resizeCanvas();
 	
 	readImageData(pic_img);
+	
+	fillMatrix(Filters.Blur1);
 }
 
 function findElements(){
@@ -116,6 +118,12 @@ function applyFilter(filter){
 	//testImage(new_data);
 }
 
+function applyMatrix(){
+	readMatrix();
+	
+	applyFilter(Filters.User);
+}
+
 function getMappedIndex(x, y, color){
 	
 	return (y * w + x) * color_depth + color;
@@ -171,7 +179,7 @@ function testImage(img_data){
 }
 
 function setFilter(filtername){
-	applyFilter(Filters[filtername]);
+	fillMatrix(Filters[filtername]);
 	
 	document.getElementById("btn_apply").focus();
 }
