@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
 
 	<img id="pic" src="../../../resources/img/5_271_haus_2.jpg" width="500px" height="375px">
-	<canvas id="pic_canvas" width="500px" height="375px"></canvas>
+	<canvas id="pic_canvas" src="../../../resources/img/5_271_haus_2.jpg" width="500px" height="375px"></canvas>
 	
 	<div id="chart_wrapper">
 		<div id="mydiv" style="width:428px;height:200px"></div>
@@ -30,13 +30,13 @@
 	
 	<div id="check_wrapper" class="my_text">
 		<input id="check_red" type="checkbox" name="check_channel" value="red" onchange="setChannel(false)">
-		<label for="check_red" class="text_red"> Rot </label>
+		<label id="check_red_label" for="check_red" class="text_red"> Rot </label>
 		
 		<input id="check_green" type="checkbox" name="check_channel" value="green" onchange="setChannel(false)">
-		<label for="check_green" class="text_green"> Grün </label>
+		<label id="check_green_label" for="check_green" class="text_green"> Grün </label>
 
 		<input id="check_blue" type="checkbox" name="check_channel" value="blue" onchange="setChannel(false)">
-		<label for="check_blue" class="text_blue"> Blau </label>
+		<label id="check_blue_label" for="check_blue" class="text_blue"> Blau </label>
 	</div>
 	
 	<div id="button_wrapper">
@@ -56,9 +56,10 @@
 	
 	<script src="../../../resources/js/plugins/histogram/histogram.min.js"></script>
 	
-	<script src="http://pomax.github.io/RGBAnalyse/release/RGBAnalyse.js"></script>
+	<!--script src="http://pomax.github.io/RGBAnalyse/release/RGBAnalyse.js"></script-->
 	
 	<script type="text/javascript" src="Augucation1_55.js"></script>
 
+	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript" src="Augucation5_271.js"></script>
 </body>

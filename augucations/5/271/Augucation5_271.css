@@ -11,17 +11,15 @@
 
 #pic_canvas
 { 
-	display: none;
-	border:          none;
-	/*background:      url("../../../resources/img/5_271_haus_2.jpg");*/
-	background-size: 100% auto;
-	margin auto;
+	background:      url("../../../resources/img/5_271_haus_2.jpg");
+	margin: 3% auto;
+	display: block;
 }
 
 #pic
 {
-	display: block;
-  margin: 3% auto;	
+	display: none;
+  margin: 3% auto;
 }
 
 #chart_wrapper
@@ -45,6 +43,22 @@
 	margin: auto;
 	text-align: center;
 }
+
+#check_red_label
+{
+	color: #FF0000;
+}
+
+#check_green_label
+{
+	color: #00FF00;
+}
+
+#check_blue_label
+{
+	color: #0000FF;
+}
+
 
 #button_wrapper
 {
