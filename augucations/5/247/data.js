@@ -101,32 +101,91 @@ function drawImageNew(d, ctx){
 	ctx.putImageData(new_data, 0, 0);
 }
 
-function equalize(is_gray, val){
+function equalize(is_gray, val, ctx){
 
-	var orig_data = is_gray ? image.gray : image.rgba;
-	var new_data = [];
-	
-	var min = 100; //getMin(orig_data);
-	var max = 150; //getMax(orig_data);
-	
-	if(is_gray){
 		
-		for (var i = 0; i < orig_data.length; i++){
-			
-			// ignore alpha
-			if (i % 4 == 3){
-				new_data[i] = 255;
-				continue;
-			}
-			
-			new_data[i] = parseInt(Math.abs((orig_data[i] - min) / (max - min) * 255));
+	var orig_data = is_gray ? image.gray : image.rgba;
+	var orig_histo = is_gray ? image.gray_histo : image.rgb_histo;
+	
+	var new_data = [];
+	var new_image_data = [];
+	
+	var min = getMin(orig_data);
+	var max = getMax(orig_data);	
+	
+	var range = 2.55 * val;
+	var dest_min = (255 - range) * 0.5;
+	var dest_max = dest_min + range;
+	
+	var pix_count = image.width * image.height;
+	
+	if (is_gray){
+		
+		var probabilities = [];
+		for (var i = 0; i < orig_histo.length; i++){
+			probabilities[i] = (orig_histo[i][1] / pix_count);
+		}
+		
+		var cumulative_probabilities = [];
+		cumulative_probabilities[0] = probabilities[0];
+		for (var i = 1; i < probabilities.length; i++){
+			cumulative_probabilities[i] = cumulative_probabilities[i - 1] + probabilities[i];
+		}
+	
+		for (var i = 0; i < cumulative_probabilities.length; i++){
+			cumulative_probabilities[i] = Math.floor(cumulative_probabilities[i] * range + dest_min);
+		}
+		
+		for (var i = 0; i < orig_histo.length; i++){
+			new_data[i] = [ cumulative_probabilities[i], orig_histo[i][1]];
+		}
+		
+		for (var i = 0; i < orig_data.length; i += 4){
+			var new_histo_value = new_data[orig_histo[orig_data[i]][0]][0];
+						
+			new_image_data[i] = new_histo_value;
+			new_image_data[i + 1] = new_histo_value;
+			new_image_data[i + 2] = new_histo_value;
+			new_image_data[i + 3] = 255;
 		}
 	}
 	
-	image.gray_histo = Gray2Histo(new_data);
+	/*
+	if (!is_gray){
+		return;
+		for (var c = 0; c < 3; c++){
+			var probabilities = [];
+			for (var i = 0; i < orig_histo[c].length; i++){
+				probabilities[i] = (orig_histo[c][i][1] / pix_count);
+			}
+			
+			var cumulative_probabilities = [];
+			cumulative_probabilities[0] = probabilities[0];
+			for (var i = 1; i < probabilities.length; i++){
+				cumulative_probabilities[i] = cumulative_probabilities[i - 1] + probabilities[i];
+			}
+		
+			for (var i = 0; i < cumulative_probabilities.length; i++){
+				cumulative_probabilities[i] = Math.floor(cumulative_probabilities[i] * range + dest_min);
+			}
+						
+			for (var i = 0; i < orig_histo[c].length; i++){
+				new_data[i] = [ cumulative_probabilities[i], orig_histo[c][i][1]];
+			}
+			
+			for (var i = 0; i < orig_data.length; i += 4){
+				var new_histo_value = new_data[orig_histo[c][orig_data[i]][0]][0];
+							
+				new_image_data[4 * i + c] = new_histo_value;
+			}			
+		}
+	}
+	*/
+	
+	image.gray_histo = new_data;
 	setPlotData(image);	
 	
-	return new_data;
+	return new_image_data;
 }
 
 function getMin(d){

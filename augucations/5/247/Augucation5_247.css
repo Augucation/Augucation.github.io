@@ -42,6 +42,7 @@
 	width: 50%;
 	margin: auto;
 	text-align: center;
+	display: none;
 }
 
 #check_red_label
@@ -68,6 +69,7 @@
 #button_gray
 {
 	font-size: 17;
+	display: none;
 }
 
 #slider_wrapper

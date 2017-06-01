@@ -5,7 +5,7 @@ var checks,
 	canvas_ctx,
 	src_url = "../../../resources/img/5_271_haus_2.jpg",
 	plot,
-	is_grayscale,
+	is_grayscale = true,
 	check_wrapper,
 	y_max;
 
@@ -14,7 +14,7 @@ function main(){
 	checkAllCheckBoxes();
 	
 	drawAndReadImageOnCanvas(src_url, pic_canvas, canvas_ctx);
-	
+		
 }
 
 function findElements(){
@@ -38,6 +38,7 @@ function drawAndReadImageOnCanvas(source, canvas, ctx){
 	img.onload = function(){
 		ctx.drawImage(img, 0, 0);
 		image = new Img(canvas);
+		drawImageNew(image.gray, canvas_ctx);
 	};
 	img.src = source;
 	
@@ -88,11 +89,14 @@ function setChannel(grayscale){
 	}
 	
 	plot.draw();
+				
+		setChannel(true);
 }
 
 function equalizeHistogram(val){
 	
 	drawImageNew(equalize(is_grayscale, val), canvas_ctx);
+	//drawImageNew(image.gray, canvas_ctx);
 	plot.setData([image.plot_gray]);
 	plot.draw();
 }
@@ -137,7 +141,7 @@ $(function(){
 		};
 		
 		plot = $.plot($("#mydiv"), data_gray, options);
-		plot.setData(data_rgb); // stupid hack for better y-axis scaling
+		//plot.setData(data_rgb); // stupid hack for better y-axis scaling
 		plot.draw();		
 	}
 	plotIt();
