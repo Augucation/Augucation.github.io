@@ -27,10 +27,13 @@
 			
 			<div id="buttons_wrapper">
 				
-				<span>Skalierung</span>
+				<span>Skalierungsfaktor</span>
 				</br>
-				<input id="input_scale"></input>
-			
+				<div id="scale_wrapper"> 
+					<span>1 / </span>
+					<input id="input_scale"></input>
+				</div>
+				
 				<input id="btn_apply" type="button" class="button" value="Filter anwenden" onclick="applyMatrix();"> </input>
 			
 				<select id="select_filter" onchange="setFilter(this.value);">
