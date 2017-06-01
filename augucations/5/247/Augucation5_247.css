@@ -1,0 +1,84 @@
+.canvas_wrapper
+{
+	position: relative;
+	border:   none;
+	margin:   auto;
+	width:	  1080px;
+	height:	  750px;
+	padding:  0;
+	margin-bottom: -35%;
+}
+
+#pic_canvas
+{ 
+	background:      url("../../../resources/img/5_271_haus_2.jpg");
+	margin: 3% auto;
+	display: block;
+}
+
+#pic
+{
+	display: none;
+  margin: 3% auto;
+}
+
+#chart_wrapper
+{
+	box-sizing: border-box;
+	width: 100%;
+	height: 200px;
+	margin: 2% auto 1% auto;
+}
+
+#mydiv
+{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+
+#check_wrapper
+{
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+#check_red_label
+{
+	color: #FF0000;
+}
+
+#check_green_label
+{
+	color: #00FF00;
+}
+
+#check_blue_label
+{
+	color: #0000FF;
+}
+
+
+#button_wrapper
+{
+  text-align: center;
+}
+
+#button_gray
+{
+	font-size: 17;
+}
+
+#slider_wrapper
+{
+	width: 100%;
+	text-align: center;
+	margin-bottom: 2%;
+}
+
+#histo_slider
+{
+	width: 420px;
+	margin: auto;
+}
