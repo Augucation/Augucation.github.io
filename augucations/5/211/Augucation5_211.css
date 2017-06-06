@@ -1,0 +1,41 @@
+#body
+{
+	width: 90vw;
+	height: 90vh;
+	margin: auto;
+	vertical-align: middle;
+}
+
+#container
+{
+	display: inline-flex;
+	margin: 5% auto;
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	horizontal-align: middle;
+}
+
+.image
+{
+	border: 1px solid black;
+}
+
+.matrix_wrapper, .image
+{
+	width: 17vw;
+	height: 17vw;
+	position: relative;
+	margin: 0.4% 0.6%;
+}
+
+.cell, .cell:hover
+{
+	width: 10.5%;
+	height: 10.5%;
+	margin: 1%;
+	font-family: 'uhh';
+	font-size: 20px;
+	color: #555e67;
+	cursor: default;
+}
