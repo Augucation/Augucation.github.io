@@ -1,7 +1,7 @@
 var size = 8; // 8 x 8 pixel
 
-var canvasData = img.a;
-var qData = quant.d;
+var canvasData = img.e;
+var qData = quant.g;
 
 // create matrices
 var wrapper_f = document.getElementById("f");

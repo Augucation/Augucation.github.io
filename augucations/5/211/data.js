@@ -5,7 +5,6 @@ function data(data, size){
 	
 	var f = [];
 	var fprime = [];
-	var requant = [];
 	var decoded = [];
 	
 	var q = [];
@@ -32,9 +31,9 @@ function data(data, size){
 		
 		return result;
 	};
-	
-	this.requant = function(u, v){
 		
+	this.requant = function(x, y){
+			return this.getFprime(x, y) * this.getQ(x, y);
 	}
 	
 	this.calculateInverseDCT = function(u, v){
@@ -48,11 +47,11 @@ function data(data, size){
 		
 		for(var x = 0; x < this.size; x++) {
 			for(var y = 0; y < this.size; y++) {
-				result += (cu * cv * this.getFprime(x, y) * this.getQ(x, y) * Math.cos((2*x + 1) * u * Math.PI / 16) * Math.cos((2*y + 1) * v * Math.PI / 16));
+				result += (cu * cv * this.getFprime(x, y) * Math.cos((2*x + 1) * u * Math.PI / 16) * Math.cos((2*y + 1) * v * Math.PI / 16));
 			}
 		}
 		
-		result = result / 4 + 128;
+		result = Math.round(result / 4 * this.getQ(u, v) + 128);
 		
 		return result;	
 	}
@@ -117,5 +116,10 @@ function data(data, size){
 
 	this.getDecoded = function(){
 		return decoded;
+	}
+
+	this.changePixel = function(x, y, c){
+		this.data[(y * this.size + x)] = c;
+		this.calculateEverything();
 	}
 }

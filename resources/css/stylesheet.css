@@ -148,6 +148,14 @@ input[type=range]::-webkit-slider-runnable-track {
 	border-radius: 2px;
 }
 
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 2.5px;
+	background: #82888F;
+	border: none;
+	border-radius: 2px;
+}
+
 /* Special styling for WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;

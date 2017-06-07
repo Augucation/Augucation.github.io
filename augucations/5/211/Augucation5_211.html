@@ -16,12 +16,19 @@
 	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
 
 	<div id="body">
-		<div id="container">
-			<canvas id="img_orig" class="image"></canvas>
-			<div id="f" class="matrix_wrapper"></div>
-			<div id="fprime" class="matrix_wrapper"></div>
-			<div id="q" class="matrix_wrapper"></div>
-			<canvas id="img_dct" class="image"></canvas>
+		<div id="big_container">
+			<div id="image_matrix_container">
+				<canvas id="img_orig" class="image" onmousedown="mouseDown()" onmouseup="mouseUp()" onmouseleave="mouseUp()"></canvas>
+				<div id="f" class="matrix_wrapper"></div>
+				<div id="fprime" class="matrix_wrapper"></div>
+				<div id="q" class="matrix_wrapper"></div>
+				<canvas id="img_dct" class="image"></canvas>
+			</div>
+			<div id="lower_wrapper">
+				</div><input type="range" id="graypicker" min="0" max="255" step="1" value="128" oninput="setColor(this.value)"/>
+				</br>
+				<div id="image_button_wrapper"></div>
+			</div>
 		</div>
 	</div>
 	 
@@ -33,10 +40,12 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
 
-	<script type="text/javascript" src="gui.js"></script>
+	<script type="text/javascript" src="gui_matrix.js"></script>
+	<script type="text/javascript" src="gui_image_buttons.js"></script>
 	<script type="text/javascript" src="canvas.js"></script>
 	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript" src="images.js"></script>
 	<script type="text/javascript" src="quants.js"></script>
 	<script type="text/javascript" src="Augucation5_211.js"></script>
+	<script type="text/javascript" src="draw.js"></script>
 </body>
