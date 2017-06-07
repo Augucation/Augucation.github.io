@@ -16,11 +16,7 @@ canvas_orig.addEventListener('mousemove', function(evt) {
 		image_orig.setPixel(mousePos.x, mousePos.y, color);
 		data.changePixel(mousePos.x, mousePos.y, color);
 
-		matrix_f.fillMatrix(data.getF());
-		matrix_fprime.fillMatrix(data.getFprime());
-		matrix_q.fillMatrix(data.getQ());
-
-		image_dct.fillCanvas(data.getDecoded());
+		updateCalculations();
 	}
 }, false);
 
@@ -30,11 +26,7 @@ canvas_orig.addEventListener('mousedown', function(evt) {
 		image_orig.setPixel(mousePos.x, mousePos.y, color);
 		data.changePixel(mousePos.x, mousePos.y, color);
 
-		matrix_f.fillMatrix(data.getF());
-		matrix_fprime.fillMatrix(data.getFprime());
-		matrix_q.fillMatrix(data.getQ());
-
-		image_dct.fillCanvas(data.getDecoded());
+		updateCalculations();
 	}
 }, false);
 

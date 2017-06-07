@@ -1,6 +1,6 @@
 var size = 8; // 8 x 8 pixel
 
-var canvasData = img.e;
+var canvasData = img.images[0];
 var qData = quant.g;
 
 // create matrices
@@ -23,11 +23,14 @@ var image_dct = new canvas_img(canvas_dct, canvasData, size);
 var data = new data(canvasData, size);
 
 data.setQ(qData);
-data.calculateEverything();
+updateCalculations();
 
-matrix_f.fillMatrix(data.getF());
-matrix_fprime.fillMatrix(data.getFprime());
-matrix_q.fillMatrix(data.getQ());
+function updateCalculations(){
+	data.calculateEverything();
 
-image_dct.fillCanvas(data.getDecoded());
+	matrix_f.fillMatrix(data.getF());
+	matrix_fprime.fillMatrix(data.getFprime());
+	matrix_q.fillMatrix(data.getQ());
 
+	image_dct.fillCanvas(data.getDecoded());
+}
