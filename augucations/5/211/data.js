@@ -36,22 +36,22 @@ function data(data, size){
 			return this.getFprime(x, y) * this.getQ(x, y);
 	}
 	
-	this.calculateInverseDCT = function(u, v){
+	this.calculateInverseDCT = function(x, y){
 		var result = 0;
 		
-		var cu = 1;
-		if(u == 0) cu = 1 / Math.SQRT2;
-		
-		var cv = 1;
-		if(v == 0) cv = 1 / Math.SQRT2;
-		
-		for(var x = 0; x < this.size; x++) {
-			for(var y = 0; y < this.size; y++) {
-				result += (cu * cv * this.getFprime(x, y) * Math.cos((2*x + 1) * u * Math.PI / 16) * Math.cos((2*y + 1) * v * Math.PI / 16));
+		for(var u = 0; u < this.size; u++) {
+			for(var v = 0; v < this.size; v++) {
+				
+				var cu = 1;
+				if(u == 0) cu = 1 / Math.SQRT2;
+				
+				var cv = 1;
+				if(v == 0) cv = 1 / Math.SQRT2;
+
+				result += (cu * cv * this.getFprime(u, v) * this.getQ(u, v) * Math.cos((2*x + 1) * u * Math.PI / 16) * Math.cos((2*y + 1) * v * Math.PI / 16));
 			}
 		}
-		
-		result = Math.round(result / 4 * this.getQ(u, v) + 128);
+		result = Math.round(result / 4 + 128);
 		
 		return result;	
 	}
@@ -89,9 +89,9 @@ function data(data, size){
 		}
 		
 		// decode
-		for (var x = 0; x < this.size; x++){
-			for (var y = 0; y < this.size; y++){	
-				decoded.push(this.calculateInverseDCT(x, y)); 
+		for (var u = 0; u < this.size; u++){
+			for (var v = 0; v < this.size; v++){	
+				decoded.push(this.calculateInverseDCT(u, v)); 
 			}
 		}
 	};

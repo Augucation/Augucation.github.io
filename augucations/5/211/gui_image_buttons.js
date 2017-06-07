@@ -34,7 +34,15 @@ function addEL(btn, i){
 	
 	btn.addEventListener("mousedown", function(e){
 		image_orig.fillCanvas(img.images[i]);
-		data.data = img.images[i];
+		data.data = Array.from(img.images[i]);
 		updateCalculations();
 	}, false);
+}
+
+
+function setQuant(val){
+	qData = quant.quants[val];
+	
+	data.setQ(qData);
+	updateCalculations();
 }
