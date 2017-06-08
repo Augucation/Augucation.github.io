@@ -52,10 +52,3 @@ function setQuant(val){
 	data.setQ(qData);
 	updateCalculations();
 }
-
-function addRandomizeListener(btn, i){
-	btn.addEventListener("mousedown", function(e){
-		fillCanvas(btn, img.images[i], false);
-		randomizeLastImage();
-	}, false);
-}
