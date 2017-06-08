@@ -31,7 +31,7 @@ function data(data, size){
 		
 		return result;
 	};
-		
+			
 	this.requant = function(x, y){
 			return this.getFprime(x, y) * this.getQ(x, y);
 	}
@@ -81,16 +81,16 @@ function data(data, size){
 		decoded = [];
 		
 		// encode
-		for (var x = 0; x < this.size; x++){
-			for (var y = 0; y < this.size; y++){
+		for (var y = 0; y < this.size; y++){
+			for (var x = 0; x < this.size; x++){
 				f.push(Math.round(this.calculateF(x, y) * 100) / 100);
 				fprime.push(Math.round(this.calculateF(x, y) / this.getQ(x, y)));	
 			}
 		}
 		
 		// decode
-		for (var u = 0; u < this.size; u++){
-			for (var v = 0; v < this.size; v++){	
+		for (var v = 0; v < this.size; v++){
+			for (var u = 0; u < this.size; u++){	
 				decoded.push(this.calculateInverseDCT(u, v)); 
 			}
 		}
