@@ -56,9 +56,15 @@ function img(){
 						0, 0, 0, 0, 0, 0, 0, 0];
 				
 	this.images[6] = [];
-	for (var i = 0; i < 8 * 8; i++){
-		this.images[6].push(Math.round(Math.random() * 256));
-	}	
 }
 
 var img = new img();
+
+function randomizeLastImage(){
+	img.images[6] = [];
+
+	for (var i = 0; i < 8 * 8; i++){
+		img.images[6].push(Math.round(Math.random() * 256));
+	}	
+}
+randomizeLastImage();
