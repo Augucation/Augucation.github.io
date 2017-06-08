@@ -52,17 +52,31 @@
 						<option value="6">Grottig</option>
 					</select>
 				
-				</div>>
+				</div>
 				
 				<div id="container_img_dct" class="container">
 					<span class="title">Rekonstruiertes Bild</span>
 					<canvas id="img_dct" class="image"></canvas>
 				</div>
 				
-				<div id="arrow_orig_f" class="arrow right"/>
-				<div id="arrow_f_fprime" class="arrow right_down"/>
-				<div id="arrow_q_fprime" class="arrow right_up"/>
-				<div id="arrow_fprime_dct" class="arrow right"/>
+				<div id="container_arrow_orig_f" class="arrow_container">
+					<span id="dct" class="arrow_label">DCT</span>
+					<div id="arrow_orig_f" class="arrow right"/>
+				</div>
+				
+				<div id="container_arrow_f_fprime" class="arrow_container">
+					<span id="quantisierung" class="arrow_label">Quantisierung</span>
+					<div id="arrow_f_fprime" class="arrow right_down"/>
+				</div>
+				
+				<div id="container_arrow_q_fprime" class="arrow_container">
+					<div id="arrow_q_fprime" class="arrow right_up"/>
+				</div>
+				
+				<div id="container_arrow_fprime_dct" class="arrow_container">
+					<span id="requantidct" class="arrow_label">Requantisierung + inverse DCT</span>
+					<div id="arrow_fprime_dct" class="arrow right"/>
+				</div>
 				
 				</br>
 			</div>

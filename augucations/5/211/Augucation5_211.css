@@ -146,13 +146,99 @@
 	margin-top: 0.5vw;
 }
 
-#arrow_f_fprime
+.arrow
 {
 	background-image: url(../../../resources/img/arrow_right.png);
 	background-size: 100% 100%;
+}
+
+.arrow_container{
+	text-align: center;
+}
+
+#container_arrow_orig_f
+{
 	width: 4vw;
-	height: 1vw;
+	height: 3vw;
 	position: absolute;
 	top: 12.2vw;
-	left: 21.5vw;
+	left: 21.6vw;	
+}
+
+#container_arrow_f_fprime
+{
+	width: 4vw;
+	height: 3vw;
+	position: absolute;
+	top: 9.5vw;
+	left: 25vw;
+}
+
+#container_arrow_q_fprime
+{
+	width: 4vw;
+	height: 3vw;
+	position: absolute;
+	top: 5vw;
+	left: 0vw;
+}
+
+#container_arrow_fprime_dct
+{
+	width: 4vw;
+	height: 3vw;
+	position: absolute;
+	top: 8.5vw;
+	left: 25vw;
+}
+
+#arrow_orig_f{
+	width: 4vw;
+	height: 1vw;
+}
+
+#arrow_f_fprime
+{
+	width: 4vw;
+	height: 1vw;
+	
+	-webkit-transform: rotate(30deg);
+	-moz-transform: rotate(30deg);
+	-ms-transform: rotate(30deg);
+	-o-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+
+
+#arrow_q_fprime
+{
+	width: 4vw;
+	height: 1vw;
+	
+	-webkit-transform: rotate(30deg);
+	-moz-transform: rotate(-30deg);
+	-ms-transform: rotate(-30deg);
+	-o-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+
+#arrow_fprime_dct
+{
+	width: 5vw;
+	height: 1.5vw;
+	background-image: url(../../../resources/img/arrow_round.png);
+}
+
+#quantisierung
+{
+	position: absolute;
+	top: 2.5vw;
+	left: -3vw;
+}
+
+#requantidct
+{
+	position: absolute;
+	top: 2vw;
+	left: -1vw;
 }
