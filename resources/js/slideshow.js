@@ -65,7 +65,14 @@ var augucations = [
 
 	// topic 6
 	[
-		[],
+		[3, "Video: The Muybridge Movement Movie"],
+		[11, "Scheinbewegung"],
+		[16, "video: Bewegungsillusion"],
+		[25, "Video: Zeilensprungverfahren"],
+		[75, "Video: Kontinuitätsfehler"],
+		[78, "Video: Räumliche Kontinuität"],
+		[95, "Video: L-Schnitt und J-Schnitt"],
+		[99, "Video: Effekte"],
 	],
 
 
