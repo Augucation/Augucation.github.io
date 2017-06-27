@@ -1,5 +1,6 @@
-function Img(canvas){
+function Img(c){
 	
+	var canvas = c;
 	var ctx = canvas.getContext("2d");
 	
 	this.whole_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -98,7 +99,10 @@ function drawImageNew(d, ctx){
 		new_data.data[i] = d[i];
 	}
 		
-	ctx.putImageData(new_data, 0, 0);
+	ctx.putImageData(new_data, 0, 0, new_data.width, new_data.height, 0, 0, image.canvas.width, image.canvas.height);
+	
+		//ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
+          //         0, 0, canvas.width, canvas.height); // destination rectangle
 }
 
 function equalize(is_gray, val, ctx){
@@ -120,6 +124,13 @@ function equalize(is_gray, val, ctx){
 	var pix_count = image.width * image.height;
 	
 	if (is_gray){
+		
+		// new: equalize the image values directly (using the slide's formula)
+		
+		
+		
+		
+		/* old: equalize the histogram
 		
 		var probabilities = [];
 		for (var i = 0; i < orig_histo.length; i++){
@@ -148,6 +159,7 @@ function equalize(is_gray, val, ctx){
 			new_image_data[i + 2] = new_histo_value;
 			new_image_data[i + 3] = 255;
 		}
+		*/
 	}
 	
 	/*
