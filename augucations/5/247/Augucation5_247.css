@@ -34,16 +34,17 @@
 
 #slider_wrapper
 {
-	width: 100%;
+	width: 30%;
 	text-align: center;
-	margin-bottom: 2%;
+	margin: 2% auto;
 	position: relative;
 }
 
 .histo_slider
 {
-	width: 30% !important;
-	position: absolute;
+	width: 100% !important;
+	position: absolute !important;
+	top: 0px !important;
 }
 
 
@@ -64,11 +65,17 @@ input[type=range]::-webkit-slider-runnable-track {
 { 
 	#histo_slider_max
 	{
-    margin-top: -0.9% !important;
+    margin-top: -0% !important;
 	}
 }
 
 #histo_slider_max
 {
-	margin-top: -0.1%;
+	margin-top: -0%;
+	z-index: 2;
+}
+
+#histo_slider_min
+{
+  z-index: 1;	
 }
