@@ -23,8 +23,8 @@
 
 	<div id="slider_wrapper" class="my_text">
 		<span align="center">Histogrammausgleich</span>
-		<input id="histo_slider_min" class="histo_slider" type="range" range="true" min="0" max="255" values="50" oninput="equalizeHistogram(this.value)">
-		<input id="histo_slider_max" class="histo_slider" type="range" range="true" min="0" max="255" values="150" oninput="equalizeHistogram(this.value)">
+		<input id="histo_slider_min" class="histo_slider" type="range" range="true" min="0" max="255" value="50" oninput="sliderInput(true, this.value)">
+		<input id="histo_slider_max" class="histo_slider" type="range" range="true" min="0" max="255" value="150" oninput="sliderInput(false, this.value)">
 	</div>
 
 	<div>

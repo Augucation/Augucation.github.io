@@ -10,23 +10,24 @@ function img (source, container_canvas) {
 	this.height = this.canvas.height;
 
     this.data = [];
+    this.origData = [];
 	this.histogramm = [];
 
-    this.min;
-    this.max;
+    this.hMin;
+    this.hMax;
 
     this.getMin = function() {
-        var min = this.data[0];
-        for (var i = 0; i < this.data.length; i += 4) {
-            min = min < this.data[i] ? min : this.data[i];
+        var min = this.origData[0];
+        for (var i = 0; i < this.origData.length; i += 4) {
+            min = min < this.origData[i] ? min : this.origData[i];
         }
         return min;
     };
 
     this.getMax = function() {
-        var max = this.data[0];
-        for (var i = 0; i < this.data.length; i += 4) {
-            max = max > this.data[i] ? max : this.data[i];
+        var max = this.origData[0];
+        for (var i = 0; i < this.origData.length; i += 4) {
+            max = max > this.origData[i] ? max : this.origData[i];
         }
         return max;
     };
@@ -47,11 +48,12 @@ function img (source, container_canvas) {
     };
 
     this.equalize = function(w_min, w_max) {
-        var h_min = this.getMin();
-        var h_max = this.getMax();
 
-        for (var i = 0; i < this.data.length; i += 4) {
-            var f_prime = parseInt(((this.data[i] - h_min) / (h_max - h_min)) * (w_max - w_min) + w_min);
+        //var h_min = this.getMin();
+        //var h_max = this.getMax();
+
+        for (var i = 0; i < this.origData.length; i += 4) {
+            var f_prime = parseInt(((this.origData[i] - this.hMin) / (this.hMax - this.hMin)) * Math.abs(w_max - w_min) + Math.min(w_min, w_max));
 
             this.data[i] = f_prime;
             this.data[i + 1] = f_prime;
@@ -85,8 +87,16 @@ function img (source, container_canvas) {
             self.data = self.context.getImageData(0, 0, self.width, self.height).data;
             self.alignRGBChannels();
 
-            self.equalize(0, 55);
+            // store this data as origData
+            //self.origData = self.data;
+            for (var i = 0; i < self.data.length; i++) {
+                self.origData[i] = self.data[i];
+            }
 
+            self.hMin = self.getMin();
+            self.hMax = self.getMax();
+
+            self.equalize(50, 255);
             self.drawNewOnCanvas();
         };
         imageToDraw.src = source;
