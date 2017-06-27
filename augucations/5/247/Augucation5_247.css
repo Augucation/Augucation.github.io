@@ -20,7 +20,7 @@
 #chart_wrapper
 {
 	box-sizing: border-box;
-	width: 100%;
+	width: 30%;
 	height: 200px;
 	margin: 2% auto 1% auto;
 }
@@ -35,8 +35,9 @@
 #slider_wrapper
 {
 	width: 30%;
+	height: 5%;
 	text-align: center;
-	margin: 2% auto;
+	margin: 0% auto 0 auto;
 	position: relative;
 }
 
@@ -78,4 +79,11 @@ input[type=range]::-webkit-slider-runnable-track {
 #histo_slider_min
 {
   z-index: 1;	
+}
+
+#span_wrapper
+{
+	
+	position: relative;
+	text-align: center;
 }

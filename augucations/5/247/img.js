@@ -11,7 +11,7 @@ function img (source, container_canvas) {
 
     this.data = [];
     this.origData = [];
-	this.histogramm = [];
+	this.histogram = new Array(256).fill(0);
 
     this.hMin;
     this.hMax;
@@ -47,10 +47,8 @@ function img (source, container_canvas) {
         }
     };
 
+    // equalize the image acoording to the given range
     this.equalize = function(w_min, w_max) {
-
-        //var h_min = this.getMin();
-        //var h_max = this.getMax();
 
         for (var i = 0; i < this.origData.length; i += 4) {
             var f_prime = parseInt(((this.origData[i] - this.hMin) / (this.hMax - this.hMin)) * Math.abs(w_max - w_min) + Math.min(w_min, w_max));
@@ -59,8 +57,12 @@ function img (source, container_canvas) {
             this.data[i + 1] = f_prime;
             this.data[i + 2] = f_prime;
         }
+
+        // after image data changed, calculate new histogram
+        this.calculateHistogram();
     };
 
+    // called when image data was modified, draws the new image onto the canvas
     this.drawNewOnCanvas = function() {
 
         // create new ImageData object
@@ -75,6 +77,8 @@ function img (source, container_canvas) {
         this.context.putImageData(new_imageData, 0, 0);
     };
 
+
+    // initial: draws the image onto the canvas, stores image data and calls first equalization and drawing
     this.drawOnCanvasAndSaveData = function()
     {
         var imageToDraw = new Image;
@@ -88,22 +92,32 @@ function img (source, container_canvas) {
             self.alignRGBChannels();
 
             // store this data as origData
-            //self.origData = self.data;
             for (var i = 0; i < self.data.length; i++) {
                 self.origData[i] = self.data[i];
             }
 
+            // calculate min and max once (later used for histogram equalization)
             self.hMin = self.getMin();
             self.hMax = self.getMax();
 
-            self.equalize(50, 255);
+            // initial image and histogram creation
+            self.equalize($('#histo_slider_min').val(), $('#histo_slider_max').val());
             self.drawNewOnCanvas();
         };
         imageToDraw.src = source;
 	};
 
 	this.calculateHistogram = function() {
-		//for (var i = 0; i < this.)
+        this.histogram.fill(0);
+
+        // iterate over image and increase histogram bins
+		for (var i = 0; i < this.data.length; i += 4) {
+            this.histogram[this.data[i]]++;
+        }
+
+        // throw event (plotter reacts and plots new histogram)
+        var event = new CustomEvent("calculatedHistogram");
+        document.dispatchEvent(event);
 	};
 
     this.drawOnCanvasAndSaveData();
