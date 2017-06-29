@@ -1,0 +1,70 @@
+#container
+{
+  border: 0px solid black;
+  width: 90%;
+  height: 90%;
+  display: block;
+  margin: 1% auto auto auto;
+  text-align: center;
+}
+
+#htmlContainer
+{
+  width: 100%;
+  height: 90%;
+  margin-top: 1%;
+}
+
+#task
+{
+  width: 100%;
+  font-size: 28px;
+}
+
+#result, [id^=editor]
+{
+  border-radius: 1%;
+}
+
+#result
+{
+  border: 1px solid gray;
+  float: right;
+  width: 49%;
+  height: 80%;
+  margin-top: 1%;
+}
+
+[id^=editor]
+{
+  border: 1px solid gray;
+  width: 100%;
+  height: 50%;
+  float: left;
+}
+
+#codeContainer
+{
+  width: 49%;
+  height: 80%;
+  float: left;
+  margin-top: 1%;
+}
+
+#buttonContainer
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -3%;
+}
+
+#btnCompile
+{
+  width: 10%;
+  font-size: 20px;
+}
+
+textarea {
+   resize: none;
+}
