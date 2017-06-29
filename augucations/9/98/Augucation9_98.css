@@ -32,15 +32,20 @@
   float: right;
   width: 49%;
   height: 80%;
-  margin-top: 1%;
+  margin-top: 2.5%;
 }
 
 [id^=editor]
 {
   border: 1px solid gray;
   width: 100%;
-  height: 50%;
+  height: 43%;
   float: left;
+}
+
+#editor_html
+{
+  margin-bottom:  2.3%;
 }
 
 #codeContainer
@@ -49,6 +54,7 @@
   height: 80%;
   float: left;
   margin-top: 1%;
+  display: block;
 }
 
 #buttonContainer
@@ -67,4 +73,9 @@
 
 textarea {
    resize: none;
+}
+
+.label
+{
+  text-align: left;
 }
