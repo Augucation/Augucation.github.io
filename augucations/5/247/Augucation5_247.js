@@ -5,7 +5,7 @@ var src_url = "../../../resources/img/haus_slideimg.png";
 var min = $('#histo_slider_min').val();
 var max = $('#histo_slider_max').val();
 
-// create image 
+// create image
 var my_image = new img(src_url, document.getElementById("pic_canvas"));
 
 function sliderInput(isMin, val) {
