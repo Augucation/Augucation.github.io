@@ -20,6 +20,15 @@
 #input
 {
   float: right;
+  background-image: url("codeErrorLine.png");
+  background-repeat: no-repeat;
+  background-size: 1000px 24px;
+  background-position: 0px 24px;
+}
+
+#input.noError
+{
+  background-image: none;
 }
 
 #checkBtnContainer

@@ -1,38 +1,3 @@
-/*
-var xt = "",
-    h3OK = 1
-function checkErrorXML(x)
-{
-    xt = ""
-    h3OK = 1
-    checkXML(x)
-}
-
-function checkXML(n)
-{
-    var l, i, nam
-    nam = n.nodeName
-    if (nam == "h3")
-    {
-        if (h3OK == 0)
-    {
-        return;
-    }
-    h3OK = 0
-    }
-    if (nam == "#text")
-    {
-        xt = xt + n.nodeValue + "\n"
-        //console.log("nodeValue: ", n);
-    }
-    l = n.childNodes.length
-    for (i = 0; i < l;i++)
-    {
-     checkXML(n.childNodes[i])
-    }
-}
-*/
-
 function XMLError (errorObj) {
 
     this.errString = errorObj.textContent;
@@ -62,9 +27,6 @@ function XMLError (errorObj) {
 
     this.type = this.extractType();
     this.line = this.extractLine();
-
-    console.log("type: ", this.type);
-    console.log("line: ", this.line);
 }
 
 function checkWellformed() {
@@ -76,11 +38,13 @@ function checkWellformed() {
     xmlDoc = parser.parseFromString(text,"text/xml");
 
     if (xmlDoc.getElementsByTagName("parsererror").length > 0) { // if there are any errors
-        var err = XMLError(xmlDoc.getElementsByTagName("parsererror")[0]);
-        displayResult(false, true);
+        var xmlErr = new XMLError(xmlDoc.getElementsByTagName("parsererror")[0]);
+        displayResultWellformness(xmlErr);
     }
     else {
-        //console.log("No errors");
-        displayResult(true, true);
+        displayResultWellformness(null);
+
+        //if well-formed, check for validity
+        checkValidity(xmlDoc);
     }
 }
