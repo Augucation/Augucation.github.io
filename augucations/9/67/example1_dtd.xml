@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE filmsammlung [
+    <!ELEMENT filmsammlung (film*)>
+    <!ELEMENT film (titel,genre,(animationsstudio | darsteller+))>
+    <!ELEMENT titel (haupttitel,untertitel?)>
+    <!ELEMENT haupttitel (#PCDATA)>
+    <!ELEMENT untertitel (#PCDATA)>
+    <!ELEMENT genre (#PCDATA)>
+    <!ELEMENT animationsstudio (#PCDATA)>
+    <!ELEMENT darsteller (vorname*,nachname)>
+    <!ELEMENT vorname (#PCDATA)>
+    <!ELEMENT nachname (#PCDATA)>
+    <!ATTLIST film imdb_id ID #REQUIRED>
+]>
+<filmsammlung>
+<film>
+  <titel><haupttitel>Matrix</haupttitel></titel>
+  <genre>Science-Fiction</genre>
+  <genre>Action</genre>
+  <animationsstudio>Disney</animationsstudio>
+  <darsteller>Keanu Reeves</darsteller>
+</film>
+</filmsammlung>

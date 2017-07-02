@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE filmsammlung [
+    <!ELEMENT filmsammlung (film*)>
+    <!ELEMENT film (titel,genre,(animationsstudio | darsteller+))>
+    <!ELEMENT titel (haupttitel,untertitel?)>
+    <!ELEMENT haupttitel (#PCDATA)>
+    <!ELEMENT untertitel (#PCDATA)>
+    <!ELEMENT genre (#PCDATA)>
+    <!ELEMENT animationsstudio (#PCDATA)>
+    <!ELEMENT darsteller (vorname*,nachname)>
+    <!ELEMENT vorname (#PCDATA)>
+    <!ELEMENT nachname (#PCDATA)>
+    <!ATTLIST film imdb_id ID #REQUIRED>
+]>
+<filmsammlung>
+<film imdb_id="1234">
+  <titel>
+        <haupttitel>Matrix</haupttitel>
+  </titel>
+  <genre>Science-Fiction</genre>
+  <!--genre>Action</genre-->
+  <!--animationsstudio>Disney</animationsstudio-->
+  <darsteller>
+      <nachname>Keanu Reeves</nachname>
+  </darsteller>
+</film>
+<film imdb_id="1234">
+  <titel>
+    <haupttitel>Twilight->Der Film</haupttitel>
+    <untertitel>Vampire und Wölfe</untertitel>
+  </titel>
+  <genre>Science-Fiction</genre>
+  <darsteller>
+    <vorname>Kristen</vorname>
+    <vorname>...</vorname>
+    <nachname>Stewart</nachname>
+  </darsteller>
+  <darsteller>
+    <vorname>Robert</vorname>
+    <nachname>Pattinson</nachname>
+  </darsteller>
+</film>
+</filmsammlung>

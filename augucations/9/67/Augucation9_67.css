@@ -1,0 +1,76 @@
+#container
+{
+  width: 90%;
+  height: 90%;
+  margin: auto;
+}
+
+#dtd, #input
+{
+  margin-top: 2%;
+  width: 40%;
+  height: 60%;
+}
+
+#dtd
+{
+  float: left;
+}
+
+#input
+{
+  float: right;
+}
+
+#checkBtnContainer
+{
+  float: left;
+  width: 20%;
+  height: 60%;
+  align-content: center;
+  display: flex;
+  margin-top: 2%;
+}
+
+#check
+{
+  height: 40px;
+  margin: auto;
+  display: relative;
+}
+
+#evalContainer
+{
+  width: 90%;
+  height: 30%;
+  position: fixed;
+  bottom: 0;
+  margin: 2% auto;  
+  text-align: center;
+  justify-content: center;
+}
+
+#wellformed, #valid
+{
+  display: block;
+  word-wrap: break-word;
+}
+
+textarea
+{
+  resize: none;
+  font-size: 20px;
+  border-color: #555E67;
+  border-radius: 1%;
+  outline: none;
+}
+
+.right
+{
+  color: var(--green);
+}
+
+.wrong
+{
+  color: red;
+}
