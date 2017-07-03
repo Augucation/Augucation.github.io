@@ -21,12 +21,12 @@
 			<input type="button" id="check" class="button" value="Prüfen" onclick="checkWellformed();"/>
 		</div>
 
-		<textarea id="input" class="noError"></textarea>
+		<textarea id="input" class="noError" onscroll="updateInputScroll();"></textarea>
 
 		<div id="evalContainer">
 
-			<span id="wellformed">wohlgeformt</span>
-			<span id="valid">gültig</span>
+			<span id="wellformed"></span>
+			<span id="valid"></span>
 
 		</div>
 	</div>
@@ -39,6 +39,7 @@
 	<script type="text/javascript" src="fileReader.js"></script>
 	<script type="text/javascript" src="dtdChecker.js"></script>
 	<script type="text/javascript" src="xmlChecker.js"></script>
+	<script type="text/javascript" src="errorGUI.js"></script>
 	<script type="text/javascript" src="Augucation9_67.js"></script>
 
 </body>
