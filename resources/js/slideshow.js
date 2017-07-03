@@ -59,7 +59,7 @@ var augucations = [
 	[
 		[19, "Absorption"],
 		[211, "DCT"],
-		//[247, "Histogramme"],
+		[247, "Histogrammausgleich"],
 		[256, "Filter"]
 	],
 
