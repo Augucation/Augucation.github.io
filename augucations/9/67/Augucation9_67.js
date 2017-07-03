@@ -1,7 +1,9 @@
 var lineHeight = 24; //height of a line in the textarea in px
-var errLine = new errorLine($("#input"), null, lineHeight);
+var errLine = new errorLine($("#input"), lineHeight);
 
 readTextFile("dtd.txt");
+
+allowTabInTextarea("input");
 
 function writeDTDInDiv (dtdText) {
     $("#dtd").text(dtdText.toString());
