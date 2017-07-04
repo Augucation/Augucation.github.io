@@ -51,7 +51,7 @@ function correctLineNumber (text, err) {
     var lines = text.split("\n");
 
     // if the line above misses a >, the error should be there
-    if (lines[err.line - 2].slice(-1) != ">") { // - 2 because line count starts as 1
+    if (lines[err.line - 2] != null && lines[err.line - 2].slice(-1) != ">") { // - 2 because line count starts as 1
         return err.line - 1;
     }
     else {
