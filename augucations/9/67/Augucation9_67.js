@@ -1,18 +1,24 @@
 var lineHeight = 24; //height of a line in the textarea in px
 var errLine = new errorLine($("#input"), lineHeight);
 
-readTextFile("dtd.txt");
+readTextFile("dtd.txt", $("#dtd"));
+readTextFile("example2.xml", $("#input"));
+
 
 allowTabInTextarea("input");
 
-function writeDTDInDiv (dtdText) {
-    $("#dtd").text(dtdText.toString());
+function writeDTDInDiv (text, dest) {
+    dest.text(text.toString());
 }
 
-function displayResultValidity (isValid) {
+function displayResultValidity (err) {
 
-    $("#valid").text(isValid ? "gültig" : "nicht gültig");
-    $("#valid").attr("class", isValid ? "right" : "wrong");
+    $("#valid").text(err == null ? "gültig" : "nicht gültig");
+    $("#valid").attr("class", err == null ? "right" : "wrong");
+
+    // display error message
+
+    $("#validMsg").html(err ? err : "");
 }
 
 function displayResultWellformness (err) {
@@ -34,6 +40,9 @@ function displayResultWellformness (err) {
         errLine.setLineNumber(correctLineNumber($("#input").val(), err));
         errLine.update();
         errLine.show(true);
+
+        // if not well-formed, don't show validity feedback
+        $("#valid").text("");
     }
 }
 
@@ -53,3 +62,8 @@ function correctLineNumber (text, err) {
 function updateInputScroll () {
     errLine.update();
 }
+
+// remove error line when input is changed
+$("#input").on("keydown", function () {
+    errLine.show(false);
+});

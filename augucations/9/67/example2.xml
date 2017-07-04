@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE filmsammlung SYSTEM "example.dtd">
+<!DOCTYPE filmsammlung SYSTEM "filmsammlung.dtd">
 <filmsammlung>
 <film imdb_id="1234">
   <titel>Matrix</titel>

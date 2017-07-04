@@ -1,13 +1,8 @@
-function errorLine(textarea, err, lineHeight) {
+function errorLine(textarea, lineHeight) {
 
-    this.err = err;
     this.ypos;
     this.lineHeight = lineHeight;
     this.lineNumber;
-
-    this.setError = function (e) {
-        this.err = e;
-    }
 
     this.setLineNumber = function (number) {
         this.lineNumber = number;
