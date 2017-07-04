@@ -1,23 +1,49 @@
+
+// list of all allowed element names
+var elementNames = ["filmsammlung", "film", "titel", "haupttitel", "untertitel", "genre", "animationsstudio", "darsteller", "vorname", "nachname"];
+
+var forbiddenPCDATAElements = ["<", ">", "&gt;"];
+
 function checkValidity(xml) {
 
     var err = null;
 
     console.log(xml);
 
-    // list of all allowed element names
-    var elementNames = ["filmsammlung", "film", "titel", "haupttitel", "untertitel", "genre", "animationsstudio", "darsteller", "vorname", "nachname"];
-
     // check for invalid elements
     var allElements = xml.getElementsByTagName("*");
 
     for (var i = 0; i < allElements.length; i++) {
+
+        // invalid tagNames
         if (elementNames.indexOf(allElements[i].tagName) == -1) { // elementNames doesn't contain tagName
             if (err == null) err = "Ungültiges Element: " + allElements[i].tagName;
             console.log("err: ", err);
 
-
             displayResultValidity(err);
             return;
+        }
+
+        // pcadata
+        if (allElements[i].tagName == "haupttitel") // haupttitel allows cdata
+            continue;
+
+        if (allElements[i].childNodes.length > 1) // only check elements without childNodes
+            continue;
+
+        var c = allElements[i].innerHTML; // get innerHTML content
+
+        // check for all forbidden elements if they are in the string
+        for (var j = 0; j < forbiddenPCDATAElements.length; j++) {
+
+            console.log(c.indexOf(forbiddenPCDATAElements[j]) > -1);
+            if (c.indexOf(forbiddenPCDATAElements[j]) > -1) {
+                if (err == null) err = "Element enthält CDATA";
+                console.log("err: ", err);
+
+                displayResultValidity(err);
+                return;
+            }
         }
     }
 
