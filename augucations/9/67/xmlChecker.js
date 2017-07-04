@@ -20,7 +20,8 @@ function XMLError (errorObj) {
         var line = this.errString.split("Number ")[1];
 
         // cut ending
-        line = line.split(",")[0];
+        if (line != null)
+            line = line.split(",")[0];
 
         return line;
     }
