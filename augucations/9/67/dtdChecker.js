@@ -5,7 +5,7 @@ function checkValidity(xml) {
     console.log(xml);
 
     // list of all allowed element names
-    var elementNames = ["filmsammlung", "film", "titel", "haupttitel", "untertitel", "genre", "darsteller", "vorname", "nachname"];
+    var elementNames = ["filmsammlung", "film", "titel", "haupttitel", "untertitel", "genre", "animationsstudio", "darsteller", "vorname", "nachname"];
 
     // check for invalid elements
     var allElements = xml.getElementsByTagName("*");
