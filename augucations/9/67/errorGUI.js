@@ -19,11 +19,11 @@ function errorLine(textarea, lineHeight) {
     this.calcYPos = function () {
 
         // consider the scroll bar and adjust the value
-        //var scroll = textarea.scrollTop();
+        var scroll = textarea.scrollTop;//();
 
         //var scroll = textarea.pageYOffset;
 
-        var scroll = scrollValue;
+        //var scroll = scrollValue;
         //console.log("scrollValue: ", scrollValue);
 
         // highlight the relevant line by set the position of the red line
