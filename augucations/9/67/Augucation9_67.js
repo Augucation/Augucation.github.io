@@ -1,5 +1,4 @@
 var lineHeight = calculateLineHeight($('#input')); //24; //height of a line in the textarea in px
-console.log("lineHeight: ", lineHeight);
 
 var errLine = new errorLine($("#input"), lineHeight);
 

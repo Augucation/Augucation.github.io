@@ -36,7 +36,6 @@ function checkValidity(xml) {
         // check for all forbidden elements if they are in the string
         for (var j = 0; j < forbiddenPCDATAElements.length; j++) {
 
-            console.log(c.indexOf(forbiddenPCDATAElements[j]) > -1);
             if (c.indexOf(forbiddenPCDATAElements[j]) > -1) {
                 if (err == null) err = "PCDATA-Element enthält CDATA";
                 console.log("err: ", err);
