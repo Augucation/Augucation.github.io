@@ -2,6 +2,7 @@ function XMLError (errorObj) {
 
     this.errString = errorObj.textContent;
 
+
     this.extractType = function() {
 
         // cut beginning
@@ -15,6 +16,8 @@ function XMLError (errorObj) {
     }
 
     this.extractLine = function() {
+
+        console.log("xml error message: ", this.errString);
 
         // cut beginning until after "number"
         var line = this.errString.split("Number ")[1];
