@@ -8,6 +8,7 @@ function errorLine(textarea, lineHeight) {
 
     this.setLineNumber = function (number) {
         this.lineNumber = number;
+        console.log("set lineNumber: ", this.lineNumber);
     }
 
     this.show = function (show) {
