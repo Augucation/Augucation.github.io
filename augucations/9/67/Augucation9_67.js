@@ -49,8 +49,8 @@ function displayResultWellformness (err) {
 function correctLineNumber (text, err) {
 
     var lines = text.split("\n");
-    console.log("text: ", text);
-
+    console.log("err: ", err);
+    /////////////////////////////////////////////////////
     // if the line above misses a >, the error should be there
     console.log("lines[err.line - 2]: ", lines[err.line - 2]);
     if (lines[err.line - 2] != null && lines[err.line - 2].slice(-1) != ">") { // - 2 because line count starts as 1
