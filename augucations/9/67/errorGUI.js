@@ -19,7 +19,8 @@ function errorLine(textarea, lineHeight) {
     this.calcYPos = function () {
 
         // consider the scroll bar and adjust the value
-        var scroll = textarea.scrollTop;//();
+        var scroll = textarea.scrollTop();
+        //sconsole.log("scroll: ", scroll);
 
         //var scroll = textarea.pageYOffset;
 
@@ -27,7 +28,9 @@ function errorLine(textarea, lineHeight) {
         //console.log("scrollValue: ", scrollValue);
 
         // highlight the relevant line by set the position of the red line
+        this.lineNumber = 5;
         this.yPos = this.lineHeight * (this.lineNumber - 1) - scroll; // - 1 because line count starts at 1
+        console.log("this.ypos: ", this.lineNumber);
     }
 
     this.drawOnPos = function () {
@@ -38,10 +41,11 @@ function errorLine(textarea, lineHeight) {
 
     this.update = function () {
 
+        var that = this;
         //setTimeout(function () {
-            this.calcYPos();
-            this.drawOnPos();
-        //}, 1);
+            that.calcYPos();
+            that.drawOnPos();
+        //}, 0);
     }
 }
 
