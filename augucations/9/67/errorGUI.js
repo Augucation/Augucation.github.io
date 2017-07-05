@@ -28,7 +28,7 @@ function errorLine(textarea, lineHeight) {
         //console.log("scrollValue: ", scrollValue);
 
         // highlight the relevant line by set the position of the red line
-        this.lineNumber = 5;
+        //this.lineNumber = 5;
         this.yPos = this.lineHeight * (this.lineNumber - 1) - scroll; // - 1 because line count starts at 1
         console.log("this.ypos: ", this.lineNumber);
     }
