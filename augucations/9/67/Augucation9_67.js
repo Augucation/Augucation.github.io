@@ -1,4 +1,6 @@
-var lineHeight = 24; //height of a line in the textarea in px
+var lineHeight = calculateLineHeight($('#input')); //24; //height of a line in the textarea in px
+console.log("lineHeight: ", lineHeight);
+
 var errLine = new errorLine($("#input"), lineHeight);
 
 readTextFile("dtd.txt", $("#dtd"));
@@ -6,6 +8,22 @@ readTextFile("example2.xml", $("#input"));
 
 
 allowTabInTextarea("input");
+
+function calculateLineHeight(textarea) {
+
+    var lineHeight;
+
+    // firefox
+    lineHeight = parseFloat($('#input').css('line-height'));
+
+    // Chrome
+    if (isNaN(lineHeight)){
+        var magicNumber = 1.16;
+        lineHeight = magicNumber * parseFloat($('#input').css('font-size'));
+    }
+
+    return lineHeight;
+}
 
 function writeDTDInDiv (text, dest) {
     dest.text(text.toString());
@@ -49,10 +67,8 @@ function displayResultWellformness (err) {
 function correctLineNumber (text, err) {
 
     var lines = text.split("\n");
-    console.log("err: ", err);
-    /////////////////////////////////////////////////////
+
     // if the line above misses a >, the error should be there
-    console.log("lines[err.line - 2]: ", lines[err.line - 2]);
     if (lines[err.line - 2] != null && lines[err.line - 2].slice(-1) != ">") { // - 2 because line count starts as 1
         return err.line - 1;
     }

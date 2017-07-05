@@ -23,6 +23,17 @@ function XMLError (errorObj) {
         if (line != null)
             line = line.split(",")[0];
 
+
+        // Chrome:
+        if (line == undefined) {
+
+            // cut beginning
+            line = this.errString.split("error on line ")[1];
+
+            // cut ending
+            line = line.split(" ")[0];
+        }
+
         return line;
     }
 
