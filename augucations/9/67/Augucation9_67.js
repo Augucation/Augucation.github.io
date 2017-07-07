@@ -2,6 +2,8 @@ var lineHeight = calculateLineHeight($('#input')); //24; //height of a line in t
 
 var errLine = new errorLine($("#input"), lineHeight);
 
+var errTipp = "";
+
 readTextFile("dtd.txt", $("#dtd"));
 readTextFile("example2.xml", $("#input"));
 
@@ -30,12 +32,24 @@ function writeDTDInDiv (text, dest) {
 
 function displayResultValidity (err) {
 
+    console.log("displayResultValidity. err: ", err);
     $("#valid").text(err == null ? "gültig" : "nicht gültig");
     $("#valid").attr("class", err == null ? "right" : "wrong");
 
-    // display error message
+    // display tipp button, if tipp is available;
+    errTipp = err;
+    showTippButton(err);
+    //$("#validMsg").html(err && tippShowing ? err : "");
+}
 
-    $("#validMsg").html(err ? err : "");
+function showTipp (show) {
+
+    console.log("showTipp. show: ", show, "  errTipp: ", errTipp);
+    $("#validMsg").html(errTipp && show ? errTipp : "");
+}
+
+function showTippButton (show) {
+    $("#tipp").css("visibility", show ? "visible" : "hidden");
 }
 
 function displayResultWellformness (err) {
@@ -58,8 +72,14 @@ function displayResultWellformness (err) {
         errLine.update();
         errLine.show(true);
 
-        // if not well-formed, don't show validity feedback
+        // if not well-formed, don't show validity feedback and hide the tipp button
         $("#valid").text("");
+        showTippButton(false);
+    }
+
+    // if the error line could not be extracted correctly, don't show the line
+    if (err != null && err.line == undefined) {
+        errLine.show(false);
     }
 }
 

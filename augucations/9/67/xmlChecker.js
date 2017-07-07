@@ -17,7 +17,7 @@ function XMLError (errorObj) {
 
     this.extractLine = function() {
 
-        console.log("xml error message: ", this.errString);
+        console.log("Augucation! xml error message: ", this.errString);
 
         // cut beginning until after "number"
         var line = this.errString.split("Number ")[1];
@@ -37,6 +37,8 @@ function XMLError (errorObj) {
             line = line.split(" ")[0];
         }
 
+        console.log("Augucation! error in line ", line);
+
         return line;
     }
 
@@ -45,6 +47,10 @@ function XMLError (errorObj) {
 }
 
 function checkWellformed() {
+
+    // hide tipp until tipp button is clicked again
+    showTipp(false);
+
     var text, parser, xmlDoc;
 
     text =  $("#input").val();
