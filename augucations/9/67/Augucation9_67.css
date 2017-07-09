@@ -22,9 +22,33 @@
   float: left;
 }
 
-#labelXML
+#labelXML1, #labelXML2{
+  cursor: pointer;
+}
+
+#labelsXML
 {
   float: right;
+}
+
+#labelXML1
+{
+   float: left;
+}
+
+#labelXML2
+{
+  float: right;
+}
+
+.active
+{
+  
+}
+
+.inactive
+{
+  color: var(--light_gray);
 }
 
 #dtd, #input

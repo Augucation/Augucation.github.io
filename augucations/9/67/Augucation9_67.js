@@ -4,9 +4,14 @@ var errLine = new errorLine($("#input"), lineHeight);
 
 var errTipp = "";
 
-readTextFile("dtd.txt", $("#dtd"));
-readTextFile("example2.xml", $("#input"));
+var xmls = ["", ""]; //  stores xml1 and xml2
 
+var currentXML = 1;
+
+readTextFile("dtd.txt", $("#dtd"), null);
+
+readTextFile("example1.xml", $("#input"), 0);
+readTextFile("example2.xml", null, 1);
 
 allowTabInTextarea("input");
 
@@ -26,13 +31,12 @@ function calculateLineHeight(textarea) {
     return lineHeight;
 }
 
-function writeDTDInDiv (text, dest) {
+function writeToDiv (text, dest) {
     dest.text(text.toString());
 }
 
 function displayResultValidity (err) {
 
-    console.log("displayResultValidity. err: ", err);
     $("#valid").text(err == null ? "gültig" : "nicht gültig");
     $("#valid").attr("class", err == null ? "right" : "wrong");
 
@@ -44,7 +48,6 @@ function displayResultValidity (err) {
 
 function showTipp (show) {
 
-    console.log("showTipp. show: ", show, "  errTipp: ", errTipp);
     $("#validMsg").html(errTipp && show ? errTipp : "");
 }
 
@@ -111,3 +114,49 @@ function updateInputScroll () {
 $("#input").on("keydown", function () {
     errLine.show(false);
 });
+
+
+
+function changeXML (num) {
+
+    // if current xml is clicked, do nothing
+    if (num == currentXML)
+        return;
+
+    // hightlight the current xml tab (visual feedback)
+    hightLightXMLTab(num);
+
+    // don't display any feedback (until next check)
+    resetFeedBack();
+
+    // store current XML (including user's changes) to display it later again
+    storeCurrentXML ();
+
+    // write new xml into the input text area
+    $("#input").val(xmls[num - 1]);
+
+    currentXML = num;
+}
+
+function hightLightXMLTab (num) {
+
+    var active_num = num;
+    var inactive_num = num % 2 + 1;
+
+    $("#labelXML" + active_num).attr("class", "active");
+    $("#labelXML" + inactive_num).attr("class", "inactive");
+}
+
+function resetFeedBack() {
+
+    $("#wellformed").text("");
+    $("#valid").text("");
+    $("#validMsg").html("");
+    showTippButton(false);
+}
+
+function storeCurrentXML () {
+
+    // save current xml's text
+    xmls[currentXML - 1] = $("#input").val();
+}

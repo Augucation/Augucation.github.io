@@ -18,17 +18,18 @@ function checkValidity(xml) {
         // invalid tagNames
         if (elementNames.indexOf(allElements[i].tagName) == -1) { // elementNames doesn't contain tagName
             if (err == null) err = "Ungültiges Element: " + allElements[i].tagName;
-            console.log("err: ", err);
 
             displayResultValidity(err);
             return;
         }
 
+        console.log("element: ", allElements[i], " children: ", allElements[i].childNodes.length);
+
         // pcadata
         if (allElements[i].tagName == "haupttitel") // haupttitel allows cdata
             continue;
 
-        if (allElements[i].childNodes.length > 1) // only check elements without childNodes
+        if (allElements[i].childNodes.length > 2) // only check elements without childNodes
             continue;
 
         var c = allElements[i].innerHTML; // get innerHTML content
@@ -38,7 +39,6 @@ function checkValidity(xml) {
 
             if (c.indexOf(forbiddenPCDATAElements[j]) > -1) {
                 if (err == null) err = "PCDATA-Element enthält CDATA";
-                console.log("err: ", err);
 
                 displayResultValidity(err);
                 return;
@@ -49,13 +49,16 @@ function checkValidity(xml) {
     // childNodes[1] = <filmsammlung>
     if (xml.childNodes[1] == null || xml.childNodes[1].tagName != "filmsammlung") {
         if (err == null ) err = "Fehlende Filmsammlung";
-        console.log("err: ", err);
+    }
+
+    // error if ID is missing
+    if (!checkIDExistence(xml.childNodes[1])) {
+        if (err == null) err = "Fehlende ID";
     }
 
     // error if IDs are not unique
     if (!checkIDSingularity(xml.childNodes[1])) {
         if (err == null) err = "Ungültige ID";
-        console.log("err: ", err);
     }
 
     // <filmsammlung>:
@@ -63,12 +66,10 @@ function checkValidity(xml) {
     for (var i = 1; i < xml.childNodes[1].childNodes.length; i += 2) {
         if (!checkNumber(xml.childNodes[1], "film", 0, Number.MAX_VALUE)) {
             if (err == null) err = "Ungültige Anzahl an Filmen";
-            console.log("err: ", err);
         }
 
         if (xml.childNodes[1].childNodes[i].tagName != "film") {
             if (err == null ) err = "Fehlender Film";
-            console.log("err: ", err);
         }
     }
 
@@ -84,22 +85,18 @@ function checkValidity(xml) {
 
         if (!checkNumber(film, "titel", 1, 1)) {
             if (err == null) err = "Ungültige Anzahl an Titeln";
-            console.log("err: ", err);
         }
 
         if (film.childNodes[1] == null || film.childNodes[1].tagName != "titel") {
             if (err == null ) err = "Fehlender Titel";
-            console.log("err: ", err);
         }
 
         if (film.childNodes[3] == null || film.childNodes[3].tagName != "genre") {
             if (film.childNodes[3].tagName == "titel") {
                 if (err == null ) err = "Ungültige Anzahl an Titeln";
-                console.log("err: ", err);
             }
             else {
                 if (err == null ) err = "Fehlendes Genre";
-                console.log("err: ", err);
             }
         }
 
@@ -107,11 +104,9 @@ function checkValidity(xml) {
 
             if (film.childNodes[5] != null && film.childNodes[5].tagName == "genre") {
                 if (err == null ) err = "Ungültige Anzahl an Genres";
-                console.log("err: ", err);
             }
             else {
                 if (err == null ) err = "Fehlendes Animationsstudio/Darsteller";
-                console.log("err: ", err);
             }
         }
 
@@ -120,12 +115,10 @@ function checkValidity(xml) {
 
             if (!checkNumber(film, "animationsstudio", 1, 1)) {
                 if (err == null) err = "Ungültige Anzahl an Animationsstudios";
-                console.log("err: ", err);
             }
 
             if (!checkNumber(film, "darsteller", 0, 0)) {
                 if (err == null) err = "Ungültiges Element: Darsteller";
-                console.log("err: ", err);
             }
         }
 
@@ -134,7 +127,6 @@ function checkValidity(xml) {
 
             if (!checkNumber(film, "animationsstudio", 0, 0)) {
                 if (err == null) err = "Ungültiges Element: Animationsstudio";
-                console.log("err: ", err);
             }
         }
 
@@ -147,7 +139,6 @@ function checkValidity(xml) {
 
             if (film.childNodes[j] == null || film.childNodes[j] != null && film.childNodes[j].tagName != "darsteller") {
                 if (err == null ) err = "Unerlaubtes Element nach Animationsstudio/Darsteller";
-                console.log("err: ", err);
             }
 
 
@@ -164,12 +155,10 @@ function checkValidity(xml) {
                     // if the secondLastChild isn't a nachname, but other siblings are, the order is wrong
                     if (checkNumber(film.childNodes[j], "nachname", 1, 1)) {
                         if (err == null) err = "Ungültiges Element nach Nachname";
-                        console.log("err: ", err);
                     }
 
 
                     if (err == null ) err = "Fehlender Nachname";
-                    console.log("err: ", err);
                 }
 
                 // vorname
@@ -180,11 +169,9 @@ function checkValidity(xml) {
                     if (vn == null || vn.tagName != "vorname") {
                         if (vn.tagName == "nachname") {
                             if (err == null) err = "Ungültige Anzahl an Nachnamen";
-                            console.log("err: ", err);
                         }
                         else {
                             if (err == null ) err = "Fehlender Vorname";
-                            console.log("err: ", err);
                         }
                     }
                 }
@@ -197,7 +184,6 @@ function checkValidity(xml) {
         //    - childNodes[1] = nichts oder <untertitel>
         if (film.childNodes[1].childNodes[1] == null || film.childNodes[1].childNodes[1].tagName != "haupttitel") {
             if (err == null ) err = "Fehlender Haupttitel";
-            console.log("err: ", err);
         }
 
         // untertitel is optional, so it can be null without an error. However, only check it if it's not null to avoid undefined errors
@@ -205,18 +191,15 @@ function checkValidity(xml) {
 
             if (!checkNumber(film.childNodes[1], "untertitel", 0, 1)) {
                 if (err == null) err = "Ungültige Anzhal an Untertiteln";
-                console.log("err: ", err);
             }
 
             if (film.childNodes[1].childNodes[3].tagName != "untertitel" || film.childNodes[1].childNodes[5] != null) {
 
                 if (!checkNumber(film.childNodes[1], "haupttitel", 1, 1)) {
                     if (err == null) err = "Ungültige Anzhal an Haupttiteln";
-                    console.log("err: ", err);
                 }
 
                 if (err == null ) err = "Unerlaubtes Element nach Haupttitel";
-                console.log("err: ", err);
             }
         }
     }
@@ -232,18 +215,33 @@ function getXMLID (elem) {
     var outerHTML = elem.outerHTML;
 
     // cut beginning
-    outerHTML = outerHTML.split("\"")[1];
+    outerHTML = outerHTML.split("imdb_id=\"")[1];
+
+    if (outerHTML == undefined)
+        return "no id";
 
     // cut rest
     outerHTML = outerHTML.split("\"")[0];
 
+    if (outerHTML == undefined)
+        return "no id";
+
     return outerHTML;
+}
+
+function checkIDExistence (parent) {
+    for (var i = 1; i < parent.childNodes.length; i += 2) {
+        if (getXMLID(parent.childNodes[i]) == "no id") {
+            return false;
+        }
+    }
+    return true;
 }
 
 function checkIDSingularity (parent) {
 
     var IDs = [];
-    for (var i = 1; parent.childNodes.length; i +=2 ) {
+    for (var i = 1; i < parent.childNodes.length; i +=2 ) {
 
         var id = getXMLID(parent.childNodes[i]);
 
@@ -268,15 +266,6 @@ function checkNumber (parent, name, min, max) {
     for (var i = 0; i < parent.childNodes.length - 1; i++) {
         if (parent.childNodes[i].tagName == name)
             count++;
-    }
-
-    if (name == "nachndsdame") {
-        console.log("name: ", name);
-        console.log("parent: ", parent);
-        console.log("min: ", min);
-        console.log("max: ", max);
-        console.log("count: ", count);
-        console.log("valid: ", (count >= min && count <= max));
     }
 
     return (count >= min && count <= max);
