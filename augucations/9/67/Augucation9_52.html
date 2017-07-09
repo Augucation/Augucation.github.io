@@ -1,0 +1,62 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>XML</title>
+	<link rel="icon" href="../../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="Augucation9_52.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
+
+	<div id="container" class="my_text">
+		<div id="labelContainer">
+			<div id="labelDTD">filmsammlung.dtd</div>
+			<div id="labelsXML">
+				<div id="labelXML1" onclick="changeXML(1);" class="active">filmsammlung1.xml
+					<div id="1_solved" class="solved"></div>
+				</div>
+				<div id="labelXML2" onclick="changeXML(2);" class="inactive">filmsammlung2.xml
+					<div id="2_solved" class="solved"></div>
+				</div>
+			</div>
+		</div>
+
+		<textarea readonly id="dtd"></textarea>
+
+		<div id="checkBtnContainer">
+			<input type="button" id="check" class="button" value="Prüfen" onclick="checkWellformed();"/>
+		</div>
+
+		<textarea id="input" class="noError" onscroll="updateInputScroll();"></textarea>
+
+		<div id="evalContainer">
+
+			<span id="wellformed"></span>
+			<span id="valid"></span>
+
+			<input type="button" id="tipp" class="button" value="Tipp" onclick="showTipp(true);"/>
+
+			<div id="validMsg"></div>
+
+		</div>
+	</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(9, 52);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/textTab.js"></script>
+	<script type="text/javascript" src="fileReader.js"></script>
+	<script type="text/javascript" src="dtdChecker.js"></script>
+	<script type="text/javascript" src="xmlChecker.js"></script>
+	<script type="text/javascript" src="errorGUI.js"></script>
+	<script type="text/javascript" src="Augucation9_52.js"></script>
+
+</body>

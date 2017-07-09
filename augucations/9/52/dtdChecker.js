@@ -8,7 +8,7 @@ function checkValidity(xml) {
 
     var err = null;
 
-    // console.log(xml);
+    //console.log(xml);
 
     // check for invalid elements
     var allElements = xml.getElementsByTagName("*");
