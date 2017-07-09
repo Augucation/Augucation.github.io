@@ -4,9 +4,11 @@ var errLine = new errorLine($("#input"), lineHeight);
 
 var errTipp = "";
 
-var xmls = ["", ""]; //  stores xml1 and xml2
+var xmls = ["", ""]; // stores xml1 and xml2
 
 var currentXML = 1;
+
+var solved = [false, false]; // stores if xml1 and xml2 were solved already
 
 readTextFile("dtd.txt", $("#dtd"), null);
 
@@ -44,6 +46,10 @@ function displayResultValidity (err) {
     errTipp = err;
     showTippButton(err);
     //$("#validMsg").html(err && tippShowing ? err : "");
+
+
+    if (!err)
+        solvedXML();
 }
 
 function showTipp (show) {
@@ -53,6 +59,32 @@ function showTipp (show) {
 
 function showTippButton (show) {
     $("#tipp").css("visibility", show ? "visible" : "hidden");
+}
+
+function solvedXML() {
+
+    var otherXML = currentXML % 2 + 1;
+
+    // if the current XML was solved already, do nothing
+    if (solved[currentXML - 1])
+        return;
+
+    // mark the current XML as solved
+    solved[currentXML - 1] = true;
+
+    // show check mark
+    console.log("check mark: ", $("#" + currentXML + "_solved"));
+    $("#" + currentXML + "_solved").css('visibility', 'visible'); //visibility = "visible";
+
+    // if other xml was not solved already, ask to switch to next one
+    // alert if both were solved
+    if (!solved[otherXML - 1]) {
+        if (confirm("Diese XML ist korrekt! Weiter zum nächsten Beispiel?"))
+            changeXML(otherXML);
+    }
+    else {
+        alert("Herzlichen Glückwunsch, du hast beide Beispiele gelöst!");
+    }
 }
 
 function displayResultWellformness (err) {
@@ -143,8 +175,8 @@ function hightLightXMLTab (num) {
     var active_num = num;
     var inactive_num = num % 2 + 1;
 
-    $("#labelXML" + active_num).attr("class", "active");
-    $("#labelXML" + inactive_num).attr("class", "inactive");
+    $("#labelXML" + active_num).toggleClass("inactive");
+    $("#labelXML" + inactive_num).toggleClass("inactive");
 }
 
 function resetFeedBack() {
@@ -153,6 +185,8 @@ function resetFeedBack() {
     $("#valid").text("");
     $("#validMsg").html("");
     showTippButton(false);
+
+    console.log("reseeeeeeeeeeeeeeeet");
 }
 
 function storeCurrentXML () {

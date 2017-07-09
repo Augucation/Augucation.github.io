@@ -8,7 +8,7 @@ function checkValidity(xml) {
 
     var err = null;
 
-    console.log(xml);
+    //console.log(xml);
 
     // check for invalid elements
     var allElements = xml.getElementsByTagName("*");
@@ -22,8 +22,6 @@ function checkValidity(xml) {
             displayResultValidity(err);
             return;
         }
-
-        console.log("element: ", allElements[i], " children: ", allElements[i].childNodes.length);
 
         // pcadata
         if (allElements[i].tagName == "haupttitel") // haupttitel allows cdata

@@ -15,6 +15,7 @@
 [id^="label"]
 {
   width: 45%;
+  height: 30px;
 }
 
 #labelDTD
@@ -41,14 +42,26 @@
   float: right;
 }
 
-.active
-{
-  
-}
-
 .inactive
 {
   color: var(--light_gray);
+}
+
+.solved
+{
+  height: 100%;
+  width: 20%;
+  position: relative;
+  float: right;
+  visibility: hidden;
+  
+  
+  background-image: url("../../../resources/img/checkmark.png");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-x: 0px;
+  background-position-y: 0%;
+  
 }
 
 #dtd, #input
