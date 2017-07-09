@@ -64,6 +64,7 @@ function displayResultWellformness (err) {
     $("#wellformed").attr("class", isWellformed ? "right" : "wrong");
 
     // give editor highlight feedback
+    /*
     if (isWellformed)
         errLine.show(false);
     else
@@ -76,10 +77,16 @@ function displayResultWellformness (err) {
         $("#valid").text("");
         showTippButton(false);
     }
+    */
+
+    if (!isWellformed) {
+        $("#valid").text("");
+        showTippButton(false);
+    }
 
     // if the error line could not be extracted correctly, don't show the line
     if (err != null && err.line == undefined) {
-        errLine.show(false);
+        //errLine.show(false);
     }
 }
 
