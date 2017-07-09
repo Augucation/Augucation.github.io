@@ -91,9 +91,14 @@ var augucations = [
 		[11, "Absorption"],
 	],
 
-	// topic 9
+	// topic 9: internet 1
 	[
-		//[67, "XML"],
+		//[52, "XML"],
+	],
+
+	// topic 10: internet 2
+	[
+		[9, "CSS"]
 	]
 ];
 
