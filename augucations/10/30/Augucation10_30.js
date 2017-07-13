@@ -1,5 +1,14 @@
-function compile()
-{
+function init() {
+
+    createTasks();
+
+    new progressBar($("#progressPointsContainer")[0], tasks.length);
+
+    setTask(0);
+}
+
+function compile() {
+    
     // get html code from html editor
     var html = $($("#editor_html").val());
 
@@ -21,15 +30,24 @@ function addScript(script)
     document.body.appendChild(s);
 }
 
-function setTask(idx)
-{
-    var t = tasks[idx];
-
-    // Show the task as text
-    $("#task").text(t.text);
-
-    // Set the hint
-    console.log("Hint: ", t.hint);
+function clearResult() {
+    $("#result").empty();
 }
 
-setTask(0);
+function toggleTip() {
+
+    if ($("#tipDiv").width()) {
+        $("#tipDiv").css("width", "0%");
+        $("#tipButton").css("right", "0%");
+        $("#tipButtonText").html("i");
+        $("#tipText").css("color", "var(--hci_gray)");
+    }
+    else {
+        $("#tipDiv").css("width", "20%");
+        $("#tipButton").css("right", "20%");
+        $("#tipButtonText").html(">");
+        $("#tipText").css("color", "white");
+    }
+}
+
+init();

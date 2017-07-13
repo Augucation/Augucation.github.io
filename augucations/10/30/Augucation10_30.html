@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="../../../resources/js/css_variable_manager.js"></script>
 
 	<div id="container" class="my_text">
-		<span id="task"></span>
+		<div id="task"></div>
 
 		<div id="htmlContainer">
 
@@ -32,11 +32,24 @@
 				<textarea id="editor_js" cols="40" rows="40"></textarea>
 			</div>
 
-			<div id="result"></div>
+			<div id="result"/>
 		</div>
 
 		<div id="buttonContainer">
 			<input type="button" class="button" id="btnCompile" value="Ausführen" onclick="compile();"/>
+		</div>
+
+		<div id="progressContainer">
+			<div id="progressPointsContainer">
+
+			</div>
+		</div>
+
+		<div id="tipDiv">
+			<div id="tipText"></div>
+		</div>
+		<div id="tipButton" onclick="toggleTip();">
+			<span id="tipButtonText">i</span>
 		</div>
 	</div>
 
@@ -46,6 +59,7 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="task.js"></script>
+	<script type="text/javascript" src="progressbar.js"></script>
 	<script type="text/javascript" src="Augucation10_30.js"></script>
 
 </body>
