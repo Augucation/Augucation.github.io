@@ -53,7 +53,13 @@ function checkWellformed() {
 
     var text, parser, xmlDoc;
 
-    text =  $("#input").val();
+    text =  $("#input").val().toString();
+
+
+    // add a new line before every "<" to avoid child-parent-same-line-errors
+    text = text.replace(new RegExp("<", "g"), "\n<").toString();
+    text = text.substr(1); // magic. remove first character, otherwise it doesn't work
+
 
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(text,"text/xml");
