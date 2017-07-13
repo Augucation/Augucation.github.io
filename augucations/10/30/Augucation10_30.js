@@ -8,7 +8,7 @@ function init() {
 }
 
 function compile() {
-    
+
     // get html code from html editor
     var html = $($("#editor_html").val());
 
@@ -32,22 +32,6 @@ function addScript(script)
 
 function clearResult() {
     $("#result").empty();
-}
-
-function toggleTip() {
-
-    if ($("#tipDiv").width()) {
-        $("#tipDiv").css("width", "0%");
-        $("#tipButton").css("right", "0%");
-        $("#tipButtonText").html("i");
-        $("#tipText").css("color", "var(--hci_gray)");
-    }
-    else {
-        $("#tipDiv").css("width", "20%");
-        $("#tipButton").css("right", "20%");
-        $("#tipButtonText").html(">");
-        $("#tipText").css("color", "white");
-    }
 }
 
 init();
