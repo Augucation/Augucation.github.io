@@ -21,4 +21,15 @@ function addScript(script)
     document.body.appendChild(s);
 }
 
-$("#task").text("Füge das Bild \"kaese.jpg\" ein.");
+function setTask(idx)
+{
+    var t = tasks[idx];
+
+    // Show the task as text
+    $("#task").text(t.text);
+
+    // Set the hint
+    console.log("Hint: ", t.hint);
+}
+
+setTask(0);
