@@ -93,12 +93,13 @@ var augucations = [
 
 	// topic 9: internet 1
 	[
-		//[52, "XML"],
+		[52, "XML"],
 	],
 
 	// topic 10: internet 2
 	[
-		[9, "CSS"]
+		[9, "CSS"],
+		//[30, "HTML und JS"]
 	]
 ];
 
