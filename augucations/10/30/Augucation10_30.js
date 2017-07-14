@@ -5,6 +5,9 @@ function init() {
     pb = new progressBar($("#progressPointsContainer")[0], tasks.length);
 
     setTask(0);
+
+    allowTabInTextarea("editor_html");
+    allowTabInTextarea("editor_js");
 }
 
 function compile() {
