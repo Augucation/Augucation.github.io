@@ -40,9 +40,11 @@
 		</div>
 
 		<div id="progressContainer">
-			<div id="progressPointsContainer">
+			<input type="button" id="prevBtn" class="button progressBtn" value="<" onclick="pb.prevNextTask(true);"/>
 
-			</div>
+			<div id="progressPointsContainer"></div>
+
+			<input type="button" id="nextBtn" class="button progressBtn" value=">" onclick="pb.prevNextTask(false);"/>
 		</div>
 
 		<div id="tipDiv">

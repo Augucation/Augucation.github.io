@@ -2,7 +2,7 @@ function init() {
 
     createTasks();
 
-    new progressBar($("#progressPointsContainer")[0], tasks.length);
+    pb = new progressBar($("#progressPointsContainer")[0], tasks.length);
 
     setTask(0);
 }

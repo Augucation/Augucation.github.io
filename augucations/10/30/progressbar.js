@@ -3,6 +3,8 @@ function progressBar (container, count) {
     this.container = container;
     this.count = count;
 
+    this.curr = 0;
+
     var that = this;
 
     this.createProgressPoints = function () {
@@ -18,6 +20,8 @@ function progressBar (container, count) {
 
                 return function () {
 
+                    that.curr = i;
+
                     var event = new CustomEvent("newTask", { 'detail':{
                         idx: i
                     }});
@@ -28,6 +32,20 @@ function progressBar (container, count) {
 
             this.container.appendChild(point);
         }
+    }
+
+    this.prevNextTask = function (prev) {
+
+        if ((prev && this.curr <= 0) || (!prev && this.curr >= tasks.length - 1))
+            return;
+
+        this.curr = prev ? this.curr - 1 : this.curr + 1;
+
+        var event = new CustomEvent("newTask", { 'detail':{
+            idx: this.curr
+        }});
+
+        document.dispatchEvent(event);
     }
 
     this.highlightCurrentPoint = function (idx) {
@@ -45,5 +63,5 @@ function progressBar (container, count) {
     }, false);
 
     this.createProgressPoints();
-    this.highlightCurrentPoint(0);
+    this.highlightCurrentPoint(this.curr);
 }
