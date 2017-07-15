@@ -1,10 +1,13 @@
-function task(text, hint, html, js) {
+function task(text, hint, html, js, solution_html, solution_js) {
 
     this.text = text;
     this.hint = hint;
 
     this.html = html;
     this.js = js;
+
+    this.solution_html = solution_html;
+    this.solution_js = solution_js;
 
     tasks.push(this);
 }
@@ -23,23 +26,36 @@ function createTasks () {
         "width=\"..\"\n\n" +
         "Höhe:\n" +
         "height=\"..\"\n\n",
+
         "",
+
+        "",
+
+        "<img src=\"kaese.jpg\" width=\"640\" height=\"426\"/>",
+
         ""
     );
 
     new task(
         "Gib den Elementen die entsprechenden Elementtypen.",
+
         "Erste Überschrift:\n<h1>...</h1>\n\nZweite Überschrift:\n<h2>...</h2>\n\nParagraph:\n<p>...</p>",
         "<p>Große Hauptüberschrift!</p>\n" +
         "<p>Kleinere Unterüberschrift</p>\n" +
         "<p>Paragraph.</p>\n" +
         "<p>Kleinere Unterüberschrift</p>\n" +
         "<p>Paragraph.</p>\n",
+
+        "",
+
+        "",
+
         ""
     );
 
     new task(
         "Ergänze die gegebene Tabelle um die Spalte \"Zustand\" und deklariere die erste Zeile als Kopfzeile (table header).",
+
         "Tabelle:\n" +
         "<table>\n\n" +
         "Zeile (table row):\n" +
@@ -63,15 +79,26 @@ function createTasks () {
         "    <td>100€</td>\n" +
         "  </tr>\n" +
         "</table>",
+
+        "",
+
+        "",
+
         ""
     );
 
     new task(
         "Verlinke die Website \"https://www.google.de\" durch einen Hyperlink mit dem Inhalt \"Google\".",
+
         "Verweis:\n" +
         "<a>\n\n" +
         "Hyperlinkreferenz:\n" +
         "href=\"...\"",
+
+        "",
+
+        "",
+
         ""
     );
 
@@ -85,15 +112,22 @@ function createTasks () {
         "value=\"...\"\n\n" +
         "Bei Click auszuführender Javascript Code:\n" +
         "onclick=\"...\"",
+
         "",
+
         "function f()\n" +
         "{\n" +
         "  alert(\"Mööööp.\");\n" +
-        "}"
+        "}",
+
+        "",
+
+        ""
     );
 
     new task(
         "Erstelle ein 500 x 500 großes SVG-Element mit einem pink gefüllten und grün umrandeten Quadrat mit einer Kantenlänge von 50 und einem rot gefüllten Kreis mit einem Radius von 40 mit dem Mittelpunkt an der Position (100, 50).",
+
         "SVG-Element:\n" +
         "<svg/>\n\n" +
         "Rechteck-Element:\n" +
@@ -114,7 +148,13 @@ function createTasks () {
         "cx=\"...\"\n\n" +
         "y-Koordinate des Mittelpunkts:\n" +
         "cy=\"...\"\n\n",
+
         "",
+
+        "",
+
+        "",
+
         ""
     );
 
@@ -134,6 +174,10 @@ function createTasks () {
         "{\n" +
         "  //TODO: Inhalt von counter lesen, um 1 inkrementieren, Inhalt von counter auf neuen Wert setzen\n" +
         "}",
+
+        "",
+
+        ""
     );
 }
 

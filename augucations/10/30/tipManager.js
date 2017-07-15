@@ -1,7 +1,3 @@
-function a(){
-    console.log("djsadsajhdsad");
-}
-
 function toggleTip() {
 
     // if width is 0 show tip, else hide

@@ -1,4 +1,4 @@
-#container
+  #container
 {
   border: 0px solid black;
   width: 90%;
@@ -184,7 +184,6 @@ textarea {
 #tipButtonText
 {
   margin-left: 20%;
-  color: white;
   font-size: 70px;
   transition: 0.5s;
 }
@@ -192,10 +191,14 @@ textarea {
 #tipText
 {
   width: 100%;
-  height: 100%;
+  height: 85%;
   margin-top: 10%;
-  color: white;
   white-space: pre-wrap
+}
+
+.white
+{
+  color: white;
 }
 
 .progressBtn
@@ -206,4 +209,18 @@ textarea {
   height: 30px;
   font-size: 22px;
   margin-top: -5%;
+}
+
+#solutionButton
+{  
+  width: 100%;
+  height: 30px;
+  float: bottom;
+  
+  background-image: url('../../../resources/img/eye_white.png');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 85% 50%;
+  
+  cursor: pointer;
 }
