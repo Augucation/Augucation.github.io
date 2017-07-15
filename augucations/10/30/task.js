@@ -212,7 +212,7 @@ function createTasks () {
     );
 
     new task (
-        "Gib dem Bildelement einen weiteren Eventlistener, der dem Click-Event die Funktion \"button_press()\" anhängt.",
+        "Gib dem Bildelement einen weiteren EventListener, der dem Click-Event die Funktion \"button_press()\" anhängt.",
 
         "",
 
