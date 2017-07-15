@@ -210,6 +210,61 @@ function createTasks () {
         "  counter.innerHTML = parseInt(counter.innerHTML) + 1;\n" +
         "}"
     );
+
+    new task (
+        "Gib dem Bildelement einen weiteren Eventlistener, der dem Click-Event die Funktion \"button_press()\" anhängt.",
+
+        "",
+
+        "<img id=\"button_image\" src=\"button_red_off.png\" width=\"400\" height=\"400\"/>",
+
+        "var button_image = document.getElementById(\"button_image\");\n\n" +
+        "function button_on ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_red_on.png\";\n" +
+        "}\n\n" +
+        "function button_off ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_red_off.png\";\n" +
+        "}\n\n" +
+        "function button_press ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_green_on.png\";\n" +
+        "}\n\n" +
+        "button_image.addEventListener(\"mouseenter\", function () {\n" +
+        "  button_on();\n" +
+        "});\n\n" +
+        "button_image.addEventListener(\"mouseleave\", function () {\n" +
+        "  button_off();\n" +
+        "});",
+
+        "<img id=\"button_image\" src=\"button_red_off.png\" width=\"400\" height=\"400\"/>",
+
+        "var button_image = document.getElementById(\"button_image\");\n\n" +
+        "function button_on ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_red_on.png\";\n" +
+        "}\n\n" +
+        "function button_off ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_red_off.png\";\n" +
+        "}\n\n" +
+        "function button_press ()\n" +
+        "{\n" +
+        "  button_image.src = \"button_green_on.png\";\n" +
+        "}\n\n" +
+        "button_image.addEventListener(\"mouseenter\", function () {\n" +
+        "  button_on();\n" +
+        "});\n\n" +
+        "button_image.addEventListener(\"mouseleave\", function () {\n" +
+        "  button_off();\n" +
+        "});\n\n" +
+        "button_image.addEventListener(\"click\", function () {\n" +
+        "  button_press();\n" +
+        "});",
+
+        ""
+    );
 }
 
 function setTask(idx)
