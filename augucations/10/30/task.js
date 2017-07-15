@@ -127,12 +127,9 @@ function createTasks () {
 
     new task(
         "Erstelle einen Button mit der Aufschrift \"Click\", der die Funktion \"f()\" aufruft.",
-        "Eingabeelement:\n" +
-        "<input/>\n\n" +
-        "Typ:\n" +
-        "type=\"...\"\n\n" +
-        "Aufschrift:\n" +
-        "value=\"...\"\n\n" +
+
+        "Buttonelement:\n" +
+        "<button>Aufschrift</button>\n\n" +
         "Bei Click auszuführender Javascript Code:\n" +
         "onclick=\"...\"",
 
@@ -143,7 +140,7 @@ function createTasks () {
         "  alert(\"Mööööp.\");\n" +
         "}",
 
-        "<input type=\"button\" value=\"Click\" onclick=\"f();\"/>",
+        "<button onclick=\"f();\">Click</button>",
 
         ""
     );
@@ -193,7 +190,7 @@ function createTasks () {
         "parseInt()",
 
         "<p id=\"counter\">0</p>\n" +
-        "<input type=\"button\" value=\"+ 1\" onclick=\"increment();\"/>",
+        "<button onclick=\"increment();\">+ 1</button>",
 
         "var counter = document.getElementById(\"counter\");\n\n" +
         "function increment()\n" +
@@ -202,7 +199,7 @@ function createTasks () {
         "}",
 
         "<p id=\"counter\">0</p>\n" +
-        "<input type=\"button\" value=\"+ 1\" onclick=\"increment();\"/>",
+        "<button onclick=\"increment();\">+ 1</button>",
 
         "var counter = document.getElementById(\"counter\");\n\n" +
         "function increment()\n" +
@@ -218,48 +215,48 @@ function createTasks () {
 
         "<img id=\"button_image\" src=\"button_red_off.png\" width=\"400\" height=\"400\"/>",
 
-        "var button_image = document.getElementById(\"button_image\");\n\n" +
+        "var button = document.getElementById(\"button_image\");\n\n" +
         "function button_on ()\n" +
         "{\n" +
-        "  button_image.src = \"button_red_on.png\";\n" +
+        "  button.src = \"button_red_on.png\";\n" +
         "}\n\n" +
         "function button_off ()\n" +
         "{\n" +
-        "  button_image.src = \"button_red_off.png\";\n" +
+        "  button.src = \"button_red_off.png\";\n" +
         "}\n\n" +
         "function button_press ()\n" +
         "{\n" +
-        "  button_image.src = \"button_green_on.png\";\n" +
+        "  button.src = \"button_green_on.png\";\n" +
         "}\n\n" +
-        "button_image.addEventListener(\"mouseenter\", function () {\n" +
+        "button.addEventListener(\"mouseenter\", function () {\n" +
         "  button_on();\n" +
         "});\n\n" +
-        "button_image.addEventListener(\"mouseleave\", function () {\n" +
+        "button.addEventListener(\"mouseleave\", function () {\n" +
         "  button_off();\n" +
         "});",
 
         "<img id=\"button_image\" src=\"button_red_off.png\" width=\"400\" height=\"400\"/>",
 
-        "var button_image = document.getElementById(\"button_image\");\n\n" +
+        "var button = document.getElementById(\"button_image\");\n\n" +
         "function button_on ()\n" +
         "{\n" +
-        "  button_image.src = \"button_red_on.png\";\n" +
+        "  button.src = \"button_red_on.png\";\n" +
         "}\n\n" +
         "function button_off ()\n" +
         "{\n" +
-        "  button_image.src = \"button_red_off.png\";\n" +
+        "  button.src = \"button_red_off.png\";\n" +
         "}\n\n" +
         "function button_press ()\n" +
         "{\n" +
-        "  button_image.src = \"button_green_on.png\";\n" +
+        "  button.src = \"button_green_on.png\";\n" +
         "}\n\n" +
-        "button_image.addEventListener(\"mouseenter\", function () {\n" +
+        "button.addEventListener(\"mouseenter\", function () {\n" +
         "  button_on();\n" +
         "});\n\n" +
-        "button_image.addEventListener(\"mouseleave\", function () {\n" +
+        "button.addEventListener(\"mouseleave\", function () {\n" +
         "  button_off();\n" +
         "});\n\n" +
-        "button_image.addEventListener(\"click\", function () {\n" +
+        "button.addEventListener(\"click\", function () {\n" +
         "  button_press();\n" +
         "});",
 
