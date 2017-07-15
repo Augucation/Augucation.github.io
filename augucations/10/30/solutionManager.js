@@ -6,15 +6,14 @@ var user_js;
 document.getElementById("solutionButton").addEventListener("mousedown", function () {showSolution(true); });
 document.getElementById("solutionButton").addEventListener("mouseup", function () {showSolution(false); });
 document.getElementById("solutionButton").addEventListener("mouseleave", function () {showSolution(false); });
+document.getElementById("solutionButton").addEventListener("mouseenter", function () {saveUserCode(); });
 
 function showSolution (show) {
 
     if (show) {
 
-        // save the user's code
-        user_html = $("#editor_html").val();
-        user_js = $("#editor_js").val();
-
+        saveUserCode();
+        
         // show the solution code
         $("#editor_html").val(tasks[pb.curr].solution_html);
         $("#editor_js").val(tasks[pb.curr].solution_js);
@@ -25,4 +24,11 @@ function showSolution (show) {
         $("#editor_html").val(user_html);
         $("#editor_js").val(user_js);
     }
+}
+
+function saveUserCode () {
+
+    // save the user's code
+    user_html = $("#editor_html").val();
+    user_js = $("#editor_js").val();
 }

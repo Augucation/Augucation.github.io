@@ -40,6 +40,7 @@ function createTasks () {
         "Gib den Elementen die entsprechenden Elementtypen.",
 
         "Erste Überschrift:\n<h1>...</h1>\n\nZweite Überschrift:\n<h2>...</h2>\n\nParagraph:\n<p>...</p>",
+
         "<p>Große Hauptüberschrift!</p>\n" +
         "<p>Kleinere Unterüberschrift</p>\n" +
         "<p>Paragraph.</p>\n" +
@@ -48,7 +49,11 @@ function createTasks () {
 
         "",
 
-        "",
+        "<h1>Große Hauptüberschrift!</h1>\n" +
+        "<h2>Kleinere Unterüberschrift</h2>\n" +
+        "<p>Paragraph.</p>\n" +
+        "<h2>Kleinere Unterüberschrift</h2>\n" +
+        "<p>Paragraph.</p>\n",
 
         ""
     );

@@ -24,3 +24,8 @@ function showTip (show) {
 document.addEventListener("newTask", function(e) {
     showTip(false);
 }, false);
+
+// hide tip when compile button is clicked
+document.getElementById("btnCompile").addEventListener("click", function() {
+    showTip(false);
+}, false);
