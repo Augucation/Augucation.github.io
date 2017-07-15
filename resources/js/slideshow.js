@@ -99,7 +99,7 @@ var augucations = [
 	// topic 10: internet 2
 	[
 		[9, "CSS"],
-		//[30, "HTML und JS"]
+		[30, "HTML und JS"]
 	]
 ];
 
