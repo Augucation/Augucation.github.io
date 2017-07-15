@@ -87,7 +87,23 @@ function createTasks () {
 
         "",
 
-        "",
+        "<table>\n" +
+        "  <tr>\n" +
+        "    <th>Produkt</th>\n" +
+        "    <th>Preis</th>\n" +
+        "    <th>Zustand</th>\n" +
+        "  </tr>\n" +
+        "  <tr>\n" +
+        "    <td>Fernseher</td>\n" +
+        "    <td>700€</td>\n" +
+        "    <td>gebraucht</td>\n" +
+        "  </tr>\n" +
+        "  <tr>\n" +
+        "    <td>Smartphone</td>\n" +
+        "    <td>100€</td>\n" +
+        "    <td>neu</td>\n" +
+        "  </tr>\n" +
+        "</table>",
 
         ""
     );
@@ -103,6 +119,8 @@ function createTasks () {
         "",
 
         "",
+
+        "<a href=\"https://www.google.de\">Google</a>",
 
         ""
     );
@@ -125,7 +143,7 @@ function createTasks () {
         "  alert(\"Mööööp.\");\n" +
         "}",
 
-        "",
+        "<input type=\"button\" value=\"Click\" onclick=\"f();\"/>",
 
         ""
     );
@@ -158,7 +176,10 @@ function createTasks () {
 
         "",
 
-        "",
+        "<svg width=\"500\" height=\"500\">\n" +
+        "  <rect fill=\"pink\" stroke=\"green\" width=\"50\" height=\"50\"/>\n" +
+        "  <circle fill=\"red\" r=\"40\" cx=\"100\" cy=\"50\"/>\n" +
+        "</svg>\n",
 
         ""
     );
@@ -180,9 +201,14 @@ function createTasks () {
         "  //TODO: Inhalt von counter lesen, um 1 inkrementieren, Inhalt von counter auf neuen Wert setzen\n" +
         "}",
 
-        "",
+        "<p id=\"counter\">0</p>\n" +
+        "<input type=\"button\" value=\"+ 1\" onclick=\"increment();\"/>",
 
-        ""
+        "var counter = document.getElementById(\"counter\");\n\n" +
+        "function increment()\n" +
+        "{\n" +
+        "  counter.innerHTML = parseInt(counter.innerHTML) + 1;\n" +
+        "}"
     );
 }
 
