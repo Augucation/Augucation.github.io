@@ -211,7 +211,8 @@ function createTasks () {
     new task (
         "Gib dem Bildelement einen weiteren EventListener, der dem Click-Event die Funktion \"button_press()\" anhängt.",
 
-        "",
+        "Click-Event:\n" +
+        "\"click\"",
 
         "<img id=\"button_image\" src=\"button_red_off.png\" width=\"400\" height=\"400\"/>",
 
