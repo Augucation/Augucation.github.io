@@ -55,7 +55,7 @@ for (let t = 0; t < topics.length; t++)
 
         // add title
         var augucationTitle = document.createElement("div");
-        augucationTitle.innerHTML = augucations[t][a];
+        augucationTitle.innerHTML = augucations[t][a][0];
         augucationTitle.className = "augucationTitle";
         augucation.appendChild(augucationTitle);
 
