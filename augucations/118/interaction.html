@@ -1,0 +1,69 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Phasenverschiebung</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div class="my_text" align="center">
+
+		<div class="center_wrapper">
+			<input type="submit" class="mute button" id="muteBtn" value="" onclick="mute()"/>
+		</br>
+			<span id="loading">Wird geladen...</span>
+		</div>
+
+		</br>
+
+		<div class="radio_wrapper radios">
+			<fieldset>
+				<input type="radio" id="chorus" name="type" value="0" onclick="setEffect(this.id);">
+				<label class="radio_label_small blue" for="chorus">Chorus</label>
+				<input type="radio" id="flanging" name="type" value="1" onclick="setEffect(this.id);">
+				<label class="radio_label_small red" for="flanging">Flanging</label>
+			</fieldset>
+		</div>
+
+		</br>
+
+		<div class="slider_block">
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Phasenverschiebung</span>
+				<input type="range" class="slider color_blue" id="slider_chorus" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
+				<!--span class="slider_bottom_value" id="span_chorus">10 ms</span-->
+			</div>
+
+			</br>
+
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Phasenverschiebung</span>
+				<input type="range" class="slider color_red" id="slider_flanging" min="0.0" max="0.25" step="0.001" value="0.01" oninput="setDelay(this.id, this.value)"/>
+				<!--span class="slider_bottom_value" id="span_flanging">10 ms</span-->
+			</div>
+		</div>
+
+</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 181);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+
+	<script type="text/javascript" src="../../resources/js/plugins/Pizzicato.js/Pizzicato.js"></script>
+
+	<script type="text/javascript" src="main.js"></script>
+
+</body>

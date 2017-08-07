@@ -1,0 +1,11 @@
+<!ELEMENT filmsammlung (film*)>
+<!ELEMENT film (titel,genre,(animationsstudio | darsteller+))>
+<!ELEMENT titel (haupttitel,untertitel?)>
+<!ELEMENT haupttitel (#CDATA)>
+<!ELEMENT untertitel (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT animationsstudio (#PCDATA)>
+<!ELEMENT darsteller (vorname*,nachname)>
+<!ELEMENT vorname (#PCDATA)>
+<!ELEMENT nachname (#PCDATA)>
+<!ATTLIST film imdb_id ID #REQUIRED>

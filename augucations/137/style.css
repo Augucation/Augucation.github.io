@@ -1,0 +1,231 @@
+  #container
+{
+  border: 0px solid black;
+  width: 90%;
+  height: 90%;
+  display: block;
+  margin: 1% auto auto auto;
+  text-align: center;
+}
+
+#htmlContainer
+{
+  width: 100%;
+  height: 90%;
+  margin-top: 1%;
+}
+
+#task
+{
+  width: 100%;
+  height: 10%;
+  font-size: 28px;
+}
+
+#result, [id^=editor]
+{
+  border-radius: 1%;
+}
+
+#result
+{
+  border: 1px solid gray;
+  float: right;
+  width: 49%;
+  height: 80%;
+  margin-top: 2.5%;
+}
+
+[id^=editor]
+{
+  border: 1px solid gray;
+  width: 100%;
+  height: 41%;
+  float: left;
+  margin-top: 2.5%;
+}
+
+#editor_html
+{
+  margin-bottom:  2.5%;
+}
+
+#editor_js
+{
+  margin-top: 4%;
+}
+
+#codeContainer
+{
+  width: 49%;
+  height: 82.5%;
+  float: left;
+  margin-top: 1%;
+  display: block;
+}
+
+#buttonContainer
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -3%;
+}
+
+#btnCompile
+{
+  width: 10%;
+  font-size: 20px;
+}
+
+textarea {
+   resize: none;
+}
+
+.label
+{
+  text-align: left;
+  height: 2.5%;
+}
+
+#progressContainer
+{
+  width: 48%;
+  height: 10%;
+  margin: auto;
+  position: fixed;
+  left: 26%;
+  bottom: -3%;
+}
+
+#progressPointsContainer
+{
+  width: 35%;
+  height: 100%;
+  margin: auto;
+  
+  /*
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  */
+  display: inline-flex;
+}
+
+.progressPoint
+{
+  background-color: var(--light_gray);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 7.5% auto 0 auto;
+  /*
+  margin: 50% auto 0 auto;
+  transform: translateY(-50%);
+  */
+  
+  cursor: pointer;
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+  .progressPoint
+  {
+    margin: 2% auto 0 auto;
+  }
+  
+  .progressBtn
+  {
+    margin-top: -20% !important;
+  }
+}
+
+.currentPoint
+{
+  width: 30px;
+  height: 30px;
+  margin-top: 0%;
+  background-color: var(--hci_gray);
+}
+
+#tipDiv
+{
+  background-color: var(--hci_gray);
+	height: 100%;
+	width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  transition: 0.5s;
+}
+
+#tipButton
+{  
+  --size_small: 45px;
+  --size_big: 90px;
+  
+  background-color: var(--hci_gray);
+  display: inline-block;
+  height: var(--size_big);
+  width: var(--size_small);
+  border-bottom-left-radius: var(--size_big);
+  border-top-left-radius: var(--size_big);
+  
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transition: 0.5s;
+  
+  cursor: pointer;
+}
+
+#tipButtonText
+{
+  margin-left: 20%;
+  font-size: 70px;
+  transition: 0.5s;
+}
+
+#tipText
+{
+  width: 100%;
+  height: 85%;
+  margin-top: 10%;
+  white-space: pre-wrap
+}
+
+.white
+{
+  color: white;
+}
+
+.progressBtn
+{
+  background-color: var(--light_gray);
+  color: var(--hci_gray);
+  
+  height: 30px;
+  font-size: 22px;
+  margin-top: -5%;
+}
+
+#solutionButton
+{  
+  width: 100%;
+  height: 30px;
+  float: bottom;
+  
+  background-image: url('../../../resources/img/eye_white.png');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 85% 50%;
+  
+  cursor: pointer;
+}
+
+#button_image
+{
+  cursor: pointer;
+}

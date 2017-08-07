@@ -1,0 +1,160 @@
+#container
+{
+  width: 95%;
+  height: 90%;
+  margin: auto;
+}
+
+#labelContainer
+{
+  width: 100%;
+  text-align: center;
+  margin-top: 2%;
+}
+
+[id^="label"]
+{
+  width: 45%;
+  height: 30px;
+}
+
+#labelDTD
+{
+  float: left;
+}
+
+#labelXML1, #labelXML2{
+  cursor: pointer;
+}
+
+#labelsXML
+{
+  float: right;
+}
+
+#labelXML1
+{
+   float: left;
+}
+
+#labelXML2
+{
+  float: right;
+}
+
+.inactive
+{
+  color: var(--light_gray);
+}
+
+.solved
+{
+  height: 100%;
+  width: 20%;
+  position: relative;
+  float: right;
+  visibility: hidden;
+  
+  
+  background-image: url("../../../resources/img/checkmark.png");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-x: 0px;
+  background-position-y: 0%;
+  
+}
+
+#dtd, #input
+{
+  width: 45%;
+  height: 60%;
+}
+
+#dtd
+{
+  float: left;
+}
+
+#input
+{
+  float: right;
+  background-image: url("codeErrorLine.png");
+  background-repeat: no-repeat;
+  background-size: 1000px 24px;
+  background-position: 0px 24px;
+}
+
+#input.noError
+{
+  background-image: none;
+}
+
+#checkBtnContainer
+{
+  float: left;
+  width: 10%;
+  height: 50%;
+  align-content: center;
+  display: flex;
+  margin-top: 2%;
+}
+
+#check
+{
+  height: 40px;
+  margin: auto;
+  display: relative;
+}
+
+#evalContainer
+{
+  width: 94%;
+  height: 30%;
+  position: fixed;
+  bottom: 0;
+  margin: 2% auto;  
+  text-align: center;
+  justify-content: center;
+}
+
+#wellformed, #valid
+{
+  display: block;
+  word-wrap: break-word;
+  font-size: 29;
+  margin-top: 1%;
+}
+
+#validMsg
+{
+  margin-top: 1.5%;
+  font-size: 24;
+}
+
+textarea
+{
+  resize: none;
+  font-size: 20px;
+  border-color: #555E67;
+  border-radius: 1%;
+  outline: none;
+}
+
+.right
+{
+  color: var(--green);
+}
+
+.wrong
+{
+  color: red;
+}
+
+#tipp
+{
+  font-size: 20;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  
+  visibility: hidden; /* only show this one if there is a tipp message */
+}

@@ -1,0 +1,25 @@
+.slider_interpretation
+{
+  margin-bottom: 2%;
+}
+
+@-moz-document url-prefix()
+{
+  .slider_interpretation
+  {
+   margin-bottom: 0%;
+  }
+}
+
+.slider_wrap
+{
+  margin-top: 1%;
+}
+
+@-moz-document url-prefix()
+{
+  .slider_wrap
+  {
+   margin-top: 0%;
+  }
+}

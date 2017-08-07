@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE filmsammlung SYSTEM "filmsammlung.dtd">
+<filmsammlung>
+<film>
+  <titel><haupttitel>Matrix</haupttitel></titel>
+  <genre>Science-Fiction</genre>
+  <genre>Action</genre>
+  <animationsstudio>Disney</animationsstudio>
+  <darsteller>Keanu Reeves</darsteller>
+</film>
+</filmsammlung>

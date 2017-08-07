@@ -1,0 +1,69 @@
+<head>
+
+	<meta charset="UTF-8"/>
+
+	<title>Psychoakustik</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div class="my_text">
+		<div class="center_wrapper">
+			<input type="submit" class="mute button" id="muteBtn" value="" onclick="mute()"/>
+		</div>
+
+		</br>
+
+		<div id="chart" class="chart"></div>
+
+		<div class="slider_block">
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Grundfrequenz</span>
+				<input type="range" class="slider" id="slider_freq" min="0" max="100" step="1" value="50" oninput="setFrequency(this.value)"/>
+				<span class="slider_bottom_value" id="span_freq">630 Hz</span>
+			</div>
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Schalldruckpegel</span>
+				<input type="range" class="slider" id="slider_vol" min="0" max="1" step="0.01" value="0.5" oninput="setVolume(this.value)"/>
+				<span class="slider_bottom_value" id="span_vol">50%</span>
+			</div>
+		</div>
+
+		<div class="radio_wrapper">
+			<span class="slider_top_label">Frequenzspektrum/Wellenform</span>
+			<fieldset>
+				<input type="radio" id="sine" name="type" value="0" checked="checked">
+				<label class="radio_label_small" for="sine">Sinus</label>
+				<input type="radio" id="square" name="type" value="1">
+				<label class="radio_label_small" for="square">Quadrat</label>
+				<input type="radio" id="triangle" name="type" value="2">
+				<label class="radio_label_small" for="triangle">Dreieck</label>
+				<input type="radio" id="sawtooth" name="type" value="3">
+				<label class="radio_label_small" for="sawtooth">Sägezahn</label>
+			</fieldset>
+		</div>
+	</div>
+
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 47);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.axislabels.js"></script>
+
+
+	<script type="text/javascript" src="../../resources/js/plugins/Pizzicato.js/Pizzicato.js"></script>
+
+	<script type="text/javascript" src="main.js"></script>
+
+</body>

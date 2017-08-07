@@ -1,0 +1,41 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Scheinbewegung</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div id="body" class="my_text">
+		<div id="point_container">
+		</div>
+
+		</br>
+
+		<div id="slider_container">
+			<span id="slider_label">Inter-Stimulus Intervall</span>
+
+			<input type="range" id="time_slider" min="10" max="300" step="1" value="150" oninput="setTime(this.value)"/>
+			<span id="time_value_span">145 ms</span>
+
+			</br>
+
+			<input type="button" id="startstop_btn" class="button" value="Start" onclick="startStop()"/>
+		</div>
+	</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(6, 11);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="main.js"></script>
+
+</body>

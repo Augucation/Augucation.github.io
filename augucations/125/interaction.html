@@ -1,0 +1,52 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Histogrammausgleich</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="my_text">
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<canvas id="pic_canvas" src="../../resources/img/5_271_haus_2.jpg" width="500px" height="375px"></canvas>
+
+	<div id="chart_wrapper">
+		<div id="mydiv"></div>
+	</div>
+
+	<div id="slider_wrapper" class="my_text">
+		<input id="histo_slider_min" class="histo_slider" type="range" range="true" min="0" max="255" value="50" oninput="sliderInput(true, this.value)">
+		<input id="histo_slider_max" class="histo_slider" type="range" range="true" min="0" max="255" value="150" oninput="sliderInput(false, this.value)">
+	</div>
+	<div id="span_wrapper">
+		<span text-align="center">Histogrammausgleich</span>
+	</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(5, 247);" name="back" value="<<"/>
+	</div>
+
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
+	<script type="text/javascript" src="http://www.benjaminbuffet.com/public/js/jquery.flot.orderBars.js"></script>
+	<script src="js/jquery.flot.resize.min.js"></script>
+	<script src="nouislider.min.js"></script>
+
+	<script src="../../resources/js/plugins/histogram/histogram.min.js"></script>
+
+	<!--script src="http://pomax.github.io/RGBAnalyse/release/RGBAnalyse.js"></script-->
+
+	<script type="text/javascript" src="img.js"></script>
+	<script type="text/javascript" src="plotter.js"></script>
+	<script type="text/javascript" src="slidermanager.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>

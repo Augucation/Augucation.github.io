@@ -1,0 +1,103 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>DCT</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div id="body" class="my_text">
+		<div id="big_container">
+
+				<div id="container_img_orig" class="container">
+					<span class="title">Originalbild</span>
+					<canvas id="img_orig" class="image" onmousedown="mouseDown()" onmouseup="mouseUp()" onmouseleave="mouseUp()"></canvas>
+
+					</div><input type="range" id="graypicker" min="0" max="255" step="1" value="128" oninput="setColor(this.value)"/>
+
+					<div id="image_button_wrapper"></div>
+				</div>
+
+				<div id="container_f" class="container">
+					<span class="title">F</span>
+					<div id="f" class="matrix_wrapper"></div>
+				</div>
+
+				<div id="container_fprime" class="container">
+					<span class="title">F'</span>
+					<div id="fprime" class="matrix_wrapper"></div>
+				</div>
+
+				<div id="container_q" class="container">
+					<span class="title">Q</span>
+					<div id="q" class="matrix_wrapper"></div>
+
+					<select id="select_quant" onchange="setQuant(this.value);">
+						<option selected disabled>Qualität</option>
+						<option value="0">1</option>
+						<option value="1">2</option>
+						<option value="2">3</option>
+						<option value="3">4</option>
+						<option value="4">5</option>
+						<option value="5">6</option>
+						<option value="6">7</option>
+					</select>
+
+				</div>
+
+				<div id="container_img_dct" class="container">
+					<span class="title">Rekonstruiertes Bild</span>
+					<canvas id="img_dct" class="image"></canvas>
+				</div>
+
+				<div id="container_arrow_orig_f" class="arrow_container">
+					<span id="dct" class="arrow_label">DCT</span>
+					<div id="arrow_orig_f" class="arrow right"/>
+				</div>
+
+				<div id="container_arrow_f_fprime" class="arrow_container">
+					<span id="quantisierung" class="arrow_label">Quantisierung</span>
+					<div id="arrow_f_fprime" class="arrow right_down"/>
+				</div>
+
+				<div id="container_arrow_q_fprime" class="arrow_container">
+					<div id="arrow_q_fprime" class="arrow right_up"/>
+				</div>
+
+				<div id="container_arrow_fprime_dct" class="arrow_container">
+					<span id="requantidct" class="arrow_label">Requantisierung + inverse DCT</span>
+					<div id="arrow_fprime_dct" class="arrow right"/>
+				</div>
+
+				</br>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(5, 211);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
+
+	<script type="text/javascript" src="helper.js"></script>
+	<script type="text/javascript" src="gui_matrix.js"></script>
+	<script type="text/javascript" src="canvas.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="images.js"></script>
+	<script type="text/javascript" src="quants.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="draw.js"></script>
+	<script type="text/javascript" src="gui_image_buttons.js"></script>
+</body>

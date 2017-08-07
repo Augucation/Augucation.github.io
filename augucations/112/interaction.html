@@ -1,0 +1,47 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>PCM und DPCM</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+
+	<div class="container">
+	<div class="my_text">
+		<div id="canvas_wrapper" class="canvas_wrapper" width="1200px" height="750px">
+			<canvas id="myCanvas" class="canvas" width="1000px" height="750px"></canvas>
+			<div class="bitCodeList_wrapper" width="20px" height="750px">
+				<ul id="bitCodeList" class="my_text bitCodeList" width="100px", height="750px"></ul>
+			</div>
+			<br/> <br/>
+			<div class="digital_signal_wrapper" height="50px">
+				<span id="digital_signal" class="digital_signal my_text" width="1000px" height="30px"></span>
+			</div>
+		</div>
+
+	</br>
+</br>
+
+	<div class="radio_wrapper radios">
+		<fieldset>
+			<input type="radio" id="pcm" name="type" value="0" checked="checked">
+			<label class="radio_label_small" for="pcm">PCM</label>
+			<input type="radio" id="dpcm" name="type" value="1">
+			<label class="radio_label_small" for="dpcm">DPCM</label>
+		</fieldset>
+	</div>
+</div>
+</div>
+
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 71);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>

@@ -1,0 +1,70 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Filter</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div id="pics_and_matrix_wrapper">
+		<img id="pic" class="image" src="../../resources/img/zebra_schoen_pixels2.jpg" width="500px" height="375px">
+
+		<div id="middle_wrapper" class="my_text">
+			<span>Filtermatrix</span>
+			</br>
+			<div id="matrix_wrapper">
+
+			</div>
+
+			<div id="buttons_wrapper">
+
+				<span>Skalierungsfaktor</span>
+				</br>
+				<div id="scale_wrapper">
+					<span>1 / </span>
+					<input id="input_scale"></input>
+				</div>
+
+				<input id="btn_apply" type="button" class="button" value="Filter anwenden" onclick="applyMatrix();"> </input>
+
+				<select id="select_filter" onchange="setFilter(this.value);">
+					<option selected disabled>Gewählter Filter</option>
+					<option value="Init">Voreinstellung</option>
+					<option value="Blur0">Schwacher Weichzeichner</option>
+					<option value="Blur1">Starker Weichzeichner</option>
+					<option value="Sharp0">Schwacher Scharfzeichner</option>
+					<option value="Sharp1">Starker Scharfzeichner</option>
+					<option value="EdgeH">Horizontale Kantenerkennung</option>
+					<option value="EdgeV">Vertikale Kantenerkennung</option>
+				</select>
+
+			</div>
+
+		</div>
+
+
+		<canvas id="pic_canvas" class="image"></canvas>
+	</div>
+
+
+		<div>
+			<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(5, 256);" name="back" value="<<"/>
+		</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
+
+	<script type="text/javascript" src="gui.js"></script>
+	<script type="text/javascript" src="filters.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>

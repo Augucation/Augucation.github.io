@@ -1,6 +1,8 @@
 :root
 {
 	--hci_gray: #555e67;
+	--middle_gray: #444d58;
+	--dark_gray: #333c45;
 	--hci_red:  #dc0b15;
 	--dark_red: #B52121;
 	--blue:     #351FC2;

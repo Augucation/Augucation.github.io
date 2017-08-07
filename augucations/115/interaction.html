@@ -1,0 +1,71 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Frequenz-Filter</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="../../resources/css/stylesheet_radio.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div class="my_text" align="center">
+
+		<div class="center_wrapper">
+			<input type="submit" class="mute button" id="muteBtn" value="" onclick="mute()"/>
+		</br>
+			<span id="loading">Wird geladen...</span>
+		</div>
+
+		</br>
+
+		<div class="radio_wrapper radios">
+			<fieldset>
+				<input type="checkbox" id="high" name="type" value="0" onclick="check(this.id);">
+				<label class="radio_label_small red" for="high">Hochpass-Filter</label>
+				<input type="checkbox" id="low" name="type" value="1" onclick="check(this.id);">
+				<label class="radio_label_small blue" for="low">Tiefpass-Filter</label>
+			</fieldset>
+		</div>
+
+		</br>
+
+		<div class="slider_block">
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Frequenz</span>
+				<input type="range" class="slider color_red" id="slider_high" min="10" max="22050" step="1" value="10" oninput="setFrequency(this.id, this.value)"/>
+				<span class="slider_bottom_value" id="span_high">10Hz</span>
+			</div>
+
+			</br>
+
+			<div class="slider_wrapper">
+				<span class="slider_top_label">Frequenz</span>
+				<input type="range" class="slider color_blue" id="slider_low" min="10" max="22050" step="1" value="22050" oninput="setFrequency(this.id, this.value)"/>
+				<span class="slider_bottom_value" id="span_low">22050Hz</span>
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+<!--audio controls="" preload="" src="../../../resources/audio/original.wav"></audio-->
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(2, 162);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+
+	<script type="text/javascript" src="../../resources/js/plugins/Pizzicato.js/Pizzicato.js"></script>
+
+	<script type="text/javascript" src="main.js"></script>
+
+</body>
