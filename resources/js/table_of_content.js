@@ -3,8 +3,6 @@ var container = document.getElementById("tocContainer");
 var section = document.createElement("div");
 section.className = "section";
 
-let augucationIdx = 0;
-
 for (let t = 0; t < topics.length; t++)
 {
 
@@ -53,6 +51,13 @@ for (let t = 0; t < topics.length; t++)
         pic.style.backgroundImage = "url(resources/img/screenshots/" + getTotalIndex(t, a) + ".png)";
         augucation.appendChild(pic);
 
+        // if video, add video symbol
+        if (augucations[t][a][1])
+        {
+            var videoSymbol = document.createElement("div");
+            videoSymbol.className = "videoSymbol";
+            pic.appendChild(videoSymbol);
+    }
         // add title
         var augucationTitle = document.createElement("div");
         augucationTitle.innerHTML = augucations[t][a][0];
@@ -73,8 +78,6 @@ for (let t = 0; t < topics.length; t++)
 
         // add line break
         innerContainer.appendChild(document.createElement("br"));
-
-        augucationIdx++;
     }
 
     container.appendChild(s);
