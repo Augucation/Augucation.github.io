@@ -83,6 +83,14 @@ body
   height: 8em;
 }
 
+.picContainer
+{
+  width: 10em;
+  height: 8em;
+  float: left;
+  margin-right: 1em;
+}
+
 .augucationScreenshot
 {
   border: 0px solid var(--dark_gray);
@@ -107,13 +115,19 @@ body
   background-repeat: no-repeat;
 }
 
-.augucationScreenshot:hover
+.picContainer:hover
 {
   border: 3px solid var(--dark_gray);
   width: 30em;
   height: 24em;
   position: absolute;
   transform: translate(-35%, -25%);
+}
+
+.augucationScreenshot:hover
+{
+  width: 30em;
+  height: 24em; 
 }
 
 .augucationInfo
@@ -192,4 +206,55 @@ body
   width: 90vw;
   margin: auto;
   background-color: var(--dark_gray);
+}
+
+.linkContainer
+{
+  display: inline-flex;
+}
+
+.linkBtn
+{
+  border: 1px solid var(--light_gray);
+  border-radius: 5px;
+  background-color: var(--middle_gray);
+  color: white;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  cursor: pointer;
+}
+
+.linkBtn:hover
+{
+  background-color: var(--dark_gray);
+}
+
+.linkBtnHidden
+{
+  display: none;
+}
+
+.link
+{
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-left: 1em;
+}
+
+.linkHidden
+{
+  display: none;
+}
+
+.copyMsg
+{
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 1.7em;
+  margin-left: -2.5em;
+}
+
+.copyMsgHidden
+{
+  display: none;
 }
