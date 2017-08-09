@@ -40,7 +40,7 @@ for (let t = 0; t < topics.length; t++)
         augucationContainer.addEventListener("click", function(e) {
 
             // don't listen for clicks on links
-            if (e.target.className.includes("copySymbol"))
+            if (e.target.className.includes("copySymbol") || e.target.className.includes("Screenshot"))
                 return;
 
             openInteraction(getTotalIndex(t, a));
@@ -51,10 +51,27 @@ for (let t = 0; t < topics.length; t++)
         augucation.className = "augucation";
 
         // add picccc
-        var pic = document.createElement("div");
-        pic.className = "augucationScreenshot";
-        pic.style.backgroundImage = "url(resources/img/screenshots/" + getTotalIndex(t, a) + ".png)";
+        var pic = document.createElement("img");
+        pic.className = "augucationScreenshot copyable";
+        //pic.style.backgroundImage = "url(resources/img/screenshots/" + getTotalIndex(t, a) + ".png)";
+        pic.src = "resources/img/screenshots/" + getTotalIndex(t, a) + ".png";
         augucation.appendChild(pic);
+
+        $(".copyable").click(function (e) {
+            //Make the container Div contenteditable
+            $(this).attr("contenteditable", true);
+            //Select the image
+            SelectImage($(this).get(0));
+            //Execute copy Command
+            //Note: This will ONLY work directly inside a click listenner
+            document.execCommand('copy');
+            //Unselect the content
+            window.getSelection().removeAllRanges();
+            //Make the container Div uneditable again
+            $(this).removeAttr("contenteditable");
+            //Success!!
+            console.log("image copied!");
+        });
 
         // if video, add video symbol
         if (augucations[t][a][1])
