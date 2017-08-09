@@ -139,6 +139,7 @@ body
 
 .augucationTitle
 {
+  width: 21em;
   height: 70%;
   line-height: 6em;
   font-size: 1.3em;
@@ -211,6 +212,7 @@ body
 .linkContainer
 {
   display: inline-flex;
+  width: 20em;
 }
 
 .linkBtn
