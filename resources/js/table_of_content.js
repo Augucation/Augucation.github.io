@@ -34,10 +34,15 @@ for (let t = 0; t < topics.length; t++)
     for (let a = 0; a < augucations[t].length; a++)
     {
         // add outer augucation container
-        var augucationContainer = document.createElement("div");
+        let augucationContainer = document.createElement("div");
         augucationContainer.className = "augucationContainer";
 
-        augucationContainer.addEventListener("click", function() {
+        augucationContainer.addEventListener("click", function(e) {
+
+            // don't listen for clicks on links
+            if (e.target.className.includes("copySymbol"))
+                return;
+
             openInteraction(getTotalIndex(t, a));
         });
 
@@ -57,12 +62,75 @@ for (let t = 0; t < topics.length; t++)
             var videoSymbol = document.createElement("div");
             videoSymbol.className = "videoSymbol";
             pic.appendChild(videoSymbol);
-    }
+        }
+
+        // add title and link container
+        var augucationInfo = document.createElement("div");
+        augucationInfo.className = "augucationInfo";
+        augucation.appendChild(augucationInfo);
+
         // add title
         var augucationTitle = document.createElement("div");
         augucationTitle.innerHTML = augucations[t][a][0];
         augucationTitle.className = "augucationTitle";
-        augucation.appendChild(augucationTitle);
+        augucationInfo.appendChild(augucationTitle);
+
+        // add link
+        let augucationLink = document.createElement("div");
+        augucationLink.innerHTML = "augucation.github.io/list.html?" + getTotalIndex(t, a);  // TODO remove "list.html"
+        augucationLink.className = "augucationLink augucationLinkHidden";
+        augucationLink.Id = "link" + getTotalIndex(t, a);
+        augucationInfo.appendChild(augucationLink);
+
+        // add copy symbol
+        let copySymbol = document.createElement("div");
+        copySymbol.className = "copySymbol copySymbolHidden";
+        augucationLink.appendChild(copySymbol);
+
+        let copyNotification = document.createElement("div");
+        copyNotification.className = "copyNotification copyNotificationHidden";
+        copyNotification.innerHTML = "Link kopieren";
+        copySymbol.appendChild(copyNotification);
+
+        // add click listener to augucation link -> copy link
+        copySymbol.addEventListener("click", function(e) {
+            setClipboardText("augucation.github.io/list.html?" + getTotalIndex(t, a)); // TODO remove "list.html"
+
+            copyNotification.innerHTML = "Link kopiert";
+            // let notification dissappear after 1 second
+            setTimeout(function ()
+            {
+                copyNotification.classList.add("copyNotificationHidden");
+            }, 1000);
+
+            copySymbol.classList.add("copySymbolDark");
+            augucationLink.classList.remove("augucationLinkHighlighted");
+        });
+
+        // add hover listener to copySymbol to highlight augucation link
+        copySymbol.addEventListener("mouseover",function (e){
+            augucationLink.classList.add("augucationLinkHighlighted");
+            copyNotification.innerHTML = "Link kopieren";
+            copyNotification.classList.remove("copyNotificationHidden");
+            copySymbol.classList.add("copySymbolDark");
+        });
+        copySymbol.addEventListener("mouseout",function (){
+            augucationLink.classList.remove("augucationLinkHighlighted");
+            copyNotification.classList.add("copyNotificationHidden");
+            copySymbol.classList.remove("copySymbolDark");
+        });
+
+        // add hover listener to augucation container to show augucation link and copy symbol
+        augucationContainer.addEventListener("mouseover", function ()
+        {
+            augucationLink.classList.remove("augucationLinkHidden");
+            copySymbol.classList.remove("copySymbolHidden");
+        });
+        augucationContainer.addEventListener("mouseout", function ()
+        {
+            augucationLink.classList.add("augucationLinkHidden");
+            copySymbol.classList.add("copySymbolHidden");
+        });
 
         // add a sepratation line below the augucation except for the last one
         var sepLine = document.createElement("div");

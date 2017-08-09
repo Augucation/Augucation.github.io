@@ -1,27 +1,18 @@
-function main()
+/*
+* URL looks like this: augucation.github.io/list.html?10
+* extracts number after "?" and opens corresponding interaction via url
+*/
+function createAndOpenInteractionUrl()
 {
-    console.log("jsjdksjdksasssssssssssssssssssssssssssssssssssssssssssssssssssssd");
-
-    // get url parameter
     var url = window.location.search;
     var param = parseInt(url.split("?")[1]);
 
-    console.log("params: ", param);
-    
 	if (isNaN(param))
         return;
 
+	param += 100; // hacky dacky facky macky
 
-	param += 100;
-	
-    console.log("ist es ne zahl? ", !isNaN(param));
-
-    // if its a number, open corresponding interaction
-    if (!isNaN(param))
-    {
-        console.log("is ne zahl");
-        window.location.href = "augucations/" + param + "/" + "interaction.html";
-    }
+    window.location.href = "augucations/" + param + "/" + "interaction.html";
 }
 
-main();
+createAndOpenInteractionUrl();
