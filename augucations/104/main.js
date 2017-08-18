@@ -22,7 +22,7 @@ stream = [
 		["1010", "0111", "1111", "1001", "0101", "1100"],
 		["10010", "00111", "11000", "00101", "10100"]
 		];
-		
+
 memory = [33, 24, 25];
 
 function findElements()
@@ -45,10 +45,10 @@ function update()
 		code_spans[i].innerHTML = codes[bits-2][i];
 		code_bits.appendChild(code_spans[i]);
 	}
-	
+
 	// fill code_pairs
 	code_pairs.innerHTML = "Codierung (als Wertpaare)<br>";
-		
+
 		// create brackets and comma
 		var bracket_left = document.createElement("SPAN");
 		bracket_left.innerHTML = "{";
@@ -56,7 +56,7 @@ function update()
 		bracket_right.innerHTML = "}";
 		var comma = document.createElement("SPAN");
 		comma.innerHTML = ", ";
-	
+
 	for(var i = 0; i < codes[bits-2].length; i++)
 	{
 		pairs_spans[2 * i] = document.createElement("SPAN");
@@ -71,7 +71,7 @@ function update()
 		if(i < codes[bits-2].length - 1) // no comma after the last one
 			code_pairs.appendChild(comma.cloneNode(true));
 	}
-	
+
 	// fill code_stream
 	code_stream.innerHTML = "Codierung (als Bitstrom)<br>";
 		for(var i = 0; i < codes[bits-2].length; i++)
@@ -80,19 +80,19 @@ function update()
 		stream_spans[i].innerHTML = stream[bits-2][i];
 		code_stream.appendChild(stream_spans[i]);
 	}
-	
+
 	// fill code_memory
 	code_memory.innerHTML = "Gesamtspeicherbedarf<br>" + memory[bits-2] + " Bit";
-	
-	// add big white text to avoid jumpy text due to font size changes 
+
+	// add big white text to avoid jumpy text due to font size changes
 	var whitey = document.createElement("SPAN");
 	whitey.innerHTML = " ";
 	whitey.style.fontSize = "34px";
-	
+
 	code_bits.appendChild(whitey.cloneNode(true));
 	code_pairs.appendChild(whitey.cloneNode(true));
 	code_stream.appendChild(whitey.cloneNode(true));
-	
+
 	addMouseOverListeners();
 }
 
@@ -111,31 +111,31 @@ function addMouseOverListeners()
 {
 	function getMouseOverFunction(hover, type, index)
 	{
-		return function() 
+		return function()
 		{
 			mouseOver(hover, type, index)
 		}
 	}
-	
-	
+
+
 	// code_spans
-	
+
 	for (var i = 0; i < code_spans.length; i++)
 	{
 		code_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "code_spans", i), false);
 		code_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "code_spans", i), false);
 	}
-	
+
 	// pairs_spans
-	
+
 	for (var i = 0; i < pairs_spans.length; i++)
 	{
 		pairs_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "pairs_spans", i), false);
 		pairs_spans[i].addEventListener("mouseout", getMouseOverFunction(false, "pairs_spans", i), false);
 	}
-	
+
 	// stream spans
-	
+
 	for (var i = 0; i < stream_spans.length; i++)
 	{
 		stream_spans[i].addEventListener("mouseover", getMouseOverFunction(true, "stream_spans", i), false);
@@ -144,26 +144,26 @@ function addMouseOverListeners()
 }
 
 function mouseOver(hover, type, index)
-{	
+{
 	// ... because pairs has doubled elements
 	if(type == "pairs_spans")
 		index = index % 2 == 0 ? index / 2 : Math.round(index / 2) - 1;
-		
+
 	code_spans[index].style.color = hover ? "#FF0000" : color_gray;
-	
+
 	pairs_spans[index * 2].style.color = hover ? "#0000FF" : color_gray;
 	pairs_spans[index * 2 + 1].style.color = hover ? "#0000FF" : color_gray;
-	
+
 	stream_spans[index].style.color = hover ? "#00FF00" : color_gray;
-	
-	
+
+
 	/* Change font sizes to highlight
-	
+
 	code_spans[index].style.fontSize = hover ? "34px" : "28px";
-	
+
 	pairs_spans[index * 2].style.fontSize = hover ? "34px" : "28px";
 	pairs_spans[index * 2 + 1].style.fontSize = hover ? "34px" : "28px";
-	
+
 	stream_spans[index].style.fontSize = hover ? "34px" : "28px";
 	*/
 }

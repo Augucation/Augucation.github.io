@@ -1,33 +1,30 @@
 .wrapper
 {
-  width: 100%;
-  height: 90%;
+  width: 90vw;
+  height: 80vh;
   position: relative;
+  margin: auto;
 }
 
 .code
 {
-  border: 0px solid var(--hci_gray);
-  border-radius: 10px;
   width: 80vw;
   height: 10vh;
-  margin-top: 7vh;
+  margin-top: 5vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-size: 28;
 }
 
 .radio_wrapper
 {
-  margin-top: 5%;
+  margin-top: 5vh;
 }
 
 fieldset
 {
   border: none;
   text-align: center;
-  font-size: 28;
 }
 
 input[type=radio]
@@ -35,4 +32,10 @@ input[type=radio]
   width: 1.5em;
   height: 1.5em;
   margin-left: 3%;
+}
+
+.text, fieldset
+{
+  font-size: 3vh !important;
+  margin-top: 10vh;
 }
