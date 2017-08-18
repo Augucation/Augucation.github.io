@@ -21,7 +21,7 @@
 .my_text
 {
 	font-family:   'uhh';
-	font-size:      20px;
+	font-size:      2vh; /*20px;*/
   color:		      var(--hci_gray) !important;
 }
 
