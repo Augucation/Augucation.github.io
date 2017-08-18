@@ -1,11 +1,10 @@
 .canvas
 {
-  width: 50vw;
+  width: 60vh;
   height: auto;
   margin-top: -2%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: -3%;
   position: relative;
   display: block;
   background: url(https://upload.wikimedia.org/wikipedia/commons/8/8d/Hoerflaeche.svg);
@@ -16,20 +15,20 @@
 
 .slider_block
 {
-  margin-top: 1%;
+  margin-top: 5vh;
+  margin-bottom: 0vh !important;
 }
 
 .slider_wrapper
 {
-  margin-top: 0%;
   margin-left: auto;
   margin-right: auto;
-  width:    54.27vw;
-  height:   6vw;
-
+  margin-top: -4vh;
+  width:    66vh;
+  height:   20vh;
 }
 
-.radio_wrapper
+.my_text
 {
-  margin-top: -1%;
+  font-size: 3vh !important;
 }
