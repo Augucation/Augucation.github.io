@@ -36,7 +36,7 @@ function init(){
 }
 
 function createSound(){
-	sound = new Pizzicato.Sound('../../../resources/audio/original.wav', function() {finishedLoading();});
+	sound = new Pizzicato.Sound('../../resources/audio/original.wav', function() {finishedLoading();});
 	sound.loop = true;
 }
 
@@ -51,20 +51,20 @@ function createFilters(){
 		peak: 0.0001,
 		mix: 0
 	});
-	
+
 	highPassFilter1 = highPassFilter;
 	highPassFilter2 = highPassFilter;
 	highPassFilter3 = highPassFilter;
 	highPassFilter4 = highPassFilter;
 	highPassFilter5 = highPassFilter;
 
-	
+
 	lowPassFilter = new Pizzicato.Effects.LowPassFilter({
 		frequency: 22050,
 		peak: 0.0001,
 		mix: 1
 	});
-	
+
 	lowPassFilter1 = lowPassFilter;
 	lowPassFilter2 = lowPassFilter;
 	lowPassFilter3 = lowPassFilter;
@@ -90,10 +90,10 @@ function mute(){
 		sound.pause();
 		play = false;
 		muteBtn.style.backgroundImage = img_soundoff;
-		
+
 		if(low_attached)
 			sound.removeEffect(lowPassFilter);
-		
+
 		if(high_attached)
 			sound.removeEffect(high_attached);
 	}
@@ -102,10 +102,10 @@ function mute(){
 		sound.play();
 		play = true;
 		muteBtn.style.backgroundImage = img_soundon;
-		
+
 		if(low_attached)
 			sound.addEffect(lowPassFilter);
-		
+
 		if(high_attached)
 			sound.addEffect(high_attached);
 	}

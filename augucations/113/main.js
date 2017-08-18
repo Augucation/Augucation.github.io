@@ -7,19 +7,19 @@ var play = false,
 	current_sound = 0,
 	time = 0,
 	radios = document.getElementsByName("bitrate");
-	
-	sounds[0] = new Audio('../../../resources/audio/original8.mp3');
-	sounds[1] = new Audio('../../../resources/audio/original16.mp3');
-	sounds[2] = new Audio('../../../resources/audio/original32.mp3');
-	sounds[3] = new Audio('../../../resources/audio/original64.mp3');
-	sounds[4] = new Audio('../../../resources/audio/original96.mp3');
-	sounds[5] = new Audio('../../../resources/audio/original128.mp3');
+
+	sounds[0] = new Audio('../../resources/audio/original8.mp3');
+	sounds[1] = new Audio('../../resources/audio/original16.mp3');
+	sounds[2] = new Audio('../../resources/audio/original32.mp3');
+	sounds[3] = new Audio('../../resources/audio/original64.mp3');
+	sounds[4] = new Audio('../../resources/audio/original96.mp3');
+	sounds[5] = new Audio('../../resources/audio/original128.mp3');
 
 function init(){
 	manageRadioButtons();
 	loop();
-}	
-	
+}
+
 function mute(){
 
 	if(play)
@@ -54,7 +54,7 @@ function setBitrate(id){
 }
 
 function loop(){
-	
+
 	for(var i = 0; i < sounds.length; i++)
 	{
 		// if loop is supported, use it
@@ -62,7 +62,7 @@ function loop(){
 		{
 			sounds[i].loop = true;
 		}
-		
+
 		// otherwise create own loop function by using an event listener
 		else
 		{

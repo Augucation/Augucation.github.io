@@ -24,7 +24,7 @@ function createSounds(){
 	//sound1 = new Audio('../../../resources/audio/Chantar_short.ogg');
 	//sound2 = new Audio('../../../resources/audio/Chantar_short.ogg');
 
-	sound1 = new Pizzicato.Sound('../../../resources/audio/Chantar_short.ogg', function() {finishedLoading();});
+	sound1 = new Pizzicato.Sound('../../resources/audio/Chantar_short.ogg', function() {finishedLoading();});
 	sound1.loop = true;
 
 	flanger = new Pizzicato.Effects.Flanger({
