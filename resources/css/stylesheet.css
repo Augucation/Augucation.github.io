@@ -93,12 +93,14 @@ sub {
 {
 	margin: 0% auto 1% auto;
 	background-color: white;
-	background-size:  80px 80px;
+	/*background-size:  80px 80px*/;
+	background-size: 100%;
 	border: 		  none;
-	height:   		  80px;
-	width:    		  80px;
+	height:   		  10vh;
+	width:    		  10vh;
 	cursor:	  		  pointer;
 	background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg');
+	background-repeat: no-repeat;
 }
 
 .slider_wrap
