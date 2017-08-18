@@ -1,18 +1,3 @@
-.canvas
-{
-  width: 43.417vw;
-  height: 20vw;
-  margin-top: -2%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 3%;
-  position: relative;
-  display: block;
-  background: url('../../../resources/img/im-02_89_maskbg.png');
-  background-repeat: no-repeat;
-  background-size: 100%
-}
-
 .slider_block
 {
   margin-top: 1%;
@@ -20,32 +5,32 @@
 
 .slider_wrapper
 {
-  margin-top: 0%;
-  margin-left: auto;
-  margin-right: auto;
-  width:    54.27vw;
-  height:   6vw;
-  
+  margin:  5vh auto !important;
+  width:   33vw;
+  height:  3vw;
 }
 
-/*
-.slider_top_label
+.my_text
 {
-  margin-bottom: 2% !important;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  position: relative;
-  text-align: center;
+  font-size: 2vh !important;
 }
-*/
+
+.caption
+{
+  font-size: 3vh !important;
+}
 
 @-moz-document url-prefix()
 {
-  .slider_top_label
+  .slider_top_label, .slider_bottom_value
   {
     margin-bottom: 0% !important;
   }
+}
+
+.slider_top_label, .slider_bottom_value
+{
+  margin-bottom: 0% !important;
 }
 
 input[type=range].color_red::-moz-range-thumb {
