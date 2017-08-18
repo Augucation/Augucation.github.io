@@ -121,7 +121,7 @@ input[type=range] {
   width: 80%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
   display: table;
-  margin: 0 auto;
+  margin: 1vh auto;
   position: relative;
 }
 
@@ -163,19 +163,19 @@ input[type=range]::-moz-range-track {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 20px;
-  width: 20px;
+  height: 2vh;
+  width: 2vh;
   border-radius: 20px;
   background: #555e67;
   cursor: pointer;
-  margin-top: -8.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  margin-top: -1vh; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
   border: none;
-  height: 20px;
-  width: 20px;
+  height: 2vh;
+  width: 2vh;
   border-radius: 20px;
   background: #555e67;
   cursor: pointer;
@@ -184,8 +184,8 @@ input[type=range]::-moz-range-thumb {
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
   border: none;
-  height: 20px;
-  width: 20px;
+  height: 2vh;
+  width: 2vh;
   border-radius: 20px;
   background: #555e67;
   cursor: pointer;
