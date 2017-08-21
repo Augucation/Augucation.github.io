@@ -35,12 +35,12 @@
 	position: absolute;
 	left: 1vw;
 	top: 22vw;
-	height: 5vw;
+	height: 6em;
 }
 
 #graypicker::-moz-range-track {
 	width: 100%;
-	height: 20px;
+	height: 2vh;
 	background: -moz-linear-gradient(left, white, black);
 	border: 1px solid var(--hci_gray);
 	border-radius: 9px;
@@ -48,8 +48,8 @@
 
 #graypicker::-moz-range-thumb {
   border: 1px solid var(--hci_gray);
-  height: 35px;
-  width: 10px;
+  height: 4vh;
+  width: 1.5vh;
   border-radius: 4px;
   background: white;
   cursor: pointer;
@@ -57,7 +57,7 @@
 
 #graypicker::-webkit-slider-runnable-track {
 	width: 100%;
-	height: 20px;
+	height: 2vh;
 	background: -webkit-linear-gradient(left, white, black);
 	border: 1px solid var(--hci_gray);
 	border-radius: 9px;
@@ -65,8 +65,8 @@
 
 #graypicker::-webkit-slider-thumb {
   border: 1px solid var(--hci_gray);
-  height: 35px;
-  width: 10px;
+  height: 4vh;
+  width: 1.5vh;
   border-radius: 4px;
   background: white;
   cursor: pointer;
@@ -84,7 +84,7 @@
 	width: 20vw;
 	height: 3vw;
 	left: 1vw;
-	top: 26vw;
+	top: calc(23vw + 4em);
 }
 
 .imagebutton
@@ -136,7 +136,7 @@
 
 .title
 {
-	font-size: 24;
+	font-size: 3vh;
 }
 
 #select_quant
@@ -233,12 +233,12 @@
 {
 	position: absolute;
 	top: 2.5vw;
-	left: -3vw;
+	left: calc(-3.5vw - 1em);
 }
 
 #requantidct
 {
 	position: absolute;
 	top: 2vw;
-	left: -1vw;
+	left: calc(-1vw - 0.5em);
 }
