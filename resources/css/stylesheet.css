@@ -73,7 +73,7 @@ sub {
 	text-align:       center;
 	text-decoration:  none;
 	display:          inline-block;
-	font-size:        28px;
+	font-size:        1.5em !important;  /*28px*/
 	margin:           10px 10px;
 	cursor:           pointer;
 }
@@ -404,3 +404,9 @@ select:focus {
 
 select:-moz-focusring { color: transparent;
                         text-shadow: 0 0 0 #000; }
+
+
+select
+{
+	font-size: 1.5em !important;
+}
