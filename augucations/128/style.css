@@ -9,15 +9,15 @@
 
 #point_container
 {
-  border: 0px solid black;
-  width: 640px;
-  height: 189px;
+  width: 35vw;
+  height: 10vw;
   display: inline-flex;
   position: relative;
   top: 20vh;
   margin: 0 auto;
   background-image: url('frames/1.png');
   background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 
