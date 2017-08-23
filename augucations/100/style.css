@@ -23,3 +23,11 @@
    margin-top: 0%;
   }
 }
+
+#chart1, .flot-base, .flot-x-axis
+{
+  width: 50vw !important;
+  height: 20vw !important;
+  
+  border: 0px solid pink;
+}
