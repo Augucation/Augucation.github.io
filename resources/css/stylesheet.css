@@ -410,3 +410,8 @@ select
 {
 	font-size: 1.5em !important;
 }
+
+.no-spin
+{
+	font-size: 1em;
+}
