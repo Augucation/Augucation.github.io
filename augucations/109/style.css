@@ -1,15 +1,14 @@
 .chart
 {
   width: 80vw;
-  height: 50vh;
-  margin-top: -2%;
+  height: 30vh;
   margin-left: auto;
   margin-right: auto;
 }
 
 .slider_block
 {
-  margin-top: 2%;
+  margin-top: 4%;
 }
 
 .slider_wrapper
@@ -18,11 +17,16 @@
   margin-left: auto;
   margin-right: auto;
   width:    54.27vw;
-  height:   6vw;
+  height:   12vh;
 
 }
 
 .radio_wrapper
 {
-  margin-top: -1%;
+  margin-top: 0%;
+}
+
+fieldset
+{
+  margin-top: 0.5em;
 }
