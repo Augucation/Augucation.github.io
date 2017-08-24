@@ -7,17 +7,16 @@ fieldset
 {
   border: none;
   text-align: center;
-  font-size: 28;
 }
 
 input[type=radio]
 {
-  width: 1.5em;
-  height: 1.5em;
+  width: 1em;
+  height: 1em;
   margin-left: 3%;
 }
 
 .radio_label_small
 {
-  font-size: 20;
+  font-size: 1em;
 }
