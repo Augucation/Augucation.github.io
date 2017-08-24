@@ -15,11 +15,13 @@
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
 
-	<canvas id="pic_canvas" src="../../resources/img/5_271_haus_2.jpg" width="500px" height="375px"></canvas>
-
-	<div id="chart_wrapper">
-		<div id="mydiv"></div>
+	<div id="canvas_wrapper">
+		<canvas id="pic_canvas" src="../../resources/img/5_271_haus_2.jpg"></canvas>
 	</div>
+
+	<!--div id="chart_wrapper"-->
+		<div id="mydiv"></div>
+	<!--/div-->
 
 	<div id="slider_wrapper" class="my_text">
 		<input id="histo_slider_min" class="histo_slider" type="range" range="true" min="0" max="255" value="50" oninput="sliderInput(true, this.value)">
@@ -40,6 +42,10 @@
 	<script type="text/javascript" src="http://www.benjaminbuffet.com/public/js/jquery.flot.orderBars.js"></script>
 	<script src="js/jquery.flot.resize.min.js"></script>
 	<script src="nouislider.min.js"></script>
+
+	<script type="text/javascript" language="javascript" src="../../resources/js/plugins/flot/jquery.flot.axislabels.js"></script>
+
+	<script type="text/javascript" language="javascript" src="../../resources/js/plugins/flot/jquery.flot.resize.min.js"></script>
 
 	<script src="../../resources/js/plugins/histogram/histogram.min.js"></script>
 
