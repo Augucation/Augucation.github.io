@@ -5,7 +5,7 @@
 
 .slider_block
 {
-  margin-top: -1%;
+  margin-top: 0;
 }
 
 .slider_wrapper
@@ -14,7 +14,7 @@
   margin-left: auto;
   margin-right: auto;
   width:    54.27vw;
-  height:   6vw;
+  height:   12vh;
   
 }
 
