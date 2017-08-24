@@ -9,21 +9,27 @@
 .plots_wrapper
 {
   position: relative;
-  display:  block;
   margin-top: 1%;
   margin-left: auto;
   margin-right: auto;
   width:    60vw;
-  height:   37.08vw;
+  overflow: hidden;
+}
+
+/*
+.plot_chart_big_container
+{
+  display: inline-block;
+  width: 29vw;
+  height: 21vw;
+  margin-top: 5%;
+  border: 0px solid green;
 }
 
 .plot_chart
 {
-  display: inline-block;
-  width: 49.65%;
-  height: 49.65%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100% !important;
+  height: 107%;
 }
 
 .chart_name_container
@@ -34,22 +40,33 @@
 
 .chart_name
 {
-  height: 25%;
-  margin-left: 10%;
-  margin-right: 6%;
+  height: 15%;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+.plot_chart_small_container
+{
+  display: inline-block;
+  width: 11.8vw;
+  height: 11vw;
+  margin-top: 5%;
+  border: 0px solid green;
 }
 
 .plot_chart.small
 {
-  width: 19.67%;
-  height: 19.54%;
+  width: 100%;
+  height: 80%;
+  border: 0px solid red;
 }
+*/
 
 .slider_wrapper
 {
   position: relative;
   display:  block;
-  margin-top: -9%;
   margin-left: auto;
   margin-right: auto;
   width:    24.27vw;
@@ -106,4 +123,87 @@ input[type=range].color_orange::-webkit-slider-thumb {
 }
 input[type=range].color_purple::-webkit-slider-thumb {
   background: var(--purple);
+}
+
+/**
+/* odd canvas: resizable part of plot
+canvas:nth-of-type(2n + 1)
+{
+  width: 11vw !important;
+  height: 8.5vw !important;
+}
+
+/* special size for first to plot canvasas 
+#chart0 > canvas:nth-of-type(2n + 1), #chart1 > canvas:nth-of-type(2n + 1) 
+{
+  width: 28vw !important;
+  height: 22vw !important;
+}
+**/
+
+#first_row
+{
+  height: calc(7vh + 10vw + 5vmin);
+  width: 99%;
+  
+  border: 0px solid red;
+  overflow: hidden;
+}
+
+#chart0, #chart1
+{
+  width: 49% !important;
+  height: 100% !important;
+  
+  font-size: 0.7em;
+}
+
+#chart0
+{
+  float: left;
+}
+
+#chart1
+{
+  float: right;
+  overflow: hidden;
+}
+
+#second_row
+{
+  height: calc(4vh + 5vw + 4vmin);
+  width: 99%;
+  
+  border: 0px solid red;
+  overflow: hidden;
+  
+  margin-bottom: 1em;
+}
+
+.plot_chart_small_container
+{
+  width: 20% !important;
+  height: 100% !important;
+  
+  float: left;
+  overflow: hidden;
+}
+
+#chart2, #chart3, #chart4, #chart5, #chart6
+{
+  width: 100% !important;
+  height: 80% !important;
+  
+  float: left;
+  overflow: hidden;
+  
+  font-size: 0.7em;
+}
+
+.chart_name
+{
+  margin: auto;
+  display: table;
+  
+  font-size: 0.9em;
 }

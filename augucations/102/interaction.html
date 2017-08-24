@@ -14,26 +14,58 @@
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
 
+
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
+
 	<img class="img_formula" src="../../resources/img/im-01-56_formula.png">
 
-	<div class="plots_wrapper">
+	<div class="plots_wrapper my_text">
 		<div class="inner_plots_wrapper">
-			<div id="chart0" class="plot_chart"></div>
-			<div id="chart1" class="plot_chart"></div>
-			<br/>
-			<div id="chart2" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(2)"></div>
-			<div id="chart3" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(3)"></div>
-			<div id="chart4" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(4)"></div>
-			<div id="chart5" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(5)"></div>
-			<div id="chart6" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(6)"></div>
-			<br/>
-			<div class="my_text chart_name_container">
-				<span class="chart_name">k = 0</span>
-				<span class="chart_name">k = 1</span>
-				<span class="chart_name">k = 2</span>
-				<span class="chart_name">k = 3</span>
-				<span class="chart_name">k = 4</span>
+
+			<div id="first_row">
+
+				<div class="plot_chart_big_container">
+					<div id="chart0" class="plot_chart" style="width:20em; height:20em;"></div>
+				</div>
+
+				<div class="plot_chart_big_container">
+					<div id="chart1" class="plot_chart"></div>
+				</div>
+
 			</div>
+
+			<br/>
+
+			<div id="second_row">
+
+				<div class="plot_chart_small_container">
+					<div id="chart2" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(2)"></div>
+					<span class="chart_name">k = 0</span>
+				</div>
+
+				<div class="plot_chart_small_container">
+					<div id="chart3" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(3)"></div>
+					<span class="chart_name">k = 1</span>
+				</div>
+
+				<div class="plot_chart_small_container">
+					<div id="chart4" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(4)"></div>
+					<span class="chart_name">k = 2</span>
+				</div>
+
+				<div class="plot_chart_small_container">
+					<div id="chart5" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(5)"></div>
+					<span class="chart_name">k = 3</span>
+				</div>
+
+				<div class="plot_chart_small_container">
+					<div id="chart6" class="plot_chart small" style="cursor: pointer;" onclick="chartSelected(6)"></div>
+					<span class="chart_name">k = 4</span>
+				</div>
+
+			</div>
+
 		</div>
 	</div>
 	<div class="slider_wrapper">
@@ -53,5 +85,11 @@
     <!--script type="text/javascript" src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script-->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
+
+
+	<script type="text/javascript" language="javascript" src="../../resources/js/plugins/flot/jquery.flot.axislabels.js"></script>
+
+	<script type="text/javascript" language="javascript" src="../../resources/js/plugins/flot/jquery.flot.resize.min.js"></script>
+
 
 </body>
