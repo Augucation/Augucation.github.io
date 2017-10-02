@@ -15,7 +15,11 @@ function main()
     //addEventListenerToCanvas();
     //drawCoordinateSystem();
 
-    initDraw();
+    translateCanvas();
+    calc();
+    draw();
+
+    algoStep();
 }
 
 main();

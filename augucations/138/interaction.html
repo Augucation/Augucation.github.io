@@ -21,10 +21,35 @@
 		</div>
 
 		<div id="mathContainer">
-			<div id="equationContainer">
-				<span id="m">m = </span>
+
+			<div id="variablesContainer">
+
+				<div id="varrow0">
+					<div id="var_span_p" class="var_div-3"></div>
+					<div id="var_span_q" class="var_div-3"></div>
+					<div id="var_span_m" class="var_div-3"></div>
+				</div>
+
+				<div id="varrow1">
+					<div id="var_span_dx" class="var_div-2"></div>
+					<div id="var_span_dy" class="var_div-2"></div>
+				</div>
+
+				<div id="varrow2">
+					<div id="var_span_d" class="var_div-3"></div>
+					<div id="var_span_incrE" class="var_div-3"></div>
+					<div id="var_span_incrSE" class="var_div-3"></div>
+				</div>
+
 			</div>
-			<button id="deltaBtn" class="button" onclick="visualizeDeltas();">Show delta</button>
+
+			<div id="calculationContainer">
+				<div id="calculationText"></div>
+			</div>
+
+			<div id="infoContainer"></div>
+
+			<button id="forwardBtn" class="button" onclick="nextStep();">Weiter</button>
 		</div>
 
 	</div>
@@ -37,6 +62,7 @@
 	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
 	<script type="text/javascript" src="bresenham.js"></script>
 	<script type="text/javascript" src="bresenham_visualization.js"></script>
+	<script type="text/javascript" src="algorithm_steps.js"></script>
 	<script type="text/javascript" src="math_gui.js"></script>
 	<script type="text/javascript" src="coordinate_system.js"></script>
 	<script type="text/javascript" src="canvas.js"></script>

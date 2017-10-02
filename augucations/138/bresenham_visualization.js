@@ -5,13 +5,8 @@ function visualizeDeltas()
 {
     visualizeLine();
 
-    var dx = calcDX(p, q);
-    var dy = calcDY(p, q);
-
     visualizeDeltaX(dx);
     visualizeDeltaY(dy);
-
-    console.log("dx: ", dx, "  dy:", dy);
 }
 
 function visualizeDeltaX(dx)
@@ -53,4 +48,10 @@ function printOnCanvas(text, x, y, size = 20, color = "#000000")
     ctx.fillStyle = color;
     ctx.font = size + "px Verdana";
     ctx.fillText(text, x * pixelSize, y * pixelSize);
+}
+
+function removeDeltas()
+{
+    clear();
+    draw();
 }

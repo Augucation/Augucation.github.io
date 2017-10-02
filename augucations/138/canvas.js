@@ -11,9 +11,10 @@ var colorDisabled = "#dadbe5";
 
 var draggingPoint = 0; // 0: none, 1: p, 2: q
 
+var movePointFunction;
+
 canvas = document.getElementById("canvy");
 ctx = canvas.getContext("2d");
-
 
 function clear()
 {
@@ -89,46 +90,36 @@ function addEventListenerToCanvas()
     );
 
     // move points
-    canvas.addEventListener("mousemove", function(evt)
-    {
-        var m = getMousePos(evt);
+    canvas.addEventListener("mousemove", movePoint, false);
+}
 
-        console.log("m: ", m, "\t\tq: ", q);
+function movePoint(evt)
+{
+    var mPos = getMousePos(evt);
 
-        // don't leave the coordinate system!
-        if (m.x < 0 || m.y < 0 || m.x > pixelNum || m.y > pixelNum)
-            return;
+    // don't leave the coordinate system!
+    if (mPos.x < 0 || mPos.y < 0 || mPos.x > pixelNum || mPos.y > pixelNum)
+        return;
 
-        // avoid the forbidden octant!
-        if (m.y > m.x)
-            return;
+    // avoid the forbidden octant!
+    if (mPos.y > mPos.x)
+        return;
 
-        manageCursorIcon(m);
+    manageCursorIcon(mPos);
 
-        // return if no point is dragged at the moment
-        if (!draggingPoint)
-            return;
+    // return if no point is dragged at the moment
+    if (!draggingPoint)
+        return;
 
-        // move q
-        if (draggingPoint)
-            q = m;
+    // move q
+    if (draggingPoint)
+        q = mPos;
 
-        clear();
+    clear();
+    calc();
+    draw();
 
-        //plotLine(p, q);
-        bresenham(p, q);
-
-        drawPoint(p, colorPoint);
-        drawPoint(q, colorPoint);
-
-        disableSecondOctant();
-
-        drawCoordinateSystem();
-
-        calcEquation(p, q);
-        updateGUI();
-    }
-);
+    printVariables(p, q, m);
 }
 
 function manageCursorIcon(mPos)
@@ -148,22 +139,20 @@ function disableSecondOctant()
     }
 }
 
-function initDraw()
+function calc()
 {
+    bresenham(p, q);
+    printVariables(p, q, m);
+}
 
-    drawAxisArrows();
-
+function draw()
+{
     disableSecondOctant();
 
     drawCoordinateSystem();
 
-    //drawPixel(p, colorPoint);
-    //drawPixel(q, colorPoint);
     drawPoint(p, colorPoint);
     drawPoint(q, colorPoint);
-
-    //plotLine(p, q);
-    //bresenham(p, q);
 }
 
 addEventListenerToCanvas();

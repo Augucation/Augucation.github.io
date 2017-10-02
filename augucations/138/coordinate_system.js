@@ -4,7 +4,7 @@ var axisColor = "#333333";
 var gridLineWidth = 0.2;
 var axisLineWidth = 3;
 
-function drawAxisArrows()
+function translateCanvas()
 {
     ctx.translate(offset, offset);
 }
