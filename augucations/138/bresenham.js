@@ -31,7 +31,6 @@ function bresenham(p, q)
 
     /* Code von http://www.idav.ucdavis.edu/education/GraphicsNotes/Bresenhams-Algorithm/Bresenhams-Algorithm.html
 
-    */
     var dx = b.x - a.x;
     var dy = b.y - a.y;
     var m = dy / dx;
@@ -49,6 +48,7 @@ function bresenham(p, q)
         a.x++;
         err += m;
     }
+    */
 
     /* Code von den ICG Slides
 
@@ -79,6 +79,32 @@ function bresenham(p, q)
         }
     }
     */
+
+    /* Code von den ICG Slides ohne Verdopplung
+    */
+
+    var dx = b.x - a.x;
+    var dy = b.y - a.y;
+    var d = dy - dx;
+    var incrE = dy;
+    var incrNE = (dy - dx);
+
+    while (a.x < b.x)
+    {
+        drawPixel(a);
+
+        if (d <= 0)
+        {
+            d += incrE;
+            a.x++;
+        }
+        else
+        {
+            d += incrNE;
+            a.x++;
+            a.y++;
+        }
+    }
 }
 
 function plotLine(p, q)

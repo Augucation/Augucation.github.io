@@ -120,7 +120,7 @@ function addEventListenerToCanvas()
         drawPoint(q, colorPoint);
 
         //plotLine(p, q);
-        //bresenham(p, q);
+        bresenham(p, q);
 
         calcEquation(p, q);
         updateGUI();
