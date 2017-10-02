@@ -4,10 +4,20 @@ var axisColor = "#333333";
 var gridLineWidth = 0.2;
 var axisLineWidth = 3;
 
+function drawAxisArrows()
+{
+    ctx.beginPath();
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "red";
+    ctx.moveTo(0, 0);
+    ctx.lineTo(canvas.width, 0);
+    ctx.stroke();
+
+    ctx.translate(offset, offset);
+}
 
 function drawCoordinateSystem()
 {
-
     ctx.beginPath();
     ctx.lineWidth = gridLineWidth;
     ctx.strokeStyle = gridColor;
@@ -42,5 +52,3 @@ function drawCoordinateSystem()
 
     ctx.stroke();
 }
-
-drawCoordinateSystem();

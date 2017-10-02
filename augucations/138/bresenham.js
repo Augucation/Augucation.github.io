@@ -7,7 +7,68 @@ function calcEquation(p, q)
 
 function calcM(p, q)
 {
-    return (q.y - p.y) / (p.x - q.x);
+    return -(q.y - p.y) / (p.x - q.x);
+}
+
+function bresenham(p, q)
+{
+    var a = clonePoint(p);
+    var b = clonePoint(q);
+
+
+    /* Midpoint Algorithm */
+
+
+    /* Code von http://www.idav.ucdavis.edu/education/GraphicsNotes/Bresenhams-Algorithm/Bresenhams-Algorithm.html
+
+    */
+    var dx = b.x - a.x;
+    var dy = b.y - a.y;
+    var m = dy / dx;
+    var err = m - 1;
+
+    while (a.x < b.x)
+    {
+        drawPixel(a);
+
+        if (err >= 0)
+        {
+            a.y++;
+            err -= 1;
+        }
+        a.x++;
+        err += m;
+    }
+
+    /* Code von den ICG Slides
+
+    // b is toooo far away
+    //b.x--; b.y--;
+
+    var dx = b.x - a.x;
+    var dy = b.y - a.y;
+    var m = dy / dx;
+    var d = 2 * dy - dx;
+    var incrE = 2 * dy;
+    var incrNE = 2 * (dy - dx);
+
+    while (a.x < b.x)
+    {
+        drawPixel(a);
+
+        if (d <= 0)
+        {
+            d += incrE;
+            a.x++;
+        }
+        else
+        {
+            d += incrNE;
+            a.x++;
+            a.y++;
+        }
+    }
+    */
 }
 
 function plotLine(p, q)

@@ -1,18 +1,21 @@
 var pixelSize = 25; // same as grid size
 
-var canvas = document.getElementById("canvy");
-var ctx = canvas.getContext("2d");
+var offset = 25;
 
-var pixelNum = canvas.width / pixelSize;
+var pixelNum = 20; //canvas.width / pixelSize;
 
-ctx.webkitImageSmoothingEnabled = false;
-ctx.imageSmoothingEnabled = false; /// future
+var canvas, ctx;
 
 function main()
 {
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false; /// future
+
     //drawLine();
     //addEventListenerToCanvas();
     //drawCoordinateSystem();
+
+    initDraw();
 }
 
 main();

@@ -5,16 +5,33 @@ var q = {x: 19, y: 10};
 var pointSize = 10;
 
 // default colors
-var colorLine = "#333333";
-var colorPoint = "#686B94";
+var colorLine = "#686B94";
+var colorPoint = "#af2626";
 var colorDisabled = "#dadbe5";
 
 var draggingPoint = 0; // 0: none, 1: p, 2: q
 
+canvas = document.getElementById("canvy");
+ctx = canvas.getContext("2d");
+
+
 function clear()
 {
     // clear
+    ctx.translate(-offset, -offset);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.translate(offset, offset);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+}
+
+function drawPoint(point, color = "red")
+{
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.arc(point.x * pixelSize, point.y * pixelSize, 10, 0, 2 * Math.PI, false);
+    ctx.fill();
 }
 
 function drawPixel(point, color = "#686B94")
@@ -36,25 +53,14 @@ function getMousePos(evt)
         scaleY = canvas.height / rect.height;
 
     return {
-      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize),
-      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize)
+      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 0.5),
+      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 0.5)
     }
 }
 
-// 0: no point click
-// 1: clicked on p
-// 2: clicked on q
-function clickedOnPoint(mousePos)
+function clickedOnQ(mousePos)
 {
-    // check for p
-    if (distance(mousePos, p) < 1)
-        return 1;
-
-    // check for q
-    if (distance(mousePos, q) < 1)
-        return 2;
-
-    return 0;
+    return (distance(mousePos, q) < 1);
 }
 
 function addEventListenerToCanvas()
@@ -62,14 +68,14 @@ function addEventListenerToCanvas()
     // click listener to move line points
     canvas.addEventListener("mousedown", function(evt)
         {
-            draggingPoint = clickedOnPoint(getMousePos(evt));
+            draggingPoint = clickedOnQ(getMousePos(evt));
         }
     );
 
     canvas.addEventListener("mouseup", function()
         {
             // reset draggingPoint
-            draggingPoint = 0;
+            draggingPoint = false;
         }
     );
 
@@ -77,6 +83,10 @@ function addEventListenerToCanvas()
     canvas.addEventListener("mousemove", function(evt)
     {
         var m = getMousePos(evt);
+
+        // don't leave the coordinate system!
+        if (m.x < 0 || m.y < 0)
+            return;
 
         // avoid the forbidden octant!
         if (m.y > m.x)
@@ -88,12 +98,8 @@ function addEventListenerToCanvas()
         if (!draggingPoint)
             return;
 
-        // move p
-        if (draggingPoint == 1)
-            p = m;
-
         // move q
-        else if (draggingPoint == 2)
+        if (draggingPoint)
             q = m;
 
         clear();
@@ -102,10 +108,11 @@ function addEventListenerToCanvas()
 
         drawCoordinateSystem();
 
-        drawPixel(p, colorPoint);
-        drawPixel(q, colorPoint);
+        drawPoint(p, colorPoint);
+        drawPoint(q, colorPoint);
 
-        plotLine(p, q);
+        //plotLine(p, q);
+        bresenham(p, q);
 
         calcEquation(p, q);
         updateGUI();
@@ -115,29 +122,37 @@ function addEventListenerToCanvas()
 
 function manageCursorIcon(mPos)
 {
-    canvas.className = ((distance(mPos, p) < 1) ||
-                        (distance(mPos, q) < 1))     ? "pointy" : "";
+    canvas.className = (distance(mPos, q) < 1) ? "pointy" : "";
 }
 
 function disableSecondOctant()
 {
-    for (var x = 0; x < pixelNum; x++)
+    for (var x = 0; x <= pixelNum; x++)
     {
-        for (var y = 0; y < pixelNum; y++)
+        for (var y = 0; y <= pixelNum; y++)
         {
-            if (y > x)
+            if (x < y)
                 drawPixel({x: x, y: y}, colorDisabled);
         }
     }
 }
 
-disableSecondOctant();
+function initDraw()
+{
 
-drawCoordinateSystem();
+    drawAxisArrows();
 
-drawPixel(p, colorPoint);
-drawPixel(q, colorPoint);
+    disableSecondOctant();
 
-plotLine(p, q);
+    drawCoordinateSystem();
+
+    //drawPixel(p, colorPoint);
+    //drawPixel(q, colorPoint);
+    drawPoint(p, colorPoint);
+    drawPoint(q, colorPoint);
+
+    //plotLine(p, q);
+    //bresenham(p, q);
+}
 
 addEventListenerToCanvas();
