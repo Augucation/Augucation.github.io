@@ -35,6 +35,10 @@ function visualizeDeltaY(dy)
     moveToPixel(q.x, p.y);
     lineToPixel(q.x, q.y);
     ctx.stroke();
+
+    // write delta value
+    var xPos = q.x > 15 ? -4 : 1;
+    printOnCanvas("\u0394y = " + dy, q.x + xPos, q.y * 0.5, 20);
 }
 
 function visualizeLine()
