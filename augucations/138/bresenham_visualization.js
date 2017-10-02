@@ -19,12 +19,12 @@ function visualizeDeltaX(dx)
     // draw dx line
     ctx.beginPath();
     ctx.strokeStyle = colorDeltaX;
-    moveToPixel(p.x, q.y);
-    lineToPixel(q.x, q.y);
+    moveToPixel(p.x + 0.5, q.y + 0.5);
+    lineToPixel(q.x + 0.5, q.y + 0.5);
     ctx.stroke();
 
     // write delta value
-    printOnCanvas("\u0394x = " + dx, dx * 0.4, q.y + 1, 20);
+    printOnCanvas("\u0394x = " + dx, dx * 0.4, q.y + 1.5, 20);
 }
 
 function visualizeDeltaY(dy)
@@ -32,20 +32,19 @@ function visualizeDeltaY(dy)
     // draw dy line
     ctx.beginPath();
     ctx.strokeStyle = colorDeltaY;
-    moveToPixel(q.x, p.y);
-    lineToPixel(q.x, q.y);
+    moveToPixel(p.x + 0.5, p.y + 0.5);
+    lineToPixel(p.x + 0.5, q.y + 0.5);
     ctx.stroke();
 
     // write delta value
-    var xPos = q.x > 15 ? -4 : 1;
-    printOnCanvas("\u0394y = " + dy, q.x + xPos, q.y * 0.5, 20);
+    printOnCanvas("\u0394y = " + dy, p.x + 1, q.y * 0.5 + 1, 20);
 }
 
 function visualizeLine()
 {
     ctx.beginPath();
-    moveToPixel(p.x, p.y);
-    lineToPixel(q.x, q.y);
+    moveToPixel(p.x + 0.5, p.y + 0.5);
+    lineToPixel(q.x + 0.5, q.y + 0.5);
     ctx.stroke();
 }
 

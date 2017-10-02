@@ -38,7 +38,8 @@ function drawPoint(point, color = "red")
 {
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.arc(point.x * pixelSize, point.y * pixelSize, 10, 0, 2 * Math.PI, false);
+    //ctx.arc(point.x * pixelSize, point.y * pixelSize, 10, 0, 2 * Math.PI, false);
+    ctx.arc((point.x + 0.5) * pixelSize, (point.y + 0.5) * pixelSize, 10, 0, 2 * Math.PI, false);
     ctx.fill();
 }
 
@@ -61,8 +62,8 @@ function getMousePos(evt)
         scaleY = canvas.height / rect.height;
 
     return {
-      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 0.5),
-      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 0.5)
+      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 1), //-0.5
+      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 1)
     }
 }
 
@@ -92,8 +93,10 @@ function addEventListenerToCanvas()
     {
         var m = getMousePos(evt);
 
+        console.log("m: ", m, "\t\tq: ", q);
+
         // don't leave the coordinate system!
-        if (m.x < 0 || m.y < 0)
+        if (m.x < 0 || m.y < 0 || m.x > pixelNum || m.y > pixelNum)
             return;
 
         // avoid the forbidden octant!
@@ -112,15 +115,15 @@ function addEventListenerToCanvas()
 
         clear();
 
-        disableSecondOctant();
-
-        drawCoordinateSystem();
+        //plotLine(p, q);
+        bresenham(p, q);
 
         drawPoint(p, colorPoint);
         drawPoint(q, colorPoint);
 
-        //plotLine(p, q);
-        bresenham(p, q);
+        disableSecondOctant();
+
+        drawCoordinateSystem();
 
         calcEquation(p, q);
         updateGUI();

@@ -51,9 +51,7 @@ function bresenham(p, q)
     */
 
     /* Code von den ICG Slides
-
-    // b is toooo far away
-    //b.x--; b.y--;
+    */
 
     var dx = b.x - a.x;
     var dy = b.y - a.y;
@@ -62,10 +60,9 @@ function bresenham(p, q)
     var incrE = 2 * dy;
     var incrNE = 2 * (dy - dx);
 
+    drawPixel(a);
     while (a.x < b.x)
     {
-        drawPixel(a);
-
         if (d <= 0)
         {
             d += incrE;
@@ -77,33 +74,7 @@ function bresenham(p, q)
             a.x++;
             a.y++;
         }
-    }
-    */
-
-    /* Code von den ICG Slides ohne Verdopplung
-    */
-
-    var dx = b.x - a.x;
-    var dy = b.y - a.y;
-    var d = dy - dx;
-    var incrE = dy;
-    var incrNE = (dy - dx);
-
-    while (a.x < b.x)
-    {
         drawPixel(a);
-
-        if (d <= 0)
-        {
-            d += incrE;
-            a.x++;
-        }
-        else
-        {
-            d += incrNE;
-            a.x++;
-            a.y++;
-        }
     }
 }
 
