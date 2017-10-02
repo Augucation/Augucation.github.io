@@ -10,6 +10,16 @@ function calcM(p, q)
     return -(q.y - p.y) / (p.x - q.x);
 }
 
+function calcDX(p, q)
+{
+    return q.x - p.x;
+}
+
+function calcDY(p, q)
+{
+    return q.y - p.y;
+}
+
 function bresenham(p, q)
 {
     var a = clonePoint(p);

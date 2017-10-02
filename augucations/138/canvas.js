@@ -22,8 +22,16 @@ function clear()
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.translate(offset, offset);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
+function moveToPixel(x, y)
+{
+    ctx.moveTo(x * pixelSize, y * pixelSize);
+}
 
+function lineToPixel(x, y)
+{
+    ctx.lineTo(x * pixelSize, y * pixelSize);
 }
 
 function drawPoint(point, color = "red")
@@ -112,7 +120,7 @@ function addEventListenerToCanvas()
         drawPoint(q, colorPoint);
 
         //plotLine(p, q);
-        bresenham(p, q);
+        //bresenham(p, q);
 
         calcEquation(p, q);
         updateGUI();

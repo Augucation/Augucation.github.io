@@ -6,13 +6,6 @@ var axisLineWidth = 3;
 
 function drawAxisArrows()
 {
-    ctx.beginPath();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = "red";
-    ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width, 0);
-    ctx.stroke();
-
     ctx.translate(offset, offset);
 }
 
@@ -23,17 +16,17 @@ function drawCoordinateSystem()
     ctx.strokeStyle = gridColor;
 
     // draw vertical lines
-    for (var i = 1; i < canvas.width / pixelSize; i++)
+    for (var i = 1; i <= pixelNum; i++)
     {
-        ctx.moveTo(i * pixelSize, 0);
-        ctx.lineTo(i * pixelSize, canvas.height);
+        moveToPixel(i, 0);
+        lineToPixel(i, pixelNum + 1);
     }
 
     // draw horizontal lines
-    for (var i = 1; i < canvas.height / pixelSize; i++)
+    for (var i = 1; i <= pixelNum; i++)
     {
-        ctx.moveTo(0, i * pixelSize);
-        ctx.lineTo(canvas.width, i * pixelSize);
+        moveToPixel(0, i);
+        lineToPixel(pixelNum + 1, i);
     }
 
     ctx.stroke();
@@ -45,10 +38,31 @@ function drawCoordinateSystem()
     ctx.strokeStyle = axisColor;
 
     ctx.moveTo(0, 0);
-    ctx.lineTo(0, canvas.height);
+    lineToPixel(0, pixelNum + 1);
 
     ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width, 0);
+    lineToPixel(pixelNum + 1, 0);
 
     ctx.stroke();
+
+    // draw arrows
+    ctx.beginPath();
+    ctx.lineWidth = axisLineWidth;
+    ctx.strokeStyle = axisColor;
+
+    //x
+    moveToPixel(pixelNum + 0.5, -0.5);
+    lineToPixel(pixelNum + 1, 0);
+    lineToPixel(pixelNum + 0.5, 0.5);
+
+    //y
+    moveToPixel(-0.5, pixelNum + 0.5);
+    lineToPixel(0, pixelNum + 1);
+    lineToPixel(0.5, pixelNum + 0.5);
+
+    ctx.stroke();
+
+    // arrow labels
+    printOnCanvas("x", pixelNum - 0.2, -0.2, 20, axisColor);
+    printOnCanvas("y", -1, pixelNum + 0.2, 20, axisColor);
 }
