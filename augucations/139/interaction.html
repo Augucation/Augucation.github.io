@@ -1,0 +1,83 @@
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Scanline-Algorithmus</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+
+	<div id="container" class="my_text">
+
+		<div id="canvyContainer">
+			<canvas id="canvy" width="570" height="570"></canvas>
+		</div>
+
+		<div id="mathContainer">
+
+			<div id="variablesContainer">
+
+				<div id="varrow0">
+					<div id="var_span_p" class="var_div-3"></div>
+					<div id="var_span_q" class="var_div-3"></div>
+					<div id="var_span_m" class="var_div-3"></div>
+				</div>
+
+				<div id="varrow1">
+					<div id="var_span_dx" class="var_div-2"></div>
+					<div id="var_span_dy" class="var_div-2"></div>
+				</div>
+
+				<div id="varrow2">
+					<div id="var_span_d" class="var_div-3"></div>
+					<div id="var_span_incrE" class="var_div-3"></div>
+					<div id="var_span_incrSE" class="var_div-3"></div>
+				</div>
+
+			</div>
+
+			<div id="calculationContainer">
+				<div id="calculationText"></div>
+			</div>
+
+			<div id="infoContainer"></div>
+
+			<div id="btnContainer">
+				<button id="prevStepBtn" class="button" onclick="prevStep();">Zurück</button>
+
+				<div id="stepSliderContainer">
+
+					<input id="stepSlider" type="range" value="0" min="0" max="10" oninput="setStep(parseInt(value));"/>
+
+				</div>
+
+				<button id="nextStepBtn" class="button" onclick="nextStep();">Start</button>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(10, 30);" name="back" value="<<"/>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
+	<script type="text/javascript" src="step_gui_manager.js"></script>
+	<script type="text/javascript" src="scanline.js"></script>
+	<script type="text/javascript" src="bresenham_visualization.js"></script>
+	<script type="text/javascript" src="algorithm_steps.js"></script>
+	<script type="text/javascript" src="math_gui.js"></script>
+	<script type="text/javascript" src="coordinate_system.js"></script>
+	<script type="text/javascript" src="canvas.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
+</body>

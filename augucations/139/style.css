@@ -1,0 +1,164 @@
+:root
+{
+  --light_gray: #58616b;
+  --middle_gray: #444b51;
+  --dark_gray: #35373d;
+  --border_radius: 5px;
+}
+
+*
+{
+  box-sizing: border-box;
+}
+
+#canvyContainer
+{
+  border: 0px solid black;
+  width: 50%;
+  float: left;
+  height: calc(15vh + 30vw);
+  width:  calc(15vh + 30vw);
+  margin: auto;
+  display: block;
+  margin-top: 3%;
+}
+
+#canvy
+{
+    /*
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit (non standard naming)
+    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+    image-rendering: crisp-edges;               // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;   // IE (non standard naming)
+    */
+
+  --size: 75vh;
+  border: 0px solid red;
+  width: 100% !important;
+  height: 100%;
+}
+
+.pointy
+{
+  cursor: pointer;
+  border: 1px solid red;
+}
+
+#mathContainer
+{
+  border: 0px solid red;
+  display: block;
+  width: 45%;
+  float: right;
+  margin: 3%;
+  height: calc(15vh + 30vw);
+}
+
+#variablesContainer, #calculationContainer, #infoContainer, #btnContainer
+{
+  border: 0px solid black;
+  width: 100%;
+  color: white;
+}
+
+#variablesContainer
+{
+  height: 20%;
+  background-color: var(--light_gray);
+  border-radius: var(--border_radius) var(--border_radius) 0px 0px;
+	font-family: monospace;
+  font-size: calc(0.2vh + 1vw);
+}
+
+#calculationContainer
+{
+  height: 40%;
+  background-color: var(--middle_gray);
+	font-family: monospace;
+  font-size: calc(0.2vh + 1vw);
+  padding: 3% 6%;
+}
+
+#infoContainer
+{
+  height: 30%;
+  background-color: var(--dark_gray);
+  padding: 3% 6%;
+  font-size: calc(0.2vh + 1vw);
+}
+
+#btnContainer
+{
+  border: 0px solid red;
+  height: 10%;
+  background-color: var(--dark_gray);
+  border-radius: 0px 0px var(--border_radius) var(--border_radius);
+}
+
+#varrow0, #varrow1, #varrow2
+{
+  height: 50%;
+  border: 0px solid red;
+  float: left;
+  margin-left: calc(0.2vh + 2.5vw);
+  margin-top: 4%;
+}
+
+#varrow0
+{
+  width: 17%;
+}
+
+#varrow1
+{
+  width: 14%;
+}
+
+#varrow2
+{
+  width: 46%;
+}
+
+[class^=var_div]
+{
+  border: 0px solid green;
+  height: 33%;
+  width: 100%;
+  display: inline-block;
+}
+
+#prevStepBtn, #nextStepBtn
+{
+  background-color: var(--light_gray);
+  width: 9%;
+  height: 50%;
+  font-size: calc(0.2vh + 1vw) !important;
+  margin: 0 6%;
+  display: inline-block;
+}
+
+#prevStepBtn
+{
+  float: left;
+  visibility: hidden;
+}
+
+#nextStepBtn
+{
+  float: right;
+}
+
+#stepSliderContainer
+{
+  border: 0px solid yellow;
+  width: 50%;
+  margin: 0 4%;
+  display: inline-block;
+}
+
+#stepSlider
+{
+  width: 100%;
+}
