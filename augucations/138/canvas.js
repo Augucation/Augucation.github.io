@@ -35,7 +35,7 @@ function lineToPixel(x, y)
     ctx.lineTo(x * pixelSize, y * pixelSize);
 }
 
-function drawPoint(point, color = "red")
+function drawPoint(point, color = colorPoint)
 {
     ctx.beginPath();
     ctx.fillStyle = color;
@@ -44,7 +44,7 @@ function drawPoint(point, color = "red")
     ctx.fill();
 }
 
-function drawPixel(point, color = "#686B94")
+function drawPixel(point, color = colorLine)
 {
     ctx.fillStyle = color;
     ctx.fillRect(point.x * pixelSize, point.y * pixelSize, pixelSize, pixelSize);
@@ -149,10 +149,26 @@ function draw()
 {
     disableSecondOctant();
 
-    drawCoordinateSystem();
+    drawPoint(p);
+    drawPoint(q);
 
-    drawPoint(p, colorPoint);
+    drawCoordinateSystem();
+}
+
+function drawLineUntilPixel(idx)
+{
+    clear();
+
+    for (var i = -1; i < idx; i++)
+    {
+        drawPixel(line[i + 1]);
+    }
+
+    drawPoint(line[idx]);
     drawPoint(q, colorPoint);
+
+    disableSecondOctant();
+    drawCoordinateSystem();
 }
 
 addEventListenerToCanvas();

@@ -1,4 +1,5 @@
 var line = [];
+var lined = [];
 
 var m, dx, dy, d, incrE, incrSE;
 
@@ -15,9 +16,11 @@ function bresenham(p, q)
     incrSE = 2 * (dy - dx);
 
     line = [];
+    lined = [];
 
     line.push(clonePoint(a));
-    
+    lined.push(d);
+
     while (a.x < b.x)
     {
         if (d <= 0)
@@ -33,7 +36,13 @@ function bresenham(p, q)
         }
 
         line.push(clonePoint(a));
+        lined.push(d);
     }
+
+    bsteps = line.length;
+    tsteps = bsteps + esteps;
+
+    stepSlider.max = tsteps;
 }
 
 function clonePoint(point)

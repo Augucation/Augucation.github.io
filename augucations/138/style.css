@@ -1,8 +1,8 @@
 :root
 {
-	--light_gray: #838b93;
-  --middle_gray: #6f7882;
-  --dark_gray: #555e67;
+  --light_gray: #58616b;
+  --middle_gray: #444b51;
+  --dark_gray: #35373d;
   --border_radius: 5px;
 }
 
@@ -56,7 +56,7 @@
   height: calc(15vh + 30vw);
 }
 
-#variablesContainer, #calculationContainer, #infoContainer
+#variablesContainer, #calculationContainer, #infoContainer, #btnContainer
 {
   border: 0px solid black;
   width: 100%;
@@ -83,11 +83,18 @@
 
 #infoContainer
 {
-  height: 40%;
+  height: 30%;
   background-color: var(--dark_gray);
-  border-radius: 0px 0px var(--border_radius) var(--border_radius);
   padding: 3% 6%;
   font-size: calc(0.2vh + 1vw);
+}
+
+#btnContainer
+{
+  border: 0px solid red;
+  height: 10%;
+  background-color: var(--dark_gray);
+  border-radius: 0px 0px var(--border_radius) var(--border_radius);
 }
 
 #varrow0, #varrow1, #varrow2
@@ -120,4 +127,38 @@
   height: 33%;
   width: 100%;
   display: inline-block;
+}
+
+#prevStepBtn, #nextStepBtn
+{
+  background-color: var(--light_gray);
+  width: 9%;
+  height: 50%;
+  font-size: calc(0.2vh + 1vw) !important;
+  margin: 0 6%;
+  display: inline-block;
+}
+
+#prevStepBtn
+{
+  float: left;
+  visibility: hidden;
+}
+
+#nextStepBtn
+{
+  float: right;
+}
+
+#stepSliderContainer
+{
+  border: 0px solid yellow;
+  width: 50%;
+  margin: 0 4%;
+  display: inline-block;
+}
+
+#stepSlider
+{
+  width: 100%;
 }

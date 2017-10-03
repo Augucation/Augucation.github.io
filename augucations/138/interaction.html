@@ -49,7 +49,18 @@
 
 			<div id="infoContainer"></div>
 
-			<button id="forwardBtn" class="button" onclick="nextStep();">Weiter</button>
+			<div id="btnContainer">
+				<button id="prevStepBtn" class="button" onclick="prevStep();">Zurück</button>
+
+				<div id="stepSliderContainer">
+
+					<input id="stepSlider" type="range" value="0" min="0" max="10" oninput="setStep(parseInt(value));"/>
+
+				</div>
+
+				<button id="nextStepBtn" class="button" onclick="nextStep();">Start</button>
+			</div>
+
 		</div>
 
 	</div>
@@ -60,6 +71,7 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
+	<script type="text/javascript" src="step_gui_manager.js"></script>
 	<script type="text/javascript" src="bresenham.js"></script>
 	<script type="text/javascript" src="bresenham_visualization.js"></script>
 	<script type="text/javascript" src="algorithm_steps.js"></script>
