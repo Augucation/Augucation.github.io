@@ -11,16 +11,43 @@
   box-sizing: border-box;
 }
 
+body
+{
+  /*margin: 0% calc(10vh + 2vw);*/
+}
+
+#container
+{
+  width: auto;
+  height: auto;
+  border: 0px solid green;
+}
+
+#canvyContainer, #mathContainer
+{
+  display: inline-block;
+}
+
 #canvyContainer
 {
   border: 0px solid black;
-  width: 50%;
-  float: left;
+  /*width: 50%;*/
+  /*float: left;*/
   height: calc(15vh + 30vw);
   width:  calc(15vh + 30vw);
   margin: auto;
-  display: block;
+  /*display: block;*/
   margin-top: 3%;
+}
+
+#mathContainer
+{
+  border: 0px solid red;
+  /*display: block;*/
+  /*width: 50%;*/
+  width: calc(20vh + 40vw);
+  margin: auto;
+  height: calc(15vh + 30vw);
 }
 
 #canvy
@@ -46,27 +73,17 @@
   border: 1px solid red;
 }
 
-#mathContainer
-{
-  border: 0px solid red;
-  display: block;
-  width: 45%;
-  float: right;
-  margin: 3%;
-  height: calc(15vh + 30vw);
-}
-
 #variablesContainer, #calculationContainer, #infoContainer, #btnContainer
 {
   border: 0px solid black;
   width: 100%;
-  color: white;
+  /*color: white;*/
 }
 
 #variablesContainer
 {
   height: 20%;
-  background-color: var(--light_gray);
+  /*background-color: var(--light_gray);*/
   border-radius: var(--border_radius) var(--border_radius) 0px 0px;
 	font-family: monospace;
   font-size: calc(0.2vh + 1vw);
@@ -75,7 +92,7 @@
 #calculationContainer
 {
   height: 40%;
-  background-color: var(--middle_gray);
+  /*background-color: var(--middle_gray);*/
 	font-family: monospace;
   font-size: calc(0.2vh + 1vw);
   padding: 3% 6%;
@@ -84,7 +101,7 @@
 #infoContainer
 {
   height: 30%;
-  background-color: var(--dark_gray);
+  /*background-color: var(--dark_gray);*/
   padding: 3% 6%;
   font-size: calc(0.2vh + 1vw);
 }
@@ -93,7 +110,7 @@
 {
   border: 0px solid red;
   height: 10%;
-  background-color: var(--dark_gray);
+  /*background-color: var(--dark_gray);*/
   border-radius: 0px 0px var(--border_radius) var(--border_radius);
 }
 
@@ -161,4 +178,11 @@
 #stepSlider
 {
   width: 100%;
+}
+
+hr
+{
+  background: #dee0ed;
+  border: none;
+  height: 1px;
 }

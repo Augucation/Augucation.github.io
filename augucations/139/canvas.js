@@ -1,10 +1,26 @@
 // default polygon coordinates
+/*
 var vertices = [
                 {x: 70, y: 70},
                 {x: 340, y: 160},
                 {x: 390, y: 250},
                 {x: 300, y: 300},
                 {x: 250, y: 380}
+               ];
+var vertices = [
+                {x: 3, y: 3},
+                {x: 14, y: 7},
+                {x: 15, y: 11},
+                {x: 9, y: 14},
+                {x: 4, y: 15}
+               ];
+               */
+var vertices = [
+                {x: 3, y: 3},
+                {x: 1, y: 7},
+                {x: 2, y: 9},
+                {x: 9, y: 4},
+                {x: 6, y: 1}
                ];
 
 var pointSize = 10;
@@ -41,14 +57,14 @@ function lineToPixel(x, y)
     ctx.lineTo(x * pixelSize, y * pixelSize);
 }
 
-function drawPoint(point, color = colorPoint, rasterized = false)
+function drawPoint(point, color = colorPoint, size = pointSize, rasterized = false)
 {
     ctx.beginPath();
     ctx.fillStyle = color;
     if (rasterized)
-        ctx.arc((point.x + 0.5) * pixelSize, (point.y + 0.5) * pixelSize, 10, 0, 2 * Math.PI, false);
+        ctx.arc((point.x) * pixelSize, (point.y) * pixelSize, size, 0, 2 * Math.PI, false);
     else
-        ctx.arc(point.x, point.y, 10, 0, 2 * Math.PI, false);
+        ctx.arc(point.x, point.y, size, 0, 2 * Math.PI, false);
     ctx.fill();
 }
 
@@ -64,12 +80,12 @@ function drawPolygon(color = colorLine, lineWidth = polygonLineWidth)
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
 
-    ctx.moveTo(vertices[0].x, vertices[0].y);
+    moveToPixel(vertices[0].x, vertices[0].y);
 
     for (var i = 0; i < vertices.length; i++)
     {
         var next = vertices[(i + 1) % vertices.length];
-        ctx.lineTo(next.x, next.y);
+        lineToPixel(next.x, next.y);
     }
 
     ctx.stroke();
@@ -88,8 +104,11 @@ function getMousePos(evt)
         scaleY = canvas.height / rect.height;
 
     return {
-      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 1), //-0.5
-      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 1)
+      //x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 0.5), //-1
+      //y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 0.5)
+
+      x: Math.round(((evt.clientX - rect.left) * scaleX) / pixelSize) - 1, //-1
+      y: Math.round(((evt.clientY - rect.top) * scaleY) / pixelSize) - 1
     }
 }
 
@@ -106,12 +125,20 @@ function getRealMousePos(evt)
     }
 }
 
-function clickedOnPoint(mousePos)
+function clickedOnPoint(mousePos, rasterized = false)
 {
     for (var i = 0; i < vertices.length; i++)
     {
-        if (distance(mousePos, vertices[i]) < 10)
-            return i;
+        if (rasterized)
+        {
+            if ((distance(mousePos, vertices[i]) < 1))
+                return i;
+        }
+        else
+        {
+            if (distance(mousePos, vertices[i]) < 10)
+                return i;
+        }
     }
     return null;
 }
@@ -121,7 +148,7 @@ function addEventListenerToCanvas()
     // click listener to move line points
     canvas.addEventListener("mousedown", function(evt)
         {
-            draggingPoint = clickedOnPoint(getRealMousePos(evt));
+            draggingPoint = clickedOnPoint(getMousePos(evt), true);
         }
     );
 
@@ -145,7 +172,7 @@ function movePoint(evt)
     if (rmPos.x < 0 || rmPos.y < 0 || rmPos.x > canvas.width - 2 * offset || rmPos.y > canvas.height - 2 * offset)
         return;
 
-    manageCursorIcon(rmPos);
+    manageCursorIcon(mPos, true);
 
     // return if no point is dragged at the moment
     if (draggingPoint == null)
@@ -153,7 +180,7 @@ function movePoint(evt)
 
     // move q
     if (draggingPoint != null)
-        vertices[draggingPoint] = rmPos;
+        vertices[draggingPoint] = mPos;
 
     clear();
     calc();
@@ -164,9 +191,12 @@ function movePoint(evt)
 
 function manageCursorIcon(mPos, rasterized = false)
 {
+    var range = rasterized ? 1 : pointSize;
+    //var mmPos = rasterized ? {x: mPos.x - 0.5, y: mPos.y - 0.5} : mPos;
+
     for (var i = 0; i < vertices.length;  i++)
     {
-        if ((distance(mPos, vertices[i]) < pointSize))
+        if ((distance(mPos, vertices[i]) < range))
         {
             canvas.className = "pointy";
             return;
@@ -177,18 +207,18 @@ function manageCursorIcon(mPos, rasterized = false)
 
 function calc()
 {
-    //bresenham(p, q);
-    //printVariables(p, q, m);
+    scanline();
+    fillTableEdges();
 }
 
 function draw()
 {
     for (var i = 0; i < vertices.length; i++)
     {
-        drawPoint(vertices[i]);
+        drawPoint(vertices[i], colorPoint, pointSize, true);
     }
 
-    drawPolygon();
+    drawPolygon(colorPoint);
 
     drawCoordinateSystem();
 }

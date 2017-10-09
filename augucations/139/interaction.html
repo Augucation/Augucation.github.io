@@ -13,41 +13,117 @@
 
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
 
 	<div id="container" class="my_text">
 
 		<div id="canvyContainer">
-			<canvas id="canvy" width="570" height="570"></canvas>
+			<canvas id="canvy" width="650" height="650"></canvas>
 		</div>
 
 		<div id="mathContainer">
 
-			<div id="variablesContainer">
+			<div id="innerMathContainer">
 
-				<div id="varrow0">
-					<div id="var_span_p" class="var_div-3"></div>
-					<div id="var_span_q" class="var_div-3"></div>
-					<div id="var_span_m" class="var_div-3"></div>
+				<div id="tableContainer">
+
+					<div id="table_edges">
+						<table>
+							<tr>
+								<th>Startpunkt</th>
+								<th>Endpunkt</th>
+								<th>Steigung</th>
+							</tr>
+							<tr>
+								<td>(1,2)</td>
+								<td>(5,2)</td>
+								<td>-0.52</td>
+							</tr>
+							<tr>
+								<td>(1,2)</td>
+								<td>(5,2)</td>
+								<td>-0.52</td>
+							</tr>
+							<tr>
+								<td>(1,2)</td>
+								<td>(5,2)</td>
+								<td>-0.52</td>
+							</tr>
+							<tr>
+								<td>(1,2)</td>
+								<td>(5,2)</td>
+								<td>-0.52</td>
+							</tr>
+							<tr>
+								<td>(1,2)</td>
+								<td>(5,2)</td>
+								<td>-0.52</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="table_intersections">
+						<table>
+							<tr>
+								<th>Pixelreihe</br>y</th>
+								<th>Schnittpunkte</br>x</br></th>
+							</tr>
+							<tr>
+								<td>0</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>8</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>9</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+							<tr>
+								<td>10</td>
+								<td>10,14,15,16,16</td>
+							</tr>
+						</table>
+					</div>
+
 				</div>
 
-				<div id="varrow1">
-					<div id="var_span_dx" class="var_div-2"></div>
-					<div id="var_span_dy" class="var_div-2"></div>
-				</div>
+				<div id="calcInfoContainer">
 
-				<div id="varrow2">
-					<div id="var_span_d" class="var_div-3"></div>
-					<div id="var_span_incrE" class="var_div-3"></div>
-					<div id="var_span_incrSE" class="var_div-3"></div>
-				</div>
+					<div id="calculationContainer"></div>
+					<div id="infoContainer"></div>
 
+				</div>
 			</div>
-
-			<div id="calculationContainer">
-				<div id="calculationText"></div>
-			</div>
-
-			<div id="infoContainer"></div>
 
 			<div id="btnContainer">
 				<button id="prevStepBtn" class="button" onclick="prevStep();">Zurück</button>
@@ -73,7 +149,7 @@
 	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
 	<script type="text/javascript" src="step_gui_manager.js"></script>
 	<script type="text/javascript" src="scanline.js"></script>
-	<script type="text/javascript" src="bresenham_visualization.js"></script>
+	<script type="text/javascript" src="scanline_visualization.js"></script>
 	<script type="text/javascript" src="algorithm_steps.js"></script>
 	<script type="text/javascript" src="math_gui.js"></script>
 	<script type="text/javascript" src="coordinate_system.js"></script>
