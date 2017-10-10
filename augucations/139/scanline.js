@@ -1,11 +1,13 @@
 var edges;
 var intersections;
 var storedIntersections;
+var polygon;
 
 function scanline()
 {
     edges = [];
     intersections = [];
+    storedIntersections = [];
 
     // calculate and store the polygon's edges
 
@@ -25,14 +27,17 @@ function scanline()
                     min_y: min.y,
                     max_x: max.x,
                     max_y: max.y,
+                    min: min,
+                    max: max,
                     m: (max.x - min.x) / (max.y - min.y),
                     l: Math.sqrt(Math.pow(max.x - min.x, 2) +                Math.pow(max.y - min.y, 2)),
                     idx: edges.length
                     };
 
+        edge.m = isNaN(edge.m) ? 0 : edge.m;
+
         edges.push(edge);
     }
-
 
     // find all intersections
 
@@ -41,6 +46,7 @@ function scanline()
 
         // 2D intersections array: one row for each scanline
         intersections.push([]);
+        storedIntersections.push([]);
 
         // calculate the current y value
         var scan_y = i;
@@ -50,8 +56,12 @@ function scanline()
         {
             var edge = edges[j];
 
+            // skip horizontal edges
+            if (edge.m == Number.POSITIVE_INFINITY || edge.m == Number.NEGATIVE_INFINITY)
+                continue;
+
             // skip edge if edge does not intersect the scanline
-            if (!(edge.min_y < scan_y && scan_y <= edge.max_y))
+            if (!(edge.min_y <= scan_y && scan_y <= edge.max_y))
                 continue;
 
             // calculate the intersection's x coordinate
@@ -61,27 +71,42 @@ function scanline()
 
             // sort the new intersection into the scanline's intersections array
             // sorted by x (ascending)
-            sortIntersectionIntoArray(intersections[i], intersection.x); // Math.round(intersection.x));
+            sortIntersectionIntoArray(storedIntersections[i], intersection.x); // Math.round(intersection.x));
+
+            //sortIntersectionIntoArray(intersections[i], Math.round(intersection.x));
+
+
+            intersections[i].push(Math.round(intersection.x));
         }
+
+        intersections[i].sortNumbers();
     }
 
 
-    // store the intersections array as an copy before the intersections will be deleted b< the following algorithm step
-    storedIntersections = intersections.copy();
 
-    // for better intersection checking, round the intersections' x values to ints
-    for (var x = 0; x < intersections.length; x++)
-    {
-        for (var y = 0; y < intersections[x].length; y++)
-        {
-            intersections[x][y] = Math.round(intersections[x][y]);
-        }
-    }
+    removeFalseDuplicates();
 
+    //console.log(intersections.copy());
     // draw
 
+    // iterate over intersections lists
+
+    for (var y = 0; y < intersections.length; y++)
+    {
+        // for each row of intersections iterate over every second intersection to draw between these intersection pairs
+        for (var x = 0; x < intersections[y].length; x+=2)
+        {
+            // for each intersection pair start at the pixel right to the first intersection, go pixel wise to the right and draw all pixels until the second intersection is reached
+            for (var p = intersections[y][x] + 1; p < intersections[y][x + 1]; p++)
+            {
+                drawPixel({x: p, y: y});
+            }
+        }
+    }
+
+    /*
     // iterate over scanlines
-    for (var y = 0; y <= pixelNum + 1; y++)
+    for (var y = 0; y <= pixelNum + 1; y++) // y <= pixelNum
     {
 
         // skip scanline if there aren't any intersections
@@ -91,7 +116,7 @@ function scanline()
         // if there is only one intersection, draw this pixel and move on
         if (intersections[y].length == 1)
         {
-            drawPixel({x: intersections[y][0], y: y - 1});
+            //drawPixel({x: intersections[y][0], y: y}); // y - 1
             continue;
         }
 
@@ -110,11 +135,12 @@ function scanline()
 
             // draw pixel if the parity is odd
             if (par % 2 == 1)
-                drawPixel({x: x, y: y - 1});
+                drawPixel({x: x, y: y}); // y - 1
         }
     }
-
+    */
 }
+
 
 function calcIntersectionX(edge, y)
 {
@@ -123,6 +149,9 @@ function calcIntersectionX(edge, y)
 
 function sortIntersectionIntoArray(arr, x)
 {
+    //if (arr.indexOf(x) >= 0 && arr.length > 0)
+    //    return null;
+
     // insert intersection before the first element with a higher x
     for (var i = 0; i < arr.length; i++)
     {
@@ -136,6 +165,93 @@ function sortIntersectionIntoArray(arr, x)
     // if current intersection.x is higher than the others, push it
     arr.push(x);
     return arr.length;
+}
+
+// all intersections that are vertices but no local maxima are removed
+function removeFalseDuplicates()
+{
+    // iterate over all vertices
+    for (var i = 0; i < vertices.length; i++)
+    {
+        // get previous, current and next vertices
+        var prev = vertices[(i - 1) % vertices.length];
+        var curr = vertices[i];
+        var next = vertices[(i + 1) % vertices.length];
+
+        // javascript's modulo ignores negative values >:(
+        if (prev == undefined)
+            prev = vertices[vertices.length - 1];
+
+        // the vertex is a maximum if the vertical directions of prev-curr and curr-next have different signs
+
+        var dir0 = curr.y - prev.y;
+        var dir1 = next.y - curr.y;
+
+        // skip the current vertex, if the directions have different signs -> local maximum
+        if ((dir0 < 0) != (dir1 < 0))
+            continue;
+
+        // else, delete the vertex once from the intersections list
+        removeIntersectionByIndex(intersections[curr.y], intersections[curr.y].indexOf(curr.x));
+
+        drawIntersection(curr.x, curr.y);
+    }
+
+    // if the number of intersections per scanline is odd, delete the one with the highest x value
+
+    for (var y = 0; y < intersections.length; y++)
+    {
+        // skip scanline if the length of intersections is even
+        if (intersections[y].length % 2 == 0)
+            continue;
+
+        // find the index of the rightest intersection
+        var idx = 0;
+        for (var i = 0; i < intersections[y].length; i++)
+        {
+            if (intersections[y][idx] < intersections[y][i])
+                idx = i;
+        }
+
+        // remove this vertex
+        removeIntersectionByIndex(intersections[y], idx);
+    }
+
+    /*
+    // iterate over the edges
+    for (var i = 0; i < edges.length; i++)
+    {
+        // get current and next edge
+        var e = edges[i];                       // current edge
+        var n = edges[(i + 1) % edges.length];  // next edge
+
+        // calculate the vertical directions of both edges
+        var e_dir = e.max.y - e.min.y;
+        var n_dir = n.max.y - n.min.y;
+
+        // if both directions have different signs, their shared vertex is a local maximum and can be skipped
+        if (e_dir * n_dir < 0) // different signs -> negative product
+            continue;
+
+        // for each edge pair, check if both edges are on the same side in relation to their shared vertex. if not, skip this pair.
+
+        // if one edge's start is the other one's end, they are on different sides and their shared vertex does not need to be removed
+        //if (e.min.y == n.min.y || e.max.y == n.max.y)
+        //    continue;
+
+        // find their shared vertex
+        var vertex;
+
+        if (e.max.y == n.min.y)
+            vertex = e.max;
+
+        if (e.min.y == n.max.y)
+            vertex = e.min;
+
+        // delete one instance of this shared vertex from the intersections List
+        removeIntersectionByIndex(intersections[vertex.y], intersections[vertex.y].indexOf(vertex.x));
+    }
+    */
 }
 
 // return the vertex with the lowest y value

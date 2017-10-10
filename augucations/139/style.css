@@ -130,6 +130,7 @@ hr
 th
 {
   font-style: normal;
+  width: 40em;
 }
 
 td
@@ -149,16 +150,17 @@ td
 {
   border: 0px solid green;
   height: 100%;
-  width: 30%;
+  width: 31%;
   float: left;
 }
 
 #calcInfoContainer
 {
-  border: 0px solid pink;
-  width: 70%;
+  border-left: 1px solid #dee0ed;
+  width: 65%;
   height: 100%;
   float: left;
+  padding-left: 2%;
 }
 
 #calculationContainer

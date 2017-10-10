@@ -17,6 +17,7 @@ function algoStep()
     var le = findLongestEdge();
     var curr_edge = findRightEdgeFromHighestVertex();
     var y = findHighestVertex().y;
+    var hv = findHighestVertex();
 
     switch (step) {
 
@@ -28,6 +29,9 @@ function algoStep()
             + "<br/>Du kannst die Eckpunkte des Polygons per Drag & Drop verschieben.");
 
             canvas.addEventListener("mousemove", movePoint, false);
+
+            scanline();
+            //drawAllIntersections();
 
             break;
 
@@ -42,11 +46,11 @@ function algoStep()
 
         case 2:
 
-            printCalculation("p0: (" + le.min_x + "," + le.min_y + ")"
-            + "<br/>p1: (" + le.max_x + "," + le.max_y + ")"
-            + "<br/><br/>p0.y <= p1.y"
+            printCalculation(le.min.name + ": (" + le.min_x + "," + le.min_y + ")"
+            + "<br/>" + le.max.name + ": (" + le.max_x + "," + le.max_y + ")"
+            + "<br/><br/>" + le.min.name + ".y <= " + le.max.name + ".y"
             + "<br/>\u00A0\u00A0\u00A0" + le.min_y + " <= " + le.max_y
-            + "<br/>\u00A0\u00A0Startpunkt: p0(" + le.min_x + "," + le.min_y + ")");
+            + "<br/>\u00A0\u00A0Startpunkt: " + le.min.name + "(" + le.min_x + "," + le.min_y + ")");
 
             printInfo("Die Berechnung einer Kante wird nun examplarisch an der längsten Kante des Polygons gezeigt. Alle Kanten werden in einer Liste gespeichert.");
 
@@ -56,30 +60,30 @@ function algoStep()
 
         case 3:
 
-            printCalculation("Höchster Punkt: (" + findHighestVertex().x + "," + findHighestVertex().y + ")"
-            + "<br/>y = " + findHighestVertex().y);
+            printCalculation("Höchster Punkt: " + hv.name + "(" + hv.x + "," + hv.y + ")"
+            + "<br/>y = " + hv.y);
 
             printInfo("Das nächste Zwischenziel besteht darin, alle Schnittpunkte der Polygonkanten mit den horizontalen Pixelreihen des Rasters zu ermitteln. Dazu wird von oben nach unten über alle horizontalen Pixelreihen, die vom Polygon bedeckt werden, iteriert. Also wird zunächst der höchste Eckpunkt, also der mit dem niedrigsten y-Wert gesucht. Die Pixelreihe mit diesem y-Wert wird nun betrachtet.");
 
             // highlight current pixel row
-            colorPixelrow(findHighestVertex().y);
+            drawScanline(hv.y);
 
             // highlight highest vertex
-            hightlightVertex(findHighestVertex());
+            hightlightVertex(hv);
 
             break;
 
         case 4:
 
-            printCalculation("y = " + y
-            + "<br/><br/>p0.y <= y && y <= p1.y"
-            + "<br/>\u00A0\u00A0\u00A0" + curr_edge.min_y + " <= " + y + " && " + y + " <= " + curr_edge.max_y
+            printCalculation("y = " + hv.y
+            + "<br/><br/>" + curr_edge.min.name + ".y <= y && y <= " + curr_edge.max.name + ".y"
+            + "<br/>\u00A0\u00A0\u00A0" + curr_edge.min_y + " <= " + hv.y + " && " + hv.y + " <= " + curr_edge.max_y
             + "<br/><br/>Es existiert ein Schnittpunkt der momentanen Kante mit der momentanen Pixelreihe.");
 
             printInfo("Für jede Pixelreihe wird nun über jede Kante des Polygons iteriert um alle Schnittpunkte der Kanten mit der Pixelreihe zu ermitteln."
             + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt unterhalb oder auf und ihr Endpunk überhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
 
-            colorPixelrow(findHighestVertex().y);
+            drawScanline(hv.y);
             highlightEdge(curr_edge);
             highlightRowInTable(0, curr_edge.idx);
 
@@ -87,16 +91,19 @@ function algoStep()
 
         case 5:
 
-            drawAllIntersections();
-
-            printCalculation("y = " + y
-            + "<br/><br/>Schnittpunkt: q(x," + y + ")"
-            + "<br/><br/>q.x = p0.x + m * (y - p0.y)"
-            + "<br/>q.x = " + curr_edge.min_x + " + " + curr_edge.m + " * (" + y + " - " + curr_edge.min_y + ")"
-            + "<br/>q.x = " + storedIntersections[y + 1][1]
-            + "<br/><br/>q(" + storedIntersections[y + 1][1] + "," + y + ")");
+            printCalculation("y = " + hv.y
+            + "<br/><br/>Schnittpunkt: q(x," + hv.y + ")"
+            + "<br/><br/>q.x = " + curr_edge.min.name + ".x + m * (y - " + curr_edge.min.name + ".y)"
+            + "<br/>q.x = " + curr_edge.min_x + " + " + Math.round(curr_edge.m * 100) / 100 + " * (" + hv.y + " - " + curr_edge.min_y + ")"
+            + "<br/>q.x = " + storedIntersections[hv.y][1]
+            + "<br/><br/>q(" + storedIntersections[hv.y][1] + "," + hv.y + ")");
 
             printInfo("Als nächtes wird der Schnittpunkt berechnet. Der y-Wert ist bereits bekannt, er entspricht dem y-Wert der Pixelreihe. Der x-Wert wird durch linere Interpolation berechnet. Dazu wird auf den x-Wert des Startpunkts der Kante das Produkt der Steigung ...");
+
+            drawScanline(hv.y);
+            highlightEdge(curr_edge);
+            highlightRowInTable(0, curr_edge.idx);
+            drawIntersection(storedIntersections[hv.y][1], hv.y);
 
             break;
     }

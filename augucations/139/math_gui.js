@@ -20,8 +20,8 @@ function fillTableEdges()
     {
         var e = edges[i];
 
-        table_edges_td[i * 3 + 0].innerHTML = "(" + e.min_x + "," + e.min_y + ")";
-        table_edges_td[i * 3 + 1].innerHTML = "(" + e.max_x + "," + e.max_y + ")";
+        table_edges_td[i * 3 + 0].innerHTML = e.min.name + "(" + e.min_x + "," + e.min_y + ")";
+        table_edges_td[i * 3 + 1].innerHTML = e.max.name + "(" + e.max_x + "," + e.max_y + ")";
         table_edges_td[i * 3 + 2].innerHTML = Math.round(e.m * 100) / 100;
     }
 }
