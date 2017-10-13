@@ -1,3 +1,5 @@
+/* Array functions */
+
 Array.prototype.insert = function (index, item)
 {
   this.splice(index, 0, item);
@@ -12,8 +14,16 @@ Array.prototype.copy = function()
 {
     var newArray = [];
 
-    for (var i = 0; i < this.length; i++)
-    newArray[i] = this[i].slice();
+    // 1D array
+    if (this[0].length == undefined)
+        newArray = this.slice(0);
+
+    // 2D array
+    if (!isNaN(this[0].length))
+    {
+        for (var i = 0; i < this.length; i++)
+        newArray[i] = this[i].slice();
+    }
 
     return newArray;
 };

@@ -1,6 +1,8 @@
 var colorRow = "#dee1f2";
+var colorScanline = "#b9bccc";
 var colorHighlightLine = "#af2626";
 var colorLabel ="#555e67";
+var colorIntersection = "#27d83e";
 
 var highlightLineWidth = 5;
 var highlightPointSize = 15;
@@ -16,7 +18,7 @@ function colorPixelrow(y, color = colorRow)
     draw();
 }
 
-function drawScanline(y, color = colorRow, width = scanlineWidth)
+function drawScanline(y, color = colorScanline, width = scanlineWidth)
 {
     ctx.beginPath();
     ctx.strokeStyle = color;
@@ -48,20 +50,39 @@ function hightlightVertex(point)
     drawPoint(point, colorHighlightLine, highlightPointSize, true);
 }
 
-function drawIntersection(x, y)
+function drawIntersection(x, y, size = 5)
 {
-    drawPoint({x: x, y: y}, "#00FF00", 5, true);
+    drawPoint({x: x, y: y}, colorIntersection, size, true);
+
+    /* draw ugly crosses instead of boring circles
+    ctx.beginPath();
+    ctx.strokeStyle = colorIntersection;
+    ctx.lineWidth = 3;
+
+    moveToPixel(x + 0.2, y + 0.2);
+    lineToPixel(x + 0.8, y + 0.8);
+    moveToPixel(x + 0.2, y + 0.8);
+    lineToPixel(x + 0.8, y + 0.2);
+
+    ctx.stroke();
+    */
 }
 
-function drawAllIntersections()
+function drawAllIntersections(intersectionArray)
 {
-    for (var y = 0; y < storedIntersections.length; y++)
+    for (var y = 0; y < intersectionArray.length; y++)
     {
-        for (var x = 0; x < storedIntersections[y].length; x++)
+        for (var x = 0; x < intersectionArray[y].length; x++)
         {
-            drawIntersection(storedIntersections[y][x], y);
+            drawIntersection(intersectionArray[y][x], y);
         }
     }
+}
+
+function drawIntersectionPair(pair)
+{
+    drawIntersection(pair.l, pair.y);
+    drawIntersection(pair.r, pair.y);
 }
 
 function labelVertex(v)
@@ -83,4 +104,44 @@ function printOnCanvas(text, x, y, size = 20, color = "#000000")
     //ctx.font = size + "px lighter";
     ctx.font = "normal normal lighter " + size + "px arial";
     ctx.fillText(text, x * pixelSize, y * pixelSize);
+}
+
+function fillPolygonUntilPair(pair)
+{
+    // itare over all polygon pairs
+    for (var i = 0; i < pairs.length; i++)
+    {
+        // draw pixels inside of current pair
+        fillPolygonPair(pairs[i]);
+
+        // terminate if given pair is reached
+        if (pair.y == pairs[i].y && pair.idx == pairs[i].idx)
+            return;
+    }
+}
+
+function fillPolygonPair(pair)
+{
+    for (var x = pair.l + 1; x < pair.r; x++)
+    {
+        drawPixel({x: x, y: pair.y});
+    }
+}
+
+function fillPolygon()
+{
+    /*
+    for (var y = 0; y < polygon.length; y++)
+    {
+        for (var x = 0; x < polygon[y].length; x++)
+        {
+            var pixel = polygon[y][x];
+
+            drawPixel({x: pixel.x, y: pixel.y});
+        }
+    }
+    */
+
+    // draw every pair until the last one
+    fillPolygonUntilPair(pairs[pairs.length - 1]);
 }

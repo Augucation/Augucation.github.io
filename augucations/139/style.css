@@ -131,6 +131,8 @@ th
 {
   font-style: normal;
   width: 40em;
+  height: 10px;
+  white-space: nowrap;
 }
 
 td
@@ -139,6 +141,7 @@ td
   font-size: 1em;
   font-size: calc(0.2vh + 0.85vw);
   color: var(--hci_gray);
+  width: 40em;
 }
 
 .td_highlighted
@@ -185,6 +188,18 @@ td
   border: 0px solid pink;
   display: inline-block;
   margin-bottom: 1%;
+  margin-top: 10%;
+}
+
+#table_intersections td:nth-child(odd)
+  {
+    text-align: right;
+    padding-right: 10%;
+  }
+
+#table_edges_div
+{
+  height: 30%;
 }
 
 #table_edges

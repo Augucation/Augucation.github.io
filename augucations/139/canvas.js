@@ -206,14 +206,16 @@ function manageCursorIcon(mPos, rasterized = false)
 function calc()
 {
     scanline();
-    fillTableEdges();
+    fillPolygon();
+    //fillTableAllEdges();
+    //fillTableIntersections();
 }
 
 function draw()
 {
     for (var i = 0; i < vertices.length; i++)
     {
-        drawPoint(vertices[i], colorPoint, pointSize, true);
+        drawPoint(vertices[i], colorPoint, pointSize, true); 
     }
 
     drawPolygon(colorPoint);
@@ -221,21 +223,6 @@ function draw()
     drawCoordinateSystem();
 
     labelAllVertices();
-}
-
-function drawLineUntilPixel(idx)
-{
-    clear();
-
-    for (var i = -1; i < idx; i++)
-    {
-        drawPixel(line[i + 1]);
-    }
-
-    drawPoint(line[idx]);
-    drawPoint(q, colorPoint);
-
-    drawCoordinateSystem();
 }
 
 addEventListenerToCanvas();
