@@ -153,14 +153,14 @@ td
 {
   border: 0px solid green;
   height: 100%;
-  width: 31%;
+  width: 40%;
   float: left;
 }
 
 #calcInfoContainer
 {
   border-left: 1px solid #dee0ed;
-  width: 65%;
+  width: 55%;
   height: 100%;
   float: left;
   padding-left: 2%;

@@ -45,7 +45,8 @@ function scanline()
             max: max,
             m: (max.x - min.x) / (max.y - min.y),
             l: Math.sqrt(Math.pow(max.x - min.x, 2) + Math.pow(max.y - min.y, 2)),
-            idx: edges.length
+            idx: edges.length,
+            intersections: []
         };
 
         edge.m = isNaN(edge.m) ? 0 : edge.m;
@@ -79,10 +80,12 @@ function scanline()
                 continue;
 
             // calculate the intersection's x coordinate
-            var intersection = {x: calcIntersectionX(edge, scan_y), y: scan_y};
+            var intersection = {x: Math.round(calcIntersectionX(edge, scan_y) * 10) / 10, y: scan_y, edge: edge};
 
-            intersections[i].push(Math.round(intersection.x));
+            intersections[i].push(Math.round(intersection.x * 10) / 10);
             storedIntersections[i].push(Math.round(intersection.x * 10) / 10);
+
+            edge.intersections.push(intersection);
         }
 
         //intersections[i].sortNumbers();
@@ -92,7 +95,7 @@ function scanline()
     allIntersectionsUnsorted = intersections.copy();
 
     removeFalseDuplicates(intersections);
-    removeFalseDuplicates(storedIntersections);
+    //removeFalseDuplicates(storedIntersections);
 
     correctIntersectionsUnsorted = intersections.copy();
 
@@ -223,7 +226,16 @@ function removeFalseDuplicates(arr)
             continue;
 
         // else, delete the vertex once from the intersections list
-        removeIntersectionByIndex(arr[curr.y], arr[curr.y].indexOf(curr.x));
+        var roundY = Math.floor(curr.y);
+        var roundX = Math.round(curr.x);
+
+        // DEBUG
+        if (i == 4)
+        {
+            //console.log(arr[roundY]);
+            //console.log("arr[" + roundY + "] " + roundX + ": ", arr[roundY]);
+        }
+        //removeIntersectionByIndex(arr[roundY], arr[roundY].indexOf(curr.x));
     }
 
     // if the number of intersections per scanline is odd, delete the one with the highest x value
@@ -313,6 +325,24 @@ function findHighestVertex()
     }
 
     return result;
+}
+
+function findScanlineYRange()
+{
+    // find lowest and highest y value
+    var miny = vertices[0].y;
+    var maxy = vertices[0].y;
+    for (var i = 0; i < vertices.length; i++)
+    {
+        if (miny > vertices[i].y)
+            miny = vertices[i].y;
+
+        if (maxy < vertices[i].y)
+            maxy = vertices[i].y;
+    }
+
+    // to get the min and max scanlines, ceil min and floor max
+    return {min: Math.ceil(miny), max: Math.floor(maxy)};
 }
 
 function findLongestEdge()

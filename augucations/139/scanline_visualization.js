@@ -22,8 +22,8 @@ function drawScanline(y, color = colorScanline, width = scanlineWidth)
 {
     ctx.beginPath();
     ctx.strokeStyle = color;
-    moveToPixel(0, y + 0.5);
-    lineToPixel(pixelNum + 1, y + 0.5);
+    moveToPixel(0, y);
+    lineToPixel(pixelNum + 1, y);
     ctx.stroke();
 }
 
@@ -33,8 +33,8 @@ function highlightEdge(edge)
     ctx.strokeStyle = colorHighlightLine;
     ctx.lineWidth = highlightLineWidth;
 
-    moveToPixel(edge.min_x + 0.5, edge.min_y + 0.5);
-    lineToPixel(edge.max_x + 0.5, edge.max_y + 0.5);
+    moveToPixel(edge.min_x, edge.min_y);
+    lineToPixel(edge.max_x, edge.max_y);
 
     ctx.stroke();
 }
@@ -87,7 +87,7 @@ function drawIntersectionPair(pair)
 
 function labelVertex(v)
 {
-    printOnCanvas(v.name, v.x, v.y, labelSize, colorLabel);
+    printOnCanvas(v.name, v.x - 0.5, v.y - 0.5, labelSize, colorLabel);
 }
 
 function labelAllVertices()
@@ -122,7 +122,7 @@ function fillPolygonUntilPair(pair)
 
 function fillPolygonPair(pair)
 {
-    for (var x = pair.l + 1; x < pair.r; x++)
+    for (var x = Math.round(pair.l); x < Math.round(pair.r); x++)
     {
         drawPixel({x: x, y: pair.y});
     }

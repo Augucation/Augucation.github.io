@@ -20,9 +20,9 @@ function addTableEdge(edge, idx = -1)
     var td_max = tr.insertCell(1);
     var td_m = tr.insertCell(2);
 
-    td_min.innerHTML = edge.min.name + "(" + edge.min_x + "," + edge.min_y + ")";
-    td_max.innerHTML = edge.max.name + "(" + edge.max_x + "," + edge.max_y + ")";
-    td_m.innerHTML = Math.round(edge.m * 100) / 100;
+    td_min.innerHTML = edge.min.name + "(" + Math.round(edge.min_x * 10) / 10 + "," + Math.round(edge.min_y * 10) / 10 + ")";
+    td_max.innerHTML = edge.max.name + "(" + Math.round(edge.max_x * 10) / 10 + "," + Math.round(edge.max_y * 10) / 10 + ")";
+    td_m.innerHTML = Math.round(edge.m * 10) / 10;
 }
 
 function fillTableAllEdges()
@@ -103,7 +103,7 @@ function printInfo(text)
 function highlightRowInTable(table_idx, row_idx)
 {
     var t = tables[table_idx];
-    var tr = t.getElementsByTagName("tr")[row_idx]; // ignore header row
+    var tr = t.getElementsByTagName("tr")[row_idx + 1]; // ignore header row
     var td = tr.getElementsByTagName("td");
 
     for (var i = 0; i < td.length; i++)
