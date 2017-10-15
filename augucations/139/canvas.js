@@ -110,8 +110,8 @@ function getMousePos(evt)
       //x: Math.round(((evt.clientX - rect.left) * scaleX) / pixelSize) - 1, //-1
       //y: Math.round(((evt.clientY - rect.top) * scaleY) / pixelSize) - 1
 
-      x: ((evt.clientX - rect.left) * scaleX) / pixelSize,
-      y: ((evt.clientY - rect.top) * scaleY) / pixelSize
+      x: ((evt.clientX - rect.left) * scaleX - offset) / pixelSize,
+      y: ((evt.clientY - rect.top) * scaleY - offset) / pixelSize
     }
 }
 
@@ -172,7 +172,7 @@ function movePoint(evt)
     var rmPos = getRealMousePos(evt);
 
     // don't leave the coordinate system!
-    if (rmPos.x < 0 || rmPos.y < 0 || rmPos.x > canvas.width - 2 * offset || rmPos.y + pixelSize > canvas.height - 2 * offset)
+    if (rmPos.x < 0 || rmPos.y < 0 || rmPos.x > (pixelNum + 1) * pixelSize || rmPos.y > (pixelNum + 1) * pixelSize )
         return;
 
     manageCursorIcon(mPos, true);
@@ -192,7 +192,7 @@ function movePoint(evt)
 
 function manageCursorIcon(mPos, rasterized = false)
 {
-    var range = rasterized ? 1 : pointSize;
+    var range = rasterized ? 0.5 : pointSize;
     //var mmPos = rasterized ? {x: mPos.x - 0.5, y: mPos.y - 0.5} : mPos;
 
     for (var i = 0; i < vertices.length;  i++)
