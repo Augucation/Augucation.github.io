@@ -1,12 +1,8 @@
 var edges;
 var intersections;
-var storedIntersections;
 var allIntersectionsUnsorted;
-var correctIntersectionsUnsorted;
-var correctIntersectionsSorted;
 var intersectionspairs;
 var pairs;
-var floatPairs;
 var polygon;
 
 function scanline()
@@ -15,11 +11,8 @@ function scanline()
 
     edges = [];
     intersections = [];
-    storedIntersections = [];
-    allIntersections = [];
     intersectionspairs = [];
     pairs = [];
-    floatPairs = [];
     polygon = [];
 
     // calculate and store the polygon's edges
@@ -61,7 +54,7 @@ function scanline()
 
         // 2D intersections array: one row for each scanline
         intersections.push([]);
-        storedIntersections.push([]);
+        //storedIntersections.push([]);
 
         // calculate the current y value
         var scan_y = i;
@@ -85,22 +78,16 @@ function scanline()
             //intersections[i].push(Math.round(intersection.x * 10) / 10);
             //storedIntersections[i].push(Math.round(intersection.x * 10) / 10);
             intersections[i].push(intersection);
-            storedIntersections[i].push(intersection);
+            //storedIntersections[i].push(intersection);
 
             edge.intersections.push(intersection);
         }
-
-        //intersections[i].sortNumbers();
-        //storedIntersections[i].sortNumbers();
     }
 
+    // backup the unsorted intersections before they are sorted (to display them later during the explanation)
     allIntersectionsUnsorted = intersections.copy();
 
-    //removeFalseDuplicates(intersections);
-    //removeFalseDuplicates(storedIntersections);
-
-    correctIntersectionsUnsorted = intersections.copy();
-
+    // sort the intersections by their x values
     for (var y = 0; y < intersections.length; y++)
     {
         function compare(a,b) {
@@ -112,10 +99,8 @@ function scanline()
         }
 
         intersections[y].sort(compare);
-        storedIntersections[y].sort(compare);
+        //storedIntersections[y].sort(compare);
     }
-
-    correctIntersectionsSorted = intersections.copy();
 
     // draw
 
@@ -132,18 +117,14 @@ function scanline()
             // for each intersection pair start at the pixel right to the first intersection, go pixel wise to the right and draw all pixels until the second intersection is reached
             for (var p = intersections[y][x].x + 1; p < intersections[y][x + 1].x; p++)
             {
-                //drawPixel({x: p, y: y});
                 polygon[y].push({x: p, y: y});
             }
 
             pairs.push({l: intersections[y][x].x, r: intersections[y][x+1].x, y: y, idx: x / 2});
-            floatPairs.push({l: storedIntersections[y][x].x, r: storedIntersections[y][x+1].x, y: y, idx: x / 2});
         }
     }
 
-    fsteps = pairs.length;
-    tsteps = fsteps + esteps + 1;
-    stepSlider.max = tsteps;
+    calcStepNumbers(pairs.length);
 }
 
 function calcIntersectionX(edge, y)

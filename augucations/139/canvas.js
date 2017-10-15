@@ -192,7 +192,7 @@ function movePoint(evt)
     draw();
 
     if (updating)
-    {
+    {        
         updateTables();
         stepSlider.value = tsteps;
         step = tsteps;
