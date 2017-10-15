@@ -1,6 +1,8 @@
 var colorDeltaX = "#141082";
 var colorDeltaY = "#141082";
 var lineWidth = 0.6;
+var labelSize = 25;
+var colorLabel = "#393f44"; // "#555e67";
 
 function visualizeDeltas()
 {
@@ -45,6 +47,17 @@ function visualizeLine()
     moveToPixel(p.x + 0.5, p.y + 0.5);
     lineToPixel(q.x + 0.5, q.y + 0.5);
     ctx.stroke();
+}
+
+function labelVertices(ppos = p)
+{
+    printOnCanvas("p", ppos.x + 1.2, ppos.y + 0.5, labelSize, colorLabel);
+
+    // if p and q are on the same position, return after labeling p
+    if (ppos.x == q.x && ppos.y == q.y)
+        return;
+
+    printOnCanvas("q", q.x + 1.2, q.y + 0.5, labelSize, colorLabel);
 }
 
 function printOnCanvas(text, x, y, size = 20, color = "#000000")

@@ -120,6 +120,7 @@ function movePoint(evt)
     draw();
 
     printVariables(p, q, m);
+    labelVertices();
 }
 
 function manageCursorIcon(mPos)
@@ -166,6 +167,7 @@ function drawLineUntilPixel(idx)
 
     drawPoint(line[idx]);
     drawPoint(q, colorPoint);
+    labelVertices(line[idx]);
 
     disableSecondOctant();
     drawCoordinateSystem();

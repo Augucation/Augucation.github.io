@@ -20,10 +20,14 @@ function algoStep()
     var last_p = line[step - 5];
     var curr_p = line[step - 4];
 
+    labelVertices();
+
     var monoS = "<span style = \"font-family :monospace\">";
     var monoE = "</span>";
     var mono_p = "<span style=\"font-family: monospace\">p</span>";
     var mono_q = "<span style=\"font-family: monospace\">q</span>";
+    var mono_x = "<span style=\"font-family: monospace\">x</span>";
+    var mono_y = "<span style=\"font-family: monospace\">y</span>";
     var mono_d = "<span style=\"font-family: monospace\">d</span>";
     var mono_dx = "<span style=\"font-family: monospace\">\u0394x</span>";
     var mono_dy = "<span style=\"font-family: monospace\">\u0394y</span>";
@@ -47,7 +51,7 @@ function algoStep()
         case 1:
             printVariables(p, q, m, dx, dy);
             printCalculation("\u0394x = q.x - p.x<br/>\u00A0\u00A0   = " + q.x + " - " + p.x + "<br/>\u00A0\u00A0   = " + dx +"<br/><br/>\u0394y = q.y - p.y<br/>\u00A0\u00A0   = " + q.y + " - " + p.y + "<br/>\u00A0\u00A0   = " + dy);
-            printInfo("Zunächst werden " + mono_dx + " und " + mono_dy + " anhand der Punkte " + mono_p + " und " + mono_q + " berechnet.");
+            printInfo("Zunächst werden die Differenzen" + mono_dx + " und " + mono_dy + " der Punkte " + mono_p + " und " + mono_q + " berechnet.");
 
             visualizeDeltas();
 
@@ -58,7 +62,8 @@ function algoStep()
 
             printCalculation("d = 2 * \u0394y - \u0394x <br/>\u00A0 = 2 * " + dy + " - " + dx + "<br/>\u00A0 = " + lined[0]);
 
-            printInfo("Der Algorithmus funktioniert indem von jedem bisher eingefärbten Pixel unterscieden wird, ob der Pixel östlich oder südöstlich vom momentanen Pixel eingefärbt wird.<br/>Entschieden wird das abhängig vom Vorzeichen der Entscheidungsvariable " + mono_d + ".<br/>Diese wird zu Beginn auf " + monoS + " d = 2 * \u0394y - \u0394x" + monoE + " gesetzt.");
+            printInfo("Der Algorithmus funktioniert so, dass in jedem Schritt der Punkt " + mono_p + " einen Schritt in " + mono_x + "-Richtung zum Punkt " + mono_q + " hin versetzt wird. Zusätzlich dazu wird " + mono_p + " hin und wieder um einen Pixel nach unten verschoben. Dabei wird jeder Pixel, den " + mono_p + " besucht, eingefärbt."
+            + "<br/>Ob Punkt " + mono_p + " nur nach rechts (östlich) oder nach rechts unten (südöstlich) verschoben wird, ist abhängig vom Vorzeichen der Entscheidungsvariable " + mono_d + ".<br/>Diese wird zu Beginn auf " + monoS + " d = 2 * \u0394y - \u0394x" + monoE + " gesetzt.");
 
             break;
 
@@ -67,7 +72,7 @@ function algoStep()
 
             printCalculation("incrE = 2 * \u0394y<br/>\u00A0\u00A0\u00A0 \u00A0     = 2 * " + dy + "<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= " + incrE + "<br/><br/>incrSE = 2 * (\u0394y - \u0394x)<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= 2 * (" + dy + " - " + dx + ")<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= " + incrSE);
 
-            printInfo("In jedem Schritt wird nun die Entscheidungsvariable " + mono_d + " inkrementiert. Wird der Pixel östlich vom momentanen Pixel eingefärbt, wird " + mono_d + " um " + monoS + "incrE = 2 * \u0394y" + mono_E + " inkrementiert bzw. um " + monoS + "incrSE = 2 * (\u0394y - \u0394x)" + monoE + ", falls der südöstliche Pixel eingefärbt wird.");
+            printInfo("In jedem Schritt wird die Entscheidungsvariable " + mono_d + " inkrementiert. Wird Punkt " + mono_p + " östlich verschoben, wird " + mono_d + " um " + monoS + "incrE = 2 * \u0394y" + monoE + " inkrementiert bzw. um " + monoS + "incrSE = 2 * (\u0394y - \u0394x)" + monoE + ", falls " + mono_p + " zusätzlich einen Pixel nach unten wandert.");
 
             break;
 
@@ -100,7 +105,7 @@ function algoStep()
                     + "<br/>\u00A0\u00A0p = (" + curr_p.x + "," + curr_p.y + ")"
                 );
 
-                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein negatives Vorzeichen. Somit wird der Pixel östlich vom momentanen Pixel eingefärbt und " + mono_d + " um " + mono_incrE + " inkrementiert.");
+                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein negatives Vorzeichen. Somit wird der Punkt " + mono_p + " östlich verschoben und " + mono_d + " um " + mono_incrE + " inkrementiert.");
             }
             else {
                 printCalculation(
@@ -113,7 +118,7 @@ function algoStep()
                     + "<br/>\u00A0\u00A0p = (" + curr_p.x + "," + curr_p.y + ")"
                 );
 
-                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein positives Vorzeichen. Somit wird der Pixel südöstlich vom momentanen Pixel eingefärbt und " + mono_d + " um " + mono_incrSE + " inkrementiert.");
+                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein positives Vorzeichen. Somit wird der Punkt " + mono_p + " südöstlich verschoben und " + mono_d + " um " + mono_incrSE + " inkrementiert.");
             }
 
             drawLineUntilPixel(step - 4);
@@ -132,7 +137,7 @@ function algoStep()
                 +"<br/>" + space + "p == q"
             );
 
-            printInfo("Punkt p hat Punkt q erreicht, damit terminiert der Algorithmus.");
+            printInfo("Punkt " + mono_p + " hat Punkt " + mono_q + " erreicht, damit terminiert der Algorithmus.");
 
             drawLineUntilPixel(bsteps - 1);
 
