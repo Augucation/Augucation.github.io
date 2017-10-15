@@ -55,7 +55,7 @@ function fillTableAllIntersections(array)
     {
         for (var idx = 0; idx < array[y].length; idx++)
         {
-            addTableIntersection(array[y][idx], y);
+            addTableIntersection(array[y][idx].x, y);
         }
     }
 }

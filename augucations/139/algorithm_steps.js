@@ -64,10 +64,6 @@ function algoStep()
             canvas.addEventListener("mousemove", movePoint, false);
 
             scanline();
-            //drawAllIntersections(correctIntersectionsSorted); // allIntersectionsUnsorted);
-            //fillTableAllIntersections(correctIntersectionsSorted);// storedIntersections);
-
-            //fillTableAllEdges();
 
             break;
 
@@ -155,6 +151,7 @@ function algoStep()
         case 5:
 
             var hvy = findScanlineYRange().min;
+            first_edge = storedIntersections[y_min][0].edge;
 
             printCalculation("y = " + hvy
             + "<br/><br/>" + first_edge.min.name + ".y <= y && y <= " + first_edge.max.name + ".y"
@@ -176,14 +173,15 @@ function algoStep()
         case 6:
 
             var y_min = findScanlineYRange().min;
+            first_edge = storedIntersections[y_min][0].edge;
 
             printCalculation("y = " + y_min
             + "<br/><br/>Schnittpunkt: q(x," + y_min + ")"
             + "<br/><br/>q.x = " + first_edge.min.name + ".x + m * (y - " + first_edge.min.name + ".y)"
             + "<br/>q.x = " + first_edge.min_x + " + " + Math.round(first_edge.m * 100) / 100 + " * (" + y_min + " - " + first_edge.min_y + ")"
-            + "<br/>q.x = " + storedIntersections[y_min][0]
+            + "<br/>q.x = " + storedIntersections[y_min][0].x
             //+ "<br/>q.x \u2248 " + Math.round(storedIntersections[y_min][1] * 10) / 10
-            + "<br/><br/>q(" + storedIntersections[y_min][0] + "," + y_min + ")");
+            + "<br/><br/>q(" + storedIntersections[y_min][0].x + "," + y_min + ")");
 
             printInfo("Der " + mono_y  + "-Wert des Schnittpunkts ist durch die momentane Pixelreihe definiert."
             + "<br/>Der " + mono_x + "-Wert wird durch eine lineare Interpolation berechnet."
@@ -194,25 +192,27 @@ function algoStep()
             fillTableAllEdges();
             highlightRowInTable(0, first_edge.idx);
             highlightRowInTable(1, y_min);
-            drawIntersection(storedIntersections[y_min][0], y_min, 10);
+            drawIntersection(storedIntersections[y_min][0].x, y_min, 10);
 
             fillTableIntersectionLeftColumn();
-            addTableIntersection(intersections[y_min][0], y_min);
+            addTableIntersection(intersections[y_min][0].x, y_min);
 
             break;
 
         case 7:
 
             var curr_y = findScanlineYRange().min; // first scanline
-            var x = left ? storedIntersections[curr_y][0] : storedIntersections[curr_y][1];
+            var x = left ? storedIntersections[curr_y][0]: storedIntersections[curr_y][1];
+
+            second_edge = x.edge;
 
             printCalculation("y = " + curr_y
             + "<br/><br/>Schnittpunkt: q(x," + curr_y + ")"
             + "<br/><br/>q.x = " + second_edge.min.name + ".x + m * (y - " + second_edge.min.name + ".y)"
             + "<br/>q.x = " + second_edge.min_x + " + " + Math.round(second_edge.m * 10) / 10 + " * (" + curr_y + " - " + second_edge.min_y + ")"
-            + "<br/>q.x = " + Math.round(x * 10) / 10
+            + "<br/>q.x = " + Math.round(x.x * 10) / 10
             //+ "<br/>q.x \u2248 " + Math.round(x)
-            + "<br/><br/>q(" + Math.round(x * 10) / 10 + "," + curr_y + ")");
+            + "<br/><br/>q(" + Math.round(x.x * 10) / 10 + "," + curr_y + ")");
 
             printInfo("Nach diesen Prinzip werden alle Schnittpunkte der Polygonkanten mit der momentanen Pixelreihe ermittelt und der Liste hinzugefügt.");
 
@@ -222,11 +222,11 @@ function algoStep()
             highlightRowInTable(0, second_edge.idx);
             highlightRowInTable(1, curr_y);
             fillTableIntersectionLeftColumn();
-            addTableIntersection(intersections[curr_y][0], curr_y);
-            addTableIntersection(x, curr_y);
+            addTableIntersection(intersections[curr_y][0].x, curr_y);
+            addTableIntersection(x.x, curr_y);
 
-            drawIntersection(storedIntersections[curr_y][0], curr_y, 5);
-            drawIntersection(x, curr_y, 10);
+            drawIntersection(storedIntersections[curr_y][0].x, curr_y, 5);
+            drawIntersection(x.x, curr_y, 10);
 
             break;
 

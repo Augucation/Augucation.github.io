@@ -82,8 +82,10 @@ function scanline()
             // calculate the intersection's x coordinate
             var intersection = {x: Math.round(calcIntersectionX(edge, scan_y) * 10) / 10, y: scan_y, edge: edge};
 
-            intersections[i].push(Math.round(intersection.x * 10) / 10);
-            storedIntersections[i].push(Math.round(intersection.x * 10) / 10);
+            //intersections[i].push(Math.round(intersection.x * 10) / 10);
+            //storedIntersections[i].push(Math.round(intersection.x * 10) / 10);
+            intersections[i].push(intersection);
+            storedIntersections[i].push(intersection);
 
             edge.intersections.push(intersection);
         }
@@ -94,15 +96,23 @@ function scanline()
 
     allIntersectionsUnsorted = intersections.copy();
 
-    removeFalseDuplicates(intersections);
+    //removeFalseDuplicates(intersections);
     //removeFalseDuplicates(storedIntersections);
 
     correctIntersectionsUnsorted = intersections.copy();
 
     for (var y = 0; y < intersections.length; y++)
     {
-        intersections[y].sortNumbers();
-        storedIntersections[y].sortNumbers();
+        function compare(a,b) {
+          if (a.x < b.x)
+            return -1;
+          if (a.x > b.x)
+            return 1;
+          return 0;
+        }
+
+        intersections[y].sort(compare);
+        storedIntersections[y].sort(compare);
     }
 
     correctIntersectionsSorted = intersections.copy();
@@ -120,14 +130,14 @@ function scanline()
         for (var x = 0; x < intersections[y].length; x+=2)
         {
             // for each intersection pair start at the pixel right to the first intersection, go pixel wise to the right and draw all pixels until the second intersection is reached
-            for (var p = intersections[y][x] + 1; p < intersections[y][x + 1]; p++)
+            for (var p = intersections[y][x].x + 1; p < intersections[y][x + 1].x; p++)
             {
                 //drawPixel({x: p, y: y});
                 polygon[y].push({x: p, y: y});
             }
 
-            pairs.push({l: intersections[y][x], r: intersections[y][x+1], y: y, idx: x / 2});
-            floatPairs.push({l: storedIntersections[y][x], r: storedIntersections[y][x+1], y: y, idx: x / 2});
+            pairs.push({l: intersections[y][x].x, r: intersections[y][x+1].x, y: y, idx: x / 2});
+            floatPairs.push({l: storedIntersections[y][x].x, r: storedIntersections[y][x+1].x, y: y, idx: x / 2});
         }
     }
 
@@ -339,6 +349,8 @@ function sortEdgesByLength(ascending = true)
 // tricky: findRightEdge-Function with false as parameter returns the left one
 function findRightEdgeFromHighestVertex(right = true)
 {
+    var edge;
+
     var v = findHighestVertex();
 
     var possibleEdges = [];
@@ -357,9 +369,22 @@ function findRightEdgeFromHighestVertex(right = true)
 
     // check which ones end point has the highest x value
     if (right)
-        return possibleEdges[0].max_x > possibleEdges[1].max_x ? possibleEdges[0] : possibleEdges[1];
+        edge = possibleEdges[0].max_x > possibleEdges[1].max_x ? possibleEdges[0] : possibleEdges[1];
     else
-        return possibleEdges[0].max_x > possibleEdges[1].max_x ? possibleEdges[1] : possibleEdges[0];
+        edge = possibleEdges[0].max_x > possibleEdges[1].max_x ? possibleEdges[1] : possibleEdges[0];
+
+    //console.log("min: ", edge.min, "  max: ", edge.max);
+    console.log("right: ", right, "  edge: ", edge)
+    while (edge.max.y < findScanlineYRange().min)
+    {
+        console.log("aasadsdsdsdsd: ", edge);
+        if (right)
+            edge = edges[edge.idx + 1];
+        else
+            edge = edges[edge.idx - 1]
+    }
+
+    return edge;
 }
 
 function removeIntersectionByIndex(arr, index)

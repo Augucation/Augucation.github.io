@@ -74,7 +74,7 @@ function drawAllIntersections(intersectionArray)
     {
         for (var x = 0; x < intersectionArray[y].length; x++)
         {
-            drawIntersection(intersectionArray[y][x], y);
+            drawIntersection(intersectionArray[y][x].x, y);
         }
     }
 }
