@@ -54,6 +54,7 @@ body
   border: 0px solid orange;
   width: 100%;
   height: 90%;
+  padding-bottom: 5%;
 }
 
 #canvy
@@ -133,6 +134,7 @@ th
   width: 40em;
   height: 10px;
   white-space: nowrap;
+  text-align: left;
 }
 
 td
@@ -153,14 +155,15 @@ td
 {
   border: 0px solid green;
   height: 100%;
-  width: 40%;
+  width: 45%;
   float: left;
+  padding-right: 2%;
 }
 
 #calcInfoContainer
 {
   border-left: 1px solid #dee0ed;
-  width: 55%;
+  width: 50%;
   height: 100%;
   float: left;
   padding-left: 2%;
@@ -188,10 +191,10 @@ td
   border: 0px solid pink;
   display: inline-block;
   margin-bottom: 1%;
-  margin-top: 10%;
+  margin-top: 1%;
 }
 
-#table_intersections td:nth-child(odd)
+#table_intersections th:nth-child(1), #table_intersections td:nth-child(odd)
   {
     text-align: right;
     padding-right: 10%;
@@ -205,4 +208,9 @@ td
 #table_edges
 {
   border: 0px solid green;
+}
+
+#table_edges tr td:nth-child(-n+2)
+{
+  width: 40% !important;
 }

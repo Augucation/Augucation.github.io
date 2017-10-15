@@ -1,7 +1,7 @@
 var colorRow = "#dee1f2";
 var colorScanline = "#b9bccc";
 var colorHighlightLine = "#af2626";
-var colorLabel ="#555e67";
+var colorLabel = "#393f44"; // "#555e67";
 var colorIntersection = "#27d83e";
 
 var highlightLineWidth = 5;

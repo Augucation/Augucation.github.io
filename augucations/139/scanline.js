@@ -131,47 +131,9 @@ function scanline()
         }
     }
 
-    fillPolygon();
-
     fsteps = pairs.length;
-    tsteps = fsteps + esteps;
+    tsteps = fsteps + esteps + 1;
     stepSlider.max = tsteps;
-
-    /*
-    // iterate over scanlines
-    for (var y = 0; y <= pixelNum + 1; y++) // y <= pixelNum
-    {
-
-        // skip scanline if there aren't any intersections
-        if (intersections[y].length == 0)
-            continue;
-
-        // if there is only one intersection, draw this pixel and move on
-        if (intersections[y].length == 1)
-        {
-            //drawPixel({x: intersections[y][0], y: y}); // y - 1
-            continue;
-        }
-
-        var par = 0; // parity
-
-        // iterate over x along the scanline
-        for (var x = 0; x <= pixelNum + 1; x++)
-        {
-            // for every intersection: increment parity by 1
-            while (intersections[y].indexOf(x) >= 0)
-            {
-                par++;
-                var idx = intersections[y].indexOf(x)
-                removeIntersectionByIndex(intersections[y], idx);
-            }
-
-            // draw pixel if the parity is odd
-            if (par % 2 == 1)
-                drawPixel({x: x, y: y}); // y - 1
-        }
-    }
-    */
 }
 
 function calcIntersectionX(edge, y)

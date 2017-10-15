@@ -41,7 +41,7 @@ function addTableIntersection(x, y)
 
     // comma comma comma
     if (td.innerHTML != "")
-        td.innerHTML += ",";
+        td.innerHTML += ", ";
 
     td.innerHTML += x;
 }
@@ -49,6 +49,7 @@ function addTableIntersection(x, y)
 function fillTableAllIntersections(array)
 {
     clearTableIntersections();
+    fillTableIntersectionLeftColumn();
 
     for (var y = 0; y < array.length; y++)
     {
@@ -56,6 +57,22 @@ function fillTableAllIntersections(array)
         {
             addTableIntersection(array[y][idx], y);
         }
+    }
+}
+
+function fillTableIntersectionLeftColumn()
+{
+    var tds = table_intersections_td;
+
+    // iterate over every table cell td
+    for (var i = 0; i < tds.length; i++)
+    {
+        // skip every second cell (right column)
+        if (i % 2 == 1)
+            continue;
+
+        // insert index (/2, because every second one is skipped)
+        tds[i].innerHTML = i / 2;
     }
 }
 
@@ -81,7 +98,8 @@ function addTableIntersectionPair(pair)
 
 function fillTableIntersectionPairs(array)
 {
-    clearTableEdges();
+    clearTableIntersections();
+    fillTableIntersectionLeftColumn();
 
     for (var i = 0; i < array.length; i++)
     {
@@ -134,8 +152,11 @@ function clearTableEdges()
     }
 }
 
-function clearTableIntersections()
+function clearTableIntersections(clearBothColumns = false)
 {
+    if (clearBothColumns)
+        $("#table_intersections tr").find("td:eq(0)").empty();
+
     $("#table_intersections tr").find("td:eq(1)").empty();
 }
 
@@ -148,4 +169,10 @@ function highlightIntersectionpair(pair)
     var pair_span = td.getElementsByTagName("span")[pair.idx * 2]; // * 2 because every second span is a comma span
 
     pair_span.className = "td_highlighted";
+}
+
+function updateTables()
+{
+    fillTableAllEdges();
+    fillTableIntersectionPairs(floatPairs);
 }

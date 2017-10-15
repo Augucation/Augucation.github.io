@@ -35,6 +35,8 @@ var draggingPoint = null;
 
 var movePointFunction;
 
+var updating = false; // if true, tables, polygon drawinga and gui are updated when vertices are moved
+
 canvas = document.getElementById("canvy");
 ctx = canvas.getContext("2d");
 
@@ -188,12 +190,22 @@ function movePoint(evt)
     clear();
     calc();
     draw();
+
+    if (updating)
+    {
+        updateTables();
+        stepSlider.value = tsteps;
+        step = tsteps;
+
+        clear();
+        fillPolygon();
+        draw();
+    }
 }
 
 function manageCursorIcon(mPos, rasterized = false)
 {
     var range = rasterized ? 0.5 : pointSize;
-    //var mmPos = rasterized ? {x: mPos.x - 0.5, y: mPos.y - 0.5} : mPos;
 
     for (var i = 0; i < vertices.length;  i++)
     {
@@ -209,7 +221,9 @@ function manageCursorIcon(mPos, rasterized = false)
 function calc()
 {
     scanline();
-    fillPolygon();
+
+    // DEBUG
+    //fillPolygon();
     //fillTableAllEdges();
     //fillTableIntersections();
 }

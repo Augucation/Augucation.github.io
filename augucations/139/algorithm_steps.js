@@ -4,6 +4,12 @@ var fsteps;     // scanline algorithm pair filling steps
 var esteps = 10;    // explanation steps before the scanline pair filling steps
 var tsteps;         // total calculation and explanation steps
 
+// monospace snippets
+var monoS = "<span style = \"font-family :monospace\">";
+var monoE = "</span>";
+var mono_x = "<span style=\"font-family: monospace\">x</span>";
+var mono_y = "<span style=\"font-family: monospace\">y</span>";
+
 function algoStep()
 {
     updateStepGUI();
@@ -11,7 +17,9 @@ function algoStep()
     removeTableHightlight(0);
     removeTableHightlight(1);
     clearTableEdges();
-    clearTableIntersections();
+    clearTableIntersections(true);
+
+    updatingTables = false;
 
     if (step > 0)
         canvas.removeEventListener("mousemove", movePoint, false);
@@ -56,10 +64,10 @@ function algoStep()
             canvas.addEventListener("mousemove", movePoint, false);
 
             scanline();
-            drawAllIntersections(correctIntersectionsSorted); // allIntersectionsUnsorted);
-            fillTableAllIntersections(correctIntersectionsSorted);// storedIntersections);
+            //drawAllIntersections(correctIntersectionsSorted); // allIntersectionsUnsorted);
+            //fillTableAllIntersections(correctIntersectionsSorted);// storedIntersections);
 
-            fillTableAllEdges();
+            //fillTableAllEdges();
 
             break;
 
@@ -67,8 +75,8 @@ function algoStep()
 
             printCalculation("");
 
-            printInfo("Ziel des Algorithmus ist es, zu ermitteln welche Pixel Teil des gegebenen Polygons sind und somit einfärbt werden muss um das Polygon darzustellen."
-            + "<br/> Zunächsten werden anhand der Eckpunkte des Polygons all seine Kanten ermittelt. Dabei wird eine Kante als Konstrukt aus Startpunkt, Endpunkt und Steigung gehandhabt, wobei der Startpunkt der Punkt mit dem niedrigen y-Wert, in dieser Darstellung also der obere Punkt, ist.");
+            printInfo("Ziel des Algorithmus ist es, zu ermitteln welche Pixel Teil des gegebenen Polygons sind und somit eingefärbt werden müssen um das Polygon darzustellen."
+            + "<br/>Um dies zu erreichen, werden zunächst anhand der Eckpunkte alle Kanten des Polygons berechnet und in einer Liste gespeichert.");
 
             break;
 
@@ -84,12 +92,14 @@ function algoStep()
             + "<br/><br/>" + le.min.name + ".y <= " + le.max.name + ".y"
             + "<br/>\u00A0\u00A0\u00A0" + miny + " <= " + maxy
             + "<br/>\u00A0\u00A0Startpunkt: " + le.min.name + "(" + minx + "," + miny + ")"
-            + "<br/><br/>m = (" + le.max.name + ".x  - " + le.min.name + ".x) / (" + le.max.name + ".y - " + le.min.name + ".y)"
+            + "<br/><br/>m = \u0394x / \u0394y"
+            + "<br/>m = (" + le.max.name + ".x  - " + le.min.name + ".x) / (" + le.max.name + ".y - " + le.min.name + ".y)"
             + "<br/>m = (" + maxx + " - " + minx + ") / (" + maxy + " - " + miny + ")"
             + "<br/>m \u2248 " + Math.round(le.m * 100) / 100);
 
 
-            printInfo("Die Berechnung einer Kante wird nun examplarisch an der längsten Kante des Polygons gezeigt. Von beiden Punkten der Punkte wird der oberste (niedrigster y-Wert) als Starpunkt und der jeweils andere als Endpunkt gespeichert. Dazu wird außerdem die Steigung der Kante ermittelt.");
+            printInfo("Eine Kante besteht aus einem Startpunkt, einem Endpunkt und einer Steigung. Dabei ist der Startpunkt derjenige der beiden Eckpunkte der Kante mit dem geringeren " + mono_y + "-Wert, in dieser Darstellung also der höhere."
+            + "<br/>Die Steigung der Kante wird anhand der Differenz ihrer beiden Eckpunkte berechnet.");
 
             highlightEdge(le);
             addTableEdge(le);
@@ -98,6 +108,16 @@ function algoStep()
             break;
 
         case 3:
+
+            printCalculation("");
+
+            printInfo("Nach diesem Schema werden alle weiteren Kanten berechnet und der Liste hinzugefügt.");
+
+            fillTableAllEdges();
+
+            break;
+
+        case 4:
 
             var r = findScanlineYRange();
 
@@ -132,7 +152,7 @@ function algoStep()
             */
             break;
 
-        case 4:
+        case 5:
 
             var hvy = findScanlineYRange().min;
 
@@ -142,7 +162,7 @@ function algoStep()
             + "<br/><br/>Es existiert ein Schnittpunkt der momentanen Kante mit der momentanen Pixelreihe.");
 
             printInfo("Für jede Pixelreihe wird nun über jede Kante des Polygons iteriert um alle Schnittpunkte der Kanten mit der Pixelreihe zu ermitteln."
-            + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt unterhalb oder auf und ihr Endpunk überhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
+            + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt überhalb oder auf und ihr Endpunkt unterhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
 
             drawScanline(hvy);
             highlightEdge(first_edge);
@@ -153,8 +173,7 @@ function algoStep()
 
             break;
 
-        case 5:
-
+        case 6:
 
             var y_min = findScanlineYRange().min;
 
@@ -166,18 +185,23 @@ function algoStep()
             //+ "<br/>q.x \u2248 " + Math.round(storedIntersections[y_min][1] * 10) / 10
             + "<br/><br/>q(" + storedIntersections[y_min][0] + "," + y_min + ")");
 
-            printInfo("Als nächtes wird der Schnittpunkt berechnet. Der y-Wert ist bereits bekannt, er entspricht dem y-Wert der Pixelreihe. Der x-Wert wird durch linere Interpolation berechnet. Dazu wird auf den x-Wert des Startpunkts der Kante das Produkt der Steigung ...");
+            printInfo("Der " + mono_y  + "-Wert des Schnittpunkts ist durch die momentane Pixelreihe definiert."
+            + "<br/>Der " + mono_x + "-Wert wird durch eine lineare Interpolation berechnet."
+             +"<br/><br/>Der erechnete Schnittpunk wird in einer Liste gespeichert.");
 
             drawScanline(y_min);
             highlightEdge(first_edge);
             fillTableAllEdges();
             highlightRowInTable(0, first_edge.idx);
+            highlightRowInTable(1, y_min);
             drawIntersection(storedIntersections[y_min][0], y_min, 10);
+
+            fillTableIntersectionLeftColumn();
             addTableIntersection(intersections[y_min][0], y_min);
 
             break;
 
-        case 6:
+        case 7:
 
             var curr_y = findScanlineYRange().min; // first scanline
             var x = left ? storedIntersections[curr_y][0] : storedIntersections[curr_y][1];
@@ -190,13 +214,14 @@ function algoStep()
             //+ "<br/>q.x \u2248 " + Math.round(x)
             + "<br/><br/>q(" + Math.round(x * 10) / 10 + "," + curr_y + ")");
 
-            printInfo("Weiter Schnittpunkt ..."
-            + "<br/>Da wir nur ganze Pixel einfärben können, wird die berechnete x-Koordinate des Schnittpunktes gerundet. Der gerundete Wert wird dann in eine Liste aller Schnittpunkte eingetragen.");
+            printInfo("Nach diesen Prinzip werden alle Schnittpunkte der Polygonkanten mit der momentanen Pixelreihe ermittelt und der Liste hinzugefügt.");
 
             drawScanline(curr_y);
             highlightEdge(second_edge);
             fillTableAllEdges();
             highlightRowInTable(0, second_edge.idx);
+            highlightRowInTable(1, curr_y);
+            fillTableIntersectionLeftColumn();
             addTableIntersection(intersections[curr_y][0], curr_y);
             addTableIntersection(x, curr_y);
 
@@ -205,26 +230,14 @@ function algoStep()
 
             break;
 
-        case 7:
-
-            printCalculation("");
-
-            printInfo("Nach diesem Prinzip werden nun alle Schnittpunkte berechnet und in der Liste gespeichert.");
-
-            drawAllIntersections(correctIntersectionsSorted);
-            fillTableAllIntersections(allIntersectionsUnsorted);
-            fillTableAllEdges();
-
-            break;
-
         case 8:
 
             printCalculation("");
 
-            printInfo("Ne Runde ausmisten.");
+            printInfo("Dies geschieht für alle Pixelreihen, die das Polygon schneiden.");
 
             drawAllIntersections(correctIntersectionsSorted);
-            fillTableAllIntersections(correctIntersectionsUnsorted);
+            fillTableAllIntersections(allIntersectionsUnsorted);
             fillTableAllEdges();
 
             break;
@@ -233,7 +246,7 @@ function algoStep()
 
             printCalculation("");
 
-            printInfo("Ne Runde sortieren.");
+            printInfo("In der Liste aller Schnittpunkte werden nun für jeden " + mono_y + "-Wert alle " + mono_x + "-Werte aufsteigend sortiert.");
 
             drawAllIntersections(correctIntersectionsSorted);
             fillTableAllIntersections(correctIntersectionsSorted);
@@ -245,31 +258,55 @@ function algoStep()
 
             printCalculation("");
 
-            printInfo("Für jede Pixelreihe wird jetzt von links nach rechts jedes Pixelpärchen betrachtet bla bla dazwischen einfärben.");
+            printInfo("Um das Polygon letztendlich einzufärben, werden die Schnittpunkte paarweise betrachtet."
+            + "<br/>Nun wird wieder über alle relevanten horizontalen Pixelreihen iteriert. Dabei werden alle Pixel, die innerhalb eines Schnittpunktpaares liegen, eingefärbt.");
 
             drawAllIntersections(correctIntersectionsSorted);
-            fillTableAllIntersections(correctIntersectionsSorted);
+            fillTableIntersectionPairs(floatPairs);
             fillTableAllEdges();
 
             break;
     }
 
-    if (step > 10 && step <= tsteps)
+    if (step > esteps && step < tsteps)
     {
-        var p = pairs[step - 10 - 1];
-        var fp = floatPairs[step - 10 - 1];
+        var p = pairs[step - esteps - 1];
+        var fp = floatPairs[step - esteps - 1];
 
         printCalculation("y: " + fp.y
         + "<br/>Schnittpunktpaar: " + fp.l + " - " + fp.r);
 
-        printInfo("Mal mal ne Runde!");
+        if (Math.round(fp.r) - Math.round(fp.l) > 0)
+            printInfo("Alle Pixel, die innerhalb des Schnittpunktpaares liegen, werden eingefärbt.");
+        else
+            printInfo("Dieses Schnittpunktpaar umschließt keine Pixel.");
 
-        fillTableAllEdges();
+        clear();
+        fillPolygonUntilPair(p);
+        draw();
+        drawScanline(fp.y);
+        drawIntersectionPair(fp);
+
         fillTableIntersectionPairs(floatPairs);
         highlightIntersectionpair(p);
-        drawScanline(fp.y);
-        fillPolygonUntilPair(p);
-        drawIntersectionPair(fp);
+        fillTableAllEdges();
+    }
+
+    if (step == tsteps)
+    {
+        printCalculation("");
+
+        printInfo("Es wurden alle Schnittpunktpaare durchlaufen, damit terminiert der Algorithmus. Das Polygon ist nun vollständig eingefärbt.");
+
+        clear();
+        fillPolygon();
+        draw();
+
+        fillTableIntersectionPairs(floatPairs);
+        fillTableAllEdges();
+
+        addEventListenerToCanvas();
+        updating = true;
     }
 
 }
