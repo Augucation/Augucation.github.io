@@ -174,5 +174,5 @@ function highlightIntersectionpair(pair)
 function updateTables()
 {
     fillTableAllEdges();
-    fillTableIntersectionPairs(floatPairs);
+    fillTableIntersectionPairs(pairs);
 }
