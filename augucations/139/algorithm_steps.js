@@ -21,6 +21,21 @@ function algoStep()
 
     updating = false;
 
+    // prohibit too small polygons
+    if (findScanlineYRange().max - findScanlineYRange().min < 1)
+    {
+        tsteps = 1;
+        stepSlider.max = 1;
+
+        printCalculation("");
+
+        printInfo("Dein Polygon ist leider zu klein.");
+
+        return;
+    }
+
+    updateStepGUI(pairs.length);
+
     if (step > 0)
         canvas.removeEventListener("mousemove", movePoint, false);
 
@@ -77,10 +92,10 @@ function algoStep()
             + "<br/><br/>" + le.min.name + ".y <= " + le.max.name + ".y"
             + "<br/>\u00A0\u00A0\u00A0" + miny + " <= " + maxy
             + "<br/>\u00A0\u00A0Startpunkt: " + le.min.name + "(" + minx + "," + miny + ")"
-            + "<br/><br/>m = \u0394x / \u0394y"
-            + "<br/>m = (" + le.max.name + ".x  - " + le.min.name + ".x) / (" + le.max.name + ".y - " + le.min.name + ".y)"
-            + "<br/>m = (" + maxx + " - " + minx + ") / (" + maxy + " - " + miny + ")"
-            + "<br/>m \u2248 " + Math.round(le.m * 100) / 100);
+            + "<br/><br/>m = \u0394y / \u0394x"
+            + "<br/>m = (" + le.max.name + ".y  - " + le.min.name + ".y) / (" + le.max.name + ".x - " + le.min.name + ".x)"
+            + "<br/>m = (" + maxy + " - " + miny + ") / (" + maxx + " - " + minx + ")"
+            + "<br/>m \u2248 " + Math.round(le.m * 10) / 10);
 
 
             printInfo("Eine Kante besteht aus einem Startpunkt, einem Endpunkt und einer Steigung. Dabei ist der Startpunkt derjenige der beiden Eckpunkte der Kante mit dem geringeren " + mono_y + "-Wert, in dieser Darstellung also der höhere."
@@ -140,8 +155,8 @@ function algoStep()
 
             printCalculation("y = " + y_min
             + "<br/><br/>Schnittpunkt: q(x," + y_min + ")"
-            + "<br/><br/>q.x = " + first_edge.min.name + ".x + m * (y - " + first_edge.min.name + ".y)"
-            + "<br/>q.x = " + Math.round(first_edge.min_x * 10) / 10 + " + " + Math.round(first_edge.m * 10) / 10 + " * (" + y_min + " - " + Math.round(first_edge.min_y * 10) / 10 + ")"
+            + "<br/><br/>q.x = " + first_edge.min.name + ".x + 1 / m * (y - " + first_edge.min.name + ".y)"
+            + "<br/>q.x = " + Math.round(first_edge.min_x * 10) / 10 + " + 1 / " + Math.round(first_edge.m * 10) / 10 + " * (" + y_min + " - " + Math.round(first_edge.min_y * 10) / 10 + ")"
             + "<br/>q.x = " + intersections[y_min][0].x
             //+ "<br/>q.x \u2248 " + Math.round(intersections[y_min][1] * 10) / 10
             + "<br/><br/>q(" + intersections[y_min][0].x + "," + y_min + ")");

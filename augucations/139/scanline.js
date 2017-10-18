@@ -36,7 +36,7 @@ function scanline()
             max_y: max.y,
             min: min,
             max: max,
-            m: (max.x - min.x) / (max.y - min.y),
+            m: (max.y - min.y) / (max.x - min.x),
             l: Math.sqrt(Math.pow(max.x - min.x, 2) + Math.pow(max.y - min.y, 2)),
             idx: edges.length,
             intersections: []
@@ -129,7 +129,7 @@ function scanline()
 
 function calcIntersectionX(edge, y)
 {
-    return edge.min_x + edge.m * (y - edge.min_y); // y - 0.5 - edge.min_y
+    return edge.min_x + 1 / edge.m * (y - edge.min_y); // y - 0.5 - edge.min_y
 }
 
 function sortIntersectionIntoArray(arr, x)
@@ -150,103 +150,6 @@ function sortIntersectionIntoArray(arr, x)
     // if current intersection.x is higher than the others, push it
     arr.push(x);
     return arr.length;
-}
-
-// all intersections that are vertices but no local maxima are removed
-function removeFalseDuplicates(arr)
-{
-    /* ursprünglich: hardgecoded mit intersections*/
-
-    // iterate over all vertices
-    for (var i = 0; i < vertices.length; i++)
-    {
-        // get previous, current and next vertices
-        var prev = vertices[(i - 1) % vertices.length];
-        var curr = vertices[i];
-        var next = vertices[(i + 1) % vertices.length];
-
-        // javascript's modulo ignores negative values >:(
-        if (prev == undefined)
-            prev = vertices[vertices.length - 1];
-
-        // the vertex is a maximum if the vertical directions of prev-curr and curr-next have different signs
-
-        var dir0 = curr.y - prev.y;
-        var dir1 = next.y - curr.y;
-
-        // skip the current vertex, if the directions have different signs -> local maximum
-        if ((dir0 < 0) != (dir1 < 0))
-            continue;
-
-        // else, delete the vertex once from the intersections list
-        var roundY = Math.floor(curr.y);
-        var roundX = Math.round(curr.x);
-
-        // DEBUG
-        if (i == 4)
-        {
-            //console.log(arr[roundY]);
-            //console.log("arr[" + roundY + "] " + roundX + ": ", arr[roundY]);
-        }
-        //removeIntersectionByIndex(arr[roundY], arr[roundY].indexOf(curr.x));
-    }
-
-    // if the number of intersections per scanline is odd, delete the one with the highest x value
-    /*
-    for (var y = 0; y < intersections.length; y++)
-    {
-        // skip scanline if the length of intersections is even
-        if (intersections[y].length % 2 == 0)
-            continue;
-
-        // find the index of the rightest intersection
-        var idx = 0;
-        for (var i = 0; i < intersections[y].length; i++)
-        {
-            if (intersections[y][idx] < intersections[y][i])
-                idx = i;
-        }
-
-        // remove this vertex
-        removeIntersectionByIndex(intersections[y], idx);
-    }
-    */
-
-    /*
-    // iterate over the edges
-    for (var i = 0; i < edges.length; i++)
-    {
-        // get current and next edge
-        var e = edges[i];                       // current edge
-        var n = edges[(i + 1) % edges.length];  // next edge
-
-        // calculate the vertical directions of both edges
-        var e_dir = e.max.y - e.min.y;
-        var n_dir = n.max.y - n.min.y;
-
-        // if both directions have different signs, their shared vertex is a local maximum and can be skipped
-        if (e_dir * n_dir < 0) // different signs -> negative product
-            continue;
-
-        // for each edge pair, check if both edges are on the same side in relation to their shared vertex. if not, skip this pair.
-
-        // if one edge's start is the other one's end, they are on different sides and their shared vertex does not need to be removed
-        //if (e.min.y == n.min.y || e.max.y == n.max.y)
-        //    continue;
-
-        // find their shared vertex
-        var vertex;
-
-        if (e.max.y == n.min.y)
-            vertex = e.max;
-
-        if (e.min.y == n.max.y)
-            vertex = e.min;
-
-        // delete one instance of this shared vertex from the intersections List
-        removeIntersectionByIndex(intersections[vertex.y], intersections[vertex.y].indexOf(vertex.x));
-    }
-    */
 }
 
 // return the vertex with the lowest y value
