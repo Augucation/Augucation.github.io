@@ -1,0 +1,29 @@
+#guiContainer
+{
+  border: 0px solid red;
+  width: 50vw;
+  height: 30vh;
+  margin: auto
+}
+
+#matricesContainer
+{
+  border: 0px solid black;
+  width: 100%;
+  height: 80%;
+  margin: auto;
+}
+
+#rotBtn
+{
+  margin: auto;
+}
+
+#teapotContainer
+{
+  border: 0px solid red;
+  width: 50vw;
+  height: 50vh;  
+  margin: auto;
+  
+}
