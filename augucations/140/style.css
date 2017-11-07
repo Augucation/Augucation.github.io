@@ -64,7 +64,7 @@
 
 .highlighted
 {
-  color: black;
+  color: var(--dark_red);
 }
 
 #angleSlider
