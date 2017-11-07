@@ -93,7 +93,7 @@ function render() {
 function setRotationDegree(x, y, z, order, animated = false) {
 
     v = {x: x, y: y, z: z};
-    var o = order.toLowerCase();
+    var o = order.toLowerCase().reverse(); // from right to left!!!
     teapot.rotation.order = order;
     teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
 
@@ -130,7 +130,7 @@ function setRotationDegree(x, y, z, order, animated = false) {
         teapot.rotation.x = d2r(x);
         teapot.rotation.y = d2r(y);
         teapot.rotation.z = d2r(z);
-				render();
+		render();
     }
 }
 
