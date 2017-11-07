@@ -62,10 +62,8 @@ var transformation_angles_manager = function() {
         this.slider.value = trans.getRotation(this.currentAngle);
 
         if (show)
-            //console.log("highlight ", this.currentAngle);
             this.highLightAxis(this.currentAngle);
         else
-            //console.log("unhighlight");
             this.highLightAxis(false);
     }
 
@@ -83,12 +81,10 @@ var transformation_angles_manager = function() {
 
         // unhighlight all
         for (var i = 0; i < this.rots.all.length; i++)
-            //console.log("juuuuuu: ", this.rots.all[i].id);
             this.rots.all[i].className = "matrix";
 
         // if an axis is given, highlight this one
         if (axis)
-            //console.log("nooooo: ", this.rots[axis].className);
             this.rots[axis].className = "matrix highlighted";
     }
 
