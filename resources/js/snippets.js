@@ -1,17 +1,14 @@
 /* Array functions */
 
-Array.prototype.insert = function (index, item)
-{
+Array.prototype.insert = function(index, item){
   this.splice(index, 0, item);
 };
 
-Array.prototype.remove = function (index)
-{
+Array.prototype.remove = function(index){
     this.splice(index, 1);
 };
 
-Array.prototype.copy = function()
-{
+Array.prototype.copy = function(){
     var newArray = [];
 
     // 1D array
@@ -28,8 +25,7 @@ Array.prototype.copy = function()
     return newArray;
 };
 
-Array.prototype.removeDuplicates = function()
-{
+Array.prototype.removeDuplicates = function(){
     var uniqueArray = this.filter(function(item, pos)
     {
         return this.indexOf(item) == pos;
@@ -38,8 +34,7 @@ Array.prototype.removeDuplicates = function()
     return uniqueArray;
 };
 
-Array.prototype.sortNumbers = function(ascending = true)
-{
+Array.prototype.sortNumbers = function(ascending = true){
     if (ascending)
         this.sort(function(a, b){return a-b});
     else
@@ -49,14 +44,14 @@ Array.prototype.sortNumbers = function(ascending = true)
 
 /* String functions */
 
-String.prototype.insert = function (index, string) {
+String.prototype.insert = function(index, string){
   if (index > 0)
     return this.substring(0, index) + string + this.substring(index, this.length);
   else
     return string + this;
 };
 
-String.prototype.removeAtIndex = function (index) {
+String.prototype.removeAtIndex = function(index){
     if (index == 0)
         return this.substring(1, this.length);
     else if (index > 0)
@@ -64,3 +59,7 @@ String.prototype.removeAtIndex = function (index) {
     else
         return this;
 };
+
+String.prototype.reverse = function(){
+    return this.split('').reverse().join('');
+}
