@@ -45,3 +45,22 @@ Array.prototype.sortNumbers = function(ascending = true)
     else
         this.sort(function(a, b){return b-a});
 };
+
+
+/* String functions */
+
+String.prototype.insert = function (index, string) {
+  if (index > 0)
+    return this.substring(0, index) + string + this.substring(index, this.length);
+  else
+    return string + this;
+};
+
+String.prototype.removeAtIndex = function (index) {
+    if (index == 0)
+        return this.substring(1, this.length);
+    else if (index > 0)
+        return this.substring(0, index) + this.substring(index + 1, this.length);
+    else
+        return this;
+};
