@@ -37,7 +37,7 @@ var transformation_angles_manager = function() {
         document.addEventListener("click", function(ev) {
 
             // when clicked on anything but a rot element, hide the slider
-            if (ev.target.className != "matrix" && ev.target.id != "angleSlider")
+            if (!ev.target.className.includes("matrix") && ev.target.id != "angleSlider")
                 self.showSlider(false);
         }, false);
 
@@ -60,6 +60,13 @@ var transformation_angles_manager = function() {
         this.slider.style.visibility = show ? "visible" : "hidden";
 
         this.slider.value = trans.getRotation(this.currentAngle);
+
+        if (show)
+            //console.log("highlight ", this.currentAngle);
+            this.highLightAxis(this.currentAngle);
+        else
+            //console.log("unhighlight");
+            this.highLightAxis(false);
     }
 
     this.updateGUIAngle = function(axis, value){
@@ -70,6 +77,19 @@ var transformation_angles_manager = function() {
         self.updateGUIAngle("X", 0);
         self.updateGUIAngle("Y", 0);
         self.updateGUIAngle("Z", 0);
+    }
+
+    this.highLightAxis = function(axis){
+
+        // unhighlight all
+        for (var i = 0; i < this.rots.all.length; i++)
+            //console.log("juuuuuu: ", this.rots.all[i].id);
+            this.rots.all[i].className = "matrix";
+
+        // if an axis is given, highlight this one
+        if (axis)
+            //console.log("nooooo: ", this.rots[axis].className);
+            this.rots[axis].className = "matrix highlighted";
     }
 
     this.init();

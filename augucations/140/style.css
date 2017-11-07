@@ -50,6 +50,11 @@
   float: left;
 }
 
+.highlighted
+{
+  color: black;
+}
+
 #angleSlider
 {
   visibility: hidden;
