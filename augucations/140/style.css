@@ -2,21 +2,52 @@
 {
   border: 0px solid red;
   width: 50vw;
-  height: 30vh;
-  margin: auto
-}
-
-#matricesContainer
-{
-  border: 0px solid black;
-  width: 100%;
-  height: 80%;
+  height: 35vh;
   margin: auto;
+  position: relative;
+  text-align: center;
 }
 
 #rotBtn
 {
+  position: relative;
+  display: inherit;
+  margin: 2% auto;
+}
+
+#matricesContainer
+{
+  border: 0px solid blue;
+  width: auto;
+  height: auto;
   margin: auto;
+  position: relative;
+  display: inline-block;
+  
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.multsym
+{
+  font-size: 20px;
+  line-height: 60px;
+  width: auto;
+  height: auto;
+  cursor: default;
+  float: left;
+}
+
+.matrix
+{
+  border: 0px solid red;
+  font-size: 40px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  float: left;
 }
 
 #teapotContainer

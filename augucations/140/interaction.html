@@ -8,12 +8,16 @@
 	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
 	<link rel="stylesheet" href="style.css">
 
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+
 </head>
 
 <body>
 
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
 
 	<script src="http://threejs.org/build/three.min.js"></script>
 	<script src="http://threejs.org/examples/js/loaders/OBJLoader.js"></script>
@@ -21,11 +25,26 @@
 	<script src="http://threejs.org/examples/js/Detector.js"></script>
 	<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
 
-	<div id="guiContainer">
-		<div id="matricesContainer"></div>
-		<button id="rotBtn" class="button" onclick="setRotation(30, 30, 30, 'XYZ');">XYZ</button>
-		<button id="rotBtn" class="button" onclick="setRotation(30, 30, 30, 'YZX');">YZX</button>
-		<button id="rotBtn" class="button" onclick="setRotation(30, 30, 30, 'ZXY');">ZXY</button>
+	<div id="guiContainer" class="my_text">
+		<h2>Transformationssequenz</h2>
+		<p>Per Drag&amp;Drop kannst du die Reihenfolge der Rotationen ändern.</p>
+
+		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+			<div id="X" class="matrix" draggable="true" ondragstart="drag(event)">R<sub>x</sub>(10)</div>
+
+			<div id="m0" class="multsym">&nbsp &#10005 &nbsp</div>
+
+			<div id="Y" class="matrix" draggable="true"
+			ondragstart="drag(event)">R<sub>y</sub>(10)</div>
+
+			<div id="m1" class="multsym">&nbsp &#10005 &nbsp</div>
+
+			<div id="Z" class="matrix" draggable="true"
+			ondragstart="drag(event)">R<sub>z</sub>(10)</div>
+		</div>
+
+		<button id="rotBtn" class="button" onclick="rotate();">Transformation anwenden</button>
 	</div>
 	<div id="teapotContainer"></div>
 
@@ -33,6 +52,7 @@
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
 	</div>
 	<script type="text/javascript" src="transformation_manager.js"></script>
+	<script type="text/javascript" src="transformation_order_manager.js"></script>
 
 	<script type="text/javascript" src="model_renderer.js"></script>
 	<script type="text/javascript" src="main.js"></script>
