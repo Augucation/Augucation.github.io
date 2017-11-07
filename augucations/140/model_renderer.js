@@ -93,6 +93,7 @@ function render() {
 function setRotationDegree(x, y, z, order, animated = false) {
 
     v = {x: x, y: y, z: z};
+	// lower case because three.js coordinates are lower case
     var o = order.toLowerCase().reverse(); // from right to left!!!
     teapot.rotation.order = order;
     teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
@@ -108,6 +109,8 @@ function setRotationDegree(x, y, z, order, animated = false) {
 
             // iterate over all axes
             if (i < o.length){
+				// highlight current axis
+				angle_man.highLightAxis(o[i].toUpperCase());
                 // calculate direction
                 d = teapot.rotation[o[i]] < d2r(v[o[i]]) ? 1 : -1;
                 // while goal is not reached
@@ -122,6 +125,8 @@ function setRotationDegree(x, y, z, order, animated = false) {
                 }
             }
             else {
+				// stop highlighting and animation
+				angle_man.highLightAxis(false);
                 clearInterval(interval);
             }
         }
