@@ -99,14 +99,12 @@ function setRotationDegree(x, y, z, order, animated = false) {
 
     if(animated){
 
-        var interval = setInterval(update,1000/30);
-        var step = 0.05;
+        var interval = setInterval(update, 1000 / 300);
+        var step = 0.005;
         var range = 0.75;
 
         var i = 0;
         function update(){
-
-            //console.log(r2d(teapot.rotation.y));
 
             // iterate over all axes
             if (i < o.length){
@@ -132,7 +130,7 @@ function setRotationDegree(x, y, z, order, animated = false) {
         teapot.rotation.x = d2r(x);
         teapot.rotation.y = d2r(y);
         teapot.rotation.z = d2r(z);
-        render();
+				render();
     }
 }
 

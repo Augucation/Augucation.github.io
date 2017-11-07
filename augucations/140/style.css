@@ -1,18 +1,30 @@
 #guiContainer
 {
   border: 0px solid red;
-  width: 60vw;
+  width: calc(40vw + 20vh);
   height: 35vh;
   margin: auto;
   position: relative;
   text-align: center;
 }
 
-#rotBtn, #resetBtn
+#rotBtn0, #rotBtn1, #resetBtn
 {
   position: relative;
-  display: inherit;
   margin: 2% auto;
+  font-size: 2vh !important;
+}
+
+#resetBtn
+{
+  margin: auto;
+  position: relative;
+  display: inherit;
+}
+
+#rotBtn0, #rotBtn1
+{
+  display: inline-block;
 }
 
 #matricesContainer
@@ -33,7 +45,7 @@
 .multsym
 {
   font-size: 20px;
-  line-height: 60px;
+  line-height: 6vh;
   width: auto;
   height: auto;
   cursor: default;
@@ -43,7 +55,7 @@
 .matrix
 {
   border: 0px solid red;
-  font-size: 40px;
+  font-size: 4vh;
   width: auto;
   height: auto;
   cursor: pointer;
@@ -63,8 +75,7 @@
 #teapotContainer
 {
   border: 0px solid red;
-  width: 50vw;
-  height: 50vh;  
-  margin: auto;
-  
+  width: 30vw;
+  height: 30vh;  
+  margin: 2% auto;
 }
