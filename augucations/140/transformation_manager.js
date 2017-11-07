@@ -27,8 +27,8 @@ var transformation = function (rotations, order){
         this.order = order;
     }
 
-    this.rotate = function(){
-        setRotationDegree(this.rotations.X, this.rotations.Y, this.rotations.Z, this.order);
+    this.rotate = function(animated){
+        setRotationDegree(this.rotations.X, this.rotations.Y, this.rotations.Z, this.order, animated);
     }
 
     this.resetRotation = function(){
@@ -37,4 +37,4 @@ var transformation = function (rotations, order){
 }
 
 
-trans = new transformation({X: 180, Y: 180, Z: 180}, "XYZ");
+trans = new transformation({X: 0, Y: 0, Z: 0}, "XYZ");

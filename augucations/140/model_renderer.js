@@ -87,17 +87,59 @@ function animate() {
 }
 
 function render() {
-	//camera.position.x += ( mouseX - camera.position.x ) * .05;
-	//camera.position.y += ( - mouseY - camera.position.y ) * .05;
-	//camera.lookAt( scene.position );
 	renderer.render( scene, camera );
 }
 
-function setRotationDegree(x, y, z, order) {
-    teapot.rotation.order = order;
-    teapot.rotation.x = x * Math.PI / 180;
-    teapot.rotation.y = y * Math.PI / 180;
-    teapot.rotation.z = z * Math.PI / 180;
+function setRotationDegree(x, y, z, order, animated = false) {
 
-    render();
+    v = {x: x, y: y, z: z};
+    var o = order.toLowerCase();
+    teapot.rotation.order = order;
+    teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
+
+    if(animated){
+
+        var interval = setInterval(update,1000/30);
+        var step = 0.05;
+        var range = 0.75;
+
+        var i = 0;
+        function update(){
+
+            //console.log(r2d(teapot.rotation.y));
+
+            // iterate over all axes
+            if (i < o.length){
+                // calculate direction
+                d = teapot.rotation[o[i]] < d2r(v[o[i]]) ? 1 : -1;
+                // while goal is not reached
+                if (Math.abs(r2d(teapot.rotation[o[i]]) - (v[o[i]])) > range){
+                    // rotate by a step
+                    teapot.rotation[o[i]] += step * d;
+                    render();
+                }
+                // if goal is reached, go to the next axis
+                else {
+                    i++;
+                }
+            }
+            else {
+                clearInterval(interval);
+            }
+        }
+    }
+    else{
+        teapot.rotation.x = d2r(x);
+        teapot.rotation.y = d2r(y);
+        teapot.rotation.z = d2r(z);
+        render();
+    }
+}
+
+function d2r(d){
+    return d * Math.PI / 180;
+}
+
+function r2d(r){
+    return r * 180 / Math.PI;
 }

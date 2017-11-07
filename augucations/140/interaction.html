@@ -46,10 +46,11 @@
 		</div>
 
 		<div id="sliderContainer">
-			<input type=range id="angleSlider" min="0" max="360" value="180"/>
+			<input type=range id="angleSlider" min="0" max="360" value="0"/>
 		</div>
 
-		<button id="rotBtn" class="button" onclick="trans.rotate();">Transformation anwenden</button>
+		<button id="rotBtn0" class="button" onclick="trans.rotate(false);">Transformation anwenden</button>
+		<button id="rotBtn1" class="button" onclick="trans.rotate(true);">Transformation animieren</button>
 	</div>
 	<div id="teapotContainer"></div>
 
