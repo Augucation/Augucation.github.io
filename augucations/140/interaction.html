@@ -31,28 +31,35 @@
 
 		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-			<div id="X" class="matrix" draggable="true" ondragstart="drag(event)">R<sub>x</sub>(10)</div>
+			<div id="X" class="matrix" draggable="true" ondragstart="drag(event)">R<sub>x</sub>(180)</div>
 
 			<div id="m0" class="multsym">&nbsp &#10005 &nbsp</div>
 
 			<div id="Y" class="matrix" draggable="true"
-			ondragstart="drag(event)">R<sub>y</sub>(10)</div>
+			ondragstart="drag(event)">R<sub>y</sub>(180)</div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp</div>
 
 			<div id="Z" class="matrix" draggable="true"
-			ondragstart="drag(event)">R<sub>z</sub>(10)</div>
+			ondragstart="drag(event)">R<sub>z</sub>(180)</div>
 		</div>
 
-		<button id="rotBtn" class="button" onclick="rotate();">Transformation anwenden</button>
+		<div id="sliderContainer">
+			<input type=range id="angleSlider" min="0" max="360" value="180"/>
+		</div>
+
+		<button id="rotBtn" class="button" onclick="trans.rotate();">Transformation anwenden</button>
 	</div>
 	<div id="teapotContainer"></div>
+
+	<button id="resetBtn" class="button" onclick="trans.resetRotation();">Transformationen zurücksetzen</button>
 
 	<div>
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
 	</div>
 	<script type="text/javascript" src="transformation_manager.js"></script>
 	<script type="text/javascript" src="transformation_order_manager.js"></script>
+	<script type="text/javascript" src="transformation_angles_manager.js"></script>
 
 	<script type="text/javascript" src="model_renderer.js"></script>
 	<script type="text/javascript" src="main.js"></script>

@@ -8,7 +8,7 @@
   text-align: center;
 }
 
-#rotBtn
+#rotBtn, #resetBtn
 {
   position: relative;
   display: inherit;
@@ -48,6 +48,11 @@
   height: auto;
   cursor: pointer;
   float: left;
+}
+
+#angleSlider
+{
+  visibility: hidden;
 }
 
 #teapotContainer

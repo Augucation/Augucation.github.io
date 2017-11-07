@@ -15,12 +15,13 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
 
-    //document.getElementById("matricesContainer").appendChild(document.getElementById(data));
-
     positionElement(ev);
 }
 
 function positionElement(ev){
+
+    var order = trans.getOrder();
+
     var currId = ev.dataTransfer.getData("text");
     var old_idx = order.indexOf(currId);
     var new_idx = calculateIndex(ev);
@@ -28,7 +29,7 @@ function positionElement(ev){
     if (new_idx == old_idx)
         return;
 
-    updateOrder(old_idx, new_idx, currId);
+    order = updateOrder(old_idx, new_idx, currId);
 
     // fill with elements in the right order
     for (var i = 0; i < order.length; i++){
@@ -45,11 +46,18 @@ function positionElement(ev){
 }
 
 function updateOrder(oldIdx, newIdx, currentId){
+
+    var order = trans.getOrder();
+
     // remove the current id from the order
     order = order.removeAtIndex(oldIdx);
 
     // insert the current id into the order at the new index
     order = order.insert(newIdx, currentId);
+
+    trans.setOrder(order);
+
+    return trans.getOrder();
 }
 
 function calculateIndex(ev) {

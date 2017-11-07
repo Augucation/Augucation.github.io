@@ -50,7 +50,7 @@ function init() {
 			}
 		} );
 
-        object.scale.set(5, 5, 5);
+        object.scale.set(4, 4, 4);
 
         // store the object globally to modify it later
         teapot = object;
@@ -93,12 +93,11 @@ function render() {
 	renderer.render( scene, camera );
 }
 
-function setRotation(x, y, z, order) {
-
+function setRotationDegree(x, y, z, order) {
     teapot.rotation.order = order;
-    teapot.rotation.x = x;
-    teapot.rotation.y = y;
-    teapot.rotation.z = z;
+    teapot.rotation.x = x * Math.PI / 180;
+    teapot.rotation.y = y * Math.PI / 180;
+    teapot.rotation.z = z * Math.PI / 180;
 
     render();
 }
