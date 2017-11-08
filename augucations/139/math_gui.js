@@ -1,178 +1,34 @@
 var variablesContainer = document.getElementById("variablesContainer");
-var calculationContainer = document.getElementById("calculationContainer");
+var calculationText = document.getElementById("calculationText");
 var infoContainer = document.getElementById("infoContainer");
 
-var table_edges = document.getElementById("table_edges").getElementsByTagName("tbody")[0];
+var span_p = document.getElementById("var_span_p");
+var span_q = document.getElementById("var_span_q");
+var span_m = document.getElementById("var_span_m");
+var span_dx = document.getElementById("var_span_dx");
+var span_dy = document.getElementById("var_span_dy");
+var span_d = document.getElementById("var_span_d");
+var span_incrE = document.getElementById("var_span_incrE");
+var span_incrSE = document.getElementById("var_span_incrSE");
 
-var table_intersections = document.getElementById("table_intersections");
-var table_intersections_tr = table_intersections.getElementsByTagName("tr");
-var table_intersections_td = table_intersections.getElementsByTagName("td");
-
-var tables = [table_edges, table_intersections];
-
-var highlightColor = "#af2626";
-
-function addTableEdge(edge, idx = -1)
+function printVariables(p_val = null, q_val = null, m_val = null, dx_val = null, dy_val = null, d_val = null, incrE_val = null, incrSE_val = null)
 {
-    var tr = table_edges.insertRow(idx);
-
-    var td_min = tr.insertCell(0);
-    var td_max = tr.insertCell(1);
-    var td_m = tr.insertCell(2);
-
-    td_min.innerHTML = edge.min.name + "(" + Math.round(edge.min_x * 10) / 10 + "," + Math.round(edge.min_y * 10) / 10 + ")";
-    td_max.innerHTML = edge.max.name + "(" + Math.round(edge.max_x * 10) / 10 + "," + Math.round(edge.max_y * 10) / 10 + ")";
-    td_m.innerHTML = Math.round(edge.m * 10) / 10;
-}
-
-function fillTableAllEdges()
-{
-    clearTableEdges();
-
-    for (var i = 0; i < edges.length; i++)
-    {
-        addTableEdge(edges[i]);
-    }
-}
-
-function addTableIntersection(x, y)
-{
-    var td = table_intersections_td[y * 2 + 1];
-
-    // comma comma comma
-    if (td.innerHTML != "")
-        td.innerHTML += ", ";
-
-    td.innerHTML += x;
-}
-
-function fillTableAllIntersections(array)
-{
-    clearTableIntersections();
-    fillTableIntersectionLeftColumn();
-
-    for (var y = 0; y < array.length; y++)
-    {
-        for (var idx = 0; idx < array[y].length; idx++)
-        {
-            addTableIntersection(array[y][idx].x, y);
-        }
-    }
-}
-
-function fillTableIntersectionLeftColumn()
-{
-    var tds = table_intersections_td;
-
-    // iterate over every table cell td
-    for (var i = 0; i < tds.length; i++)
-    {
-        // skip every second cell (right column)
-        if (i % 2 == 1)
-            continue;
-
-        // insert index (/2, because every second one is skipped)
-        tds[i].innerHTML = i / 2;
-    }
-}
-
-function addTableIntersectionPair(pair)
-{
-    var td = table_intersections_td[pair.y * 2 + 1];
-
-    /*
-    */
-    // if td is not empty, add a comma span
-    if (td.getElementsByTagName("span").length > 0)
-    {
-        var commaspan = document.createElement("span");
-        commaspan.innerHTML = ", ";
-        td.appendChild(commaspan);
-    }
-
-    // create a span for every pair
-    var span = document.createElement("span");
-    span.innerHTML = pair.l + "-" + pair.r;
-    td.appendChild(span);
-}
-
-function fillTableIntersectionPairs(array)
-{
-    clearTableIntersections();
-    fillTableIntersectionLeftColumn();
-
-    for (var i = 0; i < array.length; i++)
-    {
-        addTableIntersectionPair(array[i]);
-    }
+    span_p.innerHTML = p_val == null ? "" : "p = (" + p_val.x + "," + p_val.y + ")";
+    span_q.innerHTML = q_val == null ? "" :  "q = (" + q_val.x + "," + q_val.y + ")";
+    span_m.innerHTML = m_val == null ? "" :  "m = " + Math.round(m_val * 100) / 100;
+    span_dx.innerHTML = dx_val == null ? "" :  "\u0394x = " + dx_val;
+    span_dy.innerHTML = dy_val == null ? "" :  "\u0394y = " + dy_val;
+    span_d.innerHTML = d_val == null ? "" :  "d = " + d_val;
+    span_incrE.innerHTML = incrE_val == null ? "" :  "incrE = " + incrE_val;
+    span_incrSE.innerHTML = incrSE_val == null ? "" :  "incrSE = " + incrSE_val;
 }
 
 function printCalculation(text)
 {
-    calculationContainer.innerHTML = text;
+    calculationText.innerHTML = text;
 }
 
 function printInfo(text)
 {
     infoContainer.innerHTML = text;
-}
-
-// colors all tds in a given row
-function highlightRowInTable(table_idx, row_idx)
-{
-    var t = tables[table_idx];
-    var tr = t.getElementsByTagName("tr")[row_idx + 1]; // ignore header row
-    var td = tr.getElementsByTagName("td");
-
-    for (var i = 0; i < td.length; i++)
-        td[i].className = "td_highlighted";
-}
-
-// unhighlights every row in a table
-function removeTableHightlight(table_idx)
-{
-    var t = tables[table_idx];
-    var td = t.getElementsByTagName("td");
-
-    for (var i = 0; i < td.length; i++)
-    {
-        td[i].className = "";
-    }
-}
-
-// removes every row except for the header row
-function clearTableEdges()
-{
-    var t = table_edges
-    var tr_l = t.getElementsByTagName("tr").length;
-
-    for (var i = tr_l - 1; i > 0; i--) // ignore header row
-    {
-        t.deleteRow(i);
-    }
-}
-
-function clearTableIntersections(clearBothColumns = false)
-{
-    if (clearBothColumns)
-        $("#table_intersections tr").find("td:eq(0)").empty();
-
-    $("#table_intersections tr").find("td:eq(1)").empty();
-}
-
-function highlightIntersectionpair(pair)
-{
-    // get the td according to the pair's y
-    var td = table_intersections_td[pair.y * 2 + 1];
-
-    // get the span according to the pair's idx
-    var pair_span = td.getElementsByTagName("span")[pair.idx * 2]; // * 2 because every second span is a comma span
-
-    pair_span.className = "td_highlighted";
-}
-
-function updateTables()
-{
-    fillTableAllEdges();
-    fillTableIntersectionPairs(pairs);
 }

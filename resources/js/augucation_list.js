@@ -4,7 +4,8 @@ var topics =
     "Audio",
     "Bilder",
     "Video",
-    "Internet"
+    "Internet",
+    "3D-Vektorgrafiken"
 ];
 
 var augucations =
@@ -66,6 +67,11 @@ var augucations =
     	["XML", 0],
     	["CSS", 0],
     	["HTML und JS", 0],
+    ],
+
+    // topic 6: 3D-Vektorgrafiken
+    [
+        ["Transformationskomposition", 0],
     ],
 ];
 

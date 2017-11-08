@@ -1,286 +1,147 @@
 var step = 0;
 
-var fsteps;     // scanline algorithm pair filling steps
-var esteps = 10;    // explanation steps before the scanline pair filling steps
+var bsteps;         // bresenham's iteration steps
+var esteps = 4;     // explanation steps before the actual bresenham' iteration steps
 var tsteps;         // total calculation and explanation steps
-
-// monospace snippets
-var monoS = "<span style = \"font-family :monospace\">";
-var monoE = "</span>";
-var mono_x = "<span style=\"font-family: monospace\">x</span>";
-var mono_y = "<span style=\"font-family: monospace\">y</span>";
 
 function algoStep()
 {
     updateStepGUI();
-    removeEdgeHighlight();
-    removeTableHightlight(0);
-    removeTableHightlight(1);
-    clearTableEdges();
-    clearTableIntersections(true);
-
-    updating = false;
-
-    // prohibit too small polygons
-    if (findScanlineYRange().max - findScanlineYRange().min < 1)
-    {
-        tsteps = 1;
-        stepSlider.max = 1;
-
-        printCalculation("");
-
-        printInfo("Dein Polygon ist leider zu klein.");
-
-        return;
-    }
-
-    updateStepGUI(pairs.length);
 
     if (step > 0)
         canvas.removeEventListener("mousemove", movePoint, false);
 
-    // find longest edge with a finite slope
-    var le = sortEdgesByLength(false)[0];
-    for (var i = 0; i < sortEdgesByLength().length; i++)
-    {
-        if (isFinite(le.m))
-            break;
+    if (step != 1)
+        removeDeltas();
 
-        le = sortEdgesByLength(false)[i];
-    }
+    var last_d = lined[step - 5];
+    var curr_d = lined[step - 4];
 
-    var y_min = findScanlineYRange().min;
+    var last_p = line[step - 5];
+    var curr_p = line[step - 4];
 
-    // get the first and second intersections' edges
-    var first_edge = intersections[y_min][0].edge;
-    var second_edge = intersections[y_min][1].edge;
+    labelVertices();
 
-    switch (step)
+    var monoS = "<span style = \"font-family :monospace\">";
+    var monoE = "</span>";
+    var mono_p = "<span style=\"font-family: monospace\">p</span>";
+    var mono_q = "<span style=\"font-family: monospace\">q</span>";
+    var mono_x = "<span style=\"font-family: monospace\">x</span>";
+    var mono_y = "<span style=\"font-family: monospace\">y</span>";
+    var mono_d = "<span style=\"font-family: monospace\">d</span>";
+    var mono_dx = "<span style=\"font-family: monospace\">\u0394x</span>";
+    var mono_dy = "<span style=\"font-family: monospace\">\u0394y</span>";
+    var mono_incrE = "<span style=\"font-family: monospace\">incrE</span>";
+    var mono_incrSE = "<span style=\"font-family: monospace\">incrSE</span>";
+
+    switch(step)
     {
 
         case 0:
+            printVariables(p, q, m);
 
             printCalculation("");
 
-            printInfo("Im Folgenden wird der Scanline-Algorithmus zur Füllung eines Polygons veranschaulicht."
-            + "<br/>Du kannst die Eckpunkte des Polygons per Drag & Drop verschieben.");
+            printInfo("Im Folgenden wird der Bresenham-Algorithmus zur Rasterisierung einer Linie zwischen den Punkten " + mono_p + " und " + mono_q + " vorgestellt.<br/>Du kannst den Punkt " + mono_q + " per Drag & Drop verschieben.<br/>Für eine einfachere Veranschaulichung werden nur Linien mit einer Steigung von<br/>" + monoS + "0 <= m <= 1" + monoE + " betrachtet.");
 
             canvas.addEventListener("mousemove", movePoint, false);
-
-            scanline();
 
             break;
 
         case 1:
+            printVariables(p, q, m, dx, dy);
+            printCalculation("\u0394x = q.x - p.x<br/>\u00A0\u00A0   = " + q.x + " - " + p.x + "<br/>\u00A0\u00A0   = " + dx +"<br/><br/>\u0394y = q.y - p.y<br/>\u00A0\u00A0   = " + q.y + " - " + p.y + "<br/>\u00A0\u00A0   = " + dy);
+            printInfo("Zunächst werden die Differenzen" + mono_dx + " und " + mono_dy + " der Punkte " + mono_p + " und " + mono_q + " berechnet.");
 
-            printCalculation("");
-
-            printInfo("Ziel des Algorithmus ist es, zu ermitteln welche Pixel Teil des gegebenen Polygons sind und somit eingefärbt werden müssen um das Polygon darzustellen."
-            + "<br/>Um dies zu erreichen, werden zunächst anhand der Eckpunkte alle Kanten des Polygons berechnet und in einer Liste gespeichert.");
+            visualizeDeltas();
 
             break;
 
         case 2:
+            printVariables(p, q, m, dx, dy, d);
 
-            var minx = Math.round(le.min.x * 10) / 10;
-            var miny = Math.round(le.min.y * 10) / 10;
-            var maxx = Math.round(le.max.x * 10) / 10;
-            var maxy = Math.round(le.max.y * 10) / 10;
+            printCalculation("d = 2 * \u0394y - \u0394x <br/>\u00A0 = 2 * " + dy + " - " + dx + "<br/>\u00A0 = " + lined[0]);
 
-            printCalculation(le.min.name + ": (" + minx + "," + miny + ")"
-            + "<br/>" + le.max.name + ": (" + maxx + "," + maxy + ")"
-            + "<br/><br/>" + le.min.name + ".y <= " + le.max.name + ".y"
-            + "<br/>\u00A0\u00A0\u00A0" + miny + " <= " + maxy
-            + "<br/>\u00A0\u00A0Startpunkt: " + le.min.name + "(" + minx + "," + miny + ")"
-            + "<br/><br/>m = \u0394y / \u0394x"
-            + "<br/>m = (" + le.max.name + ".y  - " + le.min.name + ".y) / (" + le.max.name + ".x - " + le.min.name + ".x)"
-            + "<br/>m = (" + maxy + " - " + miny + ") / (" + maxx + " - " + minx + ")"
-            + "<br/>m \u2248 " + Math.round(le.m * 10) / 10);
-
-
-            printInfo("Eine Kante besteht aus einem Startpunkt, einem Endpunkt und einer Steigung. Dabei ist der Startpunkt derjenige der beiden Eckpunkte der Kante mit dem geringeren " + mono_y + "-Wert, in dieser Darstellung also der höhere."
-            + "<br/>Die Steigung der Kante wird anhand der Differenz ihrer beiden Eckpunkte berechnet.");
-
-            highlightEdge(le);
-            addTableEdge(le);
-            highlightRowInTable(0, 0); // until now its the only edge -> [0]
+            printInfo("Der Algorithmus funktioniert so, dass in jedem Schritt der Punkt " + mono_p + " einen Schritt in " + mono_x + "-Richtung zum Punkt " + mono_q + " hin versetzt wird. Zusätzlich dazu wird " + mono_p + " hin und wieder um einen Pixel nach unten verschoben. Dabei wird jeder Pixel, den " + mono_p + " besucht, eingefärbt."
+            + "<br/>Ob Punkt " + mono_p + " nur nach rechts (östlich) oder nach rechts unten (südöstlich) verschoben wird, ist abhängig vom Vorzeichen der Entscheidungsvariable " + mono_d + ".<br/>Diese wird zu Beginn auf " + monoS + " d = 2 * \u0394y - \u0394x" + monoE + " gesetzt.");
 
             break;
 
         case 3:
+            printVariables(p, q, m, dx, dy, d, incrE, incrSE);
 
-            printCalculation("");
+            printCalculation("incrE = 2 * \u0394y<br/>\u00A0\u00A0\u00A0 \u00A0     = 2 * " + dy + "<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= " + incrE + "<br/><br/>incrSE = 2 * (\u0394y - \u0394x)<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= 2 * (" + dy + " - " + dx + ")<br/>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0= " + incrSE);
 
-            printInfo("Nach diesem Schema werden alle weiteren Kanten berechnet und der Liste hinzugefügt.");
-
-            fillTableAllEdges();
+            printInfo("In jedem Schritt wird die Entscheidungsvariable " + mono_d + " inkrementiert. Wird Punkt " + mono_p + " östlich verschoben, wird " + mono_d + " um " + monoS + "incrE = 2 * \u0394y" + monoE + " inkrementiert bzw. um " + monoS + "incrSE = 2 * (\u0394y - \u0394x)" + monoE + ", falls " + mono_p + " zusätzlich einen Pixel nach unten wandert.");
 
             break;
 
         case 4:
-
-            var r = findScanlineYRange();
+            printVariables(p, q, m, dx, dy, d, incrE, incrSE);
 
             printCalculation("");
 
-            printInfo("Das nächste Zwischenziel besteht darin, alle Schnittpunkte der Polygonkanten mit den horizontalen Pixelreihen des Rasters zu ermitteln. Dafür wird von oben nach unten über alle Pixelreihen, die das Polygon schneiden, iteriert.")
+            printInfo("Zu Beginn wird der Pixel an Punkt " + monoS + "p = (0,0)" + monoE + " eingefärbt. Dies ist der erste Pixel der Linie.");
 
-            fillTableAllEdges();
+            drawPixel(line[0]);
+            drawPoint(line[0]);
 
-            for (var y = r.min; y <= r.max; y++)
+            break;
+        }
+
+        if (4 < step && step < tsteps)
+        {
+            printVariables(curr_p, q, m, dx, dy, curr_d, incrE, incrSE);
+
+            if (last_d <= 0)
             {
-                drawScanline(y);
+                printCalculation(
+                    "d = " + last_d
+                    + "<br/>d <= 0<br/>\u00A0\u00A0d = d +  incrE<br/>\u00A0\u00A0" + "\u00A0\u00A0= " + last_d + " + " + incrE
+                    + "<br/>\u00A0\u00A0\u00A0\u00A0= "+ curr_d
+
+                    + "<br/><br/>\u00A0\u00A0p = (" + last_p.x + "," + last_p.y + ")"
+                    + "<br/>\u00A0\u00A0p.x++"
+                    + "<br/>\u00A0\u00A0p = (" + curr_p.x + "," + curr_p.y + ")"
+                );
+
+                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein negatives Vorzeichen. Somit wird der Punkt " + mono_p + " östlich verschoben und " + mono_d + " um " + mono_incrE + " inkrementiert.");
+            }
+            else {
+                printCalculation(
+                    "d = " + last_d
+                    + "<br/>d > 0<br/>\u00A0\u00A0d = d +  incrSE<br/>\u00A0\u00A0" + "\u00A0\u00A0= " + last_d + " + " + incrSE
+                    + "<br/>\u00A0\u00A0\u00A0\u00A0= "+ curr_d
+
+                    + "<br/><br/>\u00A0\u00A0p = (" + last_p.x + "," + last_p.y + ")"
+                    + "<br/>\u00A0\u00A0p.x++, p.y++"
+                    + "<br/>\u00A0\u00A0p = (" + curr_p.x + "," + curr_p.y + ")"
+                );
+
+                printInfo("Die Entscheidungsvariable " + mono_d + " hat ein positives Vorzeichen. Somit wird der Punkt " + mono_p + " südöstlich verschoben und " + mono_d + " um " + mono_incrSE + " inkrementiert.");
             }
 
-            break;
+            drawLineUntilPixel(step - 4);
+        }
 
-        case 5:
+        if (step == tsteps)
+        {
+            printVariables(q, q, m, dx, dy, lined[lined.length - 1], incrE, incrSE);
 
-            printCalculation("y = " + y_min
-            + "<br/><br/>" + first_edge.min.name + ".y <= y && y <= " + first_edge.max.name + ".y"
-            + "<br/>\u00A0\u00A0\u00A0" + Math.round(first_edge.min_y * 10) / 10 + " <= " + y_min + " && " + y_min + " <= " + Math.round(first_edge.max_y * 10) / 10
-            + "<br/><br/>Es existiert ein Schnittpunkt der momentanen Kante mit der momentanen Pixelreihe.");
+            var space = "\u00A0\u00A0\u00A0\u00A0";
+            if (q.x > 9) space += "\u00A0";
+            if (q.y > 9) space += "\u00A0";
 
-            printInfo("Für jede Pixelreihe wird nun über jede Kante des Polygons iteriert um alle Schnittpunkte der Kanten mit der Pixelreihe zu ermitteln."
-            + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt überhalb oder auf und ihr Endpunkt unterhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
+            printCalculation(
+                "(" + q.x + "," + q.y + ") == (" + q.x + "," + q.y + ")"
+                +"<br/>" + space + "p == q"
+            );
 
-            drawScanline(y_min);
-            highlightEdge(first_edge);
-            fillTableAllEdges();
-            highlightRowInTable(0, first_edge.idx);
+            printInfo("Punkt " + mono_p + " hat Punkt " + mono_q + " erreicht, damit terminiert der Algorithmus.");
 
-            break;
+            drawLineUntilPixel(bsteps - 1);
 
-        case 6:
-
-            printCalculation("y = " + y_min
-            + "<br/><br/>Schnittpunkt: q(x," + y_min + ")"
-            + "<br/><br/>q.x = " + first_edge.min.name + ".x + 1 / m * (y - " + first_edge.min.name + ".y)"
-            + "<br/>q.x = " + Math.round(first_edge.min_x * 10) / 10 + " + 1 / " + Math.round(first_edge.m * 10) / 10 + " * (" + y_min + " - " + Math.round(first_edge.min_y * 10) / 10 + ")"
-            + "<br/>q.x = " + intersections[y_min][0].x
-            //+ "<br/>q.x \u2248 " + Math.round(intersections[y_min][1] * 10) / 10
-            + "<br/><br/>q(" + intersections[y_min][0].x + "," + y_min + ")");
-
-            printInfo("Der " + mono_y  + "-Wert des Schnittpunkts ist durch die momentane Pixelreihe definiert."
-            + "<br/>Der " + mono_x + "-Wert wird durch eine lineare Interpolation berechnet."
-             +"<br/><br/>Der erechnete Schnittpunk wird in einer Liste gespeichert.");
-
-            drawScanline(y_min);
-            highlightEdge(first_edge);
-            fillTableAllEdges();
-            highlightRowInTable(0, first_edge.idx);
-            highlightRowInTable(1, y_min);
-            drawIntersection(intersections[y_min][0].x, y_min, 10);
-
-            fillTableIntersectionLeftColumn();
-            addTableIntersection(intersections[y_min][0].x, y_min);
-
-            break;
-
-        case 7:
-
-            printCalculation("y = " + y_min
-            + "<br/><br/>Schnittpunkt: q(x," + y_min + ")"
-            + "<br/><br/>q.x = " + second_edge.min.name + ".x + m * (y - " + second_edge.min.name + ".y)"
-            + "<br/>q.x = " + Math.round(second_edge.min_x * 10) / 10 + " + " + Math.round(second_edge.m * 10) / 10 + " * (" + y_min + " - " + Math.round(second_edge.min_y * 10) / 10 + ")"
-            + "<br/>q.x = " + Math.round(intersections[y_min][1].x * 10) / 10
-            //+ "<br/>q.x \u2248 " + Math.round(x)
-            + "<br/><br/>q(" + Math.round(intersections[y_min][1].x * 10) / 10 + "," + y_min + ")");
-
-            printInfo("Nach diesen Prinzip werden alle Schnittpunkte der Polygonkanten mit der momentanen Pixelreihe ermittelt und der Liste hinzugefügt.");
-
-            drawScanline(y_min);
-            highlightEdge(second_edge);
-            fillTableAllEdges();
-            highlightRowInTable(0, second_edge.idx);
-            highlightRowInTable(1, y_min);
-            fillTableIntersectionLeftColumn();
-            addTableIntersection(intersections[y_min][0].x, y_min);
-            addTableIntersection(intersections[y_min][1].x, y_min);
-
-            drawIntersection(intersections[y_min][0].x, y_min, 5);
-            drawIntersection(intersections[y_min][1].x, y_min, 10);
-
-            break;
-
-        case 8:
-
-            printCalculation("");
-
-            printInfo("Dies geschieht für alle Pixelreihen, die das Polygon schneiden.");
-
-            drawAllIntersections(allIntersectionsUnsorted);
-            fillTableAllIntersections(allIntersectionsUnsorted);
-            fillTableAllEdges();
-
-            break;
-
-        case 9:
-
-            printCalculation("");
-
-            printInfo("In der Liste aller Schnittpunkte werden nun für jeden " + mono_y + "-Wert alle " + mono_x + "-Werte aufsteigend sortiert.");
-
-            drawAllIntersections(intersections);
-            fillTableAllIntersections(intersections);
-            fillTableAllEdges();
-
-            break;
-
-        case 10:
-
-            printCalculation("");
-
-            printInfo("Um das Polygon letztendlich einzufärben, werden die Schnittpunkte paarweise betrachtet."
-            + "<br/>Nun wird wieder über alle relevanten horizontalen Pixelreihen iteriert. Dabei werden alle Pixel, die innerhalb eines Schnittpunktpaares liegen, eingefärbt.");
-
-            drawAllIntersections(intersections);
-            fillTableIntersectionPairs(pairs);
-            fillTableAllEdges();
-
-            break;
-    }
-
-    if (step > esteps && step < tsteps)
-    {
-        var p = pairs[step - esteps - 1];
-
-        printCalculation("y: " + p.y
-        + "<br/>Schnittpunktpaar: " + p.l + " - " + p.r);
-
-        if (Math.round(p.r) - Math.round(p.l) > 0)
-            printInfo("Alle Pixel, die innerhalb des Schnittpunktpaares liegen, werden eingefärbt.");
-        else
-            printInfo("Dieses Schnittpunktpaar umschließt keine Pixel.");
-
-        clear();
-        fillPolygonUntilPair(p);
-        draw();
-        drawScanline(p.y);
-        drawIntersectionPair(p);
-
-        fillTableIntersectionPairs(pairs);
-        highlightIntersectionpair(p);
-        fillTableAllEdges();
-    }
-
-    if (step == tsteps)
-    {
-        printCalculation("");
-
-        printInfo("Es wurden alle Schnittpunktpaare durchlaufen, damit terminiert der Algorithmus. Das Polygon ist nun vollständig eingefärbt.");
-
-        clear();
-        fillPolygon();
-        draw();
-
-        fillTableIntersectionPairs(pairs);
-        fillTableAllEdges();
-
-        addEventListenerToCanvas();
-        updating = true;
-    }
-
+        }
 }
 
 function nextStep()
@@ -308,11 +169,4 @@ function setStep(n)
 
     step = n;
     algoStep();
-}
-
-function calcStepNumbers(scanlineSteps)
-{
-    fsteps = scanlineSteps;
-    tsteps = fsteps + esteps + 1;
-    stepSlider.max = tsteps;
 }

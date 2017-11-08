@@ -1,81 +1,216 @@
-#guiContainer
+:root
 {
-  border: 0px solid red;
-  width: calc(40vw + 20vh);
-  height: 35vh;
-  margin: auto;
-  position: relative;
-  text-align: center;
+  --light_gray: #58616b;
+  --middle_gray: #444b51;
+  --dark_gray: #35373d;
+  --border_radius: 5px;
 }
 
-#rotBtn0, #rotBtn1, #resetBtn
+*
 {
-  position: relative;
-  margin: 2% auto;
-  font-size: 2vh !important;
+  box-sizing: border-box;
 }
 
-#resetBtn
+body
 {
-  margin: auto;
-  position: relative;
-  display: inherit;
+  /*margin: 0% calc(10vh + 2vw);*/
 }
 
-#rotBtn0, #rotBtn1
+#container
 {
-  display: inline-block;
-}
-
-#matricesContainer
-{
-  border: 0px solid blue;
   width: auto;
   height: auto;
-  margin: auto;
-  position: relative;
+  border: 0px solid green;
+  margin-top: 3%;
+}
+
+#canvyContainer, #mathContainer
+{
   display: inline-block;
+}
+
+#canvyContainer
+{
+  border: 0px solid black;
+  /*width: 50%;*/
+  /*float: left;*/
+  height: calc(15vh + 30vw);
+  width:  calc(15vh + 30vw);
+  /*display: block;*/
+}
+
+#mathContainer
+{
+  border: 0px solid red;
+  /*display: block;*/
+  /*width: 50%;*/
+  width: calc(20vh + 40vw);
+  height: calc(15vh + 30vw);
+  margin-left: 2%;
+}
+
+#innerMathContainer
+{
+  border: 0px solid orange;
+  width: 100%;
+  height: 90%;
+  padding-bottom: 5%;
+}
+
+#canvy
+{ 
+    /*
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit (non standard naming)
+    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+    image-rendering: crisp-edges;               // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;   // IE (non standard naming)
+    */
   
-  -webkit-user-select: none; /* Safari */        
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  --size: 75vh;
+  border: 0px solid red;
+  width: 100% !important;
+  height: 100%;
 }
-
-.multsym
+  
+.pointy
 {
-  font-size: 20px;
-  line-height: 6vh;
-  width: auto;
-  height: auto;
-  cursor: default;
-  float: left;
+  cursor: pointer;
+  border: 1px solid red;
 }
 
-.matrix
+#btnContainer
 {
   border: 0px solid red;
-  font-size: 4vh;
-  width: auto;
-  height: auto;
-  cursor: pointer;
+  height: 10%;
+  width: 100%;
+}
+
+#prevStepBtn, #nextStepBtn
+{
+  background-color: var(--light_gray);
+  width: 9%;
+  height: 50%;
+  font-size: calc(0.2vh + 1vw) !important;
+  margin: 0 6%;
+  display: inline-block;
+}
+
+#prevStepBtn
+{
   float: left;
-}
-
-.highlighted
-{
-  color: var(--dark_red);
-}
-
-#angleSlider
-{
   visibility: hidden;
 }
 
-#teapotContainer
+#nextStepBtn
+{
+  float: right;
+}
+
+#stepSliderContainer
+{
+  border: 0px solid yellow;
+  width: 50%;
+  margin: 0 4%;
+  display: inline-block;
+}
+
+#stepSlider
+{
+  width: 100%;
+}
+
+hr
+{
+  background: #dee0ed;
+  border: none;
+  height: 1px;
+}
+
+th
+{
+  font-style: normal;
+  width: 40em;
+  height: 10px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+td
+{
+  font-family: monospace;
+  font-size: 1em;
+  font-size: calc(0.2vh + 0.85vw);
+  color: var(--hci_gray);
+  width: 40em;
+}
+
+.td_highlighted
+{
+  color: #cc2424;
+}
+
+#tableContainer
+{
+  border: 0px solid green;
+  height: 100%;
+  width: 45%;
+  float: left;
+  padding-right: 2%;
+}
+
+#calcInfoContainer
+{
+  border-left: 1px solid #dee0ed;
+  width: 50%;
+  height: 100%;
+  float: left;
+  padding-left: 2%;
+}
+
+#calculationContainer
+{
+  border: 0px solid green;
+  font-size: calc(0.2vh + 1vw);  
+  font-family: monospace;
+  width: 100%;
+  height: 50%;
+}
+
+#infoContainer
 {
   border: 0px solid red;
-  width: 30vw;
-  height: 30vh;  
-  margin: 2% auto;
+  font-size: calc(0.2vh + 1vw);
+  width: 100%;
+  height: 50%;
+}
+
+#table_intersections
+{
+  border: 0px solid pink;
+  display: inline-block;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+#table_intersections th:nth-child(1), #table_intersections td:nth-child(odd)
+  {
+    text-align: right;
+    padding-right: 10%;
+  }
+
+#table_edges_div
+{
+  height: 30%;
+}
+
+#table_edges
+{
+  border: 0px solid green;
+}
+
+#table_edges tr td:nth-child(-n+2)
+{
+  width: 40% !important;
 }

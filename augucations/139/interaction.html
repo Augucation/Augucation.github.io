@@ -1,7 +1,7 @@
 <head>
 
 	<meta charset="UTF-8"/>
-	<title>Scanline-Algorithmus</title>
+	<title>Bresenham-Algorithmus</title>
 	<link rel="icon" href="../../resources/img/Icon.png">
 
 	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
@@ -13,107 +13,45 @@
 
 	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
-	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
 
 	<div id="container" class="my_text">
 
 		<div id="canvyContainer">
-			<canvas id="canvy" width="650" height="650"></canvas>
+			<canvas id="canvy" width="570" height="570"></canvas>
 		</div>
 
 		<div id="mathContainer">
 
-			<div id="innerMathContainer">
+			<div id="variablesContainer">
 
-				<div id="tableContainer">
-
-					<div id="table_edges_div">
-						<table id="table_edges">
-							<tr>
-								<th>Startpunkt</th>
-								<th>Endpunkt</th>
-								<th>Steigung</th>
-							</tr>
-						</table>
-					</div>
-
-					<hr />
-
-					<div id="table_intersections_div">
-						<table id="table_intersections">
-							<tr>
-								<th>Pixelreihe y</th>
-								<th>Schnittpunkte x</br></th>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</div>
-
+				<div id="varrow0">
+					<div id="var_span_p" class="var_div-3"></div>
+					<div id="var_span_q" class="var_div-3"></div>
+					<div id="var_span_m" class="var_div-3"></div>
 				</div>
 
-				<div id="calcInfoContainer">
-
-					<div id="calculationContainer"></div>
-					<hr>
-					<div id="infoContainer"></div>
-
+				<div id="varrow1">
+					<div id="var_span_dx" class="var_div-2"></div>
+					<div id="var_span_dy" class="var_div-2"></div>
 				</div>
+
+				<div id="varrow2">
+					<div id="var_span_d" class="var_div-3"></div>
+					<div id="var_span_incrE" class="var_div-3"></div>
+					<div id="var_span_incrSE" class="var_div-3"></div>
+				</div>
+
 			</div>
+
+			<hr>
+
+			<div id="calculationContainer">
+				<div id="calculationText"></div>
+			</div>
+
+			<hr>
+
+			<div id="infoContainer"></div>
 
 			<div id="btnContainer">
 				<button id="prevStepBtn" class="button" onclick="prevStep();">Zurück</button>
@@ -138,8 +76,8 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
 	<script type="text/javascript" src="step_gui_manager.js"></script>
-	<script type="text/javascript" src="scanline.js"></script>
-	<script type="text/javascript" src="scanline_visualization.js"></script>
+	<script type="text/javascript" src="bresenham.js"></script>
+	<script type="text/javascript" src="bresenham_visualization.js"></script>
 	<script type="text/javascript" src="algorithm_steps.js"></script>
 	<script type="text/javascript" src="math_gui.js"></script>
 	<script type="text/javascript" src="coordinate_system.js"></script>

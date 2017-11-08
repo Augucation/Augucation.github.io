@@ -1,15 +1,11 @@
 <head>
 
 	<meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Transformationkomposition</title>
+	<title>Scanline-Algorithmus</title>
 	<link rel="icon" href="../../resources/img/Icon.png">
 
 	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
 	<link rel="stylesheet" href="style.css">
-
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-
 
 </head>
 
@@ -19,52 +15,135 @@
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
 	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
 
-	<script src="https://threejs.org/build/three.min.js"></script>
-	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+	<div id="container" class="my_text">
 
-	<script src="https://threejs.org/examples/js/Detector.js"></script>
-	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
-
-	<div id="guiContainer" class="my_text">
-		<h2>Transformationssequenz</h2>
-		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
-		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
-
-		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-			<div id="X" class="matrix" draggable="true" ondragstart="drag(event)">R<sub>x</sub>(180)</div>
-
-			<div id="m0" class="multsym">&nbsp &#10005 &nbsp</div>
-
-			<div id="Y" class="matrix" draggable="true"
-			ondragstart="drag(event)">R<sub>y</sub>(180)</div>
-
-			<div id="m1" class="multsym">&nbsp &#10005 &nbsp</div>
-
-			<div id="Z" class="matrix" draggable="true"
-			ondragstart="drag(event)">R<sub>z</sub>(180)</div>
+		<div id="canvyContainer">
+			<canvas id="canvy" width="650" height="650"></canvas>
 		</div>
 
-		<div id="sliderContainer">
-			<input type=range id="angleSlider" min="0" max="360" value="0"/>
+		<div id="mathContainer">
+
+			<div id="innerMathContainer">
+
+				<div id="tableContainer">
+
+					<div id="table_edges_div">
+						<table id="table_edges">
+							<tr>
+								<th>Startpunkt</th>
+								<th>Endpunkt</th>
+								<th>Steigung</th>
+							</tr>
+						</table>
+					</div>
+
+					<hr />
+
+					<div id="table_intersections_div">
+						<table id="table_intersections">
+							<tr>
+								<th>Pixelreihe y</th>
+								<th>Schnittpunkte x</br></th>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+
+				</div>
+
+				<div id="calcInfoContainer">
+
+					<div id="calculationContainer"></div>
+					<hr>
+					<div id="infoContainer"></div>
+
+				</div>
+			</div>
+
+			<div id="btnContainer">
+				<button id="prevStepBtn" class="button" onclick="prevStep();">Zurück</button>
+
+				<div id="stepSliderContainer">
+
+					<input id="stepSlider" type="range" value="0" min="0" max="10" oninput="setStep(parseInt(value));"/>
+
+				</div>
+
+				<button id="nextStepBtn" class="button" onclick="nextStep();">Start</button>
+			</div>
+
 		</div>
 
-		<button id="rotBtn0" class="button" onclick="trans.rotate(false);">Transformation anwenden</button>
-		<button id="rotBtn1" class="button" onclick="trans.rotate(true);">Transformation animieren</button>
 	</div>
-	<div id="teapotContainer"></div>
-
-	<button id="resetBtn" class="button" onclick="trans.resetRotation();">Transformation zurücksetzen</button>
 
 	<div>
-		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(10, 30);" name="back" value="<<"/>
 	</div>
-	<script type="text/javascript" src="transformation_manager.js"></script>
-	<script type="text/javascript" src="transformation_order_manager.js"></script>
-	<script type="text/javascript" src="transformation_angles_manager.js"></script>
-	<script type="text/javascript" src="coordinate_system.js"></script>
 
-	<script type="text/javascript" src="model_renderer.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/textTab.js"></script>
+	<script type="text/javascript" src="step_gui_manager.js"></script>
+	<script type="text/javascript" src="scanline.js"></script>
+	<script type="text/javascript" src="scanline_visualization.js"></script>
+	<script type="text/javascript" src="algorithm_steps.js"></script>
+	<script type="text/javascript" src="math_gui.js"></script>
+	<script type="text/javascript" src="coordinate_system.js"></script>
+	<script type="text/javascript" src="canvas.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 
 </body>

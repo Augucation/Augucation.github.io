@@ -51,26 +51,18 @@ function drawCoordinateSystem()
     ctx.strokeStyle = axisColor;
 
     //x
-    moveToPixel(pixelNum + 0.7, -0.3);
+    moveToPixel(pixelNum + 0.5, -0.5);
     lineToPixel(pixelNum + 1, 0);
-    lineToPixel(pixelNum + 0.7, 0.3);
+    lineToPixel(pixelNum + 0.5, 0.5);
 
     //y
-    moveToPixel(-0.3, pixelNum + 0.7);
+    moveToPixel(-0.5, pixelNum + 0.5);
     lineToPixel(0, pixelNum + 1);
-    lineToPixel(0.3, pixelNum + 0.7);
+    lineToPixel(0.5, pixelNum + 0.5);
 
     ctx.stroke();
 
     // arrow labels
-    printOnCanvas("x", pixelNum + 0.2, -0.2, 18, axisColor);
-    printOnCanvas("y", -0.3, pixelNum + 0.5, 20, axisColor);
-}
-
-function printOnCanvas(text, x, y, size = 20, color = "#000000")
-{
-    ctx.fillStyle = color;
-    //ctx.font = size + "px lighter";
-    ctx.font = "normal normal lighter " + size + "px arial";
-    ctx.fillText(text, x * pixelSize, y * pixelSize);
+    printOnCanvas("x", pixelNum - 0.2, -0.2, 20, axisColor);
+    printOnCanvas("y", -1, pixelNum + 0.2, 20, axisColor);
 }

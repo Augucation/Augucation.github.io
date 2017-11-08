@@ -1,188 +1,81 @@
-:root
+#guiContainer
 {
-  --light_gray: #58616b;
-  --middle_gray: #444b51;
-  --dark_gray: #35373d;
-  --border_radius: 5px;
+  border: 0px solid red;
+  width: calc(40vw + 20vh);
+  height: 35vh;
+  margin: auto;
+  position: relative;
+  text-align: center;
 }
 
-*
+#rotBtn0, #rotBtn1, #resetBtn
 {
-  box-sizing: border-box;
+  position: relative;
+  margin: 2% auto;
+  font-size: 2vh !important;
 }
 
-body
+#resetBtn
 {
-  /*margin: 0% calc(10vh + 2vw);*/
+  margin: auto;
+  position: relative;
+  display: inherit;
 }
 
-#container
+#rotBtn0, #rotBtn1
 {
+  display: inline-block;
+}
+
+#matricesContainer
+{
+  border: 0px solid blue;
   width: auto;
   height: auto;
-  border: 0px solid green;
-}
-
-#canvyContainer, #mathContainer
-{
+  margin: auto;
+  position: relative;
   display: inline-block;
+  
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
-#canvyContainer
+.multsym
 {
-  border: 0px solid black;
-  /*width: 50%;*/
-  /*float: left;*/
-  height: calc(15vh + 30vw);
-  width:  calc(15vh + 30vw);
-  margin: auto;
-  /*display: block;*/
-  margin-top: 3%;
+  font-size: 20px;
+  line-height: 6vh;
+  width: auto;
+  height: auto;
+  cursor: default;
+  float: left;
 }
 
-#mathContainer
+.matrix
 {
   border: 0px solid red;
-  /*display: block;*/
-  /*width: 50%;*/
-  width: calc(20vh + 40vw);
-  margin: auto;
-  height: calc(15vh + 30vw);
-}
-
-#canvy
-{ 
-    /*
-    image-rendering: optimizeSpeed;             // Older versions of FF
-    image-rendering: -moz-crisp-edges;          // FF 6.0+
-    image-rendering: -webkit-optimize-contrast; // Webkit (non standard naming)
-    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
-    image-rendering: crisp-edges;               // Possible future browsers.
-    -ms-interpolation-mode: nearest-neighbor;   // IE (non standard naming)
-    */
-  
-  --size: 75vh;
-  border: 0px solid red;
-  width: 100% !important;
-  height: 100%;
-}
-  
-.pointy
-{
+  font-size: 4vh;
+  width: auto;
+  height: auto;
   cursor: pointer;
-  border: 1px solid red;
-}
-
-#variablesContainer, #calculationContainer, #infoContainer, #btnContainer
-{
-  border: 0px solid black;
-  width: 100%;
-  /*color: white;*/
-}
-
-#variablesContainer
-{
-  height: 20%;
-  /*background-color: var(--light_gray);*/
-  border-radius: var(--border_radius) var(--border_radius) 0px 0px;
-	font-family: monospace;
-  font-size: calc(0.2vh + 1vw);
-}
-
-#calculationContainer
-{
-  height: 40%;
-  /*background-color: var(--middle_gray);*/
-	font-family: monospace;
-  font-size: calc(0.2vh + 1vw);
-  padding: 3% 6%;
-}
-
-#infoContainer
-{
-  height: 30%;
-  /*background-color: var(--dark_gray);*/
-  padding: 3% 6%;
-  font-size: calc(0.2vh + 1vw);
-}
-
-#btnContainer
-{
-  border: 0px solid red;
-  height: 10%;
-  /*background-color: var(--dark_gray);*/
-  border-radius: 0px 0px var(--border_radius) var(--border_radius);
-}
-
-#varrow0, #varrow1, #varrow2
-{
-  height: 50%;
-  border: 0px solid red;
   float: left;
-  margin-left: calc(0.2vh + 2.5vw);
-  margin-top: 4%;
 }
 
-#varrow0
+.highlighted
 {
-  width: 17%;
+  color: var(--dark_red);
 }
 
-#varrow1
+#angleSlider
 {
-  width: 14%;
-}
-
-#varrow2
-{
-  width: 46%;
-}
-
-[class^=var_div]
-{
-  border: 0px solid green;
-  height: 33%;
-  width: 100%;
-  display: inline-block;
-}
-
-#prevStepBtn, #nextStepBtn
-{
-  background-color: var(--light_gray);
-  width: 9%;
-  height: 50%;
-  font-size: calc(0.2vh + 1vw) !important;
-  margin: 0 6%;
-  display: inline-block;
-}
-
-#prevStepBtn
-{
-  float: left;
   visibility: hidden;
 }
 
-#nextStepBtn
+#teapotContainer
 {
-  float: right;
-}
-
-#stepSliderContainer
-{
-  border: 0px solid yellow;
-  width: 50%;
-  margin: 0 4%;
-  display: inline-block;
-}
-
-#stepSlider
-{
-  width: 100%;
-}
-
-hr
-{
-  background: #dee0ed;
-  border: none;
-  height: 1px;
+  border: 0px solid red;
+  width: 30vw;
+  height: 30vh;  
+  margin: 2% auto;
 }

@@ -1,8 +1,8 @@
-var pixelSize = 39; //51; //25; // same as grid size
+var pixelSize = 25; // same as grid size
 
 var offset = 25;
 
-var pixelNum = 13; //10; //20 //canvas.width / pixelSize;
+var pixelNum = 20; //canvas.width / pixelSize;
 
 var canvas, ctx;
 

@@ -1,41 +1,17 @@
-/* default polygon coordinates
-var vertices = [
-                {x: 70, y: 70},
-                {x: 340, y: 160},
-                {x: 390, y: 250},
-                {x: 300, y: 300},
-                {x: 250, y: 380}
-               ];
-var vertices = [
-                {x: 3, y: 3},
-                {x: 14, y: 7},
-                {x: 15, y: 11},
-                {x: 9, y: 14},
-                {x: 4, y: 15}
-               ];
-*/
-
-var vertices = [
-                {x: 6, y: 1.5, name: "p0"},
-                {x: 9, y: 4.5, name: "p1"},
-                {x: 2, y: 9.5, name: "p2"},
-                {x: 1, y: 7.5, name: "p3"},
-                {x: 3, y: 3.5, name: "p4"}
-               ];
+// default line coordinates
+var p = {x: 0, y: 0};
+var q = {x: 19, y: 10};
 
 var pointSize = 10;
 
 // default colors
 var colorLine = "#686B94";
 var colorPoint = "#af2626";
+var colorDisabled = "#dadbe5";
 
-var polygonLineWidth = 1;
-
-var draggingPoint = null;
+var draggingPoint = 0; // 0: none, 1: p, 2: q
 
 var movePointFunction;
-
-var updating = false; // if true, tables, polygon drawinga and gui are updated when vertices are moved
 
 canvas = document.getElementById("canvy");
 ctx = canvas.getContext("2d");
@@ -59,14 +35,12 @@ function lineToPixel(x, y)
     ctx.lineTo(x * pixelSize, y * pixelSize);
 }
 
-function drawPoint(point, color = colorPoint, size = pointSize, rasterized = false)
+function drawPoint(point, color = colorPoint)
 {
     ctx.beginPath();
     ctx.fillStyle = color;
-    if (rasterized)
-        ctx.arc((point.x) * pixelSize, (point.y) * pixelSize, size, 0, 2 * Math.PI, false);
-    else
-        ctx.arc(point.x, point.y, size, 0, 2 * Math.PI, false);
+    //ctx.arc(point.x * pixelSize, point.y * pixelSize, 10, 0, 2 * Math.PI, false);
+    ctx.arc((point.x + 0.5) * pixelSize, (point.y + 0.5) * pixelSize, 10, 0, 2 * Math.PI, false);
     ctx.fill();
 }
 
@@ -76,29 +50,12 @@ function drawPixel(point, color = colorLine)
     ctx.fillRect(point.x * pixelSize, point.y * pixelSize, pixelSize, pixelSize);
 }
 
-function drawPolygon(color = colorLine, lineWidth = polygonLineWidth)
-{
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineWidth;
-
-    moveToPixel(vertices[0].x, vertices[0].y);
-
-    for (var i = 0; i < vertices.length; i++)
-    {
-        var next = vertices[(i + 1) % vertices.length];
-        lineToPixel(next.x, next.y);
-    }
-
-    ctx.stroke();
-}
-
 function distance(a, b)
 {
     return (Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)));
 }
 
-// helper: get rasterized mouse position in canvas
+// helper: get mouse position in canvas
 function getMousePos(evt)
 {
     var rect = canvas.getBoundingClientRect(),
@@ -106,46 +63,14 @@ function getMousePos(evt)
         scaleY = canvas.height / rect.height;
 
     return {
-      //x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 0.5), //-1
-      //y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 0.5)
-
-      //x: Math.round(((evt.clientX - rect.left) * scaleX) / pixelSize) - 1, //-1
-      //y: Math.round(((evt.clientY - rect.top) * scaleY) / pixelSize) - 1
-
-      x: ((evt.clientX - rect.left) * scaleX - offset) / pixelSize,
-      y: ((evt.clientY - rect.top) * scaleY - offset) / pixelSize
+      x: Math.floor(((evt.clientX - rect.left) * scaleX) / pixelSize - 1), //-0.5
+      y: Math.floor(((evt.clientY - rect.top) * scaleY) / pixelSize - 1)
     }
 }
 
-// helper: get unrasterized mouse position in canvas
-function getRealMousePos(evt)
+function clickedOnQ(mousePos)
 {
-    var rect = canvas.getBoundingClientRect(),
-        scaleX = canvas.width / rect.width,
-        scaleY = canvas.height / rect.height;
-
-    return {
-      x: ((evt.clientX - rect.left) * scaleX) - offset,
-      y: ((evt.clientY - rect.top) * scaleY) - offset
-    }
-}
-
-function clickedOnPoint(mousePos, rasterized = false)
-{
-    for (var i = 0; i < vertices.length; i++)
-    {
-        if (rasterized)
-        {
-            if ((distance(mousePos, vertices[i]) < 1))
-                return i;
-        }
-        else
-        {
-            if (distance(mousePos, vertices[i]) < 10)
-                return i;
-        }
-    }
-    return null;
+    return (distance(mousePos, q) < 1);
 }
 
 function addEventListenerToCanvas()
@@ -153,7 +78,7 @@ function addEventListenerToCanvas()
     // click listener to move line points
     canvas.addEventListener("mousedown", function(evt)
         {
-            draggingPoint = clickedOnPoint(getMousePos(evt), true);
+            draggingPoint = clickedOnQ(getMousePos(evt));
         }
     );
 
@@ -171,75 +96,81 @@ function addEventListenerToCanvas()
 function movePoint(evt)
 {
     var mPos = getMousePos(evt);
-    var rmPos = getRealMousePos(evt);
 
     // don't leave the coordinate system!
-    if (rmPos.x < 0 || rmPos.y < 0 || rmPos.x > (pixelNum + 1) * pixelSize || rmPos.y > (pixelNum + 1) * pixelSize )
+    if (mPos.x < 0 || mPos.y < 0 || mPos.x > pixelNum || mPos.y > pixelNum)
         return;
 
-    manageCursorIcon(mPos, true);
+    // avoid the forbidden octant!
+    if (mPos.y > mPos.x)
+        return;
+
+    manageCursorIcon(mPos);
 
     // return if no point is dragged at the moment
-    if (draggingPoint == null || vertices[draggingPoint] == undefined)
+    if (!draggingPoint)
         return;
 
-    // move dragged vertex
-    vertices[draggingPoint].x = mPos.x;
-    vertices[draggingPoint].y = mPos.y;
+    // move q
+    if (draggingPoint)
+        q = mPos;
 
     clear();
     calc();
     draw();
 
-    if (updating)
-    {        
-        updateTables();
-        stepSlider.value = tsteps;
-        step = tsteps;
-
-        clear();
-        fillPolygon();
-        draw();
-    }
+    printVariables(p, q, m);
+    labelVertices();
 }
 
-function manageCursorIcon(mPos, rasterized = false)
+function manageCursorIcon(mPos)
 {
-    var range = rasterized ? 0.5 : pointSize;
+    canvas.className = (distance(mPos, q) < 1) ? "pointy" : "";
+}
 
-    for (var i = 0; i < vertices.length;  i++)
+function disableSecondOctant()
+{
+    for (var x = 0; x <= pixelNum; x++)
     {
-        if ((distance(mPos, vertices[i]) < range))
+        for (var y = 0; y <= pixelNum; y++)
         {
-            canvas.className = "pointy";
-            return;
+            if (x < y)
+                drawPixel({x: x, y: y}, colorDisabled);
         }
     }
-    canvas.className = "";
 }
 
 function calc()
 {
-    scanline();
-
-    // DEBUG
-    //fillPolygon();
-    //fillTableAllEdges();
-    //fillTableIntersections();
+    bresenham(p, q);
+    printVariables(p, q, m);
 }
 
 function draw()
 {
-    for (var i = 0; i < vertices.length; i++)
-    {
-        drawPoint(vertices[i], colorPoint, pointSize, true);
-    }
+    disableSecondOctant();
 
-    drawPolygon(colorPoint);
+    drawPoint(p);
+    drawPoint(q);
 
     drawCoordinateSystem();
+}
 
-    labelAllVertices();
+function drawLineUntilPixel(idx)
+{
+    clear();
+
+    for (var i = -1; i < idx; i++)
+    {
+        drawPixel(line[i + 1]);
+    }
+
+    drawPoint(line[idx]);
+    drawPoint(q, colorPoint);
+    labelVertices(line[idx]);
+
+    disableSecondOctant();
+    drawCoordinateSystem();
 }
 
 addEventListenerToCanvas();
