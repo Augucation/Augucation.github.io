@@ -9,7 +9,9 @@ function init() {
 	container = document.getElementById("teapotContainer");
 
 	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-	camera.position.z = 250;
+	camera.position.z = 350;
+	camera.position.y = 75;
+	camera.lookAt(new THREE.Vector3(0, 20, 0));
 
     // scene
 	scene = new THREE.Scene();
@@ -19,6 +21,9 @@ function init() {
     var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
 	camera.add( pointLight );
 	scene.add( camera );
+
+	// create coordinate_system
+	cs = new coordinate_system(scene);
 
     // texture
 	var manager = new THREE.LoadingManager();
