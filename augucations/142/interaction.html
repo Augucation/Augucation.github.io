@@ -1,0 +1,47 @@
+<head>
+
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welt- und Objektkoordinaten</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="style.css">
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
+
+	<script src="https://threejs.org/build/three.min.js"></script>
+	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+
+	<script src="https://threejs.org/examples/js/Detector.js"></script>
+	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+
+	<div id="guiContainer" class="my_text">
+		<h2>Transformationssequenz</h2>
+		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
+		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
+
+
+	<div id="teapotContainer"></div>
+
+	<button id="resetBtn" class="button" onclick="trans.resetRotation();">Transformation zurücksetzen</button>
+
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
+	</div>
+	
+	<script type="text/javascript" src="coordinate_system.js"></script>
+
+	<script type="text/javascript" src="model_renderer.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
+</body>
