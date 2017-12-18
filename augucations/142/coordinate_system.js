@@ -1,12 +1,14 @@
 var cs;
 
-var coordinate_system = function(scene){
+var coordinate_system = function(scene, pos, size){
 
     this.scene = scene;
 
-    this.min = -135;
-    this.max = 135;
-    this.step = 100;
+    this.pos = pos;
+    this.size = size;
+
+    this.min = -this.size;
+    this.max = this.size;
 
     this.gray = 0x555e67;
     this.red = 0xB52121;
@@ -26,34 +28,14 @@ var coordinate_system = function(scene){
     this.draw = function(){
 
         // axes
-        this.axes.x = this.drawLine(this.vec(this.min, 0, 0), this.vec(this.max, 0, 0), this.axisMaterial);
-        this.axes.y = this.drawLine(this.vec(0, this.min, 0), this.vec(0, this.max, 0), this.axisMaterial);
-        this.axes.z = this.drawLine(this.vec(0, 0, this.min), this.vec(0, 0, this.max), this.axisMaterial);
+        this.axes.x = this.drawLine(vec(this.min + this.pos.x, this.pos.y, this.pos.z), vec(this.max + this.pos.x, this.pos.y, this.pos.z), this.axisMaterial);
+        this.axes.y = this.drawLine(vec(this.pos.x, this.min + this.pos.y, this.pos.z), vec(this.pos.x, this.max + this.pos.y, this.pos.z), this.axisMaterial);
+        this.axes.z = this.drawLine(vec(this.pos.x, this.pos.y, this.min + this.pos.z), vec(this.pos.x, this.pos.y, this.max + this.pos.z), this.axisMaterial);
 
         // arrow heads
-        this.arrowheads.x = this.drawCone(this.vec(this.max, 0, 0), 10, 20, this.axisMaterial, "X");
-        this.arrowheads.y = this.drawCone(this.vec(0, this.max, 0), 10, 20, this.axisMaterial, "Y");
-        this.arrowheads.z = this.drawCone(this.vec(0, 0, this.max), 5, 10, this.axisMaterial, "Z");
-
-        /* grid
-        for (x = this.min; x < Math.abs(this.max - this.min); x += this.step){
-            for (y = this.min; y < Math.abs(this.max - this.min); y += this.step){
-                this.drawLine(this.vec(x, y, this.min), this.vec(x, y, this.max), this.lineMaterial);
-            }
-        }
-
-        for (z = this.min; z < Math.abs(this.max - this.min); z += this.step){
-            for (y = this.min; y < Math.abs(this.max - this.min); y += this.step){
-                this.drawLine(this.vec(this.min, y, z), this.vec(this.max, y, z), this.lineMaterial);
-            }
-        }
-
-        for (x = this.min; x < Math.abs(this.max - this.min); x += this.step){
-            for (z = this.min; z < Math.abs(this.max - this.min); z += this.step){
-                this.drawLine(this.vec(x, this.min, z), this.vec(x, this.max, z), this.lineMaterial);
-            }
-        }
-        */
+        this.arrowheads.x = this.drawCone(vec(this.max + this.pos.x, this.pos.y, this.pos.z), this.size * 0.1, this.size * 0.1, this.axisMaterial, "X");
+        this.arrowheads.y = this.drawCone(vec(this.pos.x, this.max + this.pos.y, this.pos.z), this.size * 0.1, this.size * 0.1, this.axisMaterial, "Y");
+        this.arrowheads.z = this.drawCone(vec(this.pos.x, this.pos.y, this.max + this.pos.z), this.size * 0.07, this.size * 0.07, this.axisMaterial, "Z");
     }
 
     this.drawLine = function(start, end, material){
@@ -104,9 +86,17 @@ var coordinate_system = function(scene){
         this.arrowheads[axis].material = this.highlightMaterial;
     }
 
-    this.vec = function(x, y, z){
-        return new THREE.Vector3(x, y, z);
-    }
-
     this.init();
+}
+
+function vec(x, y, z){
+    return new THREE.Vector3(x, y, z);
+}
+
+function d2r(d){
+    return d * Math.PI / 180;
+}
+
+function r2d(r){
+    return r * 180 / Math.PI;
 }

@@ -1,2 +1,3 @@
-init();
+initScene();
+createModelsAndCoordinateSystems();
 animate();

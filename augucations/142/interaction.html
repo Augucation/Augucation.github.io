@@ -26,7 +26,7 @@
 	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
 	<div id="guiContainer" class="my_text">
-		<h2>Transformationssequenz</h2>
+		<h2>Welt- und Objektkoordinaten</h2>
 		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
 		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
 
@@ -38,10 +38,11 @@
 	<div>
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
 	</div>
-	
-	<script type="text/javascript" src="coordinate_system.js"></script>
 
-	<script type="text/javascript" src="model_renderer.js"></script>
+	<script type="text/javascript" src="coordinate_system.js"></script>
+	<script type="text/javascript" src="object_manager.js"></script>
+	<script type="text/javascript" src="scene_manager.js"></script>
+	<script type="text/javascript" src="object.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 
 </body>
