@@ -1,0 +1,158 @@
+<head>
+
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Frustum Diagramm</title>
+	<link rel="icon" href="../../resources/img/Icon.png">
+
+	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
+	<link rel="stylesheet" href="style.css">
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+
+</head>
+
+<body>
+
+	<script type="text/javascript" src="../../resources/js/slideshow.js"></script>
+	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
+	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
+
+	<script src="https://threejs.org/build/three.min.js"></script>
+	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+
+	<script src="https://threejs.org/examples/js/Detector.js"></script>
+	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+
+	<div id="guiContainer" class="my_text">
+		<h2>Frustum Diagramm</h2>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+			eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+			eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+			voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			<div id="canvasContainer">
+			  <canvas id="canvas"></canvas>
+			  <img id="eye" src="resources/eye-icon.png" style="position: absolute; z-index:2; left: 10px; top: 275px; width: 32px; height: auto;"/>
+			</div>
+			<div id="uiContainer">
+			  <div id="ui">
+			    <div class="sliderDiv" id="fieldOfView"></div>
+			    <div class="sliderDiv" id="zNear"></div>
+			    <div class="sliderDiv" id="zFar"></div>
+			    <div class="sliderDiv" id="zPosition"></div>
+			  </div>
+	<div>
+		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
+	</div>
+
+</body>
+
+<script id="vertexColorVertexShader" type="text/something-not-javascript">
+attribute vec4 position;
+attribute vec4 color;
+uniform mat4 u_worldViewProjection;
+varying vec4 v_color;
+void main() {
+  gl_Position = u_worldViewProjection * position;
+  v_color = color;
+}
+
+</script>
+<script id="vertexColorFragmentShader" type="text/something-not-javascript">
+precision mediump float;
+uniform vec4 u_color;
+varying vec4 v_color;
+void main() {
+  gl_FragColor = u_color * v_color;
+}
+</script>
+<script id="baseVertexShader" type="text/something-not-javascript">
+attribute vec4 position;
+attribute vec4 color;
+uniform mat4 u_worldViewProjection;
+uniform mat4 u_exampleWorldViewProjection;
+varying vec4 v_color;
+varying vec4 v_position;
+void main() {
+  gl_Position = u_worldViewProjection * position;
+  v_position = u_exampleWorldViewProjection * position;
+  v_position = v_position / v_position.w;
+  v_color = color;
+}
+
+</script>
+<script id="colorFragmentShader" type="text/something-not-javascript">
+precision mediump float;
+varying vec4 v_color;
+varying vec4 v_position;
+uniform vec4 u_color;
+void main() {
+  bool blend = (v_position.x < -1.0 || v_position.x > 1.0 ||
+                v_position.y < -1.0 || v_position.y > 1.0 ||
+                v_position.z < -1.0 || v_position.z > 1.0);
+  vec4 blendColor = blend ? vec4(0.35, 0.35, 0.35, 1.0) : vec4(1, 1, 1, 1);
+  gl_FragColor = v_color * u_color * blendColor;
+}
+</script>
+
+<!-- vertex shader -->
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+attribute vec2 a_position;
+attribute vec2 a_texCoord;
+
+uniform vec2 u_resolution;
+
+varying vec2 v_texCoord;
+
+void main() {
+   // convert the rectangle from pixels to 0.0 to 1.0
+   vec2 zeroToOne = a_position / u_resolution;
+
+   // convert from 0->1 to 0->2
+   vec2 zeroToTwo = zeroToOne * 2.0;
+
+   // convert from 0->2 to -1->+1 (clipspace)
+   vec2 clipSpace = zeroToTwo - 1.0;
+
+   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+
+   // pass the texCoord to the fragment shader
+   // The GPU will interpolate this value between points.
+   v_texCoord = a_texCoord;
+}
+</script>
+<!-- fragment shader -->
+<script id="2d-fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+
+// our texture
+uniform sampler2D u_image;
+
+// the texCoords passed in from the vertex shader.
+varying vec2 v_texCoord;
+
+void main() {
+   gl_FragColor = texture2D(u_image, v_texCoord);
+}
+</script>
+
+<!--
+for most samples webgl-utils only provides shader compiling/linking and
+canvas resizing because why clutter the examples with code that's the same in every sample.
+See http://webglfundamentals.org/webgl/lessons/webgl-boilerplate.html
+and http://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
+for webgl-utils, m3, m4, and webgl-lessons-ui.
+-->
+<script src="resources/webgl-utils.js"></script>
+<script src="resources/webgl-lessons-ui.js"></script>
+<script src="resources/webgl-lessons-helper.js"></script> <!-- you can and should delete this script. it is only used on the site to help with errors -->
+<script src="resources/twgl-full.min.js"></script>
+
+<script src="main.js"></script>
+<script src="model_renderer.js"></script>
+<script>
+
+</script>

@@ -1,0 +1,41 @@
+#guiContainer
+{
+  border: 0px solid red;
+  width: calc(40vw + 20vh);
+  height: 75vh;
+  margin: auto;
+  position: relative;
+  text-align: center;
+}
+
+#canvas
+{
+  width: calc(25vw + 15vh);
+}
+
+#uiContainer
+{
+  width: 50%;
+  margin: auto;
+}
+
+.sliderDiv
+{
+  margin: 2%
+}
+
+input[type = range]
+{
+  margin: -0.6% auto;
+}
+
+#canvasContainer
+{
+  width: calc(25vw + 15vh);
+  margin: 3% auto;
+}
+
+#eye
+{
+  position: absolute;
+}
