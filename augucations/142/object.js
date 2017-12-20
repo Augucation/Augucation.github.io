@@ -12,6 +12,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
 
     this.obj;
     this.coordinate_system;
+    this.transform;
 
     var that = this;
 
@@ -42,6 +43,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
 
             object.scale.set(that.scale.x, that.scale.y, that.scale.z);
             object.position.set(that.pos.x, that.pos.y, that.pos.z);
+            that.transform = object;
 
     		scene.add( object );
             pickableObjects.push(object.children[0]);
@@ -51,7 +53,6 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
 
     this.addCoordinateSystem = function(){
         this.coordinate_system = new coordinate_system(this.scene, this.pos, this.csSize);
-        this.coordinate_system.init();
     }
 
     this.init();
@@ -62,17 +63,17 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     }
 
     this.pickedMsgHandler = function(e){
-        if (!modelPath)
+        if (!that.modelPath)
             return;
         that.highlight(e.detail.object_id == that.obj.id);
     }
 
     this.unpickedMsgHandler = function(e){
-        if (!modelPath)
+        if (!that.modelPath)
             return;
         that.highlight(false);
     }
-    
+
     addEventListener("picked_object", this.pickedMsgHandler, false);
     addEventListener("unpicked_object", this.unpickedMsgHandler, false);
 

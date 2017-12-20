@@ -30,7 +30,39 @@
 		<h2>Welt- und Objektkoordinaten</h2>
 		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
 		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
+	</div>
 
+	<div id="buttonAndSliderContainer" class="my_text">
+
+		<div id="btnContainer">
+			<!--fieldset-->
+				<input type="radio" name="radio_local_global" id="radio_local"/>
+				<label for="radio_local">Lokal</label>
+				<input type="radio" name="radio_local_global" id="radio_global"/>
+				<label for="radio_global">Global</label>
+			<!--/fieldset-->
+		</div>
+
+		<div id="sliderContainer">
+			<div id="sliderContainerTranslation">
+				<input id="translateX" type="range" min="-5" max="5" value="0"/>
+				<label for="translateX">Translation X</label>
+				<input id="translateY" type="range" min="-50" max="50" value="0"/>
+				<label for="translateY">Translation Y</label>
+				<input id="translateZ" type="range" min="-50" max="50" value="0"/>
+				<label for="translteZ">Translation Z</label>
+			</div>
+			<div id="sliderContainerRotation">
+				<input id="rotateX" type="range" min="-180" max="180" value="0"/>
+				<label for="rotateX">Rotation X</label>
+				<input id="rotateY" type="range" min="-180" max="180" value="0"/>
+				<label for="rotateY">Rotation Y</label>
+				<input id="rotateZ" type="range" min="-180" max="180" value="0"/>
+				<label for="rotateZ">Rotation Z</label>
+			</div>
+		</div>
+
+	</div>
 
 	<div id="teapotContainer"></div>
 
@@ -45,6 +77,8 @@
 	<script type="text/javascript" src="scene_manager.js"></script>
 	<script type="text/javascript" src="object.js"></script>
 	<script type="text/javascript" src="object_picker.js"></script>
+	<script type="text/javascript" src="gui.js"></script>
+	<script type="text/javascript" src="transformation_manager.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 
 </body>

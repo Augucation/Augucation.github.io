@@ -39,3 +39,25 @@
   height: 40vh;  
   margin: 2% auto;
 }
+
+#buttonAndSliderContainer
+{
+  width: calc(40vw + 20vh);
+  align-content: center;
+  margin: auto;
+}
+
+#radio_global, #radio_local
+{
+}
+
+#sliderContainer
+{
+  width: 100%;  
+}
+
+#sliderContainerRotation, #sliderContainerTranslation
+{
+  display: inline-block;
+  width: 40%;
+}

@@ -3,6 +3,7 @@ var container;
 var camera, scene, renderer;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+var isMouseDown, onMouseDownPosition;
 
 function initScene() {
 	container = document.getElementById("teapotContainer");
@@ -31,7 +32,7 @@ function initScene() {
 	renderer.setSize( container.clientWidth, container.clientHeight );
     renderer.setClearColor (0xffffff);
 	container.appendChild( renderer.domElement );
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	document.addEventListener('mousemove', onDocumentMouseMove, false);
 
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -44,7 +45,7 @@ function onWindowResize() {
     renderer.setSize( container.clientWidth, container.clientHeight );
 }
 
-function onDocumentMouseMove( event ) {
+function onDocumentMouseMove(event) {
 	mouseX = ( event.clientX - windowHalfX ) / 2;
 	mouseY = ( event.clientY - windowHalfY ) / 2;
 }
@@ -59,8 +60,5 @@ function render() {
 }
 
 function stopAnimation(){
-	// stop highlighting and animation
-	angle_man.highLightAxis(false);
-	cs.highlightAxis(false);
 	clearInterval(interval);
 }
