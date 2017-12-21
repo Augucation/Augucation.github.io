@@ -1,6 +1,6 @@
 var gui = function(){
 
-    that = this;
+    thatt = this;
 
     this.slider_trans = {};
     this.slider_trans.y = document.getElementById("translateY");
@@ -22,9 +22,9 @@ var gui = function(){
         var event = new CustomEvent("rotate_object", {
             detail:{
                 obj: current_obj,
-                rotRadians: vec(d2r(that.slider_rot.x.value),
-                                d2r(that.slider_rot.y.value),
-                                d2r(that.slider_rot.z.value))
+                rotRadians: vec(d2r(thatt.slider_rot.x.value),
+                                d2r(thatt.slider_rot.y.value),
+                                d2r(thatt.slider_rot.z.value))
             }
         });
         dispatchEvent(event);
