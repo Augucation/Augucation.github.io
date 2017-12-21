@@ -23,6 +23,8 @@ function initScene() {
 	camera.add( pointLight );
 	scene.add( camera );
 
+    //var controls = new THREE.OrbitControls(camera);
+
     var manager = new THREE.LoadingManager();
     var textureLoader = new THREE.TextureLoader( manager );
 	var texture = textureLoader.load( 'textures/UV_Grid_Sm.jpg' );

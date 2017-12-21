@@ -23,11 +23,28 @@ var coordinate_system = function(scene, pos, size){
     // this.lineMaterial = new THREE.LineBasicMaterial({ color: this.gray, linewidth: this.lineWidth });
     // this.highlightMaterial = new THREE.LineBasicMaterial({ color: this.red, linewidth: this.lineWidth });
 
+    this.cylinderGeom = new THREE.CylinderGeometry(2, 2, this.size * 2, 30);
+
     this.axes = {};
     this.arrowheads = {};
 
     this.init = function(){
-        this.draw();
+        //this.draw();
+        this.create();
+    }
+
+    this.create = function(){
+        this.axes.x = this.createAxis(this.xaxisMaterial, vec(0, 0, 90));
+        this.axes.y = this.createAxis(this.yaxisMaterial, vec(0, 0, 0));
+        this.axes.z = this.createAxis(this.zaxisMaterial, vec(90, 0, 0));
+    }
+
+    this.createAxis = function(material, rotation){
+        var axis = new THREE.Mesh(this.cylinderGeom, material);
+        axis.position.set(this.pos.x, this.pos.y, this.pos.z);
+        axis.rotation.set(d2r(rotation.x), d2r(rotation.y), d2r(rotation.z));
+        scene.add(axis);
+        return axis;
     }
 
     this.draw = function(){
@@ -44,13 +61,8 @@ var coordinate_system = function(scene, pos, size){
         this.correctConeRotation();
     }
 
-    this.drawLine = function(start, end, material){
-		var geometry = new THREE.Geometry();
-		geometry.vertices.push( new THREE.Vector3( start.x, start.y, start.z) );
-		geometry.vertices.push( new THREE.Vector3( end.x, end.y, end.z) );
-		var line = new THREE.Line( geometry, material );
-        scene.add(line);
-        return line;
+    this.drawLine = function(geom, material){
+
     }
 
     this.drawCone = function(pos, radius, height, material, axis){
@@ -91,6 +103,7 @@ var coordinate_system = function(scene, pos, size){
     }
 
     this.translate = function(x, y, z){
+        /*
         for (axis in this.axes){
             this.axes[axis].geometry.translate(x, y, z);
         }
@@ -99,17 +112,27 @@ var coordinate_system = function(scene, pos, size){
             this.arrowheads[ar].geometry.translate(x, y, z);
             this.correctConeRotation();
         }
+        */
     }
 
     this.rotate = function(x, y, z){
+        this.axes.x.rotation.set(d2r(x), d2r(y), d2r(z + 90));
+        this.axes.y.rotation.set(d2r(x), d2r(y), d2r(z));
+        this.axes.z.rotation.set(d2r(x + 90), d2r(y), d2r(z));
+        /*
+        this.axes.x.rotateX(45);
         for (axis in this.axes){
-            this.axes[axis].geometry.rotation = new THREE.Vector3(x, y, z);
+            var tmp_pos = this.axes[axis].geometry.boundingSphere.center;
+            console.log("tmp_pos: ", tmp_pos);
+            this.axes[axis].rotation.set(x, y, z);
+            //this.axes[axis].position.set(tmp_pos.x, tmp_pos.y, tmp_pos.z);
+            this.axes[axis].position.set(0, 0, 0);
         }
         for (ar in this.arrowheads){
-            this.arrowheads[ar].rotation = new THREE.Vector3(x, y, z);
-            //this.arrowheads[ar].geometry.rotate(x, y, z);
+            this.arrowheads[ar].rotation.set(x, y, z);
             this.correctConeRotation();
         }
+        */
     }
 
     this.correctConeRotation = function(){
@@ -118,16 +141,4 @@ var coordinate_system = function(scene, pos, size){
     }
 
     this.init();
-}
-
-function vec(x, y, z){
-    return new THREE.Vector3(x, y, z);
-}
-
-function d2r(d){
-    return d * Math.PI / 180;
-}
-
-function r2d(r){
-    return r * 180 / Math.PI;
 }

@@ -46,6 +46,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
             that.transform = object;
 
     		scene.add( object );
+            object.children[0].transform = that.transform;
             pickableObjects.push(object.children[0]);
             that.obj = object.children[0];
     	});
@@ -66,16 +67,30 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
         if (!that.modelPath)
             return;
         that.highlight(e.detail.object_id == that.obj.id);
+
+        if (e.detail.object_id == that.obj.id)
+            current_obj = {obj: that, cs: that.coordinate_system};
     }
+    addEventListener("picked_object", this.pickedMsgHandler, false);
 
     this.unpickedMsgHandler = function(e){
         if (!that.modelPath)
             return;
         that.highlight(false);
     }
-
-    addEventListener("picked_object", this.pickedMsgHandler, false);
     addEventListener("unpicked_object", this.unpickedMsgHandler, false);
+
+    this.rotMsgHandler = function(e){
+        // if object does not contains a model or object is not the current object, return
+        if (!that.modelPath || current_obj.obj != that)
+            return;
+
+        that.transform.rotation.set(e.detail.rotRadians.x,
+                                    e.detail.rotRadians.y,
+                                    e.detail.rotRadians.z);
+    }
+    addEventListener("rotate_object", this.rotMsgHandler, false);
+
 
     return {
         obj: this,

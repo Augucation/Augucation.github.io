@@ -31,7 +31,9 @@ window.onload = function(){
         picked_object = intersects[0];
         var event = new CustomEvent("picked_object", {
             detail: {
-                object_id: picked_object.object.id
+                object: picked_object,
+                object_id: picked_object.object.id,
+                object_transform: picked_object.object.transform
             }
         });
         dispatchEvent(event);

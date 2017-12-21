@@ -1,40 +1,37 @@
+var transformation_manager = function(){
 
+    this.radio_local = document.getElementById("radio_local");
+    this.radio_global = document.getElementById("radio_global");
 
-/*
+    this.radio_local.onclick = this.rotateCSLocal;
+    this.radio_global.onclick = this.rotateCSGlobal;
 
-    this.rotateAbs = function(x, y, z, local){
-        // rotate the object itself
-        _x = x ? x : that.transform.rotation.x;
-        _y = y ? y : that.transform.rotation.y;
-        _z = z ? z : that.transform.rotation.z;
-        that.transform.rotation.set(_x, _y, _z);
+    that = this;
 
-        // if not local, translate the coordinate system as well
-        if (!local)
-            that.coordinate_system.rotate(x, y, z);
+    this.rotateCSLocal = function(){
+
+        for (i in teapots){
+            if(!teapots[i].cs)
+                continue;
+            var rot = teapots[i].obj.transform.rotation;
+            teapots[i].cs.rotate(r2d(rot.x), r2d(rot.y), r2d(rot.z));
+        }
+        addEventListener("rotate_object", this.rotMsgHandler, false);
     }
 
-    this.translateRel = function(x, y, z, local){
-        // translate the object itself
-        that.transform.translateX(x);
-        that.transform.translateY(y);
-        that.transform.translateZ(z);
+    this.rotateCSGlobal = function(){
 
-        // if not local, translate the coordinate system as well
-        if (!local)
-            that.coordinate_system.translate(x, y, z);
+        for (i in teapots){
+            if(!teapots[i].cs)
+                continue;
+            teapots[i].cs.rotate(0, 0, 0);
+        }
+        removeEventListener("rotate_object", this.rotMsgHandler);
     }
 
-    this.translateAbs = function(x, y, z, local){
-        // translate the object itself
-        _x = x ? x : that.transform.position.x;
-        _y = y ? y : that.transform.position.y;
-        _z = z ? z : that.transform.position.z;
-        that.transform.position.set(_x, _y, _z);
-
-        // if not local, translate the coordinate system as well
-        if (!local)
-            that.coordinate_system.position.set(_x, _y, _z);
-            // 6:20
+    this.rotMsgHandler = function(e){
+        that.rotateCSLocal();
     }
-*/
+}
+
+var transformation_manager = new transformation_manager();
