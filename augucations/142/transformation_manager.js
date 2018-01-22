@@ -6,6 +6,7 @@ var transformation_manager = function(){
     this.radio_local.onclick = this.rotateCSLocal;
     this.radio_global.onclick = this.rotateCSGlobal;
 
+
     that = this;
 
     this.rotateCSLocal = function(){
@@ -26,7 +27,7 @@ var transformation_manager = function(){
                 continue;
             teapots[i].cs.rotate(0, 0, 0);
         }
-        removeEventListener("rotate_object", this.rotMsgHandler);
+    //    removeEventListener("rotate_object", this.rotMsgHandler);
     }
 
     this.rotMsgHandler = function(e){

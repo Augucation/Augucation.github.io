@@ -2,6 +2,8 @@ var gui = function(){
 
     thatt = this;
 
+
+    ///////////////////////////////// SLIDER ///////////////////////////////////
     this.slider_trans = {};
     this.slider_trans.y = document.getElementById("translateY");
     this.slider_trans.z = document.getElementById("translateZ");
@@ -29,16 +31,25 @@ var gui = function(){
         });
         dispatchEvent(event);
     }
+
     for (slider in this.slider_rot){
         this.slider_rot[slider].addEventListener("input", this.throwRotationEvent, false);
     }
 
     this.pickedMsgHandler = function(e){
-        that.slider_rot.x.value = r2d(e.detail.object_transform.rotation.x);
-        that.slider_rot.y.value = r2d(e.detail.object_transform.rotation.y);
-        that.slider_rot.z.value = r2d(e.detail.object_transform.rotation.z);
+        // update slider values to the picket object's valus
+        thatt.slider_rot.x.value = r2d(e.detail.object_transform.rotation.x);
+        thatt.slider_rot.y.value = r2d(e.detail.object_transform.rotation.y);
+        thatt.slider_rot.z.value = r2d(e.detail.object_transform.rotation.z);
     }
     addEventListener("picked_object", this.pickedMsgHandler, false);
+
+
+    ////////////////////////////// RADIO BUTTONS ///////////////////////////////
+
+    this.radio_local = document.getElementById("radio_local");
+    this.radio_global = document.getElementById("radio_global");
+
 }
 
 var gui = new gui();

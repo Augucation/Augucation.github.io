@@ -20,13 +20,12 @@ var coordinate_system = function(scene, pos, size){
     this.xaxisMaterial = new THREE.LineBasicMaterial({ color: this.red, linewidth: this.axisWidth });
     this.yaxisMaterial = new THREE.LineBasicMaterial({ color: this.green, linewidth: this.axisWidth });
     this.zaxisMaterial = new THREE.LineBasicMaterial({ color: this.blue, linewidth: this.axisWidth });
-    // this.lineMaterial = new THREE.LineBasicMaterial({ color: this.gray, linewidth: this.lineWidth });
-    // this.highlightMaterial = new THREE.LineBasicMaterial({ color: this.red, linewidth: this.lineWidth });
-
     this.cylinderGeom = new THREE.CylinderGeometry(2, 2, this.size * 2, 30);
 
     this.axes = {};
     this.arrowheads = {};
+
+    that = this;
 
     this.init = function(){
         //this.draw();
@@ -61,24 +60,11 @@ var coordinate_system = function(scene, pos, size){
         this.correctConeRotation();
     }
 
-    this.drawLine = function(geom, material){
-
-    }
-
     this.drawCone = function(pos, radius, height, material, axis){
 
         var geometry = new THREE.ConeGeometry( radius, height, 20 );
         var cone = new THREE.Mesh( geometry, material );
 
-        /*
-        if(axis == "X"){
-            cone.rotateZ(d2r(-90));
-        }
-
-        if (axis == "Z"){
-            cone.rotateX(d2r(90));
-        }
-        */
         cone.position.set(pos.x, pos.y, pos.z);
         scene.add( cone );
 
@@ -116,25 +102,24 @@ var coordinate_system = function(scene, pos, size){
     }
 
     this.rotate = function(x, y, z){
-        this.axes.x.rotation.set(d2r(x), d2r(y), d2r(z + 90));
-        this.axes.y.rotation.set(d2r(x), d2r(y), d2r(z));
-        this.axes.z.rotation.set(d2r(x + 90), d2r(y), d2r(z));
-        /*
-        this.axes.x.rotateX(45);
-        for (axis in this.axes){
-            var tmp_pos = this.axes[axis].geometry.boundingSphere.center;
-            console.log("tmp_pos: ", tmp_pos);
-            this.axes[axis].rotation.set(x, y, z);
-            //this.axes[axis].position.set(tmp_pos.x, tmp_pos.y, tmp_pos.z);
-            this.axes[axis].position.set(0, 0, 0);
-        }
-        for (ar in this.arrowheads){
-            this.arrowheads[ar].rotation.set(x, y, z);
-            this.correctConeRotation();
-        }
-        */
+        this.axes.x.rotation.set(x, y, z + d2r(90));
+        this.axes.y.rotation.set(x, y, z);
+        //this.axes.z.rotation.z = -y;
+        //this.axes.z.rotation.x = d2r(90) + x;
+        this.axes.z.rotation.set(x + d2r(90), 0, -y);
+        console.log("z axis rotation: ", this.axes.z.rotation);
     }
 
+/*
+    this.rotMsgHandler = function(e){
+        // if object contains a model
+        if (that.modelPath)
+            return;
+
+        //that.rotate(e.detail.rotRadians.x, e.detail.rotRadians.y, e.detail.rotRadians.z);
+    }
+    addEventListener("rotate_object", this.rotMsgHandler, false);
+*/
     this.correctConeRotation = function(){
         this.arrowheads.x.rotateZ(d2r(-90));
         this.arrowheads.z.rotateX(d2r(90));
