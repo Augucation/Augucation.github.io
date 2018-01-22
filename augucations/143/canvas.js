@@ -1,3 +1,6 @@
+var canvas = document.getElementById("canvy");
+var ctx = canvas.getContext("2d");
+
 // default colors
 var colorLine = "#686B94";
 var color_hci = "#555e67";
@@ -5,13 +8,8 @@ var colorPoint = "#af2626";
 
 var segmentLineWidth = 1;
 var lineWidth = 5;
-var draggingPoint = null;
-
-var movePointFunction;
-
-var updating = false; // if true, tables, polygon drawinga and gui are updated when vertices are moved
-
 var boarderWidth = 0.25;
+
 var bc_fontSize = 30; // static bit codes inside the canvas
 var pointSize = 10;
 
@@ -19,22 +17,16 @@ var p1 = {x: 220, y: 530};
 var p2 = {x: 520, y: 220};
 var points = [p1, p2];
 
-var canvas = document.getElementById("canvy");
-var ctx = canvas.getContext("2d");
+var draggingPoint = null;
 
 var width = canvy.width; // same as height
+var absBoarderWidth = width * boarderWidth;
 
-function clear()
-{
-    // clear
-    // ctx.translate(-offset, -offset);
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.translate(offset, offset);
+function clear(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawLineP1P2()
-{
+function drawLineP1P2(){
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
@@ -43,8 +35,7 @@ function drawLineP1P2()
     ctx.stroke();
 }
 
-function drawPoint(point, color = colorPoint, size = pointSize)
-{
+function drawPoint(point, color = colorPoint, size = pointSize){
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.arc(point.x, point.y, size, 0, 2 * Math.PI, false);
@@ -52,8 +43,7 @@ function drawPoint(point, color = colorPoint, size = pointSize)
 }
 
 // helper: get mouse position in canvas
-function getMousePos(evt)
-{
+function getMousePos(evt){
     var rect = canvas.getBoundingClientRect(),
         scaleX = canvas.width / rect.width,
         scaleY = canvas.height / rect.height;
@@ -64,8 +54,7 @@ function getMousePos(evt)
     }
 }
 
-function clickedOnPoint(mousePos)
-{
+function clickedOnPoint(mousePos){
     for (var i = 0; i < points.length; i++){
         if (distance(mousePos, points[i]) < 10){
             return i;
@@ -74,8 +63,7 @@ function clickedOnPoint(mousePos)
     return null;
 }
 
-function addEventListenerToCanvas()
-{
+function addEventListenerToCanvas(){
     // click listener to move points
     canvas.addEventListener("mousedown", function(evt){
             draggingPoint = clickedOnPoint(getMousePos(evt), true);
@@ -90,8 +78,7 @@ function addEventListenerToCanvas()
     canvas.addEventListener("mousemove", movePoint, false);
 }
 
-function movePoint(evt)
-{
+function movePoint(evt){
     var mPos = getMousePos(evt);
 
     // don't leave the canvas!
@@ -111,12 +98,11 @@ function movePoint(evt)
     clear();
     // calc();
     draw();
+
+    dispatchEvent(new CustomEvent("moved_point"));
 }
 
-
-
-function distance(a, b)
-{
+function distance(a, b){
     return (Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)));
 }
 
@@ -168,7 +154,6 @@ function addStaticBitcodes(){
 }
 
 function draw(){
-    var absBoarderWidth = width * boarderWidth;
 
     // draw the lines which separate rectangle from boarder
     ctx.beginPath();
