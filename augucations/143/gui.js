@@ -26,19 +26,19 @@ function fillDivs(b1, b2, res_and, res_or, res_and_b, res_or_b){
     var equals_and = res_and_b ? "&ne;" : "=";
     var equals_or = res_or_b ? "=" : "&ne;";
 
-    div_and.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;" + b1 +
-    					"<br/>AND " + b2 +
+    div_and.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;" + color(b1, "dark_red") +
+    					"<br/>AND " + color(b2, "blue") +
     					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;----" +
-    					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;" + res_and +
+    					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;" + color(res_and, "dark_purple") +
     					"<br/>&nbsp;&nbsp;" +
-                        "<br/>&nbsp;&nbsp;&nbsp;" + res_and + " " + equals_and + " 0000";
+                        "<br/>&nbsp;&nbsp;&nbsp;" + color(res_and, "dark_purple") + " " + equals_and + " 0000";
 
-    div_or.innerHTML = "&nbsp;&nbsp;&nbsp;" + b1 +
-    					"<br/>OR " + b2 +
+    div_or.innerHTML = "&nbsp;&nbsp;&nbsp;" + color(b1, "dark_red") +
+    					"<br/>OR " + color(b2, "blue") +
     					"<br/>&nbsp;&nbsp;&nbsp;----" +
-    					"<br/>&nbsp;&nbsp;&nbsp;" + res_or +
+    					"<br/>&nbsp;&nbsp;&nbsp;" + color(res_or, "dark_purple") +
     					"<br/>&nbsp;&nbsp;" +
-                        "<br/>&nbsp;&nbsp;&nbsp;" + res_or + " " + equals_or + " 0000";
+                        "<br/>&nbsp;&nbsp;&nbsp;" + color(res_or, "dark_purple") + " " + equals_or + " 0000";
 
     div_res_and.innerHTML = res_and_b ? "<br/>Die Linie liegt vollständig außerhalb." : "";
     div_res_or.innerHTML = res_or_b ? "<br/>Die Linie liegt vollständig innerhalb." : "";
@@ -49,4 +49,8 @@ function fillDivs(b1, b2, res_and, res_or, res_and_b, res_or_b){
     else if (res_or_b) result = "Die Linie liegt vollständig innerhalb des Bildbereiches und muss nicht geclippt werden.";
     else result = "Die Linie liegt weder vollständig außerhalb noch innerhalb des Bildbereiches und muss geclippt werden.";
     div_res.innerHTML = result;
+}
+
+function color(text, color){
+    return "<span style=\"color: var(--" + color + ")\">" + text + "</span>";
 }

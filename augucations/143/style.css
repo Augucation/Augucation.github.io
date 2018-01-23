@@ -114,11 +114,13 @@ body
 #bc_b1
 {
   float: left;
+  color: var(--dark_red);
 }
 
 #bc_b2
 {
-  float: right
+  float: right;
+  color: var(--blue);
 }
 
 #andorContainer

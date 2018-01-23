@@ -2,9 +2,9 @@ var canvas = document.getElementById("canvy");
 var ctx = canvas.getContext("2d");
 
 // default colors
-var colorLine = "#686B94";
-var color_hci = "#555e67";
-var colorPoint = "#af2626";
+var colorLine = color_black;
+var colorPoint1 = color_dark_red;
+var colorPoint2 = color_blue;
 
 var segmentLineWidth = 1;
 var lineWidth = 5;
@@ -31,11 +31,11 @@ function drawLineP1P2(){
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
     ctx.lineWidth = lineWidth;
-    ctx.strokeStyle = color_hci;
+    ctx.strokeStyle = color_gray;
     ctx.stroke();
 }
 
-function drawPoint(point, color = colorPoint, size = pointSize){
+function drawPoint(point, color, size = pointSize){
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.arc(point.x, point.y, size, 0, 2 * Math.PI, false);
@@ -177,8 +177,8 @@ function draw(){
     addStaticBitcodes();
 
     drawLineP1P2();
-    drawPoint(p1);
-    drawPoint(p2);
+    drawPoint(p1, colorPoint1);
+    drawPoint(p2, colorPoint2);
 }
 
 addEventListenerToCanvas();
