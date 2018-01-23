@@ -62,4 +62,11 @@ String.prototype.removeAtIndex = function(index){
 
 String.prototype.reverse = function(){
     return this.split('').reverse().join('');
-}
+};
+
+String.prototype.lpad = function(padString, length) {
+    var str = this;
+    while (str.length < length)
+        str = padString + str;
+    return str;
+};
