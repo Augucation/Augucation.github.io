@@ -94,33 +94,20 @@ body
 
 #bc_caption
 {
-  border: 0px solid green;
-  height: 30%;
+  width: 100%;
   text-align: center;
-  font-size: calc(0.3vh + 1.5vw);
+  margin-bottom: 3%;
 }
 
-#bc_b1, #bc_b2
+#bc
 {
   border: 0px solid red;
-  width: 40.7%;
+  width: 100%;
   height: 70%;
   display: inline-block;
   margin: auto;
   text-align: center;
   font-family: monospace;
-}
-
-#bc_b1
-{
-  float: left;
-  color: var(--dark_red);
-}
-
-#bc_b2
-{
-  float: right;
-  color: var(--blue);
 }
 
 #andorContainer
