@@ -8,7 +8,7 @@ var colorPoint = "#af2626";
 
 var segmentLineWidth = 1;
 var lineWidth = 5;
-var boarderWidth = 0.25;
+var borderWidth = 0.25;
 
 var bc_fontSize = 30; // static bit codes inside the canvas
 var pointSize = 10;
@@ -20,7 +20,7 @@ var points = [p1, p2];
 var draggingPoint = null;
 
 var width = canvy.width; // same as height
-var absBoarderWidth = width * boarderWidth;
+var absBorderWidth = width * borderWidth;
 
 function clear(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -127,8 +127,8 @@ function printOnCanvas(text, x, y, size = 20, color = "#000000"){
 }
 
 function addStaticBitcodes(){
-    // absolute boarderwidth times pi * thumb
-    var offset = width * boarderWidth * 0.3;
+    // absolute borderwidth times pi * thumb
+    var offset = width * borderWidth * 0.3;
 
     // additional offset for the labels inside the right column
     var roffset = offset * 1.2;
@@ -155,20 +155,20 @@ function addStaticBitcodes(){
 
 function draw(){
 
-    // draw the lines which separate rectangle from boarder
+    // draw the lines which separate rectangle from border
     ctx.beginPath();
 
     // horizontal lines
-    ctx.moveTo(0, absBoarderWidth);
-    ctx.lineTo(width, absBoarderWidth);
-    ctx.moveTo(0, width - absBoarderWidth);
-    ctx.lineTo(width, width - absBoarderWidth);
+    ctx.moveTo(0, absBorderWidth);
+    ctx.lineTo(width, absBorderWidth);
+    ctx.moveTo(0, width - absBorderWidth);
+    ctx.lineTo(width, width - absBorderWidth);
 
     // vertical lines
-    ctx.moveTo(absBoarderWidth, 0);
-    ctx.lineTo(absBoarderWidth, width);
-    ctx.moveTo(width - absBoarderWidth, 0);
-    ctx.lineTo(width - absBoarderWidth, width);
+    ctx.moveTo(absBorderWidth, 0);
+    ctx.lineTo(absBorderWidth, width);
+    ctx.moveTo(width - absBorderWidth, 0);
+    ctx.lineTo(width - absBorderWidth, width);
 
     ctx.lineWidth = segmentLineWidth;
     ctx.strokeStyle = colorLine;
