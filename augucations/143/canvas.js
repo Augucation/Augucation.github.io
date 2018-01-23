@@ -11,6 +11,7 @@ var lineWidth = 5;
 var borderWidth = 0.25;
 
 var bc_fontSize = 30; // static bit codes inside the canvas
+var label_fontSize = 20;
 var pointSize = 10;
 
 var p1 = {x: 220, y: 530};
@@ -153,6 +154,18 @@ function addStaticBitcodes(){
     printOnCanvas("0110", width - offset - roffset, width - offset - loffset, bc_fontSize);
 }
 
+function addLabels(){
+
+    // horizontal offset
+    var hoffset = 15;
+
+    // vertical offset
+    var voffset = 0;
+
+    printOnCanvas("P1", p1.x + hoffset, p1.y + voffset, label_fontSize);
+    printOnCanvas("P2", p2.x + hoffset, p2.y + voffset, label_fontSize);
+}
+
 function draw(){
 
     // draw the lines which separate rectangle from border
@@ -175,6 +188,7 @@ function draw(){
     ctx.stroke();
 
     addStaticBitcodes();
+    addLabels();
 
     drawLineP1P2();
     drawPoint(p1, colorPoint1);
