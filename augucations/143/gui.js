@@ -27,15 +27,15 @@ function fillDivs(b1, b2, res_and, res_or, res_and_b, res_or_b){
     var equals_or = res_or_b ? "=" : "&ne;";
 
     div_and.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;" + b1 +
-    					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;" + b2 +
-    					"<br/>AND ----" +
+    					"<br/>AND " + b2 +
+    					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;----" +
     					"<br/>&nbsp;&nbsp;&nbsp;&nbsp;" + res_and +
     					"<br/>&nbsp;&nbsp;" +
                         "<br/>&nbsp;&nbsp;&nbsp;" + res_and + " " + equals_and + " 0000";
 
     div_or.innerHTML = "&nbsp;&nbsp;&nbsp;" + b1 +
-    					"<br/>&nbsp;&nbsp;&nbsp;" + b2 +
-    					"<br/>OR ----" +
+    					"<br/>OR " + b2 +
+    					"<br/>&nbsp;&nbsp;&nbsp;----" +
     					"<br/>&nbsp;&nbsp;&nbsp;" + res_or +
     					"<br/>&nbsp;&nbsp;" +
                         "<br/>&nbsp;&nbsp;&nbsp;" + res_or + " " + equals_or + " 0000";
