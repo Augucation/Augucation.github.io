@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="../../resources/js/css_variable_manager.js"></script>
 	<script type="text/javascript" src="../../resources/js/snippets.js"></script>
 
+	<h1 class="my_text">Linien-Clipping</h1>
 	<div id="container" class="my_text">
 
 		<div id="canvyContainer">
@@ -23,12 +24,16 @@
 
 		<div id="logicContainer">
 			<div id="infoContainer">
-				Line Clipping ddsk. asdsad dsdjad djsakljdl dassk asd akds dsal.
-				Line Clipping ddsk. asdsad dsdjad.
+				Der Linien-Clipping Algorithmus ist ein Algorithmus zum Abschneiden (Clipping) von Linien.
+				Links siehst du einen Bildbereich sowie eine Linie zwischen Punkten P1 und P2.
+				Du kannst die Punkte per Drag&Drop verschieben.
+				Der Algorithmus berechnet zunächst, ob die Linie den Bildbereich schneidet.
+				Dazu wird beiden Punkten abhängig von ihrer Position relativ zum Bildbereich ein Bitcode zugewiesen.
+				Ist die bitweise Verundung beider Bitcodes gleich 0000, liegt die Linie vollständig innerhalb des Bildbereiches und die Linie muss nicht geclippt werden.
 			</div>
 			<hr>
 			<div id="bitcodesContainer">
-				<div id="bc_caption">Bitcodes der Punkte P1 und P2:</div>
+				<!--div id="bc_caption">Bitcodes der Punkte P1 und P2:</div-->
 				<div id="bc"></div>
 			</div>
 			<hr>

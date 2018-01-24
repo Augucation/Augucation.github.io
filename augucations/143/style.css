@@ -76,7 +76,7 @@ body
 #infoContainer, #bitcodesContainer, #andorContainer, #resultContainer
 {
   border: 0px solid green;
-  padding: 3% 6%;
+  padding: auto 6%;
   width: 90%;
   margin: auto;
   font-size: calc(0.2vh + 1vw);
@@ -84,12 +84,13 @@ body
 
 #infoContainer
 {
-  height: 20%;
+  height: 30%;
 }
 
 #bitcodesContainer
 {
-  height: 20%;
+  height: 10%;
+  padding-top: 1.3%;
 }
 
 #bc_caption
@@ -103,9 +104,9 @@ body
 {
   border: 0px solid red;
   width: 100%;
-  height: 70%;
-  display: inline-block;
+  height: 100%;
   margin: auto;
+  display: inline-block;
   text-align: center;
   font-family: monospace;
 }
@@ -114,6 +115,7 @@ body
 {
   height: 40%;
   font-family: monospace;
+  padding-top: 1%;
 }
 
 #ao_and, #ao_or
@@ -142,6 +144,7 @@ body
   width: 40.7%;
   display: inline-block;
   margin: auto;
+  text-align: center;
 }
 
 #ao_result_and
@@ -164,4 +167,12 @@ hr
   background: #dee0ed;
   border: none;
   height: 1px;
+}
+
+h1
+{
+  width: 100%;
+  text-align: center;
+  display: block;
+  font-size: 24px !important;
 }
