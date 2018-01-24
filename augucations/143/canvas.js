@@ -3,11 +3,13 @@ var ctx = canvas.getContext("2d");
 
 // default colors
 var colorLine = color_black;
+var colorRect = color_black;
 var colorPoint1 = color_dark_red;
 var colorPoint2 = color_blue;
 
 var segmentLineWidth = 1;
 var lineWidth = 5;
+var rectLineWidth = 3;
 var borderWidth = 0.25;
 
 var bc_fontSize = 30; // static bit codes inside the canvas
@@ -97,7 +99,6 @@ function movePoint(evt){
     points[draggingPoint].y = mPos.y;
 
     clear();
-    // calc();
     draw();
 
     dispatchEvent(new CustomEvent("moved_point"));
@@ -166,6 +167,14 @@ function addLabels(){
     printOnCanvas("P2", p2.x + hoffset, p2.y + voffset, label_fontSize);
 }
 
+function drawBildbereich(){
+    ctx.beginPath();
+    ctx.rect(absBorderWidth, absBorderWidth, width - 2 * absBorderWidth, width - 2 * absBorderWidth);
+    ctx.lineWidth = rectLineWidth;
+    ctx.strokeStyle = colorRect;
+    ctx.stroke();
+}
+
 function draw(){
 
     // draw the lines which separate rectangle from border
@@ -187,6 +196,7 @@ function draw(){
     ctx.strokeStyle = colorLine;
     ctx.stroke();
 
+    drawBildbereich();
     addStaticBitcodes();
     addLabels();
 
