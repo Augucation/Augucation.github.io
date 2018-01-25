@@ -28,17 +28,26 @@ var transformation_angles_manager = function() {
         for (var i = 0; i < this.mats.all.length; i++){
 
             this.mats.all[i].addEventListener("click", function(ev) {
-                console.log("currentTransformation: ", ev.target);
-                // don't call children's event listener -> always call the parents' one
-                ev.stopPropagation();
+
+                // hacky hack.
+                // This event is called on a cell inside a matrix, but we want
+                // it to be called on the matrix itself.
+                // -> Set the id to the grandparent's id (cell -> row -> mat)
+                ev.target.id = ev.target.parentNode.parentNode.id;
 
                 // store the current rotation element
                 self.currentTransformation = ev.target.id;
 
+                // exlude composition matrix
+                if (ev.target.id == "comp")
+                    return;
+
                 // show sliders when matrix is clicked
-                for (slider of self.sliders){
+                for (slider of self.sliders)
                     self.showSlider(slider, true);
-            }
+
+                // highlight matrix
+                self.highLightMats(true);
 
             }, false);
         }
@@ -46,9 +55,15 @@ var transformation_angles_manager = function() {
         document.addEventListener("click", function(ev) {
 
             // when clicked on anything but a rot element, hide the slider
-            if (!ev.target.className.includes("matrix") && !ev.target.id.includes("Slider"))
-                for (slider of self.sliders){
-                    self.showSlider(slider, false);
+            if (   !ev.target.className.includes("matrix")
+                && !ev.target.className.includes("cell")
+                && !ev.target.id.includes("Slider")
+                || ev.target.id == "comp") {
+
+                    for (slider of self.sliders){
+                        self.showSlider(slider, false);
+                    }
+                    self.highLightMats(false);
             }
         }, false);
 
@@ -74,10 +89,6 @@ var transformation_angles_manager = function() {
 
         //this.slider.value = trans.getRotation(this.currentAngle);
 
-        if (show)
-            this.highLightMats(true);
-        else
-            this.highLightMats(false);
     }
 
     this.updateGUIAngle = function(axis, value){
@@ -92,7 +103,7 @@ var transformation_angles_manager = function() {
 
     this.highLightMats = function(transformation){
 
-        console.log("highlightMats: ", self.currentTransformation);
+        console.log("highlightMats: ", transformation);
 
         // unhighlight all
         for (var i = 0; i < this.mats.all.length; i++)
@@ -104,13 +115,14 @@ var transformation_angles_manager = function() {
             if (self.currentTransformation == "trans")
                 this.mats.all[1].className = "matrix highlighted";
             else if (self.currentTransformation.includes("rot")){
-                    this.mats.all[2].className = "matrix highlighted";
+                    this.mats.all[2].className += " highlighted";
                     this.mats.all[3].className = "matrix highlighted";
                     this.mats.all[4].className = "matrix highlighted";
-                }
+            }
             else if (self.currentTransformation == "scale")
                 this.mats.all[5].className = "matrix highlighted";
         }
+    //    console.log(this.mats.all[2]);
     }
 
     this.init();

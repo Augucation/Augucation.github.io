@@ -30,29 +30,29 @@
 		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
 		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
 
-		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div id="matricesContainer">
 
-			<div id="comp" class="matrix" draggable="true" ondragstart="drag(event)"></div>
+			<div id="comp" class="matrix"></div>
 
 			<div id="m0" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="trans" class="matrix" draggable="true"	ondragstart="drag(event)">Tr(180)</div>
+			<div id="trans" class="matrix">Tr(180)</div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotZ" class="matrix" draggable="true" ondragstart="drag(event)">Rot<sub>z</sub>(180)</div>
+			<div id="rotZ" class="matrix">Rot<sub>z</sub>(180)</div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotY" class="matrix" draggable="true" ondragstart="drag(event)">Rot<sub>y</sub>(180)</div>
+			<div id="rotY" class="matrix">Rot<sub>y</sub>(180)</div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotX" class="matrix" draggable="true" ondragstart="drag(event)">Rot<sub>x</sub>(180)</div>
+			<div id="rotX" class="matrix">Rot<sub>x</sub>(180)</div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="scale" class="matrix" draggable="true" ondragstart="drag(event)">Scale(180)</div>
+			<div id="scale" class="matrix">Scale(180)</div>
 		</div>
 
 		<div id="sliderContainer">
