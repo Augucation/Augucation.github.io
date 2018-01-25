@@ -36,33 +36,43 @@
 
 			<div id="m0" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="trans" class="matrix">Tr(180)</div>
+			<div id="trans" class="matrix"></div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotZ" class="matrix">Rot<sub>z</sub>(180)</div>
+			<div id="rotZ" class="matrix"></div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotY" class="matrix">Rot<sub>y</sub>(180)</div>
+			<div id="rotY" class="matrix"></div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="rotX" class="matrix">Rot<sub>x</sub>(180)</div>
+			<div id="rotX" class="matrix"></div>
 
 			<div id="m1" class="multsym">&nbsp &#10005 &nbsp;</div>
 
-			<div id="scale" class="matrix">Scale(180)</div>
+			<div id="scale" class="matrix"></div>
 		</div>
 
 		<div id="sliderContainer">
-			<input type=range id="SliderX" min="0" max="360" value="0"/>
-			<input type=range id="SliderY" min="0" max="360" value="0"/>
-			<input type=range id="SliderZ" min="0" max="360" value="0"/>
+			<div id="slidersTrans" class="innerSliderContainer">
+				<input type=range id="SliderTransX" min="-10" max="10" value="3"/>
+				<input type=range id="SliderTransY" min="-10" max="10" value="3"/>
+				<input type=range id="SliderTransZ" min="-10" max="10" value="3"/>
+			</div>
+			<div id="slidersRot" class="innerSliderContainer">
+				<input type=range id="SliderRotX" min="-180" max="180" value="0"/>
+				<input type=range id="SliderRotY" min="-180" max="180" value="0"/>
+				<input type=range id="SliderRotZ" min="-180" max="180" value="0"/>
+			</div>
+			<div id="slidersScale" class="innerSliderContainer">
+				<input type=range id="SliderScaleX" min="-8" max="10" value="1"/>
+				<input type=range id="SliderScaleY" min="-8" max="10" value="1"/>
+				<input type=range id="SliderScaleZ" min="-8" max="10" value="1"/>
+			</div>
 		</div>
 
-		<button id="rotBtn0" class="button" onclick="trans.rotate(false);">Transformation anwenden</button>
-		<button id="rotBtn1" class="button" onclick="trans.rotate(true);">Transformation animieren</button>
 	</div>
 	<div id="teapotContainer"></div>
 
@@ -75,6 +85,7 @@
 	<script type="text/javascript" src="transformation_order_manager.js"></script>
 	<script type="text/javascript" src="transformation_angles_manager.js"></script>
 	<script type="text/javascript" src="coordinate_system.js"></script>
+	<script type="text/javascript" src="slider_manager.js"></script>
 	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript" src="matrix.js"></script>
 	<script type="text/javascript" src="gui.js"></script>

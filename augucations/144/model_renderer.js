@@ -95,57 +95,24 @@ function render() {
 	renderer.render( scene, camera );
 }
 
-function setRotationDegree(x, y, z, order, animated = false) {
+function setScalation(x, y, z) {
+	teapot.scale.x = x;
+	teapot.scale.y = y;
+	teapot.scale.z = z;
+	console.log("scale x: ", x);
+}
 
-	if (x + y + z == 0){
-		stopAnimation();
-		return;
-	}
+function setRotationDegree(x, y, z) {
 
     v = {x: x, y: y, z: z};
 	// lower case because three.js coordinates are lower case
-    var o = order.toLowerCase().reverse(); // from right to left!!!
-    teapot.rotation.order = order;
+
     teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
 
-    if(animated){
-
-        var interval = setInterval(update, 1000 / 300);
-        var step = 0.005;
-        var range = 0.75;
-
-        var i = 0;
-        function update(){
-
-            // iterate over all axes
-            if (i < o.length){
-				// highlight current axis
-				angle_man.highLightAxis(o[i].toUpperCase());
-				cs.highlightAxis(o[i]);
-                // calculate direction
-                d = teapot.rotation[o[i]] < d2r(v[o[i]]) ? 1 : -1;
-                // while goal is not reached
-                if (Math.abs(r2d(teapot.rotation[o[i]]) - (v[o[i]])) > range){
-                    // rotate by a step
-                    teapot.rotation[o[i]] += step * d;
-                    render();
-                }
-                // if goal is reached, go to the next axis
-                else {
-                    i++;
-                }
-            }
-            else {
-				stopAnimation();
-            }
-        }
-    }
-    else{
-        teapot.rotation.x = d2r(x);
-        teapot.rotation.y = d2r(y);
-        teapot.rotation.z = d2r(z);
-		render();
-    }
+    teapot.rotation.x = d2r(x);
+    teapot.rotation.y = d2r(y);
+    teapot.rotation.z = d2r(z);
+	render();
 }
 
 function stopAnimation(){

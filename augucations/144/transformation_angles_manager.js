@@ -1,10 +1,20 @@
 var transformation_angles_manager = function() {
 
-    this.sliders = [];
+    this.sliderDivs = [];
+    this.sliderDivs[0] = document.getElementById("slidersTrans");
+    this.sliderDivs[1] = document.getElementById("slidersRot");
+    this.sliderDivs[2] = document.getElementById("slidersScale");
 
-    this.sliders[0] = document.getElementById("SliderX");
-    this.sliders[1] = document.getElementById("SliderY");
-    this.sliders[2] = document.getElementById("SliderZ");
+    this.sliders = [];
+    this.sliders[0] = document.getElementById("SliderTransX");
+    this.sliders[1] = document.getElementById("SliderTransY");
+    this.sliders[2] = document.getElementById("SliderTransZ");
+    this.sliders[3] = document.getElementById("SliderRotZ");
+    this.sliders[4] = document.getElementById("SliderRotY");
+    this.sliders[5] = document.getElementById("SliderRotX");
+    this.sliders[6] = document.getElementById("SliderScaleX");
+    this.sliders[7] = document.getElementById("SliderScaleY");
+    this.sliders[8] = document.getElementById("SliderScaleZ");
 
     this.mats = {};
 
@@ -43,8 +53,21 @@ var transformation_angles_manager = function() {
                     return;
 
                 // show sliders when matrix is clicked
-                for (slider of self.sliders)
-                    self.showSlider(slider, true);
+                if (ev.target.id == "trans"){
+                    self.showSlider(self.sliderDivs[0], true);
+                    self.showSlider(self.sliderDivs[1], false);
+                    self.showSlider(self.sliderDivs[2], false);
+                }
+                else if (ev.target.id.includes("rot")){
+                    self.showSlider(self.sliderDivs[1], true);
+                    self.showSlider(self.sliderDivs[0], false);
+                    self.showSlider(self.sliderDivs[2], false);
+                }
+                else if (ev.target.id == "scale"){
+                    self.showSlider(self.sliderDivs[2], true);
+                    self.showSlider(self.sliderDivs[0], false);
+                    self.showSlider(self.sliderDivs[1], false);
+                }
 
                 // highlight matrix
                 self.highLightMats(true);
@@ -60,34 +83,21 @@ var transformation_angles_manager = function() {
                 && !ev.target.id.includes("Slider")
                 || ev.target.id == "comp") {
 
-                    for (slider of self.sliders){
-                        self.showSlider(slider, false);
+                    for (sliderDiv of self.sliderDivs){
+                        self.showSlider(sliderDiv, false);
                     }
                     self.highLightMats(false);
             }
         }, false);
 
 
-        for (slider of self.sliders)
-            slider.addEventListener("input", function(ev){
-
-                // update the rotation data stored inside the trans manager
-                trans.setRotation(self.currentAngle, parseFloat(this.value));
-
-                // update gui
-                self.updateGUIAngle(self.currentAngle, parseFloat(this.value));
-
-            }, false);
-
         // add listener to the reset button to reset gui
         document.getElementById("resetBtn").addEventListener("click", self.resetGUIAngles(), false);
     }
 
-    this.showSlider = function(slider, show)
+    this.showSlider = function(sliderDiv, show)
     {
-        slider.style.visibility = show ? "visible" : "hidden";
-
-        //this.slider.value = trans.getRotation(this.currentAngle);
+        sliderDiv.style.display = show ? "block" : "none";
 
     }
 
@@ -102,8 +112,6 @@ var transformation_angles_manager = function() {
     }
 
     this.highLightMats = function(transformation){
-
-        console.log("highlightMats: ", transformation);
 
         // unhighlight all
         for (var i = 0; i < this.mats.all.length; i++)
@@ -122,7 +130,6 @@ var transformation_angles_manager = function() {
             else if (self.currentTransformation == "scale")
                 this.mats.all[5].className = "matrix highlighted";
         }
-    //    console.log(this.mats.all[2]);
     }
 
     this.init();

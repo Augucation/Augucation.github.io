@@ -2,7 +2,7 @@
 {
   border: 0px solid red;
   width: calc(50vw + 30vh);
-  height: 35vh;
+  height: 50vh;
   margin: auto;
   position: relative;
   text-align: center;
@@ -85,7 +85,17 @@
 
 input[type=range]
 {
-  visibility: hidden;
+ /* visibility: hidden;*/
+}
+
+#sliderContainer
+{
+  height: 50%;
+}
+
+.innerSliderContainer
+{
+  display: none;
 }
 
 #teapotContainer

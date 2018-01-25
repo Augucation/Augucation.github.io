@@ -1,40 +1,43 @@
-var transformation = function (rotations, order){
+var transformation = function (rotations, scale){
 
-    this.rotations = rotations;
-    this.order = order;
+    self.rotations = rotations;
+    self.scale = scale;
 
-    this.getRotations = function(){
-        return this.rotations;
+    self = this;
+
+    self.getRotations = function(){
+        return self.rotations;
     }
 
-    this.getRotation = function(axis){
-        return this.rotations[axis];
+    self.getRotation = function(axis){
+        return self.rotations[axis];
     }
 
-    this.setRotations = function(rotations){
-        this.rotations = rotations;
+    self.setRotations = function(rotations){
+        self.rotations = rotations;
     }
 
-    this.setRotation = function(axis, value){
-        this.rotations[axis] = value;
+    self.setRotation = function(axis, value){
+        self.rotations[axis] = value;
     }
 
-    this.getOrder = function(){
-        return this.order;
+    self.rotate = function(){
+        setRotationDegree(self.rotations.X, self.rotations.Y, self.rotations.Z);
     }
 
-    this.setOrder = function(order){
-        this.order = order;
+    self.resetRotation = function(){
+        setRotationDegree(0, 0, 0);
     }
 
-    this.rotate = function(animated){
-        setRotationDegree(this.rotations.X, this.rotations.Y, this.rotations.Z, this.order, animated);
+    self.setScale = function(scale){
+        self.scale = scale;
+        console.log("scalleeeee: ", scale);
     }
 
-    this.resetRotation = function(){
-        setRotationDegree(0, 0, 0, this.order);
+    self.scale = function(){
+        setScalation(self.scale.X, self.scale.Y, self.scale.Z);
     }
 }
 
 
-trans = new transformation({X: 0, Y: 0, Z: 0}, "XYZ");
+trans = new transformation({X: 0, Y: 0, Z: 0}, {X: 1, Y: 1, Z: 1});
