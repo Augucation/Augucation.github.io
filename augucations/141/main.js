@@ -19,7 +19,7 @@ function main() {
     return;
   }
 
-  const eyeElem = document.querySelector("#eye");
+  //const eyeElem = document.querySelector("#eye");
 
   // Create Geometry.
   var wireCubeArrays = {
@@ -567,8 +567,8 @@ function main() {
       const eyePosition = m4.transformPoint(worldViewProjection, [0, 0, 0]);
       const ex = (eyePosition[0] *  .5 + .5) * width / pixelRatio;
       const ey = (eyePosition[1] * -.5 + .5) * halfHeight / pixelRatio;
-      eyeElem.style.left = px(ex - eyeElem.width / 2);
-      eyeElem.style.top = px(ey - eyeElem.height / 2);
+    //  eyeElem.style.left = px(ex - eyeElem.width / 2);
+    //  eyeElem.style.top = px(ey - eyeElem.height / 2);
     }
 
 
