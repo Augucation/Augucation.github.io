@@ -1,0 +1,97 @@
+#guiContainer
+{
+  border: 0px solid red;
+  width: calc(50vw + 30vh);
+  height: 35vh;
+  margin: auto;
+  position: relative;
+  text-align: center;
+}
+
+#rotBtn0, #rotBtn1, #resetBtn
+{
+  position: relative;
+  margin: 2% auto;
+  font-size: 2vh !important;
+}
+
+#resetBtn
+{
+  margin: auto;
+  position: relative;
+  display: inherit;
+}
+
+#rotBtn0, #rotBtn1
+{
+  display: inline-block;
+}
+
+#matricesContainer
+{
+  border: 0px solid blue;
+  width: 100%;
+  height: calc(5vh + 5vw);
+  margin: auto;
+  position: relative;
+  display: inline-block;
+  
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.multsym
+{
+  font-size: 20px;
+  line-height: 6vh;
+  width: auto;
+  height: auto;
+  cursor: default;
+  float: left;
+}
+
+.matrix
+{
+  border: 0px solid red;
+  /*! font-size: 4vh; */
+  width:  calc(6vh + 6vw);
+  height: calc(6vh + 6vw);
+  cursor: pointer;
+  float: left;
+}
+
+.row
+{
+  border: 0px solid red;
+  width:  100%;
+  height: 25%;
+  display: block;
+}
+
+.cell
+{
+  border: 0px solid green;
+  width: 25%;
+  height: 100%;
+  display: inline-block;
+}
+
+.highlighted
+{
+  color: var(--dark_red);
+}
+
+input[type=range]
+{
+  visibility: hidden;
+}
+
+#teapotContainer
+{
+  border: 0px solid red;
+  width: 30vw;
+  height: 30vh;  
+  margin: 2% auto;
+}
