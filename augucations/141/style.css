@@ -10,7 +10,8 @@
 
 #canvas
 {
-  width: calc(25vw + 15vh);
+  width: calc(35vw + 25vh);
+  border: 1px solid var(--hci_gray);
 }
 
 #uiContainer
@@ -31,7 +32,7 @@ input[type = range]
 
 #canvasContainer
 {
-  width: calc(25vw + 15vh);
+  width: calc(35vw + 25vh);
   margin: 3% auto;
 }
 

@@ -6,6 +6,8 @@ const m4 = twgl.m4;
 var eyePosition;
 var target;
 
+var yoffset = 10;
+
 // globals
 var pixelRatio = window.devicePixelRatio || 1;
 var scale = 1;
@@ -412,7 +414,7 @@ function main() {
   var zNear = 10;
   var zFar = 50;
   var fieldOfView = 30;
-  var zPosition = -25;
+  var zPosition = -35;
 
   // Setup a ui.
   function updateFieldOfView(event, ui) {
@@ -595,8 +597,7 @@ function main() {
     gl.enable(gl.SCISSOR_TEST);
     gl.viewport(0, 0, width, halfHeight);
     gl.scissor(0, 0, width, halfHeight);
-    // gl.clearColor(0.33, 0.37, 0.4, 1);
-    gl.clearColor(0, 0, 0, 0)
+    gl.clearColor(0.33, 0.37, 0.4, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     m4.perspective(
