@@ -38,7 +38,6 @@ function init() {
 	var onProgress = function ( xhr ) {
 		if ( xhr.lengthComputable ) {
 			var percentComplete = xhr.loaded / xhr.total * 100;
-			//console.log( Math.round(percentComplete, 2) + '% downloaded' );
 		}
 	};
 
@@ -49,7 +48,11 @@ function init() {
 	loader.load( 'utah-teapot.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-                var material = new THREE.MeshLambertMaterial({color: 0xdc0b15, transparent: false, opacity: 1});
+                var material = new THREE.MeshLambertMaterial({
+					color: 0xdc0b15,
+					transparent: false,
+					opacity: 1
+				});
 
                 child.material = material;
 			}
@@ -99,7 +102,6 @@ function setScalation(x, y, z) {
 	teapot.scale.x = x;
 	teapot.scale.y = y;
 	teapot.scale.z = z;
-	console.log("scale x: ", x);
 }
 
 function setRotationDegree(x, y, z) {
@@ -113,6 +115,12 @@ function setRotationDegree(x, y, z) {
     teapot.rotation.y = d2r(y);
     teapot.rotation.z = d2r(z);
 	render();
+}
+
+function setTranslation(x, y, z) {
+	teapot.position.x = x;
+	teapot.position.y = y;
+	teapot.position.z = z;
 }
 
 function stopAnimation(){

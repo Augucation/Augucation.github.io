@@ -13,28 +13,39 @@ for (var i = 0; i < angle_man.sliders.length; i++)
     }, false);
 */
 
-var rot = function(){
+var rot = function() {
     trans.setRotations({
-                        X: parseFloat(angle_man.sliders[5].value),
-                        Y: parseFloat(angle_man.sliders[4].value),
-                        Z: parseFloat(angle_man.sliders[3].value)
-                       });
+        X: parseFloat(angle_man.sliders[5].value),
+        Y: parseFloat(angle_man.sliders[4].value),
+        Z: parseFloat(angle_man.sliders[3].value)
+    });
     trans.rotate();
 }
 
-var scale = function(){
-
-    var convert_scale = function(v){
+var scale = function() {
+    // The sliders have values between -8 and 10.
+    // This function converts the slider's values to values between 0.1 and 10.
+    var convert_scale = function(v) {
         return (v >= 1 ? v : (0.9 + (v * 0.1)));
     }
 
 
     trans.setScale({
-                    X: convert_scale(parseFloat(angle_man.sliders[6].value)),
-                    Y: convert_scale(parseFloat(angle_man.sliders[7].value)),
-                    Z: convert_scale(parseFloat(angle_man.sliders[8].value))
-                   });
+        X: convert_scale(parseFloat(angle_man.sliders[6].value)),
+        Y: convert_scale(parseFloat(angle_man.sliders[7].value)),
+        Z: convert_scale(parseFloat(angle_man.sliders[8].value))
+    });
     trans.scale();
+}
+
+var translate = function() {
+
+    trans.setTranslation({
+        X: parseFloat(angle_man.sliders[0].value),
+        Y: parseFloat(angle_man.sliders[1].value),
+        Z: parseFloat(angle_man.sliders[2].value)
+    });
+    trans.translate();
 }
 
 angle_man.sliders[3].addEventListener("input", function(){rot();}, false);
@@ -44,3 +55,7 @@ angle_man.sliders[5].addEventListener("input", function(){rot();}, false);
 angle_man.sliders[6].addEventListener("input", function(){scale();}, false);
 angle_man.sliders[7].addEventListener("input", function(){scale();}, false);
 angle_man.sliders[8].addEventListener("input", function(){scale();}, false);
+
+angle_man.sliders[0].addEventListener("input", function(){translate();}, false);
+angle_man.sliders[1].addEventListener("input", function(){translate();}, false);
+angle_man.sliders[2].addEventListener("input", function(){translate();}, false);
