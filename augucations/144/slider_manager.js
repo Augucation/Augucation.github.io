@@ -15,9 +15,9 @@ for (var i = 0; i < angle_man.sliders.length; i++)
 
 var rot = function() {
     trans.setRotations({
-        X: parseFloat(angle_man.sliders[5].value),
-        Y: parseFloat(angle_man.sliders[4].value),
-        Z: parseFloat(angle_man.sliders[3].value)
+        x: parseFloat(angle_man.sliders[5].value),
+        y: parseFloat(angle_man.sliders[4].value),
+        z: parseFloat(angle_man.sliders[3].value)
     });
     trans.rotate();
 }
@@ -31,9 +31,9 @@ var scale = function() {
 
 
     trans.setScale({
-        X: convert_scale(parseFloat(angle_man.sliders[6].value)),
-        Y: convert_scale(parseFloat(angle_man.sliders[7].value)),
-        Z: convert_scale(parseFloat(angle_man.sliders[8].value))
+        x: convert_scale(parseFloat(angle_man.sliders[6].value)),
+        y: convert_scale(parseFloat(angle_man.sliders[7].value)),
+        z: convert_scale(parseFloat(angle_man.sliders[8].value))
     });
     trans.scale();
 }
@@ -41,9 +41,9 @@ var scale = function() {
 var translate = function() {
 
     trans.setTranslation({
-        X: parseFloat(angle_man.sliders[0].value),
-        Y: parseFloat(angle_man.sliders[1].value),
-        Z: parseFloat(angle_man.sliders[2].value)
+        x: parseFloat(angle_man.sliders[0].value),
+        y: parseFloat(angle_man.sliders[1].value),
+        z: parseFloat(angle_man.sliders[2].value)
     });
     trans.translate();
 }

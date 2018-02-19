@@ -98,29 +98,26 @@ function render() {
 	renderer.render( scene, camera );
 }
 
-function setScalation(x, y, z) {
-	teapot.scale.x = x;
-	teapot.scale.y = y;
-	teapot.scale.z = z;
+function setScalation(scale) {
+	teapot.scale.x = scale.x;
+	teapot.scale.y = scale.y;
+	teapot.scale.z = scale.z;
 }
 
-function setRotationDegree(x, y, z) {
-
-    v = {x: x, y: y, z: z};
-	// lower case because three.js coordinates are lower case
+function setRotationDegree(rotation) {
 
     teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
 
-    teapot.rotation.x = d2r(x);
-    teapot.rotation.y = d2r(y);
-    teapot.rotation.z = d2r(z);
+    teapot.rotation.x = d2r(rotation.x);
+    teapot.rotation.y = d2r(rotation.y);
+    teapot.rotation.z = d2r(rotation.z);
 	render();
 }
 
-function setTranslation(x, y, z) {
-	teapot.position.x = x;
-	teapot.position.y = y;
-	teapot.position.z = z;
+function setTranslation(translation) {
+	teapot.position.x = translation.x;
+	teapot.position.y = translation.y;
+	teapot.position.z = translation.z;
 }
 
 function stopAnimation(){
