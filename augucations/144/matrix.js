@@ -1,23 +1,24 @@
-var Matrix = function(div, id, type){
+var Matrix = function(div, id, size, type) {
 
     this.div = div;
     this.cells = [];
     this.id = id;
+    this.size = size;
     this.type = type;
 
     self = this;
 
-    this.init = function(){
+    this.init = function() {
         this.createMatrix();
-        this.fillMatrix(data.d[this.id]);
+        this.fillMatrix();
     }
 
-    this.createMatrix = function(){
+    this.createMatrix = function() {
             // clear content
             div.innerHTML = "";
 
             // create cell element
-            var addCell = function(){
+            var addCell = function() {
                 var cell = document.createElement("div");
                 cell.className = "cell";
                 self.cells.push(cell);
@@ -25,93 +26,57 @@ var Matrix = function(div, id, type){
             }
 
             // create row with 4 cells
-            var addRow = function(){
+            var addRow = function() {
                 var row = document.createElement("row");
                 row.className = "row";
-                for (var i = 0; i < 4; i++){
+                for (var i = 0; i < self.size; i++){
                     row.appendChild(addCell());
                 }
                 return row;
             }
 
             // add 4 rows to matrix
-            for (var i = 0; i < 4; i++){
+            for (var i = 0; i < self.size; i++){
                 div.appendChild(addRow());
             }
     }
 
-    this.fillMatrix = function(data){
+    this.fillMatrix = function() {
 
-        // non rotation matrices: fill with plain values
-        if (!self.type.includes("rot")){
-            for (var i = 0; i < self.cells.length; i++){
-                self.cells[i].innerHTML = data[i];
+        // get data from the data object depending on the matrix type
+        d = data[self.type];
+
+        // iterate over matrix cells and fill these with the data
+        for (var x = 0; x < self.size; x++) {
+            for (var y = 0; y < self.size; y++) {
+                self.cells[self.size * x + y].innerHTML = d[x][y];
             }
         }
 
-        // rotation matrices: add sin and cos
-        else if (self.type == "rotZ"){
-            self.cells[0].innerHTML = "cos(" + data[0] + ")";
-            self.cells[1].innerHTML = "-sin(" + data[1] + ")";
-            self.cells[2].innerHTML = data[2];
-            self.cells[3].innerHTML = data[3];
+        // exception: add cos() and sin() to some rotation matrix cells,
+        // do nothing and return for all other matrix types
+        if (!self.type.includes("rotation"))
+            return;
 
-            self.cells[4].innerHTML = "sin(" + data[4] + ")";
-            self.cells[5].innerHTML = "cos(" + data[5] + ")";
-            self.cells[6].innerHTML = data[6];
-            self.cells[7].innerHTML = data[7];
-
-            self.cells[8].innerHTML = data[8];
-            self.cells[9].innerHTML = data[9];
-            self.cells[10].innerHTML = data[10];
-            self.cells[11].innerHTML = data[11];
-
-            self.cells[12].innerHTML = data[12];
-            self.cells[13].innerHTML = data[13];
-            self.cells[14].innerHTML = data[14];
-            self.cells[15].innerHTML = data[15];
+        if (self.type == "rotationX") {
+            self.cells[5].innerHTML = "cos(" + d[1][1] + ")";
+            self.cells[6].innerHTML = "-sin(" + d[1][2] + ")";
+            self.cells[9].innerHTML = "sin(" + d[2][1] + ")";
+            self.cells[10].innerHTML = "cos(" + d[2][2] + ")";
         }
-        else if (self.type == "rotY"){
-            self.cells[0].innerHTML = "cos(" + data[0] + ")";
-            self.cells[1].innerHTML = data[1];
-            self.cells[2].innerHTML = "sin(" + data[2] + ")";
-            self.cells[3].innerHTML = data[3];
+        else if (self.type == "rotationY") {
+            self.cells[0].innerHTML = "cos(" + d[0][0] + ")";
+            self.cells[2].innerHTML = "sin(" + d[0][2] + ")";
+            self.cells[8].innerHTML = "-sin(" + d[2][0] + ")";
+            self.cells[10].innerHTML = "cos(" + d[2][2] + ")";
 
-            self.cells[4].innerHTML = data[4];
-            self.cells[5].innerHTML = data[5];
-            self.cells[6].innerHTML = data[6];
-            self.cells[7].innerHTML = data[7];
-
-            self.cells[8].innerHTML = "-sin(" + data[8] + ")";
-            self.cells[9].innerHTML = data[9];
-            self.cells[10].innerHTML = "cos(" + data[10] + ")";
-            self.cells[11].innerHTML = data[11];
-
-            self.cells[12].innerHTML = data[12];
-            self.cells[13].innerHTML = data[13];
-            self.cells[14].innerHTML = data[14];
-            self.cells[15].innerHTML = data[15];
         }
-        else if (self.type == "rotX"){
-            self.cells[0].innerHTML = data[0];
-            self.cells[1].innerHTML = data[1];
-            self.cells[2].innerHTML = data[2];
-            self.cells[3].innerHTML = data[3];
+        else if (self.type == "rotationZ") {
+            self.cells[0].innerHTML = "cos(" + d[0][0] + ")";
+            self.cells[1].innerHTML = "-sin(" + d[0][1] + ")";
+            self.cells[4].innerHTML = "sin(" + d[1][0] + ")";
+            self.cells[5].innerHTML = "cos(" + d[1][1] + ")";
 
-            self.cells[4].innerHTML = data[4];
-            self.cells[5].innerHTML = "cos(" + data[5] + ")";
-            self.cells[6].innerHTML = "-sin(" + data[6] + ")";
-            self.cells[7].innerHTML = data[7];
-
-            self.cells[8].innerHTML = data[8];
-            self.cells[9].innerHTML = "sin(" + data[9] + ")";
-            self.cells[10].innerHTML = "cos(" + data[10] + ")";
-            self.cells[11].innerHTML = data[11];
-
-            self.cells[12].innerHTML = data[12];
-            self.cells[13].innerHTML = data[13];
-            self.cells[14].innerHTML = data[14];
-            self.cells[15].innerHTML = data[15];
         }
     }
 

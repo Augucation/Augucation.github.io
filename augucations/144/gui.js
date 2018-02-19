@@ -12,12 +12,12 @@ var Gui = function(){
             mat = new Matrix(angle_man.mats.all[i], i);
         }
         */
-        this.mats.push(new Matrix(angle_man.mats.all[0], 0, "comp"));
-        this.mats.push(new Matrix(angle_man.mats.all[1], 1, "trans"));
-        this.mats.push(new Matrix(angle_man.mats.all[2], 2, "rotZ"));
-        this.mats.push(new Matrix(angle_man.mats.all[3], 3, "rotY"));
-        this.mats.push(new Matrix(angle_man.mats.all[4], 4, "rotX"));
-        this.mats.push(new Matrix(angle_man.mats.all[5], 5, "scale"));
+        this.mats.push(new Matrix(angle_man.mats.all[0], 0, 4, "composition"));
+        this.mats.push(new Matrix(angle_man.mats.all[1], 1, 4, "translation"));
+        this.mats.push(new Matrix(angle_man.mats.all[2], 2, 4, "rotationZ"));
+        this.mats.push(new Matrix(angle_man.mats.all[3], 3, 4, "rotationY"));
+        this.mats.push(new Matrix(angle_man.mats.all[4], 4, 4, "rotationX"));
+        this.mats.push(new Matrix(angle_man.mats.all[5], 5, 4, "scale"));
     }
 }
 
