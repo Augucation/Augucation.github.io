@@ -15,9 +15,9 @@ var Data = function(){
     ];
 
     this.rotationX = [
+        [1, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 1, 0],
         [0, 0, 0, 1]
     ];
 
@@ -29,9 +29,9 @@ var Data = function(){
     ];
 
     this.rotationZ = [
-        [1, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
+        [0, 0, 1, 0],
         [0, 0, 0, 1]
     ];
 
@@ -46,14 +46,17 @@ var Data = function(){
 
     this.setTranslationX = function(x) {
         this.translation[0][0] = x;
+        gui.mats[1].fillMatrix();
     }
 
     this.setTranslationY = function(y) {
         this.translation[1][1] = y;
+        gui.mats[1].fillMatrix();
     }
 
     this.setTranslationZ = function(z) {
         this.translation[2][2] = z;
+        gui.mats[1].fillMatrix();
     }
 
     this.setTranslationXYZ = function(translations) {
@@ -77,6 +80,7 @@ var Data = function(){
         this.rotationX[1][2] = x;
         this.rotationX[2][1] = x;
         this.rotationX[2][2] = x;
+        gui.mats[4].fillMatrix();
     }
 
     this.setRotationY = function(y) {
@@ -84,13 +88,15 @@ var Data = function(){
         this.rotationY[0][2] = y;
         this.rotationY[2][0] = y;
         this.rotationY[2][2] = y;
+        gui.mats[3].fillMatrix();
     }
 
     this.setRotationZ = function(z) {
         this.rotationZ[0][0] = z;
-        this.rotationZ[1][1] = z;
+        this.rotationZ[0][1] = z;
         this.rotationZ[1][0] = z;
         this.rotationZ[1][1] = z;
+        gui.mats[2].fillMatrix();
     }
 
     this.setRotationXYZ = function(rotations) {
@@ -111,6 +117,7 @@ var Data = function(){
 
     this.setScaleX = function(x) {
         this.scale[0][0] = x;
+        gui.mats[5].fillMatrix();
     }
 
     this.setScaleY = function(y) {
