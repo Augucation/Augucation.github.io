@@ -44,12 +44,15 @@ var Matrix = function(div, id, size, type) {
     this.fillMatrix = function(matrix_data) {
 
         // get data from the data object depending on the matrix type
-        d = data[this.type];
+        // for rotation matrices get the data from the gui version
+        var d;
+        d = this.type.includes("rotation") ? data[this.type + "_gui"] : data[this.type];
 
-        // iterate over matrix cells and fill these with the data
+
+        // iterate over matrix cells and fill them with the data
         for (var x = 0; x < this.size; x++) {
             for (var y = 0; y < this.size; y++) {
-                this.cells[this.size * x + y].innerHTML = d[x][y];
+                this.cells[this.size * x + y].innerHTML = Math.round(d[x][y] * 100) / 100;
             }
         }
 

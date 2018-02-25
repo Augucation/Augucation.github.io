@@ -4,6 +4,7 @@ var camera, scene, renderer, teapot;
 var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+var teapotInitScale = 4;
 
 function init() {
 	container = document.getElementById("teapotContainer");
@@ -58,7 +59,7 @@ function init() {
 			}
 		} );
 
-        object.scale.set(4, 4, 4);
+        object.scale.set(teapotInitScale, teapotInitScale, teapotInitScale);
 
         // store the object globally to modify it later
         teapot = object;
@@ -99,18 +100,18 @@ function render() {
 }
 
 function setScalation(scale) {
-	teapot.scale.x = scale.x;
-	teapot.scale.y = scale.y;
-	teapot.scale.z = scale.z;
+	teapot.scale.x = scale.x * teapotInitScale;
+	teapot.scale.y = scale.y * teapotInitScale;
+	teapot.scale.z = scale.z * teapotInitScale;
 }
 
 function setRotationDegree(rotation) {
 
     teapot.rotation.x = teapot.rotation.y = teapot.rotation.z = 0;
 
-    teapot.rotation.x = d2r(rotation.x);
-    teapot.rotation.y = d2r(rotation.y);
-    teapot.rotation.z = d2r(rotation.z);
+    teapot.rotation.x = rotation.x * d2r;
+    teapot.rotation.y = rotation.y * d2r;
+    teapot.rotation.z = rotation.z * d2r;
 	render();
 }
 
@@ -120,17 +121,13 @@ function setTranslation(translation) {
 	teapot.position.z = translation.z;
 }
 
+function getMatrix() {
+	return teapot.matrix;
+}
+
 function stopAnimation(){
 	// stop highlighting and animation
 	angle_man.highLightAxis(false);
 	cs.highlightAxis(false);
 	clearInterval(interval);
-}
-
-function d2r(d){
-    return d * Math.PI / 180;
-}
-
-function r2d(r){
-    return r * 180 / Math.PI;
 }

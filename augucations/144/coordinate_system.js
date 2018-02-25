@@ -75,11 +75,11 @@ var coordinate_system = function(scene){
         cone.position.set(pos.x, pos.y, pos.z);
 
         if(axis == "X"){
-            cone.rotation.z = d2r(-90);
+            cone.rotation.z = -90 * d2r;
         }
 
         if (axis == "Z"){
-            cone.rotation.x = d2r(90);
+            cone.rotation.x = 90 * d2r;
         }
 
         scene.add( cone );

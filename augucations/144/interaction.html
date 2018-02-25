@@ -25,6 +25,8 @@
 	<script src="https://threejs.org/examples/js/Detector.js"></script>
 	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.min.js"></script>
+
 	<div id="guiContainer" class="my_text">
 		<h2>Transformationssequenz</h2>
 		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
@@ -57,9 +59,9 @@
 
 		<div id="sliderContainer">
 			<div id="slidersTrans" class="innerSliderContainer">
-				<input type=range id="SliderTransX" min="-100" max="100" value="3"/>
-				<input type=range id="SliderTransY" min="-100" max="100" value="3"/>
-				<input type=range id="SliderTransZ" min="-100" max="100" value="3"/>
+				<input type=range id="SliderTransX" min="-100" max="100" value="0"/>
+				<input type=range id="SliderTransY" min="-100" max="100" value="0"/>
+				<input type=range id="SliderTransZ" min="-100" max="100" value="0"/>
 			</div>
 			<div id="slidersRot" class="innerSliderContainer">
 				<input type=range id="SliderRotX" min="-180" max="180" value="0"/>
