@@ -5,6 +5,9 @@ var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 var teapotInitScale = 4;
+var initMatrix;
+
+var old_matrix;
 
 function init() {
 	container = document.getElementById("teapotContainer");
@@ -112,13 +115,31 @@ function setRotationDegree(rotation) {
     teapot.rotation.x = rotation.x * d2r;
     teapot.rotation.y = rotation.y * d2r;
     teapot.rotation.z = rotation.z * d2r;
-	render();
 }
 
 function setTranslation(translation) {
 	teapot.position.x = translation.x;
 	teapot.position.y = translation.y;
 	teapot.position.z = translation.z;
+
+}
+
+function applyCompositionMatrix() {
+
+	/* Before applying the composition matrix, reset the teapot's last
+	 * transformation by applying the inverse of the matrix applied the last
+	 * time.
+	 */
+
+	if (old_matrix)
+		teapot.applyMatrix(old_matrix.getInverse(old_matrix));
+
+	m = trans.A2T(data.composition);
+
+	teapot.applyMatrix(m);
+	old_matrix = m;
+
+	teapot.updateMatrixWorld();
 }
 
 function getMatrix() {

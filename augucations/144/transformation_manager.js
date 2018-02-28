@@ -14,7 +14,7 @@ var transformation = function () {
     }
 
     this.rotate = function() {
-        setRotationDegree(data.getRotationXYZ_gui());
+        //setRotationDegree(data.getRotationXYZ_gui());
     }
 
     this.setScale = function(scale) {
@@ -23,7 +23,7 @@ var transformation = function () {
     }
 
     this.scale = function() {
-        setScalation(data.getScaleXYZ());
+        //setScalation(data.getScaleXYZ());
     }
 
     this.setTranslation = function(translation) {
@@ -32,56 +32,58 @@ var transformation = function () {
     }
 
     this.translate = function() {
-        setTranslation(data.getTranslationXYZ());
+        //setTranslation(data.getTranslationXYZ());
     }
 
-    this.compose = function() {
+    this.applyComposition = function() {
+        applyCompositionMatrix();
+    }
 
-        var composition_order = [
-            data.translation,
-            data.rotationX,
-            data.rotationY,
-            data.rotationZ,
-            data.scale
+    this.compose = function(gui=true) {
+
+        /* If gui is true, the gui values are used, i.e. degrees instead of
+         * radians for rotations. Use this to calculate the gui matrix.
+         * Else, the real values are used. Use this to calculate the real
+         * transformation matrix that will be applied onto the teapot.
+         */
+
+         /*
+         data.translation,
+         data.rotationX,
+         data.rotationY,
+         data.rotationZ,
+         data.scale
+         */
+
+        var composition_order = [];
+
+        if(gui) {
+            composition_order = [
+                data.rotationX,
+                data.scale,
+                data.rotationZ,
+                data.translation,
+                data.rotationY
+            ];
+        } else {
+            composition_order = [
+                data.translation
+            ];
+        }
+
+        // Identity matrix
+        var composition = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
         ];
 
-        var composition = math.multiply(data.translation, data.rotationX);
-        composition = math.multiply(composition, data.rotationY);
-        composition = math.multiply(composition, data.rotationZ);
-        composition = math.multiply(composition, data.scale);
+        for (var i = 0; i < composition_order.length; i++) {
+                composition = math.multiply(composition, composition_order[i]);
+        }
+
         data.setCompositionArray(composition);
-
-        //data.setCompositionArray(math.multiply(data.translation, data.scale));
-
-        // Three.JS has a built in matrix multiplication function
-        // that we will use. Therefore we convert the data object's matrices
-        // into Three.JS matrix objects.
-
-        /*
-        var composition = new THREE.Matrix4();
-
-        composition.multiplyMatrices(this.A2T(data.scale), this.A2T(data.rotationZ));
-        composition.multiplyMatrices(composition, this.A2T(data.rotationY));
-        composition.multiplyMatrices(composition, this.A2T(data.rotationX));
-        composition.multiplyMatrices(composition, this.A2T(data.translation));
-
-        composition = this.A2T(data.scale).multiply(this.A2T(data.rotationZ));
-        composition = composition.multiply(this.A2T(data.rotationY));
-        composition = composition.multiply(this.A2T(data.rotationX));
-        composition = composition.multiply(this.A2T(data.translation));
-
-        // Convert the composition matrix back into a 2D array and set it.
-        data.setCompositionArray(this.T2A(composition));
-
-        // Because the teapot model is very small, the model_renderer renderes
-        // it 4 (teapotInitScale) times bigger than the scale matrix says.
-        // Therefore we have to divide the teapot' real scale by 4 to get values
-        // that match the ones shown in the matrix.
-        var scaleFix = new THREE.Matrix4();
-        scaleFix.fromArray([0.25, 1, 1, 1, 1, 0.25, 1, 1, 1, 1, 0.25, 1, 1, 1, 1, 1]);
-
-        data.setCompositionArray(this.T2A(getMatrix().multiply(scaleFix)));
-        */
     }
 
     // Array matrix to Three.JS matrix

@@ -19,7 +19,8 @@ var rot = function() {
         y: Math.round(parseFloat(angle_man.sliders[4].value) * 100) / 100,
         z: Math.round(parseFloat(angle_man.sliders[3].value) * 100) / 100
     });
-    trans.rotate();
+    trans.applyComposition();
+    // trans.rotate();
 }
 
 var scale = function() {
@@ -33,8 +34,9 @@ var scale = function() {
         x: Math.round(convert_scale(parseFloat(angle_man.sliders[6].value)) * 100) / 100,
         y: Math.round(convert_scale(parseFloat(angle_man.sliders[7].value)) * 100) / 100,
         z: Math.round(convert_scale(parseFloat(angle_man.sliders[8].value)) * 100) / 100
-    });    
-    trans.scale();
+    });
+    trans.applyComposition();
+    // trans.scale();
 }
 
 var translate = function() {
@@ -44,7 +46,8 @@ var translate = function() {
         y: Math.round(parseFloat(angle_man.sliders[1].value) * 100) / 100,
         z: Math.round(parseFloat(angle_man.sliders[2].value) * 100) / 100
     });
-    trans.translate();
+    trans.applyComposition();
+    // trans.translate();
 }
 
 angle_man.sliders[3].addEventListener("input", function(){rot();}, false);
