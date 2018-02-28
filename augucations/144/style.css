@@ -1,8 +1,9 @@
 #guiContainer
 {
   border: 0px solid red;
-  width: calc(50vw + 30vh);
-  height: 50vh;
+  width: 100%;
+  width: calc(70vw + 50vh);
+  height: 60vh;
   margin: auto;
   position: relative;
   text-align: center;
@@ -31,7 +32,7 @@
 {
   border: 0px solid blue;
   width: 100%;
-  height: calc(5vh + 5vw);
+  height: calc(9vh + 9vw);
   margin: auto;
   position: relative;
   display: inline-block;
@@ -42,26 +43,76 @@
   user-select: none; /* Standard */
 }
 
+.multsym_container
+{
+  float: left;
+  height:  calc(8vh + 8vw);
+  width: 2%;
+  display: table;
+  text-align: center;
+  margin-right: 0.5%;
+}
+
 .multsym
 {
   font-size: 20px;
-  line-height: 6vh;
-  width: auto;
-  height: auto;
-  cursor: default;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.sin_cos_font
+{
+  font-size: 1.4vh;
+}
+
+.x_font
+{
+  font-size: 1.5vh;  
+}
+
+.matrix_container
+{
   float: left;
+  border: 0px solid red;
+  width: calc(7vh + 8vw);
+  height: 100%;
 }
 
 .matrix
 {
-  border: 0px solid red;
-  /*! font-size: 4vh; */
-  width:  calc(6vh + 6vw);
-  height: calc(6vh + 6vw);
+  border: 0px solid blue;
+  font-size: 2vh;
+  width:  100%;
+  height: calc(7vh + 7vw);
   cursor: pointer;
-  float: left;
+  margin-top: 4%;
 }
 
+.matrix_title
+{
+  font-size: 3vh;
+}
+
+.matrix_bracket
+{
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  float: left;
+  height:  calc(6vh + 6vw);
+  width: 1%;
+  margin-top: calc(1.5vh + 1.5vw);
+}
+
+.open
+{
+  background-image: url('../../resources/img/round_bracket_open.png');
+}
+
+.close
+{
+  background-image: url('../../resources/img/round_bracket_close.png');
+}
+  
 .row
 {
   border: 0px solid red;
@@ -103,5 +154,5 @@ input[type=range]
   border: 0px solid red;
   width: 30vw;
   height: 30vh;  
-  margin: 2% auto;
+  margin: 4% auto 2% auto;
 }
