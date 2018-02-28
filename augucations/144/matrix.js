@@ -61,24 +61,46 @@ var Matrix = function(div, id, size, type) {
         if (!this.type.includes("rotation"))
             return;
 
+
+        /*
+         * Put the "sin(x)" and "cos(x)" parts (except for "x") inside extra spans with an
+         * extra class for small fonts,
+         * The x gets also an unique class, this class has a medium sized font.
+         */
+        function addFontClasses(sin_cos, value) {
+
+            var scfont_ = "<span class = \"sin_cos_font\">";
+            var _scfont = "</span>";
+
+            var xfont_ = "<span class = \"x_font\">";
+            var _xfont = "</span>";
+
+            return scfont_ + sin_cos + "(" + _scfont
+                    + xfont_ + value + _xfont
+                    + scfont_ + ")" + _scfont;
+        }
+
         if (this.type == "rotationX") {
-            this.cells[5].innerHTML = "cos(" + d[1][1] + ")";
-            this.cells[6].innerHTML = "-sin(" + d[1][2] + ")";
-            this.cells[9].innerHTML = "sin(" + d[2][1] + ")";
-            this.cells[10].innerHTML = "cos(" + d[2][2] + ")";
+            var value = d[1][1];
+            this.cells[5].innerHTML = addFontClasses("cos", value);
+            this.cells[6].innerHTML = addFontClasses("-sin", value);
+            this.cells[9].innerHTML = addFontClasses("sin", value);
+            this.cells[10].innerHTML = addFontClasses("cos", value);
         }
         else if (this.type == "rotationY") {
-            this.cells[0].innerHTML = "cos(" + d[0][0] + ")";
-            this.cells[2].innerHTML = "sin(" + d[0][2] + ")";
-            this.cells[8].innerHTML = "-sin(" + d[2][0] + ")";
-            this.cells[10].innerHTML = "cos(" + d[2][2] + ")";
+            var value = d[0][0];
+            this.cells[0].innerHTML = addFontClasses("cos", value);
+            this.cells[2].innerHTML = addFontClasses("sin", value);
+            this.cells[8].innerHTML = addFontClasses("-sin", value);
+            this.cells[10].innerHTML = addFontClasses("cos", value);
 
         }
         else if (this.type == "rotationZ") {
-            this.cells[0].innerHTML = "cos(" + d[0][0] + ")";
-            this.cells[1].innerHTML = "-sin(" + d[0][1] + ")";
-            this.cells[4].innerHTML = "sin(" + d[1][0] + ")";
-            this.cells[5].innerHTML = "cos(" + d[1][1] + ")";
+            var value = d[0][0];
+            this.cells[0].innerHTML = addFontClasses("cos", value);
+            this.cells[1].innerHTML = addFontClasses("-sin", value);
+            this.cells[4].innerHTML = addFontClasses("sin", value);
+            this.cells[5].innerHTML = addFontClasses("cos", value);
         }
     }
 
