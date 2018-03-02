@@ -39,37 +39,17 @@ var transformation = function () {
         applyCompositionMatrix();
     }
 
-    this.compose = function(gui=true) {
 
-        /* If gui is true, the gui values are used, i.e. degrees instead of
-         * radians for rotations. Use this to calculate the gui matrix.
-         * Else, the real values are used. Use this to calculate the real
-         * transformation matrix that will be applied onto the teapot.
-         */
+    this.composition_order = [
+        "translation",
+        "rotationZ",
+        "rotationY",
+        "rotationX",
+        "scale",
+    ];
 
-         /*
-         data.translation,
-         data.rotationX,
-         data.rotationY,
-         data.rotationZ,
-         data.scale
-         */
 
-        var composition_order = [];
-
-        if(gui) {
-            composition_order = [
-                data.rotationX,
-                data.scale,
-                data.rotationZ,
-                data.translation,
-                data.rotationY
-            ];
-        } else {
-            composition_order = [
-                data.translation
-            ];
-        }
+    this.compose = function() {
 
         // Identity matrix
         var composition = [
@@ -79,8 +59,8 @@ var transformation = function () {
             [0, 0, 0, 1]
         ];
 
-        for (var i = 0; i < composition_order.length; i++) {
-                composition = math.multiply(composition, composition_order[i]);
+        for (var i = 0; i < this.composition_order.length; i++) {
+                composition = math.multiply(composition, data.getMatrix(this.composition_order[i]));
         }
 
         data.setCompositionArray(composition);

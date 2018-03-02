@@ -20,7 +20,7 @@ function drop(ev) {
 
 function positionElement(ev){
 
-    var order = trans.getOrder();
+    var order = trans.composition_order;
 
     var currId = ev.dataTransfer.getData("text");
     var old_idx = order.indexOf(currId);
@@ -47,7 +47,7 @@ function positionElement(ev){
 
 function updateOrder(oldIdx, newIdx, currentId){
 
-    var order = trans.getOrder();
+    var order = trans.composition_order;
 
     // remove the current id from the order
     order = order.removeAtIndex(oldIdx);

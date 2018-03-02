@@ -7,12 +7,12 @@ var Gui = function() {
     }
 
     this.createMatrices = function() {
-        this.mats.push(new Matrix(angle_man.mats.all[0], 0, 4, "composition"));
-        this.mats.push(new Matrix(angle_man.mats.all[1], 1, 4, "translation"));
-        this.mats.push(new Matrix(angle_man.mats.all[2], 2, 4, "rotationZ"));
-        this.mats.push(new Matrix(angle_man.mats.all[3], 3, 4, "rotationY"));
-        this.mats.push(new Matrix(angle_man.mats.all[4], 4, 4, "rotationX"));
-        this.mats.push(new Matrix(angle_man.mats.all[5], 5, 4, "scale"));
+        this.mats.push(new Matrix(0, 4, "composition"));
+        this.mats.push(new Matrix(1, 4, "translation"));
+        this.mats.push(new Matrix(2, 4, "rotationZ"));
+        this.mats.push(new Matrix(3, 4, "rotationY"));
+        this.mats.push(new Matrix(4, 4, "rotationX"));
+        this.mats.push(new Matrix(5, 4, "scale"));
     }
 }
 

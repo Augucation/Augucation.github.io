@@ -18,7 +18,8 @@ var transformation_angles_manager = function() {
 
     this.mats = {};
 
-    this.currentTransormation = "trans"; // "rotZ", "rotY", "rotX", "scale"
+    this.currentTransformation;
+    this.currentMatrixDiv;
 
     this.init = function(){
         this.findMatrices();
@@ -45,20 +46,22 @@ var transformation_angles_manager = function() {
                 // -> Set the id to the grandparent's id (cell -> row -> mat)
                 ev.target.id = ev.target.parentNode.parentNode.id;
 
-                // store the current rotation element
+                // store the current transformation id and div
                 self.currentTransformation = ev.target.id;
+                self.currentMatrixDiv = ev.target;
 
-                // exlude composition matrix
-                if (ev.target.id == "comp")
+                // exclude composition matrix
+                if (ev.target.id == "composition")
                     return;
 
+
                 // show sliders when matrix is clicked
-                if (ev.target.id == "trans"){
+                if (ev.target.id == "translation"){
                     self.showSlider(self.sliderDivs[0], true);
                     self.showSlider(self.sliderDivs[1], false);
                     self.showSlider(self.sliderDivs[2], false);
                 }
-                else if (ev.target.id.includes("rot")){
+                else if (ev.target.id.includes("rotation")){
                     self.showSlider(self.sliderDivs[1], true);
                     self.showSlider(self.sliderDivs[0], false);
                     self.showSlider(self.sliderDivs[2], false);
@@ -69,6 +72,7 @@ var transformation_angles_manager = function() {
                     self.showSlider(self.sliderDivs[1], false);
                 }
 
+
                 // highlight matrix
                 self.highLightMats(true);
 
@@ -77,11 +81,11 @@ var transformation_angles_manager = function() {
 
         document.addEventListener("click", function(ev) {
 
-            // when clicked on anything but a rot element, hide the slider
+            // when clicked on anything but a matrix, hide the slider
             if (   !ev.target.className.includes("matrix")
                 && !ev.target.className.includes("cell")
                 && !ev.target.id.includes("Slider")
-                || ev.target.id == "comp") {
+                || ev.target.id == "composition") {
 
                     for (sliderDiv of self.sliderDivs){
                         self.showSlider(sliderDiv, false);
@@ -117,18 +121,21 @@ var transformation_angles_manager = function() {
         for (var i = 0; i < this.mats.all.length; i++)
             this.mats.all[i].className = "matrix";
 
-        // if an transformation is given, highlight the current matrices
-        // hardcoded and ugly :(
-        if (transformation){
-            if (self.currentTransformation == "trans")
-                this.mats.all[1].className = "matrix highlighted";
-            else if (self.currentTransformation.includes("rot")){
-                    this.mats.all[2].className += " highlighted";
-                    this.mats.all[3].className = "matrix highlighted";
-                    this.mats.all[4].className = "matrix highlighted";
-            }
-            else if (self.currentTransformation == "scale")
-                this.mats.all[5].className = "matrix highlighted";
+        // If there is no current transformation, return at this point and don't
+        // highlight anything.
+        if (!transformation)
+            return;
+
+        // If the current transformation is a rotation, hightlight all
+        // rotation matrices!
+        if (this.currentTransformation.includes("rotation")) {
+            document.getElementById("rotationX").className += " highlighted";
+            document.getElementById("rotationY").className += " highlighted";
+            document.getElementById("rotationZ").className += " highlighted";
+        }
+        // Else just highlight the matrix that was clicked on.
+        else {
+            this.currentMatrixDiv.parentNode.parentNode.className += " highlighted";
         }
     }
 

@@ -67,6 +67,10 @@ var Data = function(){
         [0, 0, 0, 1]
     ];
 
+    this.getMatrix = function(name) {
+        return this[name];
+    }
+
     ///// Composition /////
 
     this.setCompositionArray = function(compo) {

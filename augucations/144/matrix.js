@@ -1,21 +1,39 @@
-var Matrix = function(div, id, size, type) {
+var Matrix = function(id, size, type) {
 
-    this.div = div;
     this.cells = [];
     this.id = id;
     this.size = size;
     this.type = type;
 
+    this.div;
+
     self = this;
 
     this.init = function() {
+        this.findDiv();
         this.createMatrix();
         this.fillMatrix();
+        this.setTitle();
+    }
+
+    this.findDiv = function() {
+        // composition is not listed, it always gets div number 0
+        if (this.type == "composition") {
+            this.div = angle_man.mats.all[0];
+            return;
+        }
+
+        // find the idx of this matrix' type inside the composition order array
+        // + 1 because composition gets the first div
+        var idx = trans.composition_order.indexOf(this.type) + 1;
+        this.div = angle_man.mats.all[idx];
+
+        this.div.id = this.type;
     }
 
     this.createMatrix = function() {
             // clear content
-            div.innerHTML = "";
+            this.div.innerHTML = "";
 
             // create cell element
             var addCell = function() {
@@ -37,7 +55,7 @@ var Matrix = function(div, id, size, type) {
 
             // add 4 rows to matrix
             for (var i = 0; i < self.size; i++){
-                div.appendChild(addRow());
+                this.div.appendChild(addRow());
             }
     }
 
@@ -101,6 +119,22 @@ var Matrix = function(div, id, size, type) {
             this.cells[1].innerHTML = addFontClasses("-sin", value);
             this.cells[4].innerHTML = addFontClasses("sin", value);
             this.cells[5].innerHTML = addFontClasses("cos", value);
+        }
+    }
+
+    this.setTitle = function() {
+        var span = this.div.parentNode.children[0];
+        span.innerHTML = this.getGuiTitle(this.type);
+    }
+
+    this.getGuiTitle = function(type) {
+        switch (type) {
+            case "composition" : return "Komposition";
+            case "translation" : return "Translation";
+            case "rotationX" : return "Rotation X";
+            case "rotationY" : return "Rotation Y";
+            case "rotationZ" : return "Rotation Z";
+            case "scale" : return "Skalerierung";
         }
     }
 

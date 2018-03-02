@@ -32,12 +32,12 @@
 		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
 		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
 
-		<div id="matricesContainer">
+		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Komposition</span>
-				<div id="comp" class="matrix"></div>
+				<div id="composition" class="matrix"></div>
 			</div>
 			<div class="matrix_bracket close"></div>
 
@@ -46,9 +46,9 @@
 			</div>
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Translation</span>
-				<div id="trans" class="matrix"></div>
+				<div id="translation" class="matrix"></div>
 			</div>
 			<div class="matrix_bracket close"></div>
 
@@ -57,9 +57,9 @@
 			</div>
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Rotation Z</span>
-				<div id="rotZ" class="matrix"></div>
+				<div id="rotationZ" class="matrix"></div>
 			</div>
 			<div class="matrix_bracket close"></div>
 
@@ -68,9 +68,9 @@
 			</div>
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Rotation Y</span>
-				<div id="rotY" class="matrix"></div>
+				<div id="rotationY" class="matrix"></div>
 			</div>
 			<div class="matrix_bracket close"></div>
 
@@ -79,9 +79,9 @@
 			</div>
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Rotation X</span>
-				<div id="rotX" class="matrix"></div>
+				<div id="rotationX" class="matrix"></div>
 			</div>
 			<div class="matrix_bracket close"></div>
 
@@ -90,7 +90,7 @@
 			</div>
 
 			<div class="matrix_bracket open"></div>
-			<div class="matrix_container">
+			<div class="matrix_container" draggable="true" ondragstart="drag(event)">
 				<span class="matrix_title">Skalierung</span>
 				<div id="scale" class="matrix"></div>
 			</div>
