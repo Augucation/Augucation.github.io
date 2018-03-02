@@ -132,6 +132,7 @@
 .highlighted
 {
   color: var(--dark_red);
+  font-weight: bolder;
 }
 
 input[type=range]
