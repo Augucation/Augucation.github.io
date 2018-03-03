@@ -34,26 +34,6 @@ var coordinate_system = function(scene){
         this.arrowheads.x = this.drawCone(this.vec(this.max, 0, 0), 10, 20, this.axisMaterial, "X");
         this.arrowheads.y = this.drawCone(this.vec(0, this.max, 0), 10, 20, this.axisMaterial, "Y");
         this.arrowheads.z = this.drawCone(this.vec(0, 0, this.max), 5, 10, this.axisMaterial, "Z");
-
-        /* grid
-        for (x = this.min; x < Math.abs(this.max - this.min); x += this.step){
-            for (y = this.min; y < Math.abs(this.max - this.min); y += this.step){
-                this.drawLine(this.vec(x, y, this.min), this.vec(x, y, this.max), this.lineMaterial);
-            }
-        }
-
-        for (z = this.min; z < Math.abs(this.max - this.min); z += this.step){
-            for (y = this.min; y < Math.abs(this.max - this.min); y += this.step){
-                this.drawLine(this.vec(this.min, y, z), this.vec(this.max, y, z), this.lineMaterial);
-            }
-        }
-
-        for (x = this.min; x < Math.abs(this.max - this.min); x += this.step){
-            for (z = this.min; z < Math.abs(this.max - this.min); z += this.step){
-                this.drawLine(this.vec(x, this.min, z), this.vec(x, this.max, z), this.lineMaterial);
-            }
-        }
-        */
     }
 
     this.drawLine = function(start, end, material){
