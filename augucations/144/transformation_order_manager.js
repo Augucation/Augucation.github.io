@@ -1,63 +1,63 @@
 var mat_container = document.getElementById("matricesContainer");
 
 function allowDrop(ev) {
-    positionElement(ev);
 
     ev.preventDefault();
 }
 
 function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    // ev.target is the matrix container -> get the childed matrix
+    ev.dataTransfer.setData("text", ev.target.children[1].id);
 }
 
 function drop(ev) {
-
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
 
     positionElement(ev);
+
+    gui.findDivs();
+    gui.fillMatrices();
+
+    trans.compose();
 }
 
 function positionElement(ev){
 
     var order = trans.composition_order;
 
-    var currId = ev.dataTransfer.getData("text");
-    var old_idx = order.indexOf(currId);
+    var elem = ev.dataTransfer.getData("text");
+    var old_idx = order.indexOf(elem);
     var new_idx = calculateIndex(ev);
 
-    if (new_idx == old_idx)
+    if (new_idx == old_idx
+        || old_idx < 0      // ignore composition matrix
+        || new_idx < 0)     // ignore composition matrix
         return;
 
-    order = updateOrder(old_idx, new_idx, currId);
-
-    // fill with elements in the right order
-    for (var i = 0; i < order.length; i++){
-        // append the rot elements according to the order
-        $el = $('#' + order[i]);
-        $el.parent().append($el);
-
-        // add the multiplication symbols
-        $ms = $("#m" + i);
-        if ($ms.length > 0){
-            $ms.parent().append($ms);
-        }
-    }
+    updateOrder(old_idx, new_idx, elem);
 }
 
-function updateOrder(oldIdx, newIdx, currentId){
+function updateOrder(oldIdx, newIdx, elem){
 
     var order = trans.composition_order;
 
     // remove the current id from the order
-    order = order.removeAtIndex(oldIdx);
+    order.remove(oldIdx);
 
     // insert the current id into the order at the new index
-    order = order.insert(newIdx, currentId);
+    order.insert(newIdx, elem);
 
-    trans.setOrder(order);
+    trans.setCompositionOrder(order);
 
-    return trans.getOrder();
+    updateGuiMatrices();
+}
+
+function updateGuiMatrices() {
+
+    var mats = document.getElementsByClassName("matrix");
+
+    //console.log(matsArray);
 }
 
 function calculateIndex(ev) {
@@ -72,7 +72,6 @@ function calculateIndex(ev) {
     // get the drop x coordinate
     var dropCoordX = ev.pageX;
 
-
     // decide which position the dropped element should have
 
     // calculate the relative x position inside the container
@@ -81,16 +80,14 @@ function calculateIndex(ev) {
     // normalize this position
     pos /= containerWidth;
 
-    // multiply by the number of elements - 1
-    var idx = pos * 2;
+    // multiply by the number of matrices
+    var idx = pos * gui.mats.length;
 
-    // round
-    var idx = Math.round(idx);
+    // floor
+    var idx = Math.floor(idx);
 
-    // hacky hack
-    if (pos < 0.3333) idx = 0;
-    if (0.3333 <= pos && pos <= 0.6666) idx = 1;
-    if (pos > 0.6666) idx = 2;
+    // -1 to ignore the composition matrix
+    idx--;
 
     return idx;
 }

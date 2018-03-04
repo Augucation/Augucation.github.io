@@ -14,6 +14,25 @@ var Gui = function() {
         this.mats.push(new Matrix(4, 4, "rotationX"));
         this.mats.push(new Matrix(5, 4, "scale"));
     }
+
+    this.findDivs = function() {
+        for (var i = 0; i < this.mats.length; i++) {
+            this.mats[i].findDiv();
+        }
+    }
+
+    this.fillMatrices = function () {
+        for (var i = 0; i < this.mats.length; i++) {
+            this.mats[i].fillMatrix();
+        }
+    }
+
+    this.findMatByType = function(type) {
+        for (var i = 0; i < this.mats.length; i++) {
+            if (this.mats[i].type == type)
+                return this.mats[i];
+        }
+    }
 }
 
 var gui = new Gui();

@@ -48,8 +48,13 @@ var transformation = function () {
         "scale",
     ];
 
+    this.setCompositionOrder = function(order) {
+        this.composition_order = order;
+    }
 
     this.compose = function() {
+
+        // console.log(this.composition_order);
 
         // Identity matrix
         var composition = [
@@ -64,6 +69,7 @@ var transformation = function () {
         }
 
         data.setCompositionArray(composition);
+        this.applyComposition();
     }
 
     // Array matrix to Three.JS matrix

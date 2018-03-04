@@ -6,6 +6,7 @@ var Matrix = function(id, size, type) {
     this.type = type;
 
     this.div;
+    this.title;
 
     self = this;
 
@@ -29,6 +30,8 @@ var Matrix = function(id, size, type) {
         this.div = angle_man.mats.all[idx];
 
         this.div.id = this.type;
+
+        this.findCells();
     }
 
     this.createMatrix = function() {
@@ -59,8 +62,24 @@ var Matrix = function(id, size, type) {
             }
     }
 
-    this.fillMatrix = function(matrix_data) {
+    this.findCells = function() {
 
+        // Only proceed if the cells can be found
+        if (this.div.children.length < 1)
+            return;
+
+        var rows = this.div.children;
+
+        var cells = [];
+        for (var x = 0; x < rows.length; x++) {
+            for (var y = 0; y < rows[x].children.length; y++) {
+                cells.push(rows[x].children[y]);
+            }
+        }
+        this.cells = cells;
+    }
+
+    this.fillMatrix = function() {
         // get data from the data object depending on the matrix type
         // for rotation matrices get the data from the gui version
         var d;
@@ -73,6 +92,8 @@ var Matrix = function(id, size, type) {
                 this.cells[this.size * x + y].innerHTML = Math.round(d[x][y] * 100) / 100;
             }
         }
+
+        this.setTitle();
 
         // exception: add cos() and sin() to some rotation matrix cells,
         // do nothing and return for all other matrix types
@@ -124,7 +145,9 @@ var Matrix = function(id, size, type) {
 
     this.setTitle = function() {
         var span = this.div.parentNode.children[0];
-        span.innerHTML = this.getGuiTitle(this.type);
+        this.title = this.getGuiTitle(this.type);
+        span.innerHTML = this.title
+        return this.getGuiTitle(this.title);
     }
 
     this.getGuiTitle = function(type) {
@@ -134,7 +157,7 @@ var Matrix = function(id, size, type) {
             case "rotationX" : return "Rotation X";
             case "rotationY" : return "Rotation Y";
             case "rotationZ" : return "Rotation Z";
-            case "scale" : return "Skalerierung";
+            case "scale" : return "Skalierung";
         }
     }
 
