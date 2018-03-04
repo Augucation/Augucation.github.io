@@ -140,14 +140,38 @@
   font-weight: bolder;
 }
 
-input[type=range]
-{
- /* visibility: hidden;*/
-}
-
 #sliderContainer
 {
   height: auto;
+  width: 50%;
+  margin: auto;
+}
+
+.sliderWrapper
+{
+  border: 0px solid blue;
+  width: 100%;  
+  height: 3.5%;
+}
+
+.slider_label
+{
+  border: 0px solid red;
+  width: auto;
+  height: 70%;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 1%;
+  margin-top: -2.5%;
+  font-size: 2vh !important;
+}
+
+input[type=range]
+{
+  width: 50%;
+  display: inline-block;
+  position: relative;
 }
 
 .innerSliderContainer

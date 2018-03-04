@@ -106,22 +106,58 @@
 
 		<div id="sliderContainer">
 			<div id="slidersTrans" class="innerSliderContainer">
-				<input type=range id="SliderTransX" min="-100" max="100" value="0"/>
-				<input type=range id="SliderTransY" min="-100" max="100" value="0"/>
-				<input type=range id="SliderTransZ" min="-100" max="100" value="0"/>
+
+				<div class="sliderWrapper">
+					<span class="slider_label">X</span>
+					<input type=range id="SliderTransX" min="-100" max="100" value="0"/>
+				</div>
+
+				<div class="sliderWrapper">
+					<span class="slider_label">Y</span>
+					<input type=range id="SliderTransY" min="-100" max="100" value="0"/>
+				</div>
+
+				<div class="sliderWrapper">
+					<span class="slider_label">Z</span>
+					<input type=range id="SliderTransZ" min="-100" max="100" value="0"/>
+				</div>
 			</div>
-			<div id="slidersRot" class="innerSliderContainer">
+
+		<div id="slidersRot" class="innerSliderContainer">
+			<div class="sliderWrapper">
+				<span class="slider_label">X</span>
 				<input type=range id="SliderRotX" min="-180" max="180" value="0"/>
+			</div>
+
+			<div class="sliderWrapper">
+				<span class="slider_label">Y</span>
 				<input type=range id="SliderRotY" min="-180" max="180" value="0"/>
+			</div>
+
+			<div class="sliderWrapper">
+				<span class="slider_label">Z</span>
 				<input type=range id="SliderRotZ" min="-180" max="180" value="0"/>
 			</div>
-			<div id="slidersScale" class="innerSliderContainer">
+			</div>
+
+		<div id="slidersScale" class="innerSliderContainer">
+			<div class="sliderWrapper">
+				<span class="slider_label">X</span>
 				<input type=range id="SliderScaleX" min="-8" max="10" value="1"/>
+			</div>
+
+			<div class="sliderWrapper">
+				<span class="slider_label">Y</span>
 				<input type=range id="SliderScaleY" min="-8" max="10" value="1"/>
+			</div>
+
+			<div class="sliderWrapper">
+				<span class="slider_label">Z</span>
 				<input type=range id="SliderScaleZ" min="-8" max="10" value="1"/>
 			</div>
 		</div>
 
+		</div>
 	</div>
 
 	<div id="teapotContainer"></div>
