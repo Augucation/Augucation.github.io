@@ -50,14 +50,7 @@ function updateOrder(oldIdx, newIdx, elem){
 
     trans.setCompositionOrder(order);
 
-    updateGuiMatrices();
-}
-
-function updateGuiMatrices() {
-
-    var mats = document.getElementsByClassName("matrix");
-
-    //console.log(matsArray);
+    angle_man.highLightMats(true);
 }
 
 function calculateIndex(ev) {

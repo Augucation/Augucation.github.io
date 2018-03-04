@@ -44,29 +44,29 @@ var transformation_angles_manager = function() {
                 // This event is called on a cell inside a matrix, but we want
                 // it to be called on the matrix itself.
                 // -> Set the id to the grandparent's id (cell -> row -> mat)
-                ev.target.id = ev.target.parentNode.parentNode.id;
+                var target_id = ev.target.parentNode.parentNode.id;
 
                 // store the current transformation id and div
-                self.currentTransformation = ev.target.id;
+                self.currentTransformation = target_id;
                 self.currentMatrixDiv = ev.target;
 
                 // exclude composition matrix
-                if (ev.target.id == "composition")
+                if (target_id == "composition")
                     return;
 
 
                 // show sliders when matrix is clicked
-                if (ev.target.id == "translation"){
+                if (target_id == "translation"){
                     self.showSlider(self.sliderDivs[0], true);
                     self.showSlider(self.sliderDivs[1], false);
                     self.showSlider(self.sliderDivs[2], false);
                 }
-                else if (ev.target.id.includes("rotation")){
+                else if (target_id.includes("rotation")){
                     self.showSlider(self.sliderDivs[1], true);
                     self.showSlider(self.sliderDivs[0], false);
                     self.showSlider(self.sliderDivs[2], false);
                 }
-                else if (ev.target.id == "scale"){
+                else if (target_id == "scale"){
                     self.showSlider(self.sliderDivs[2], true);
                     self.showSlider(self.sliderDivs[0], false);
                     self.showSlider(self.sliderDivs[1], false);
@@ -116,7 +116,19 @@ var transformation_angles_manager = function() {
 //        self.updateGUIAngle("Z", 0);
     }
 
+    this.setCurrentMatrixDiv = function() {
+        this.currentMatrixDiv = document.getElementById(this.currentTransformation);
+    }
+
     this.highLightMats = function(transformation){
+
+        var mats = document.getElementsByClassName("matrix");
+        for (var i = 1; i < mats.length; i++) {
+            mats[i].id = trans.composition_order[i - 1];
+        }
+
+        this.setCurrentMatrixDiv();
+        gui.findDivs();
 
         // unhighlight all
         for (var i = 0; i < this.mats.all.length; i++)
@@ -124,7 +136,7 @@ var transformation_angles_manager = function() {
 
         // If there is no current transformation, return at this point and don't
         // highlight anything.
-        if (!transformation)
+        if (!transformation || !this.currentTransformation)
             return;
 
         // If the current transformation is a rotation, hightlight all
@@ -136,7 +148,7 @@ var transformation_angles_manager = function() {
         }
         // Else just highlight the matrix that was clicked on.
         else {
-            this.currentMatrixDiv.parentNode.parentNode.className += " highlighted";
+            this.currentMatrixDiv.className += " highlighted";
         }
     }
 
