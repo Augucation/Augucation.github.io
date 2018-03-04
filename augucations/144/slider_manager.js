@@ -1,18 +1,3 @@
-// sliders are stored in angle_man.sliders
-/*
-for (var i = 0; i < angle_man.sliders.length; i++)
-
-    slider.addEventListener("input", function(ev){
-
-        // update the data stored inside the trans manager
-        trans.setRotation(self.currentAngle, parseFloat(this.value));
-
-        // update gui
-        self.updateGUIAngle(self.currentAngle, parseFloat(this.value));
-
-    }, false);
-*/
-
 var rot = function() {
     trans.setRotations({
         x: Math.round(parseFloat(angle_man.sliders[5].value) * 100) / 100,
@@ -20,7 +5,6 @@ var rot = function() {
         z: Math.round(parseFloat(angle_man.sliders[3].value) * 100) / 100
     });
     trans.applyComposition();
-    // trans.rotate();
 }
 
 var scale = function() {
@@ -36,7 +20,6 @@ var scale = function() {
         z: Math.round(convert_scale(parseFloat(angle_man.sliders[8].value)) * 100) / 100
     });
     trans.applyComposition();
-    // trans.scale();
 }
 
 var translate = function() {
@@ -47,7 +30,16 @@ var translate = function() {
         z: Math.round(parseFloat(angle_man.sliders[2].value) * 100) / 100
     });
     trans.applyComposition();
-    // trans.translate();
+}
+
+var resetSliders = function() {
+    // translation and rotation sliders
+    for (var i = 0; i < 6; i++)
+        angle_man.sliders[i].value = 0;
+
+    // scale sliders
+    for (var i = 6; i < 8; i++)
+        angle_man.sliders[i].value = 1;
 }
 
 angle_man.sliders[3].addEventListener("input", function(){rot();}, false);

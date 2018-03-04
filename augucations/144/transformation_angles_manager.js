@@ -81,8 +81,10 @@ var transformation_angles_manager = function() {
 
         document.addEventListener("click", function(ev) {
 
-            // when clicked on anything but a matrix, hide the slider
+            // when clicked on anything but a matrix or the reset button,
+            // hide the slider
             if (   !ev.target.className.includes("matrix")
+                   (ev.target.id != "resetBtn")
                 && !ev.target.className.includes("cell")
                 && !ev.target.id.includes("Slider")
                 || ev.target.id == "composition") {
@@ -99,8 +101,7 @@ var transformation_angles_manager = function() {
         document.getElementById("resetBtn").addEventListener("click", self.resetGUIAngles(), false);
     }
 
-    this.showSlider = function(sliderDiv, show)
-    {
+    this.showSlider = function(sliderDiv, show) {
         sliderDiv.style.display = show ? "block" : "none";
 
     }

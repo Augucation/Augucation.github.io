@@ -4,68 +4,15 @@ var r2d = 180 / Math.PI;
 
 var Data = function(){
 
-    this.composition = [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.translation = [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationX = [
-        [1, 0, 0, 0],
-        [0, Math.cos(0), -Math.sin(0), 0],
-        [0, Math.sin(0), Math.cos(0), 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationX_gui = [
-        [1, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationY = [
-        [Math.cos(0), 0, Math.sin(0), 0],
-        [0, 1, 0, 0],
-        [-Math.sin(0), 0, Math.cos(0), 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationY_gui = [
-        [0, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationZ = [
-        [Math.cos(0), -Math.sin(0), 0, 0],
-        [Math.sin(0), Math.cos(0), 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.rotationZ_gui = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ];
-
-    this.scale = [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ];
+    this.composition = [];
+    this.translation = [];
+    this.rotationX = [];
+    this.rotationX_gui = [];
+    this.rotationY = [];
+    this.rotationY_gui = [];
+    this.rotationZ = [];
+    this.rotationZ_gui = [];
+    this.scale = [];
 
     this.getMatrix = function(name) {
         return this[name];
@@ -206,6 +153,76 @@ var Data = function(){
             z: this.scale[2][2]
         }
     }
+
+    ///// RESET ////
+
+    this.resetEverything = function() {
+        this.composition = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.translation = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationX = [
+            [1, 0, 0, 0],
+            [0, Math.cos(0), -Math.sin(0), 0],
+            [0, Math.sin(0), Math.cos(0), 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationX_gui = [
+            [1, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationY = [
+            [Math.cos(0), 0, Math.sin(0), 0],
+            [0, 1, 0, 0],
+            [-Math.sin(0), 0, Math.cos(0), 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationY_gui = [
+            [0, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationZ = [
+            [Math.cos(0), -Math.sin(0), 0, 0],
+            [Math.sin(0), Math.cos(0), 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.rotationZ_gui = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.scale = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
+    }
 }
 
 var data = new Data();
+
+// this function writes the initial data into the matrix arrays
+data.resetEverything();

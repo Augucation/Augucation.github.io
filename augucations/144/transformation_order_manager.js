@@ -91,8 +91,3 @@ function calculateIndex(ev) {
 
     return idx;
 }
-
-function relocateMultSymbols(){
-    $('#m0').remove().insertAfter(".matrix").eq(0);
-    $('#m1').remove().insertAfter(".matrix").eq(1);
-}

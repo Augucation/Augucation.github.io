@@ -1,4 +1,19 @@
+var identity_matrix = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+];
+
 var transformation = function () {
+
+    this.composition_order = [
+        "translation",
+        "rotationZ",
+        "rotationY",
+        "rotationX",
+        "scale",
+    ];
 
     // The following set functions alter the values inside the data object.
 
@@ -13,17 +28,9 @@ var transformation = function () {
         this.compose();
     }
 
-    this.rotate = function() {
-        //setRotationDegree(data.getRotationXYZ_gui());
-    }
-
     this.setScale = function(scale) {
         data.setScaleXYZ(scale);
         this.compose();
-    }
-
-    this.scale = function() {
-        //setScalation(data.getScaleXYZ());
     }
 
     this.setTranslation = function(translation) {
@@ -31,22 +38,9 @@ var transformation = function () {
         this.compose();
     }
 
-    this.translate = function() {
-        //setTranslation(data.getTranslationXYZ());
-    }
-
     this.applyComposition = function() {
         applyCompositionMatrix();
     }
-
-
-    this.composition_order = [
-        "translation",
-        "rotationZ",
-        "rotationY",
-        "rotationX",
-        "scale",
-    ];
 
     this.setCompositionOrder = function(order) {
         this.composition_order = order;
@@ -54,15 +48,7 @@ var transformation = function () {
 
     this.compose = function() {
 
-        // console.log(this.composition_order);
-
-        // Identity matrix
-        var composition = [
-            [1, 0, 0, 0],
-            [0, 1, 0, 0],
-            [0, 0, 1, 0],
-            [0, 0, 0, 1]
-        ];
+        var composition = identity_matrix;
 
         for (var i = 0; i < this.composition_order.length; i++) {
                 composition = math.multiply(composition, data.getMatrix(this.composition_order[i]));
@@ -70,6 +56,13 @@ var transformation = function () {
 
         data.setCompositionArray(composition);
         this.applyComposition();
+    }
+
+    this.resetTransformation = function() {
+        data.resetEverything();
+        this.applyComposition();
+        gui.fillMatrices();
+        resetSliders();
     }
 
     // Array matrix to Three.JS matrix
