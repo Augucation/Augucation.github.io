@@ -8,11 +8,10 @@
   text-align: center;
 }
 
-#rotBtn0, #rotBtn1, #resetBtn
+#Explanation
 {
-  position: relative;
-  margin: 2% auto;
-  font-size: 2vh !important;
+  width: 65%;
+  display: inline-block;
 }
 
 #resetBtn
@@ -20,6 +19,7 @@
   margin: auto;
   position: relative;
   display: inherit;
+  font-size: 2vh !important;
 }
 
 #rotBtn0, #rotBtn1

@@ -2,7 +2,7 @@
 
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Transformationsmatrizen</title>
+	<title>Komposition</title>
 	<link rel="icon" href="../../resources/img/Icon.png">
 
 	<link rel="stylesheet" href="../../resources/css/stylesheet.css">
@@ -28,10 +28,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.min.js"></script>
 
 	<div id="guiContainer" class="my_text">
-		<h2>Transformationssequenz</h2>
-		<p>Bei einer Transformationskomposition ist die Reihenfolge der einzelnen Transformationen ausschlaggebend für das Ergebnis der Komposition.
-		</br> Um diesen Effekt zu veranschaulichen, kannst du die Reihenfolge der Rotationen in der folgenden Rotationskomposition per Drag&amp;Drop ändern und sehen wie sich das Objekt verhält, wenn du die Transformation anwendest. Außerdem kannst du einstellen, um welchen Winkel um die Achsen rotiert werden soll, indem du auf eine einzelne Rotation clickst und den dann erscheinenden Slider nutzt.</p>
-
+		<h2>Komposition</h2>
+		<p id="Explanation"> Bei einer Transformationskomposition ist die Reihenfolge der einzelnen
+		    Transformationen ausschlaggebend für das Ergebnis der Komposition.
+			</br>
+			Um dies zu veranschaulichen, kannst auf die folgenden Matrizen klicken,
+			um ihre Werte mit den erscheinenden Slidern zu ändern.
+			Außerdem kannst du die Reihenfolge, in der die einzelnen Transformationen
+			ausgeführt werden, per Drag&amp;Drop ändern und sehen, wie sich
+			das Objekt verhält.
+		</p>
 		<div id="matricesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
 
 			<div class="matrix_bracket open"></div>
@@ -117,7 +123,7 @@
 		</div>
 
 	</div>
-	
+
 	<div id="teapotContainer"></div>
 
 	<button id="resetBtn" class="button" onclick="trans.resetTransformation();">Transformation zurücksetzen</button>
