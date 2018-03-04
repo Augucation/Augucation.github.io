@@ -132,7 +132,7 @@ var transformation_angles_manager = function() {
 
         // unhighlight all
         for (var i = 0; i < this.mats.all.length; i++)
-            this.mats.all[i].className = "matrix";
+            this.mats.all[i].parentNode.className = "matrix_container";
 
         // If there is no current transformation, return at this point and don't
         // highlight anything.
@@ -142,13 +142,13 @@ var transformation_angles_manager = function() {
         // If the current transformation is a rotation, hightlight all
         // rotation matrices!
         if (this.currentTransformation.includes("rotation")) {
-            document.getElementById("rotationX").className += " highlighted";
-            document.getElementById("rotationY").className += " highlighted";
-            document.getElementById("rotationZ").className += " highlighted";
+            document.getElementById("rotationX").parentNode.className += " highlighted";
+            document.getElementById("rotationY").parentNode.className += " highlighted";
+            document.getElementById("rotationZ").parentNode.className += " highlighted";
         }
         // Else just highlight the matrix that was clicked on.
         else {
-            this.currentMatrixDiv.className += " highlighted";
+            this.currentMatrixDiv.parentNode.className += " highlighted";
         }
     }
 
