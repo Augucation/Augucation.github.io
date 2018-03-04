@@ -154,9 +154,9 @@ var Matrix = function(id, size, type) {
         switch (type) {
             case "composition" : return "Komposition";
             case "translation" : return "Translation";
-            case "rotationX" : return "Rotation X";
-            case "rotationY" : return "Rotation Y";
-            case "rotationZ" : return "Rotation Z";
+            case "rotationX" : return "Rotation<sub>x</sub>";
+            case "rotationY" : return "Rotation<sub>y</sub>";
+            case "rotationZ" : return "Rotation<sub>z</sub>";
             case "scale" : return "Skalierung";
         }
     }
