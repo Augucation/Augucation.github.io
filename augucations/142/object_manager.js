@@ -12,13 +12,14 @@ var createModelsAndCoordinateSystems = function(){
 
     teapots.push(new object(scene,
                          model_teapot,
-                         vec(-75, -85, -75),
+                         vec(0 , 0, 0),
                          vec(2, 2, 2),
                          60,
                          normalColor_teapot,
                          highlightColor_teapot));
     teapots.slice(-1)[0].obj.parent = parent;
 
+    /*
     teapots.push(new object(scene,
                          model_teapot,
                          vec(75, 75, 75),
@@ -27,6 +28,7 @@ var createModelsAndCoordinateSystems = function(){
                          normalColor_teapot,
                          highlightColor_teapot));
     teapots.slice(-1)[0].obj.parent = parent;
+    */
 
     world = new object(scene, false, vec(0, 0, 0), vec(1, 1, 1), 150);
 
