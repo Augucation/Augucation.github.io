@@ -13,17 +13,19 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     this.obj;
     this.coordinate_system;
     this.transform;
+    this.group;
 
     var that = this;
 
     this.init = function(){
         if (this.modelPath)
             this.addModel();
-
-        this.addCoordinateSystem();
+        else
+            this.addCoordinateSystem();
     }
 
-    // load model from file, set scale and position and add object to scene
+    // load model from file, set scale and position and add object to its own
+    // group and this group to the scene
     this.addModel = function(){
         var manager = new THREE.LoadingManager();
         var textureLoader = new THREE.TextureLoader( manager );
@@ -46,10 +48,15 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
             object.position.set(that.pos.x, that.pos.y, that.pos.z);
             that.transform = object;
 
-    		scene.add( object );
+    		scene.add(object);
             object.children[0].transform = that.transform;
             pickableObjects.push(object.children[0]);
             that.obj = object.children[0];
+
+            // group
+            that.group = new THREE.Group();
+            scene.add(that.group);
+            that.group.add(object);
     	});
     }
 
@@ -87,40 +94,13 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
 
 
     this.rotate = function(radians){
-        scene.updateMatrixWorld();
-        /*
-        that.transform.rotation.set(radians.x, radians.y, radians.z);
-
-        parent.transform.rotation.x = radians.x;
-        parent.transform.rotation.y = radians.y;
-        parent.transform.rotation.z = radians.z;
-        */
-        that.transform.rotation.x = radians.x;
-        that.transform.rotation.y = radians.y;
-        that.transform.rotation.z = radians.z;
-        rot = that.transform.getWorldRotation();
-        console.log("x: ", r2d(rot.x), "y: ", r2d(rot.y), "z: ", r2d(rot.z));
-        //that.coordinate_system.rotate(radians.x, radians.y, radians.z);
-        /*
-        diff = vec(0, 0, 0);
-        diff.subVectors(vec(radians.x, radians.y, radians.z), vec(that.transform.rotation.x, that.transform.rotation.y, that.transform.rotation.z));
-        console.log("diff: ", diff);
-
-        that.rotateAroundWorldAxis(vec(1, 0, 0), -diff.x);
-        that.rotateAroundWorldAxis(vec(0, 1, 0), -diff.y);
-        that.rotateAroundWorldAxis(vec(0, 0, 1), -diff.z);
-        that.rotateAroundWorldAxis(vec(1, 0, 0), radians.x - that.transform.rotation.x);
-        that.rotateAroundWorldAxis(vec(0, 1, 0), radians.y - that.transform.rotation.y);
-        that.rotateAroundWorldAxis(vec(0, 0, 1), radians.z - that.transform.rotation.z);
-        */
-    }
-
-    this.rotateAroundWorldAxis = function(axis, radians) {
-        rotWorldMatrix = new THREE.Matrix4();
-        rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
-        rotWorldMatrix.multiply(that.transform.worldMatrix);        // pre-multiply
-        that.transform.worldDMtrix = rotWorldMatrix;
-        that.transform.rotation.setFromRotationMatrix(that.transform.worldMatrix);
+        // If the mode is local, rotate the object itself,
+        // if the mode is global, rotate the object's group
+        var thing = (transformation_manager.mode == "local") ? that.transform
+                                                             : that.group;
+        thing.rotation.x = radians.x;
+        thing.rotation.y = radians.y;
+        thing.rotation.z = radians.z;
     }
 
     this.rotMsgHandler = function(e){

@@ -107,7 +107,7 @@ var coordinate_system = function(scene, pos, size){
         //this.axes.z.rotation.z = -y;
         //this.axes.z.rotation.x = d2r(90) + x;
         this.axes.z.rotation.set(x + d2r(90), 0, -y);
-        console.log("z axis rotation: ", this.axes.z.rotation);
+        //console.log("z axis rotation: ", this.axes.z.rotation);
     }
 
 /*
