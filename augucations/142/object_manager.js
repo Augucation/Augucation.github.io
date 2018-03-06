@@ -8,16 +8,18 @@ var parent;
 var createModelsAndCoordinateSystems = function(){
 
     // static parent to access the teapots' world rotation and translation
-    parent = new object(scene, false, vec(0, 0, 0), vec(1, 1, 1));
+    parent = new THREE.Group();
+    scene.add(parent);
+
 
     teapots.push(new object(scene,
                          model_teapot,
-                         vec(0 , 0, 0),
+                         vec(0, 0, 0),
                          vec(2, 2, 2),
                          60,
                          normalColor_teapot,
-                         highlightColor_teapot));
-    teapots.slice(-1)[0].obj.parent = parent;
+                         highlightColor_teapot,
+                         true));
 
     /*
     teapots.push(new object(scene,
@@ -27,10 +29,9 @@ var createModelsAndCoordinateSystems = function(){
                          60,
                          normalColor_teapot,
                          highlightColor_teapot));
-    teapots.slice(-1)[0].obj.parent = parent;
     */
 
-    world = new object(scene, false, vec(0, 0, 0), vec(1, 1, 1), 150);
+    world = new object(scene, false, vec(0, 0, 0), vec(1, 1, 1), 150, coloredCS = false);
 
     current_obj = teapots[0];
 }

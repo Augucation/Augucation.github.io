@@ -6,7 +6,7 @@ var windowHalfY = window.innerHeight / 2;
 var isMouseDown, onMouseDownPosition;
 
 function initScene() {
-	container = document.getElementById("teapotContainer");
+	container = document.getElementById("teapotDiv");
 
 	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
     camera.position.x = 35;

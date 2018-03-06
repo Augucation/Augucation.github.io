@@ -26,45 +26,100 @@
 	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 	<script src="https://threejs.org/examples/js/renderers/Projector.js"></script>
 
-	<div id="guiContainer" class="my_text">
-		<h2>Welt- und Objektkoordinaten</h2>
+	<div id="Container" class="my_text">
 
-		<div id="buttonAndSliderContainer" class="my_text">
-
-			<div id="btnContainer">
-				<!--fieldset-->
-					<input type="radio" name="radio_local_global" id="radio_local" checked/>
-					<label for="radio_local">Lokal</label>
-					<input type="radio" name="radio_local_global" id="radio_global"/>
-					<label for="radio_global">Global</label>
-				<!--/fieldset-->
-			</div>
-
-			<div id="sliderContainer">
-				<div id="sliderContainerTranslation">
-					<input id="translateX" type="range" min="-5" max="5" value="0"/>
-					<label for="translateX">Translation X</label>
-					<input id="translateY" type="range" min="-50" max="50" value="0"/>
-					<label for="translateY">Translation Y</label>
-					<input id="translateZ" type="range" min="-50" max="50" value="0"/>
-					<label for="translteZ">Translation Z</label>
-				</div>
-				<div id="sliderContainerRotation">
-					<input id="rotateX" type="range" min="-180" max="180" value="0"/>
-					<label for="rotateX">Rotation X</label>
-					<input id="rotateY" type="range" min="-180" max="180" value="0"/>
-					<label for="rotateY">Rotation Y</label>
-					<input id="rotateZ" type="range" min="-180" max="180" value="0"/>
-					<label for="rotateZ">Rotation Z</label>
-				</div>
-			</div>
-
+		<div id="teapotContainer">
+			<div id="teapotDiv"></div>
 		</div>
+
+		<div id="guiContainer">
+			<h2>Welt- und Objektkoordinaten</h2>
+
+			<div id="buttonAndSliderContainer">
+
+				<div id="btnContainer">
+						<input type="radio" name="radio_local_global" id="radio_local" checked/>
+						<label for="radio_local">Lokal</label>
+						<input type="radio" name="radio_local_global" id="radio_global"/>
+						<label for="radio_global">Global</label>
+				</div>
+
+				<div id="sliderContainer">
+					<div id="sliderContainerTranslation">
+						<input id="translateX" type="range" min="-10" max="10" value="0"/>
+						<label for="translateX">Translation X</label>
+						<input id="translateY" type="range" min="-10" max="10" value="0"/>
+						<label for="translateY">Translation Y</label>
+						<input id="translateZ" type="range" min="-10" max="10" value="0"/>
+						<label for="translteZ">Translation Z</label>
+					</div>
+					<div id="sliderContainerRotation">
+						<input id="rotateX" type="range" min="-180" max="180" value="0"/>
+						<label for="rotateX">Rotation X</label>
+						<input id="rotateY" type="range" min="-180" max="180" value="0"/>
+						<label for="rotateY">Rotation Y</label>
+						<input id="rotateZ" type="range" min="-180" max="180" value="0"/>
+						<label for="rotateZ">Rotation Z</label>
+					</div>
+					<div id="sliderContainerSkalierung">
+						<input id="scaleX" type="range" min="-8" max="10" value="0"/>
+						<label for="scaleX">Skalierung X</label>
+						<input id="scaleY" type="range" min="-8" max="10" value="0"/>
+						<label for="scaleY">Skalierung Y</label>
+						<input id="scaleZ" type="range" min="-8" max="10" value="0"/>
+						<label for="scaleZ">Skalierung Z</label>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="dataContainer">
+				<div id="dataLocalContainer">
+					<span>Lokal</span>
+					</br></br>
+
+					<span>Translation</span>
+					</br>
+						<span id="span_local_trans_x">X: 0</span> </br>
+						<span id="span_local_trans_y">Y: 0</span> </br>
+						<span id="span_local_trans_z">Z: 0</span> </br>
+					<span>Rotation</span>
+					</br>
+						<span id="span_local_rot_x">X: 0</span> </br>
+						<span id="span_local_rot_y">Y: 0</span> </br>
+						<span id="span_local_rot_z">Z: 0</span> </br>
+					<span>Skalierung</span>
+					</br>
+						<span id="span_local_scale_x">X: 1</span> </br>
+						<span id="span_local_scale_y">Y: 1</span> </br>
+						<span id="span_local_scale_z">Z: 1</span> </br>
+				</div>
+				<div id="dataGlobalContainer">
+					<span>Global</span>
+					</br></br>
+
+					<span>Translation</span>
+					</br>
+						<span id="span_global_trans_x">X: 0</span> </br>
+						<span id="span_global_trans_y">Y: 0</span> </br>
+						<span id="span_global_trans_z">Z: 0</span> </br>
+					<span>Rotation</span>
+					</br>
+						<span id="span_global_rot_x">X: 0</span> </br>
+						<span id="span_global_rot_y">Y: 0</span> </br>
+						<span id="span_global_rot_z">Z: 0</span> </br>
+					<span>Skalierung</span>
+					</br>
+						<span id="span_global_scale_x">X: 1</span> </br>
+						<span id="span_global_scale_y">Y: 1</span> </br>
+						<span id="span_global_scale_z">Z: 1</span> </br>
+				</div>
+			</div>
+
+			<button id="resetBtn" class="button" onclick="trans.resetRotation();">Transformation zurücksetzen</button>
+		</div>
+
 	</div>
-
-	<div id="teapotContainer"></div>
-
-	<button id="resetBtn" class="button" onclick="trans.resetRotation();">Transformation zurücksetzen</button>
 
 	<div>
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>

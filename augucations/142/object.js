@@ -1,6 +1,6 @@
 var pickableObjects = [];
 
-var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlightColor){
+var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlightColor, coloredCS){
 
     this.scene = scene;
     this.modelPath = modelPath;
@@ -9,6 +9,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     this.csSize = csSize;
     this.normalColor = normalColor;
     this.highlightColor = highlightColor;
+    this.coloredCS = coloredCS;
 
     this.obj;
     this.coordinate_system;
@@ -45,7 +46,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     		} );
 
             object.scale.set(that.scale.x, that.scale.y, that.scale.z);
-            object.position.set(that.pos.x, that.pos.y, that.pos.z);
+            object.position.set(0, 0, 0);
             that.transform = object;
 
     		scene.add(object);
@@ -55,13 +56,20 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
 
             // group
             that.group = new THREE.Group();
-            scene.add(that.group);
+            that.group.position.set(that.pos.x, that.pos.y, that.pos.z);
+            parent.add(that.group);
             that.group.add(object);
-    	});
+
+            that.addCoordinateSystem();
+        });
     }
 
     this.addCoordinateSystem = function(){
-        this.coordinate_system = new coordinate_system(this.scene, this.pos, this.csSize);
+        this.coordinate_system = new coordinate_system(this.scene, {x: 0, y: 0, z: 0}, this.csSize, this.coloredCS);
+
+        if (this.group){
+            this.coordinate_system.addToGroup(this.group);
+        }
     }
 
     this.init();
@@ -92,26 +100,68 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     }
     addEventListener("unpicked_object", this.unpickedMsgHandler, false);
 
-
     this.rotate = function(radians){
         // If the mode is local, rotate the object itself,
         // if the mode is global, rotate the object's group
-        var thing = (transformation_manager.mode == "local") ? that.transform
-                                                             : that.group;
+        var thing = (transformation_manager.mode == "local") ? that.group
+                                                             : parent;
+
         thing.rotation.x = radians.x;
         thing.rotation.y = radians.y;
         thing.rotation.z = radians.z;
+
     }
 
-    this.rotMsgHandler = function(e){
+    this.translate = function(translation){
+        // If the mode is local, rotate the object itself,
+        // if the mode is global, rotate the object's group
+        var thing = (transformation_manager.mode == "local") ? that.group
+                                                             : parent;
+        thing.position.x = translation.x;
+        thing.position.y = translation.y;
+        thing.position.z = translation.z;
+    }
+
+    this.scalee = function(scale){
+        // If the mode is local, rotate the object itself,
+        // if the mode is global, rotate the object's group
+        var thing = (transformation_manager.mode == "local") ? that.group
+                                                             : parent;
+        thing.scale.x = scale.x;
+        thing.scale.y = scale.y;
+        thing.scale.z = scale.z;
+    }
+
+    this.transformationMsgHandler = function(e, type){
         // if object does not contains a model or object is not the current object, return
         if (!that.modelPath || current_obj.obj != that)
             return;
 
-        that.rotate(e.detail.rotRadians);
+        if (type == "rotation")
+            that.rotate(e.detail.rotRadians);
+        else if (type == "translation")
+            that.translate(e.detail.translation);
+        else if (type == "scale")
+            that.scalee(e.detail.scale);
     }
-    addEventListener("rotate_object", this.rotMsgHandler, false);
 
+    addEventListener("rotate_object",
+                     function(event) {
+                         that.transformationMsgHandler(event, "rotation");
+                     },
+                     false);
+
+     addEventListener("translate_object",
+                      function(event) {
+                          that.transformationMsgHandler(event, "translation");
+                      },
+                      false);
+
+      addEventListener("scale_object",
+                       function(event) {
+                           that.transformationMsgHandler(event, "scale");
+                       },
+                       false);
 
     return {
         obj: this,

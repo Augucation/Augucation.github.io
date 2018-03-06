@@ -1,6 +1,6 @@
 var cs;
 
-var coordinate_system = function(scene, pos, size){
+var coordinate_system = function(scene, pos, size, colored){
 
     this.scene = scene;
 
@@ -11,11 +11,11 @@ var coordinate_system = function(scene, pos, size){
     this.max = this.size;
 
     this.gray = 0x555e67;
-    this.red = 0xB52121;
-    this.green = 0x70cc3f;
-    this.blue = 0x0f24c4;
-    this.axisWidth = 3;
-    this.lineWidth = 1;
+    this.red = colored ? 0xB52121 : this.gray;
+    this.green = colored ? 0x70cc3f : this.gray;
+    this.blue = colored ? 0x0f24c4 : this.gray;
+    this.axisWidth = colored ? 50 : 3;
+    this.lineWidth = colored ? 50 : 1;
 
     this.xaxisMaterial = new THREE.LineBasicMaterial({ color: this.red, linewidth: this.axisWidth });
     this.yaxisMaterial = new THREE.LineBasicMaterial({ color: this.green, linewidth: this.axisWidth });
@@ -88,41 +88,15 @@ var coordinate_system = function(scene, pos, size){
         this.arrowheads[axis].material = this.highlightMaterial;
     }
 
-    this.translate = function(x, y, z){
-        /*
-        for (axis in this.axes){
-            this.axes[axis].geometry.translate(x, y, z);
-        }
-        for (ar in this.arrowheads){
-            this.arrowheads[ar].rotation = new THREE.Vector3(0, 0, 0);
-            this.arrowheads[ar].geometry.translate(x, y, z);
-            this.correctConeRotation();
-        }
-        */
-    }
-
-    this.rotate = function(x, y, z){
-        this.axes.x.rotation.set(x, y, z + d2r(90));
-        this.axes.y.rotation.set(x, y, z);
-        //this.axes.z.rotation.z = -y;
-        //this.axes.z.rotation.x = d2r(90) + x;
-        this.axes.z.rotation.set(x + d2r(90), 0, -y);
-        //console.log("z axis rotation: ", this.axes.z.rotation);
-    }
-
-/*
-    this.rotMsgHandler = function(e){
-        // if object contains a model
-        if (that.modelPath)
-            return;
-
-        //that.rotate(e.detail.rotRadians.x, e.detail.rotRadians.y, e.detail.rotRadians.z);
-    }
-    addEventListener("rotate_object", this.rotMsgHandler, false);
-*/
     this.correctConeRotation = function(){
         this.arrowheads.x.rotateZ(d2r(-90));
         this.arrowheads.z.rotateX(d2r(90));
+    }
+
+    this.addToGroup = function(group) {
+        for (var a in this.axes) {
+            group.add(this.axes[a]);
+        }
     }
 
     this.init();

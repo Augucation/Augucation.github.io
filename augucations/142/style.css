@@ -1,11 +1,21 @@
+#Container
+{
+  width: 90%;
+  height: 90%;
+  display: table;
+  margin: auto;
+}
+
 #guiContainer
 {
   border: 0px solid red;
-  width: calc(40vw + 20vh);
-  height: 35vh;
-  margin: auto;
+  width: 40vw;
+  height: 80vh;
   position: relative;
   text-align: center;
+  float: left;
+  display: table-cell;
+  margin-left: 1%;
 }
 
 #rotBtn0, #rotBtn1, #resetBtn
@@ -32,32 +42,57 @@
   color: var(--dark_red);
 }
 
+#teapotDiv
+{
+  border: 2px solid var(--hci_gray);
+  border-radius: 5px;
+  width: calc(10vw + 54vh);
+  height: calc(10vw + 54vh);
+}
+
 #teapotContainer
 {
   border: 0px solid red;
   width: 40vw;
-  height: 40vh;  
-  margin: 2% auto;
+  height: 80vh;
+  margin-right: 1%;
+  float: left;
+  display: table-cell;
 }
 
 #buttonAndSliderContainer
 {
-  width: calc(40vw + 20vh);
+  border: 0px solid blue;
+  width: 100%;
+  height: 35%;
   align-content: center;
   margin: auto;
-}
-
-#radio_global, #radio_local
-{
+  float: top;
+  position: relative;
 }
 
 #sliderContainer
 {
   width: 100%;  
+  height: 40%;
 }
 
-#sliderContainerRotation, #sliderContainerTranslation
+#sliderContainerRotation, #sliderContainerTranslation, #sliderContainerSkalierung
 {
   display: inline-block;
+  width: 30%;
+}
+
+#dataContainer
+{
+  border: 0px solid red;
+  width: 100%;
+  height: 55%;
+}
+
+#dataLocalContainer, #dataGlobalContainer
+{
+  height: 100%;
   width: 40%;
+  float: left;
 }
