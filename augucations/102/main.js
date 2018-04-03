@@ -1,3 +1,6 @@
+
+var chartSelected;
+
 $(document).ready(function () {
 	var charts, options, colors, data1;
 	var current_chart = 2; // 2 - 6 because the first two charts are Extrawürschte
@@ -161,7 +164,7 @@ $(document).ready(function () {
 		sliders[1].value = param_theta[current_chart - 2];
 	}
 
-	function chartSelected(index){
+	chartSelected = function(index){
 		current_chart = index;
 		updateSlider();
 		plotFunc();
