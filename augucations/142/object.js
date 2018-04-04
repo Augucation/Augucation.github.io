@@ -148,7 +148,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     addEventListener("rotate_object",
                      function(event) {
                          that.transformationMsgHandler(event, "rotation");
-                     },
+                     },  
                      false);
 
      addEventListener("translate_object",
