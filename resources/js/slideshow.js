@@ -263,8 +263,16 @@ function StartAugucation(){
 		window.location = url;
 }
 
-// called from augucation htmls
-// open index.html with topic and page encoded as url parameters
+/*
+ * !!!!! UPDATE !!!!!
+ *
+ * This function is now implemented in augucation_list.js and opens the
+ * interaction list instead of the slide show.
+ *
+
+ * old:
+	called from augucation htmls
+	open index.html with topic and page encoded as url parameters
 function CloseAugucation(top, page){
 
 	window.location="../../../index.html?" + top + "&" + page;
@@ -272,6 +280,7 @@ function CloseAugucation(top, page){
 	topic = top;
 	pageNum = page;
 }
+*/
 
 function getTopicAndPageNumFromURL(){
 

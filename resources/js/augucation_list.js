@@ -88,3 +88,8 @@ function getTotalIndex(topic, num)
 
     return idx;
 }
+
+function CloseAugucation()
+{
+    window.location = "../../list.html";
+}
