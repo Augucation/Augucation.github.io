@@ -19,25 +19,56 @@ var gui = function(){
     this.slider_scale.y = document.getElementById("scaleY");
     this.slider_scale.z = document.getElementById("scaleZ");
 
-    this.throwRotationEvent = function(){
-        var event = new CustomEvent("rotate_object", {
+    // For each slider, the current data is stored.
+    // If a slider's value changed, an event containing the difference
+    // between the stored value and the new value is thrown.
+    var data_rotX = this.slider_rot.x.value;
+
+    this.throwRotationXEvent = function(){
+        var event = new CustomEvent("rotateX_object", {
             detail:{
                 obj: current_obj,
-                rotRadians: vec(d2r(thatt.slider_rot.x.value),
-                                d2r(thatt.slider_rot.y.value),
-                                d2r(thatt.slider_rot.z.value))
+                rotRadians: d2r(thatt.slider_rot.x.value)
+            }
+        });
+        dispatchEvent(event);
+
+        // update the stored value
+        data_rotX = thatt.slider_rot.x.value;
+
+        var mode = transformation_manager.mode;
+        var span_x = document.getElementById("span_" + mode + "_rot_x");
+        span_x.innerHTML = "X: " + thatt.slider_rot.x.value;
+    }
+
+    this.throwRotationYEvent = function(){
+        var event = new CustomEvent("rotateY_object", {
+            detail:{
+                obj: current_obj,
+                rotRadians: d2r(thatt.slider_rot.y.value)
             }
         });
         dispatchEvent(event);
 
         var mode = transformation_manager.mode;
-        var span_x = document.getElementById("span_" + mode + "_rot_x");
         var span_y = document.getElementById("span_" + mode + "_rot_y");
-        var span_z = document.getElementById("span_" + mode + "_rot_z");
-        span_x.innerHTML = "X: " + thatt.slider_rot.x.value;
         span_y.innerHTML = "Y: " + thatt.slider_rot.y.value;
+    }
+
+    this.throwRotationZEvent = function(){
+        var event = new CustomEvent("rotateZ_object", {
+            detail:{
+                obj: current_obj,
+                rotRadians: d2r(thatt.slider_rot.z.value)
+            }
+        });
+        dispatchEvent(event);
+
+        var mode = transformation_manager.mode;
+        var span_z = document.getElementById("span_" + mode + "_rot_z");
         span_z.innerHTML = "Z: " + thatt.slider_rot.z.value;
     }
+
     this.throwTranslationEvent = function(){
         var event = new CustomEvent("translate_object", {
             detail:{
@@ -83,8 +114,9 @@ var gui = function(){
     }
 
 
-    for (slider in this.slider_rot)
-        this.slider_rot[slider].addEventListener("input", this.throwRotationEvent, false);
+    this.slider_rot.x.addEventListener("input", this.throwRotationXEvent, false);
+    this.slider_rot.y.addEventListener("input", this.throwRotationYEvent, false);
+    this.slider_rot.z.addEventListener("input", this.throwRotationZEvent, false);
 
     for (slider in this.slider_trans)
         this.slider_trans[slider].addEventListener("input", this.throwTranslationEvent, false);

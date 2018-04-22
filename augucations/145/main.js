@@ -1,0 +1,3 @@
+initScene();
+teapot();
+animate();

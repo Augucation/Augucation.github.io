@@ -1,0 +1,98 @@
+#Container
+{
+  width: 90%;
+  height: 90%;
+  display: table;
+  margin: auto;
+}
+
+#guiContainer
+{
+  border: 0px solid red;
+  width: 40vw;
+  height: 80vh;
+  position: relative;
+  text-align: center;
+  float: left;
+  display: table-cell;
+  margin-left: 1%;
+}
+
+#rotBtn0, #rotBtn1, #resetBtn
+{
+  position: relative;
+  margin: 2% auto;
+  font-size: 2vh !important;
+}
+
+#resetBtn
+{
+  margin: auto;
+  position: relative;
+  display: inherit;
+}
+
+#rotBtn0, #rotBtn1
+{
+  display: inline-block;
+}
+
+.highlighted
+{
+  color: var(--dark_red);
+}
+
+#teapotDiv
+{
+  border: 2px solid var(--hci_gray);
+  border-radius: 5px;
+  width: calc(10vw + 54vh);
+  height: calc(10vw + 54vh);
+}
+
+#teapotContainer
+{
+  border: 0px solid red;
+  width: 40vw;
+  height: 80vh;
+  margin-right: 1%;
+  float: left;
+  display: table-cell;
+}
+
+#buttonAndSliderContainer
+{
+  border: 0px solid blue;
+  width: 100%;
+  height: 35%;
+  align-content: center;
+  margin: auto;
+  float: top;
+  position: relative;
+}
+
+#sliderContainer
+{
+  width: 100%;  
+  height: 40%;
+}
+
+#sliderContainerRotation, #sliderContainerTranslation, #sliderContainerSkalierung
+{
+  display: inline-block;
+  width: 30%;
+}
+
+#dataContainer
+{
+  border: 0px solid red;
+  width: 100%;
+  height: 55%;
+}
+
+#dataLocalContainer, #dataGlobalContainer
+{
+  height: 100%;
+  width: 40%;
+  float: left;
+}
