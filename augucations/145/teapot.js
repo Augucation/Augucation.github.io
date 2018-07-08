@@ -1,10 +1,12 @@
-var teapot = function(path, color, scale) {
+var teapot = function(path, color, position, scale) {
     var that = this;
 
     this.path = path;
     this.color = color;
+    this.position = position;
     this.scale = scale;
     this.obj;
+    this.group;
 
 
     this.loadModel = function(){
@@ -28,10 +30,16 @@ var teapot = function(path, color, scale) {
                     }
                 } );
 
-                //console.log("teapot scene: ", scene);
+                that.group = new THREE.Group();
+                scene.add(that.group);
+
+
                 object.scale.set(that.scale, that.scale, that.scale);
-                object.position.set(100, 100, 100);
-                scene.add(object);
+                object.position.set(that.position.x, that.position.y, that.position.z);
+                //scene.add(object);
+
+                that.group.add(object);
+
                 that.obj = object;
         });
     }
@@ -61,20 +69,16 @@ var teapot = function(path, color, scale) {
             that.obj.rotation.y = value * D2R;
         if (axis.z == 1)
             that.obj.rotation.z = value * D2R;
-        /*
-        var rotMatLoc = new THREE.Matrix4();
-        that.obj.applyMatrix(rotMatLoc);
-        rotMatLoc.makeRotationAxis(axis.normalize(), value * D2R);
-        printMatrix(rotMatLoc);
-        that.obj.matrix.multiply(rotMatLoc);
-        //that.obj.applyMatrix(that.obj.matrix);
-        that.obj.applyMatrix(rotMatLoc);
-        */
     }
 
 
     this.rotate_global = function(axis, value) {
-        console.log("global");
+        if (axis.x == 1)
+            that.group.rotation.x = value * D2R;
+        if (axis.y == 1)
+            that.group.rotation.y = value * D2R;
+        if (axis.z == 1)
+            that.group.rotation.z = value * D2R;
     }
 
 
