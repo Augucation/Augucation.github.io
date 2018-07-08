@@ -39,35 +39,35 @@
 			<div id="buttonAndSliderContainer">
 
 				<div id="btnContainer">
-						<input type="radio" name="radio_local_global" id="radio_local" checked/>
-						<label for="radio_local">Lokal</label>
-						<input type="radio" name="radio_local_global" id="radio_global"/>
-						<label for="radio_global">Global</label>
+						<input type="radio" name="radio_local_global" class="radio" id="local" value="1" checked/>
+						<label for="local">Lokal</label>
+						<input type="radio" name="radio_local_global" class="radio" id="global" value="2"/>
+						<label for="global">Global</label>
 				</div>
 
 				<div id="sliderContainer">
 					<div id="sliderContainerTranslation">
-						<input id="translateX" type="range" min="-10" max="10" value="0"/>
+						<input id="translateX" type="range" class="slider translate" min="-10" max="10" value="0"/>
 						<label for="translateX">Translation X</label>
-						<input id="translateY" type="range" min="-10" max="10" value="0"/>
+						<input id="translateY" type="range" class="slider translate" min="-10" max="10" value="0"/>
 						<label for="translateY">Translation Y</label>
-						<input id="translateZ" type="range" min="-10" max="10" value="0"/>
+						<input id="translateZ" type="range" class="slider translate" min="-10" max="10" value="0"/>
 						<label for="translteZ">Translation Z</label>
 					</div>
 					<div id="sliderContainerRotation">
-						<input id="rotateX" type="range" min="-180" max="180" value="0"/>
+						<input id="rotateX" type="range" class="slider rotate" min="0" max="360" value="0"/>
 						<label for="rotateX">Rotation X</label>
-						<input id="rotateY" type="range" min="-180" max="180" value="0"/>
+						<input id="rotateY" type="range" class="slider rotate" min="0" max="360" value="0"/>
 						<label for="rotateY">Rotation Y</label>
-						<input id="rotateZ" type="range" min="-180" max="180" value="0"/>
+						<input id="rotateZ" type="range" class="slider rotate" min="0" max="360" value="0"/>
 						<label for="rotateZ">Rotation Z</label>
 					</div>
 					<div id="sliderContainerSkalierung">
-						<input id="scaleX" type="range" min="-8" max="10" value="0"/>
+						<input id="scaleX" type="range" class="slider scale" min="-8" max="10" value="0"/>
 						<label for="scaleX">Skalierung X</label>
-						<input id="scaleY" type="range" min="-8" max="10" value="0"/>
+						<input id="scaleY" type="range" class="slider scale" min="-8" max="10" value="0"/>
 						<label for="scaleY">Skalierung Y</label>
-						<input id="scaleZ" type="range" min="-8" max="10" value="0"/>
+						<input id="scaleZ" type="range" class="slider scale" min="-8" max="10" value="0"/>
 						<label for="scaleZ">Skalierung Z</label>
 					</div>
 				</div>
@@ -126,17 +126,13 @@
 		<input id="backBtn" type="button" class="back button" onclick="CloseAugucation(8, 11);" name="back" value="<<"/>
 	</div>
 
-	<script type="text/javascript" src="scene_manager.js"></script>
-	<script type="text/javascript" src="objects_manager.js"></script>
-	<script type="text/javascript" src="slider_manager.js"></script>
-	<script type="text/javascript" src="teapot.js"></script>
 	<script type="text/javascript" src="utils.js"></script>
-	<script type="text/javascript" src="main.js"></script>
-	<script type="text/javascript" src="transformation_manager.js"></script>
+	<script type="text/javascript" src="scene_manager.js"></script>
+	<script type="text/javascript" src="gui_manager.js"></script>
+	<script type="text/javascript" src="teapot.js"></script>
 	<script type="text/javascript" src="coordinate_system.js"></script>
-	<!--script type="text/javascript" src="object.js"></script>
-	<script type="text/javascript" src="object_picker.js"></script>
-	<script type="text/javascript" src="gui.js"></script>
-	<script type="text/javascript" src="matrices.js"></script-->
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="objects_manager.js"></script>
+    <script type="text/javascript" src="transformation_manager.js"></script>
 
 </body>

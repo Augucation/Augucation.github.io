@@ -1,11 +1,11 @@
 var cs;
 
-var coordinate_system = function(scene, pos, size, colored){
-
-    this.scene = scene;
+var coordinate_system = function(pos, size, colored){
 
     this.pos = pos;
     this.size = size;
+
+    //console.log("cs scene: ", scene);
 
     this.min = -this.size;
     this.max = this.size;
@@ -25,11 +25,14 @@ var coordinate_system = function(scene, pos, size, colored){
     this.axes = {};
     this.arrowheads = {};
 
+    // This group is an empty that will parent all axes and arrowheads.
+    this.obj = new THREE.Group();
+
     that = this;
 
     this.init = function(){
-        //this.draw();
-        this.create();
+        this.create();          // fill this.obj with axes and arrowheads
+        scene.add(this.obj);    // add this.obj to the global main scene
     }
 
     this.create = function(){
@@ -41,8 +44,8 @@ var coordinate_system = function(scene, pos, size, colored){
     this.createAxis = function(material, rotation){
         var axis = new THREE.Mesh(this.cylinderGeom, material);
         axis.position.set(this.pos.x, this.pos.y, this.pos.z);
-        axis.rotation.set(d2r(rotation.x), d2r(rotation.y), d2r(rotation.z));
-        scene.add(axis);
+        axis.rotation.set(rotation.x * D2R, rotation.y * D2R, rotation.z * D2R);
+        this.obj.add(axis);
         return axis;
     }
 
@@ -66,7 +69,7 @@ var coordinate_system = function(scene, pos, size, colored){
         var cone = new THREE.Mesh( geometry, material );
 
         cone.position.set(pos.x, pos.y, pos.z);
-        scene.add( cone );
+        this.obj.add( cone );
 
         return cone;
     }
@@ -89,14 +92,8 @@ var coordinate_system = function(scene, pos, size, colored){
     }
 
     this.correctConeRotation = function(){
-        this.arrowheads.x.rotateZ(d2r(-90));
-        this.arrowheads.z.rotateX(d2r(90));
-    }
-
-    this.addToGroup = function(group) {
-        for (var a in this.axes) {
-            group.add(this.axes[a]);
-        }
+        this.arrowheads.x.rotateZ(-90 * D2R);
+        this.arrowheads.z.rotateX(90 * D2R);
     }
 
     this.init();

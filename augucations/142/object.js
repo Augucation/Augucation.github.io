@@ -141,6 +141,7 @@ var object = function(scene, modelPath, pos, scale, csSize, normalColor, highlig
     }
 
     this.translate = function(translation){
+
         // If the mode is local, rotate the object itself,
         // if the mode is global, rotate the object's group
         var thing = (transformation_manager.mode == "local") ? that.group
