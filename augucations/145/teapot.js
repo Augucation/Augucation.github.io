@@ -31,30 +31,23 @@ var teapot = function(path, color, position, scale) {
                     }
                 } );
 
-                var geometry = new THREE.BoxBufferGeometry( 25, 25, 25 );
-                var material1 = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-                var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
-
-                var cube1 = new THREE.Mesh(geometry, material1);
-                var cube2 = new THREE.Mesh(geometry, material2);
-
                 var cs1 = new coordinate_system({x: 0, y: 0, z: 0}, 50 * teapot_scale, true);
 
                 that.global_cs = new THREE.Group();
-                //that.global_cs.add(cube1);
                 scene.add(that.global_cs);
 
                 that.local_cs = new THREE.Group();
-                //that.local_cs.add(cube2);
                 that.local_cs.add(cs1.obj);
                 that.global_cs.add(that.local_cs);
 
+                that.teapot_cs = new THREE.Group();
+                that.local_cs.add(that.teapot_cs);
 
                 object.scale.set(that.scale, that.scale, that.scale);
                 object.position.set(that.position.x, that.position.y, that.position.z);
                 //scene.add(object);
 
-                that.local_cs.add(object);
+                that.teapot_cs.add(object);
 
                 that.obj = object;
         });
@@ -78,15 +71,15 @@ var teapot = function(path, color, position, scale) {
     this.rotate_local = function(axis, value) {
 
         // TODO: Um buntes CS drehen, CS selbst aber nicht mitdrehen
-        
+
         //that.obj.rotateOnAxis(axis, value * D2R - that.obj.rotation.x);
 
         if (axis.x == 1)
-            that.local_cs.rotation.x = value * D2R;
+            that.teapot_cs.rotation.x = value * D2R;
         if (axis.y == 1)
-            that.local_cs.rotation.y = value * D2R;
+            that.teapot_cs.rotation.y = value * D2R;
         if (axis.z == 1)
-            that.local_cs.rotation.z = value * D2R;
+            that.teapot_cs.rotation.z = value * D2R;
     }
 
 
