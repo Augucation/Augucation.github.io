@@ -106,61 +106,6 @@ var coordinate_system = function(pos, size, cone_size_factor, colored){
         return cone;
     }
 
-    /*
-    this.draw = function(){
-
-        console.log("draw! ", this.min);
-        // axes
-        this.axes.x = this.drawLine(vec(this.min + this.pos.x, this.pos.y, this.pos.z), vec(this.max + this.pos.x, this.pos.y, this.pos.z), this.xaxisMaterial);
-        this.axes.y = this.drawLine(vec(this.pos.x, this.min + this.pos.y, this.pos.z), vec(this.pos.x, this.max + this.pos.y, this.pos.z), this.yaxisMaterial);
-        this.axes.z = this.drawLine(vec(this.pos.x, this.pos.y, this.min + this.pos.z), vec(this.pos.x, this.pos.y, this.max + this.pos.z), this.zaxisMaterial);
-
-        // arrow heads
-        this.arrowheads.x = this.drawCone(vec(this.max + this.pos.x, this.pos.y, this.pos.z), this.size * 0.1, this.size * 0.1, this.xaxisMaterial, "X");
-        this.arrowheads.y = this.drawCone(vec(this.pos.x, this.max + this.pos.y, this.pos.z), this.size * 0.1, this.size * 0.1, this.yaxisMaterial, "Y");
-        this.arrowheads.z = this.drawCone(vec(this.pos.x, this.pos.y, this.max + this.pos.z), this.size * 0.07, this.size * 0.07, this.zaxisMaterial, "Z");
-        this.correctConeRotation();
-    }
-    */
-
-    /*
-    this.drawCone = function(pos, radius, height, material, axis){
-
-        var geometry = new THREE.ConeGeometry( radius, height, 20 );
-        var cone = new THREE.Mesh( geometry, material );
-
-        cone.position.set(pos.x, pos.y, pos.z);
-        this.obj.add( cone );
-
-        return cone;
-    }
-    */
-
-    /*
-    this.highlightAxis = function(axis){
-
-        // unhighlight all axes
-        for (var a in this.axes)
-            this.axes[a].material = this.axisMaterial;
-
-        for(var h in this.arrowheads)
-            this.arrowheads[h].material = this.axisMaterial;
-
-        // if an axis is given, highlight this onError
-        if (axis == false)
-            return
-
-        this.axes[axis].material = this.highlightMaterial;
-        this.arrowheads[axis].material = this.highlightMaterial;
-    }
-    */
-
-    /*
-    this.correctConeRotation = function(){
-        this.arrowheads.x.rotateZ(-90 * D2R);
-        this.arrowheads.z.rotateX(90 * D2R);
-    }
-    */
 
     this.init();
 }
