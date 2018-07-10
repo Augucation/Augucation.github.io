@@ -111,13 +111,12 @@ var coordinate_system = function(pos, size, cone_size_factor, colored){
 }
 
 function cs_set_size(axis, teapot, cs, parent, size) {
-
     // create a new cs and remove the old one
 
     // get the current size and only replace the size value of that one axis
     var new_size = cs.size;
     new_size[axis] = size;
-    var new_cs = new coordinate_system(cs.pos, new_size, cs.colored)
+    var new_cs = new coordinate_system(cs.pos, new_size, cs.cone_size_factor, cs.colored)
 
     teapot.real_local_cs = new_cs;
     parent.add(new_cs.obj);
