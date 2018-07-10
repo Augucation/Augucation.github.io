@@ -32,7 +32,7 @@ var teapot = function(path, color, position, scale) {
                 } );
 
                 var cs1_size = 50 * teapot_scale;
-                var cs1 = new coordinate_system({x: 0, y: 0, z: 0}, {x: cs1_size, y: cs1_size, z: cs1_size}, true);
+                var cs1 = new coordinate_system(vec(0, 0, 0), {x: cs1_size, y: cs1_size, z: cs1_size}, 0.1, true);
 
                 that.global_cs = new THREE.Group();
                 scene.add(that.global_cs);
