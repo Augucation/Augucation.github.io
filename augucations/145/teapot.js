@@ -31,12 +31,14 @@ var teapot = function(path, color, position, scale) {
                     }
                 } );
 
-                var cs1 = new coordinate_system({x: 0, y: 0, z: 0}, 50 * teapot_scale, true);
+                var cs1_size = 50 * teapot_scale;
+                var cs1 = new coordinate_system({x: 0, y: 0, z: 0}, {x: cs1_size, y: cs1_size, z: cs1_size}, true);
 
                 that.global_cs = new THREE.Group();
                 scene.add(that.global_cs);
 
                 that.local_cs = new THREE.Group();
+                that.real_local_cs = cs1;
                 that.local_cs.add(cs1.obj);
                 that.global_cs.add(that.local_cs);
 
@@ -69,11 +71,6 @@ var teapot = function(path, color, position, scale) {
 
 
     this.rotate_local = function(axis, value) {
-
-        // TODO: Um buntes CS drehen, CS selbst aber nicht mitdrehen
-
-        //that.obj.rotateOnAxis(axis, value * D2R - that.obj.rotation.x);
-
         if (axis.x == 1)
             that.teapot_cs.rotation.x = value * D2R;
         if (axis.y == 1)
@@ -123,8 +120,40 @@ var teapot = function(path, color, position, scale) {
     }
 
 
+    this.scale_local = function(axis, value) {
+        if (axis.x == 1)
+            that.obj.scale.x = value;
+        if (axis.y == 1)
+            that.obj.scale.y = value;
+        if (axis.z == 1)
+            that.obj.scale.z = value;
+    }
+
+
+    this.scale_global = function(axis, value) {
+
+        var axis_name = "";
+
+        if (axis.x == 1){
+            that.obj.scale.x = value;
+            axis_name = "x";
+        }
+        if (axis.y == 1){
+            that.obj.scale.y = value;
+            axis_name = "y";
+        }
+        if (axis.z == 1){
+            that.obj.scale.z = value;
+            axis_name = "z";
+        }
+
+        cs_set_size(axis_name, that, that.real_local_cs, that.local_cs, value * 50 * that.scale);
+    }
+
+
     this.apply_scale = function(axis, value, mode){
-        console.log("scalation", axis, value, mode);
+        value = value >= 1 ? value : (0.9 + (value * 0.1));
+        mode == Mode.LOCAL ? this.scale_local(axis, value, mode) : this.scale_global(axis, value, mode);
     }
 
 
