@@ -38,7 +38,7 @@ var resetSliders = function() {
         angle_man.sliders[i].value = 0;
 
     // scale sliders
-    for (var i = 6; i < 8; i++)
+    for (var i = 6; i < 9; i++)
         angle_man.sliders[i].value = 1;
 }
 
