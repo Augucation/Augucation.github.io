@@ -58,10 +58,18 @@ var coordinate_system = function(scene){
 
     this.drawLine = function(start, end, material){
 
-		var geometry = new THREE.Geometry();
-		geometry.vertices.push( new THREE.Vector3( start.x, start.y, start.z) );
-		geometry.vertices.push( new THREE.Vector3( end.x, end.y, end.z) );
-		var line = new THREE.Line( geometry, material );
+        //var geometry = new THREE.Geometry();
+        //geometry.vertices.push( new THREE.Vector3( start.x, start.y, start.z) );
+        //geometry.vertices.push( new THREE.Vector3( end.x, end.y, end.z) );
+        //var line = new THREE.Line( geometry, material );
+
+        /* THREE.Geometry() is deprecated. New way to draw a line: */
+
+        const points = [];
+        points.push(new THREE.Vector3( start.x, start.y, start.z));
+        points.push(new THREE.Vector3( end.x, end.y, end.z));
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geometry, material);
         scene.add(line);
 
         return line;
