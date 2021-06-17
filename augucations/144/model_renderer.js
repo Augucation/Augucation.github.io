@@ -131,10 +131,17 @@ function applyCompositionMatrix() {
 	 * time.
 	 */
 
-	if (old_matrix)
-		teapot.applyMatrix(old_matrix.getInverse(old_matrix));
+	//if (old_matrix)
+	//	teapot.applyMatrix(old_matrix.getInverse(old_matrix));
+
+	// Change: instead of applying the inverse matrix, I manually reset position, rotation and scale
+	// Now the visualization of the teapot looks correct
+	teapot.position.set(0, 0, 0);
+	teapot.rotation.set(0, 0, 0);
+	teapot.scale.set(teapotInitScale, teapotInitScale, teapotInitScale);
 
 	m = trans.A2T(data.composition);
+
 
 	teapot.applyMatrix(m);
 	old_matrix = m;
