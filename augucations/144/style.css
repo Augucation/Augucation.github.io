@@ -63,12 +63,22 @@
 
 .sin_cos_font
 {
-  font-size: 1.4vh;
+  font-size: 1vh;
 }
 
 .x_font
 {
   font-size: 1.5vh;  
+}
+
+.bracket_font
+{
+  font-size: 1.2vh;
+}
+
+.deg_font
+{
+  font-size: 1.4vh;
 }
 
 .matrix_container
@@ -132,6 +142,7 @@
   width: 25%;
   height: 100%;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .highlighted

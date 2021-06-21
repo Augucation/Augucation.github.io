@@ -114,9 +114,17 @@ var Matrix = function(id, size, type) {
             var xfont_ = "<span class = \"x_font\">";
             var _xfont = "</span>";
 
-            return scfont_ + sin_cos + "(" + _scfont
-                    + xfont_ + value + _xfont
-                    + scfont_ + ")" + _scfont;
+            var bracket_ = "<span class = \"bracket_font\">(</span>";
+            var _bracket = "<span class = \"bracket_font\">)</span>";
+
+            var degree = "<span class = \"deg_font\">°</span>";
+
+
+            return scfont_ + sin_cos + _scfont
+                    + bracket_
+                    + xfont_ + value + _xfont + degree
+                    + _bracket
+                    + scfont_ + _scfont;
         }
 
         if (this.type == "rotationX") {

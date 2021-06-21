@@ -145,8 +145,8 @@ function applyCompositionMatrix() {
 
 	teapot.applyMatrix(m);
 	old_matrix = m;
-
-	teapot.updateMatrixWorld();
+	console.log(m);
+	//teapot.updateMatrixWorld();
 }
 
 function getMatrix() {
