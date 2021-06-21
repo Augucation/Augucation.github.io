@@ -142,7 +142,7 @@ function algoStep()
             + "<br/><br/>Es existiert ein Schnittpunkt der momentanen Kante mit der momentanen Pixelreihe.");
 
             printInfo("Für jede Pixelreihe wird nun über jede Kante des Polygons iteriert um alle Schnittpunkte der Kanten mit der Pixelreihe zu ermitteln."
-            + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt überhalb oder auf und ihr Endpunkt unterhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
+            + "<br/>Eine Kante schneidet die Pixelreihe, wenn ihr Startpunkt oberhalb oder auf und ihr Endpunkt unterhalb oder auf der Pixelreihe liegt. Trifft dies nicht zu, existiert kein Schnittpunkt und die Kante kann übersprungen werden.");
 
             drawScanline(y_min);
             highlightEdge(first_edge);
@@ -163,7 +163,7 @@ function algoStep()
 
             printInfo("Der " + mono_y  + "-Wert des Schnittpunkts ist durch die momentane Pixelreihe definiert."
             + "<br/>Der " + mono_x + "-Wert wird durch eine lineare Interpolation berechnet."
-             +"<br/><br/>Der erechnete Schnittpunk wird in einer Liste gespeichert.");
+             +"<br/><br/>Der errechnete Schnittpunkt wird in einer Liste gespeichert.");
 
             drawScanline(y_min);
             highlightEdge(first_edge);
@@ -187,7 +187,7 @@ function algoStep()
             //+ "<br/>q.x \u2248 " + Math.round(x)
             + "<br/><br/>q(" + Math.round(intersections[y_min][1].x * 10) / 10 + "," + y_min + ")");
 
-            printInfo("Nach diesen Prinzip werden alle Schnittpunkte der Polygonkanten mit der momentanen Pixelreihe ermittelt und der Liste hinzugefügt.");
+            printInfo("Nach diesem Prinzip werden alle Schnittpunkte der Polygonkanten mit der momentanen Pixelreihe ermittelt und der Liste hinzugefügt.");
 
             drawScanline(y_min);
             highlightEdge(second_edge);
